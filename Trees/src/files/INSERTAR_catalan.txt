@@ -1,0 +1,10 @@
+Si realitzem la operació d'insertar una CLAU K ambn un VALOR V dins d'un arbre,  
+s'introdueix dins del arbre la parella <clau, valor> coressponent a la inserció.
+
+POSIBILITATS:
+
+* Si la clau K no existeix al arbre, s'introducirà al arbre la parella <clau, valor>
+
+* Si la clau K ja existeix al arbre, s'actualitzarà el seu valor.
+
+* Si la clau K té un valor indefinit, es generarà un ERROR.

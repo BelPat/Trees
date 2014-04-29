@@ -1,0 +1,9 @@
+
+Un árbol AVL (Adelson-Velskii y Landis), es un árbol binario de búsqueda, en el que todo 
+subárbol cumple:
+
+- El subárbol izquierdo, donde están ubicadas las claves más pequeñas que la raíz.
+- El subárbol derecho, donde están ubicadas las claves más grandes que la raíz.
+- fe(T’)=0, fe(T’)=1 ó fe(T’)=-1; donde fe es el Factor de equilibrio de un árbol binario T:
+
+	fe(T)=profundidad(izq(T))–profundidad(der(T))

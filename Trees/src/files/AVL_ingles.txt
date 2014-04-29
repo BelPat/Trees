@@ -1,0 +1,10 @@
+
+An AVL (Adelson-Velskii and Landis) tree, is a binary search tree, in which all
+subtree satisfies:
+
+- The left subtree, where are located the keys smaller than the root.
+- The right subtree, where are located the keys larger than the root.
+- Faith (T ') = 0, fe (T') = 1 or faith (T ') = -1, 
+	where k is the balance factor of a binary tree T:
+
+	faith (T) = depth (left (T))-depth (right (T))

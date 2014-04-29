@@ -1,0 +1,24 @@
+    función Consultar ( k, b )  devuelve TObjeto es
+            var
+                encontrado : booleano
+                actual : *nodo
+            fvar
+            actual := arrel
+            encontrado := falso
+            mientras !encontrado && actual != null hacer
+                    si actual.clave = k entonces
+                            encontrado := cierto
+                    sino si actual.clave ? k entonces
+                            actual := actual.fd
+                    sino
+                            actual := actual.fe
+                    fsi
+            fmientras
+            si encontrado entonces
+                    b := cierto
+                    devuelve actual.val
+            sino
+                    b := falso
+                    no devuelve nada
+            fsi
+    ffunción

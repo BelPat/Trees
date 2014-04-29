@@ -1,0 +1,608 @@
+package classes;
+ 
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+public class AVLTree<T> {
+ 
+ private AVLNode root; // the root node
+ 
+/***************************** Core Functions ************************************/
+
+ /**
+  * Add a new element with key "k" into the tree.
+  * 
+  * @param k
+  *            The key of the new node.
+  */
+ 
+    /**
+     * Crea un árbol binario vacío
+     *
+     */
+    public AVLTree() {
+    }                              
+                                
+    public boolean add(T k) {
+      // create new node
+      AVLNode n = new AVLNode(k);
+      // start recursive procedure for inserting the node
+      if (this.find(k)==false){
+            return (add(this.root,n));
+      }
+      return false;
+    }
+ 
+    /**
+    * Recursive method to insert a node into a tree.
+    * 
+    * @param p The node currently compared, usually you start with the root.
+    * @param q The node to be inserted.
+    */
+    public boolean add(AVLNode p, AVLNode q) {
+      // If  node to compare is null, the node is inserted. If the root is null, it is the root of the tree.
+      if(p==null) {
+           this.root=q;
+      } else {   
+       // If compare node is smaller, continue with the getLeft() node
+       if(q.toInt()<p.toInt()) {
+            if(p.getLeft()==null) {
+                 p.setLeft(q);
+                 q.setRoot(p);
+                 // Node is inserted now, continue checking the balance
+                 recursiveBalance(p);
+            } else {
+                 add(p.getLeft(),q);
+            }
+
+       } else if(q.toInt()>p.toInt()) {
+            if(p.getRight()==null) {
+                 p.setRight(q);
+                 q.setRoot(p);     
+                 // Node is inserted now, continue checking the balance
+                 recursiveBalance(p);
+            } else {
+             add(p.getRight(),q);
+            }
+       } else {
+            return false;
+       }
+      }
+       return true;
+    }
+
+    /**
+    * Check the balance for each node recursivly and call required methods for balancing the tree until the root is reached.
+    * 
+    * @param cur : The node to check the balance for, usually you start with the root of a leaf.
+    */
+    public void recursiveBalance(AVLNode cur) {
+      // we do not use the balance in this class, but the store it anyway
+      setBalance(cur);
+      int balance = cur.getBalance();
+
+      // check the balance
+      if(balance==-2) {
+           if(height(cur.getLeft().getLeft())>=height(cur.getLeft().getRight())) {
+                cur = rotateRight(cur);
+           } else {
+                cur = doubleRotateLeftRight(cur);
+           }
+      } else if(balance==2) {
+           if(height(cur.getRight().getRight())>=height(cur.getRight().getLeft())) {
+                cur = rotateLeft(cur);
+           } else {
+                cur = doubleRotateRightLeft(cur);
+           }
+      }
+      // we did not reach the root yet
+      if(cur.getRoot()!=null) {
+           recursiveBalance(cur.getRoot());
+      } else {
+           this.root = cur;
+           System.out.println("------------ Balancing finished ----------------");
+      }
+    }
+
+    /**
+    * Removes a node from the tree, if it is existent.
+    */
+    public T delete(int k) {
+      // First we must find the node, after this we can delete it.
+      return(deleteAVL(this.root,k).getKey());
+    }
+
+    /**
+    * Finds a node and calls a method to remove the node.
+    * 
+    * @param p The node to start the search.
+    * @param q The KEY of node to remove.
+    */
+    public AVLNode<T> deleteAVL(AVLNode p,int q) {
+      if(p==null) {
+           // getRight() Wert existiert nicht in diesem Baum, daher ist nichts zu tun
+           return null;
+      } else {
+           if(p.toInt()>q)  {
+                deleteAVL(p.getLeft(),q);
+           } else if(p.toInt()<q) {
+                deleteAVL(p.getRight(),q);
+           } else if(p.getKey()==q) {
+                // we found the node in the tree.. now lets go on!
+                deleteNode(p);
+           }
+       return p;
+      }
+    }
+
+    /**
+    * Removes a node from a AVL-Tree, while balancing will be done if necessary.
+    * 
+    * @param q The node to be removed.
+    */
+    public void deleteNode(AVLNode q) {
+      AVLNode r;
+      // at least one child of q, q will be removed directly
+      if(q.getLeft()==null || q.getRight()==null) {
+           // the root is deleted
+           if(q.getRoot()==null) {
+                this.root=null;
+                q=null;
+                return;
+           }
+           r = q;
+      } else {
+           // q has two children --> will be replaced by successor
+           r = successor(q);
+           q.setKey(r.getKey());
+      }
+      AVLNode p;
+      if(r.getLeft()!=null) {
+           p = r.getLeft();
+      } else {
+           p = r.getRight();
+      }
+
+      if(p!=null) {
+           p.setRoot( r.getRoot());
+      }
+
+      if(r.getRoot()==null) {
+           this.root = p;
+      } else {
+               if(r==r.getRoot().getLeft()) {
+                r.getRoot().setLeft(p);
+           } else {
+                r.getRoot().setRight(p);
+           }
+           // balancing must be done until the root is reached.
+           recursiveBalance(r.getRoot());
+      }
+      r = null;
+    }
+
+    /**
+     * Retorna true si existe un dato en el árbol binario, o false en caso
+     * contrario. Es necesario para que el método funcione que los objetos
+     * almacenados en el árbol binario tengan sobreescrito el método equals.
+     *
+     * @return un boolean , true si el dato está o false en caso contrario.
+     */
+    //La clase T debe tener sobreescrito el metodo equals
+    public boolean find(T key) {
+        return (find(this.getRoot(), key));
+    }
+
+    private boolean find(AVLNode<T> r, T key) {
+        if (r == null) {
+            return (false);
+        }
+        if (r.getKey().equals(key)) {
+            return (true);
+        }
+        return (find(r.getLeft(), key) || find(r.getRight(), key));
+    }
+
+     /**
+     * Retorna un iterador con las hojas del árbol binario
+     *
+     * @return un iterador de la clase Iterator de la java.util
+     */
+    public Iterator<T> getLeaves() {
+        SimpleList<T> l = new SimpleList<T>();
+        getLeaves(this.getRoot(), l);
+        return (l.iterator());
+    }
+
+    private void getLeaves(AVLNode<T> r, SimpleList<T> l) {
+        if (r != null) {
+            if (this.isLeaf(r)) {
+                l.addEnd(r.getKey());
+            }
+            getLeaves(r.getLeft(), l);
+            getLeaves(r.getRight(), l);
+        }
+
+    }
+
+
+    protected boolean isLeaf(AVLNode<T> x) {
+        return (x != null && x.getLeft() == null && x.getRight() == null);
+    }
+
+     /**
+     * Dado un dato almacenado en el árbol , retorna el padre de ese dato. Se
+     * parte de la premisa que el árbol no contiene elementos repetidos.
+     *
+     * @param key dato que se desea find
+     * @return el padre del dato almacenado en el árbol, null en caso no existir
+     * el dato
+     */
+    public T getFather(T key) {
+        if (key == null || this.getRoot() == null) {
+            return null;
+        }
+        AVLNode<T> x = getFather(this.getRoot(), key);
+        if (x == null) {
+            return null;
+        }
+        return (x.getKey());
+    }
+
+    private AVLNode<T> getFather(AVLNode<T> x, T key) {
+        if (x == null) {
+            return null;
+        }
+        if ((x.getLeft() != null && x.getLeft().getKey().equals(key)) || (x.getRight() != null && x.getRight().getKey().equals(key))) {
+            return (x);
+        }
+        AVLNode<T> y = getFather(x.getLeft(), key);
+        if (y == null) {
+            return (getFather(x.getRight(), key));
+        } else {
+            return (y);
+        }
+    }
+
+
+    /**
+     * Elimina las hojas(nodos terminales) del árbol binario.
+     */
+    public void cutLeaves() {
+
+        Iterator<Integer> it=(Iterator<Integer>) this.getLeaves();        
+        while(it.hasNext())
+        {
+            delete(it.next().intValue());
+        }
+    }
+
+    /*
+    private int[] cutLeaves(AVLNode<T> x) {
+
+        int aux;
+        int hojas[] = null;
+        int cont_hojas=0;
+
+        if (x == null) {
+            return null;
+        }
+        if (this.esLeaf(x.getLeft())) {
+            hojas[cont_hojas]=x.getLeft().toInt();
+            cont_hojas++;
+        }
+        if (this.esLeaf(x.getRight())) {
+            aux=x.getRight().toInt();
+            hojas[cont_hojas]= aux;
+            cont_hojas++;
+        }
+        cutLeaves(x.getLeft());
+        cutLeaves(x.getRight());
+
+        return hojas;
+
+
+    }
+
+
+    private void cutLeaves(AVLNode<T> x) {
+
+        AVLNode<T> aux_getLeft()=null;
+        AVLNode<T> aux_getRight()=null;
+        int max=this.height(this.root);
+        int hojas[] = null;
+        int cont_hojas=0;
+
+        if (x == null) {
+            return;
+        }
+        if (this.esLeaf(x.getLeft())) {
+               hojas[cont_hojas]=x.getLeft().toInt();
+               cont_hojas++;
+        }
+        if (this.esLeaf(x.getRight())) {
+               hojas[cont_hojas]=x.getRight().toInt();
+               cont_hojas++;
+        }
+        cutLeaves(x.getLeft());
+        cutLeaves(x.getRight());
+
+        for(int cont=0;cont<cont_hojas;cont++)
+        {
+            delete(hojas[cont]);
+        }
+
+    }*/
+
+    /*   private void cutLeaves(AVLNode<T> x) {
+
+        AVLNode<T> aux_getLeft()=null;
+        AVLNode<T> aux_getRight()=null;
+        if (x == null) {
+            return;
+        }
+        if (this.esLeaf(x.getLeft())) {
+            aux_getLeft()=new AVLNode<T>(x.getLeft());
+            delete(x.getLeft().toInt());
+            cutLeaves(aux_getLeft());
+        }
+        else{
+                cutLeaves(x.getLeft());
+        }
+        if (this.esLeaf(x.getRight())) {
+            aux_getRight()=new AVLNode<T>(x.getRight());
+            delete(x.getRight().toInt());
+            cutLeaves(aux_getRight());
+        }
+      else{
+        cutLeaves(x.getRight());
+    }     
+
+    }*/
+
+
+    /**
+    * Left rotation using the given node.
+    * 
+    * 
+    * @param n
+    *            The node for the rotation.
+    * 
+    * @return The root of the rotated tree.
+    */
+    public AVLNode rotateLeft(AVLNode n) {
+      AVLNode v = n.getRight();
+      v.setRoot(n.getRoot()) ;
+      n.setRight(v.getLeft());
+      if(n.getRight()!=null) {
+           n.getRight().setRoot(n);
+      }
+      v.setLeft( n );
+      n.setRoot ( v );
+      if(v.getRoot()!=null) {
+           if(v.getRoot().getRight()==n) {
+                v.getRoot().setRight(v) ;
+           } else if(v.getRoot().getLeft()==n) {
+                v.getRoot().setLeft(v);
+           }
+      }
+      setBalance(n);
+      setBalance(v);
+      return v;
+    }
+
+    /**
+    * Right rotation using the given node.
+    * 
+    * @param n
+    *            The node for the rotation
+    * 
+    * @return The root of the new rotated tree.
+    */
+    public AVLNode rotateRight(AVLNode n) {  
+      AVLNode v = n.getLeft();
+      v.setRoot( n.getRoot());  
+      n.setLeft(v.getRight());  
+      if(n.getLeft()!=null) {
+           n.getLeft().setRoot(n);
+      }
+      v.setRight(n);
+      n.setRoot(v);
+      if(v.getRoot()!=null) {
+           if(v.getRoot().getRight()==n) {
+                v.getRoot().setRight(v);
+           } else if(v.getRoot().getLeft()==n) {
+                v.getRoot().setLeft(v);
+           }
+      }
+      setBalance(n);
+      setBalance(v);
+
+      return v;
+    }
+    /**
+    * 
+    * @param u The node for the rotation.
+    * @return The root after the double rotation.
+    */
+    public AVLNode doubleRotateLeftRight(AVLNode u) {
+        u.setLeft(rotateLeft(u.getLeft()));
+        return rotateRight(u);
+    }
+
+    /**
+    * 
+    * @param u The node for the rotation.
+    * @return The root after the double rotation.
+    */
+    public AVLNode doubleRotateRightLeft(AVLNode u) {
+        u.setRight(rotateRight(u.getRight()));
+        return rotateLeft(u);
+    }
+
+    /***************************** Helper Functions ************************************/
+
+    /**
+    * Returns the successor of a given node in the tree (search recursivly).
+    * 
+    * @param q The predecessor.
+    * @return The successor of node q.
+    */
+    public AVLNode successor(AVLNode q) {
+      if(q.getRight()!=null) {
+           AVLNode r = q.getRight();
+           while(r.getLeft()!=null) {
+                r = r.getLeft();
+           }
+           return r;
+      } else {
+           AVLNode p = q.getRoot();
+           while(p!=null && q==p.getRight()) {
+                q = p;
+                p = q.getRoot();
+           }
+           return p;
+      }
+    }
+
+    /**
+    * Calculating the "height" of a node.
+    * 
+    * @param cur
+    * @return The height of a node (-1, if node is not existent eg. NULL).
+    */
+    private int height(AVLNode cur) {
+      if(cur==null) {
+           return -1;
+      }
+      if(cur.getLeft()==null && cur.getRight()==null) {
+           return 0;
+      } else if(cur.getLeft()==null) {
+           return 1+height(cur.getRight());
+      } else if(cur.getRight()==null) {
+           return 1+height(cur.getLeft());
+      } else {
+           return 1+maximum(height(cur.getLeft()),height(cur.getRight()));
+      }
+    }
+
+    /**
+    * Return the maximum of two integers.
+    */
+    private int maximum(int a, int b) {
+      if(a>=b) {
+           return a;
+      } else {
+           return b;
+      }
+    }
+
+    /** 
+    * Only for debugging purposes. Gives all keyrmation about a node.
+
+    * @param n The node to write keyrmation about.
+    */
+    public void debug(AVLNode n) {
+      int l = 0;
+      int r = 0;
+      int p = 0;
+      if(n.getLeft()!=null) {
+           l = n.getLeft().toInt();
+      }
+      if(n.getRight()!=null) {
+           r = n.getRight().toInt();
+      }
+      if(n.getRoot()!=null) {
+           p = n.getRoot().toInt();
+      }
+
+      System.out.println("Left: "+l+" Key: "+n+" Right: "+r+" Parent: "+p+" Balance: "+n.getBalance());
+
+      if(n.getLeft()!=null) {
+           debug(n.getLeft());
+      }
+      if(n.getRight()!=null) {
+           debug(n.getRight());
+      }
+    }
+
+    /**
+     * Crea un árbol de la clase JTree. Esta clase permite dibujar el árbol
+     * utilizando una distribución de ficheros y directorios de un explorador de
+     * archivos convencional
+     *
+     * @return un JTree con el árbol binario que se tiene creado
+     */
+    public JTree getJTree() {
+        DefaultMutableTreeNode x = new DefaultMutableTreeNode("ARBOL-VACIO");
+        if (this.isEmpty()) {
+            return (new JTree(x));
+        }
+        return (new JTree(createJtree(this.getRoot(), "Root(T)->")));
+    }
+
+    protected DefaultMutableTreeNode createJtree(AVLNode<T> r, String msg) {
+        if (isLeaf(r)) {
+            return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
+        }
+        DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
+        if (r.getLeft() != null) {
+            x.add(createJtree(r.getLeft(), "Left->"));
+        }
+        if (r.getRight() != null) {
+            x.add(createJtree(r.getRight(), "Right->"));
+        }
+        return x;
+    }
+
+    public JPanel getPaint() {
+        return new GraphicAVLTree(this);
+    }
+
+    /**
+     * Retorna si el árbol contiene o no elementos.
+     *
+     * @return true si el árbol binario esta vacío o false en caso contrario
+     */
+    public boolean isEmpty() {
+        return (this.getRoot() == null);
+    }
+
+
+    private void setBalance(AVLNode cur) {
+        cur.setBalance( height(cur.getRight())-height(cur.getLeft()));
+    }
+
+
+     /**
+     * Retorna un iterador con el recorrido preOrder del árbol binario
+     *
+     * @return un iterador de la clase Iterator de la java.util
+     */
+    public Iterator<T> preOrder() {
+        SimpleList<T> l = new SimpleList<T>();
+        preOrder(this.getRoot(), l);
+        return (l.iterator());
+    }
+
+    private void preOrder(AVLNode<T> r, SimpleList<T> l) {
+        if (r != null) {
+            l.addEnd(r.getKey());
+            preOrder(r.getLeft(), l);
+            preOrder(r.getRight(), l);
+        }
+    }
+
+    public AVLNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(AVLNode root) {
+        this.root = root;
+    }
+ 
+}
+

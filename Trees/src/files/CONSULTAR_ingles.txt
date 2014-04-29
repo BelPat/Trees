@@ -1,0 +1,7 @@
+If we make a query of a KEY K in a tree, we get the value of that key.
+
+POSSIBILITIES:
+
+* If the key K exists in the tree, indicated by message what is the value of that key.
+
+* If the key K is not in the tree, you will get an ERROR.

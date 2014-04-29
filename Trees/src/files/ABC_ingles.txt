@@ -1,0 +1,6 @@
+
+A tree ABC (Complet Binary Tree) is a tree that is characterized by all nodes,
+except for the last level have two children:
+
+- The left subtree, where are located the keys smaller than the root.
+- The right subtree, where are located the keys larger than the root.

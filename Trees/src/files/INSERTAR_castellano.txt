@@ -1,0 +1,10 @@
+Si realizamos la operación de insertar una CLAVE K con un VALOR V dentro de un árbol, se 
+introduce dentro del árbol la pareja <clave, valor> corerspondiente a la inserción.
+
+POSIBILIDADES:
+
+* Si la clave K no existe en el árbol, se introducirá en el árbol la pareja <clave, valor>
+
+* Si la clave K ya exista en el árbol, se procederá a actualizar su valor.
+
+* Si la clave K tiene un valor indefinido, se generará un ERROR.

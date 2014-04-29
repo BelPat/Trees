@@ -1,0 +1,9 @@
+
+Els arbres AVL (Adelson-Velskii y Landis), són arbres binaris de cerca equilibrats, on tots els 
+subarbres compleixen:
+
+- El subarbre esquerre, on hi són les claus més petites que l'arrel.
+- El subarbre dret, on hi són les claus més grans que l'arrel.
+- fe(T’)=0, fe(T’)=1 ó fe(T’)=-1; on fe és el Factor d'equilibri d'un arbre binari T:
+
+	fe(T)=profunditat(esq(T))–profunditat(dre(T))

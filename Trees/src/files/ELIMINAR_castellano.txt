@@ -1,0 +1,9 @@
+Si realizamos la operación de eliminar una CLAVE K  de un árbol; se procederá a eliminar la
+pareja <clave, valor>.
+
+POSIBILIDADES:
+
+* Si la clave K existe en el árbol, se eliminará y se actualizará la estructura del árbol .
+
+* Si la clave K no existe en el árbol, se generará un ERROR.  
+
