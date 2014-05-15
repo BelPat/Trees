@@ -1,4 +1,4 @@
-﻿This a project of simulations about B, AVL and BLACK AND WHITE Trees.
+﻿This a project of simulations about B, AVL and RED AND BLACK Trees.
 
 Here we can found some exemples about their functions.....
 
