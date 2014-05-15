@@ -50,7 +50,7 @@
         <Component class="javax.swing.JButton" name="BtmExitHelp">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/exit.png"/>
+              <Image iconType="3" name="/resources/images/exit.png"/>
             </Property>
           </Properties>
           <Events>
@@ -276,7 +276,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="220" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -332,7 +332,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane5" pref="220" max="32767" attributes="0"/>
+                          <Component id="jScrollPane5" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -388,7 +388,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" pref="220" max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -465,7 +465,7 @@
         <Component class="javax.swing.JButton" name="BtmExitConfig1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/ok.png"/>
+              <Image iconType="3" name="/resources/images/ok.png"/>
             </Property>
           </Properties>
           <Events>
@@ -527,7 +527,7 @@
         <Component class="javax.swing.JButton" name="BtmExitConfig2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/ok.png"/>
+              <Image iconType="3" name="/resources/images/ok.png"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[40, 40]"/>
@@ -769,7 +769,7 @@
         <Component class="javax.swing.JButton" name="BtmHelp">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/1373669794_Folder-Info.png"/>
+              <Image iconType="3" name="/resources/images/1373669794_Folder-Info.png"/>
             </Property>
           </Properties>
           <Events>
@@ -780,7 +780,7 @@
         <Component class="javax.swing.JButton" name="BtmReload">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/1373669670_order.png"/>
+              <Image iconType="3" name="/resources/images/1373669670_order.png"/>
             </Property>
           </Properties>
           <Events>
@@ -791,7 +791,7 @@
         <Component class="javax.swing.JButton" name="BtmPlay">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/1373669712_start.png"/>
+              <Image iconType="3" name="/resources/images/1373669712_start.png"/>
             </Property>
           </Properties>
           <Events>
@@ -802,7 +802,7 @@
         <Component class="javax.swing.JButton" name="BtmNext">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/1373669652_hide-right.png"/>
+              <Image iconType="3" name="/resources/images/1373669652_hide-right.png"/>
             </Property>
           </Properties>
           <Events>
@@ -814,7 +814,7 @@
         <Component class="javax.swing.JButton" name="BtmStop">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/1373669729_stop-red.png"/>
+              <Image iconType="3" name="/resources/images/1373669729_stop-red.png"/>
             </Property>
           </Properties>
           <Events>
@@ -931,6 +931,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Consultar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OptSearchActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="OptDelete">
               <Properties>
@@ -1012,7 +1015,7 @@
     <Component class="javax.swing.JButton" name="BtnExit">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/exit.png"/>
+          <Image iconType="3" name="/resources/images/exit.png"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[40, 40]"/>
@@ -1044,17 +1047,18 @@
     <Component class="javax.swing.JButton" name="BtnSpain">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/spain.png"/>
+          <Image iconType="3" name="/resources/images/spain.png"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnSpainMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSpainActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnEnglish">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/uk.png"/>
+          <Image iconType="3" name="/resources/images/uk.png"/>
         </Property>
       </Properties>
       <Events>
@@ -1064,7 +1068,7 @@
     <Component class="javax.swing.JButton" name="BtnCatalan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/catalonia.png"/>
+          <Image iconType="3" name="/resources/images/catalonia.png"/>
         </Property>
       </Properties>
       <Events>
@@ -1123,12 +1127,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="779" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="780" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="282" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="278" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

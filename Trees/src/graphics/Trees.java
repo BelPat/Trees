@@ -29,6 +29,7 @@ import classes.AVLTree;
 import classes.SimulatorAVLTree;
 import classes.SimulatorBinaryTree;
 import classes.SimulatorRBTree;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -250,13 +251,13 @@ public class Trees extends javax.swing.JFrame {
         switch ( language ) {
             case "castellano":
                 //File archivo;
-                path = "/files/" + ayuda + "_castellano.txt";
+                path = "/resources/files/" + ayuda + "_castellano.txt";
                 break;
             case "ingles":
-                path = "/files/" + ayuda + "_ingles.txt";
+                path = "/resources/files/" + ayuda + "_ingles.txt";
                 break;
             case "catalan":
-                path = "/files/" + ayuda + "_catalan.txt";
+                path = "/resources/files/" + ayuda + "_catalan.txt";
                 break;
         }
         try {
@@ -399,7 +400,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmExitHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
+        BtmExitHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
         BtmExitHelp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmExitHelpMouseClicked(evt);
@@ -523,7 +524,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaInsertarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Insertar", PAyudaInsertar);
@@ -551,7 +552,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaEliminarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Eliminar", PAyudaEliminar);
@@ -579,7 +580,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaConsultarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Consultar", PAyudaConsultar);
@@ -613,7 +614,7 @@ public class Trees extends javax.swing.JFrame {
         FrmConfigTree.setName("Configuración"); // NOI18N
         FrmConfigTree.setResizable(false);
 
-        BtmExitConfig1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ok.png"))); // NOI18N
+        BtmExitConfig1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
         BtmExitConfig1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmExitConfig1MouseClicked(evt);
@@ -655,7 +656,7 @@ public class Trees extends javax.swing.JFrame {
 
         jLabel5.setText("INTRODUZCA UNA CLAVE Y UN VALOR CORRECTOS");
 
-        BtmExitConfig2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ok.png"))); // NOI18N
+        BtmExitConfig2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
         BtmExitConfig2.setMaximumSize(new java.awt.Dimension(40, 40));
         BtmExitConfig2.setMinimumSize(new java.awt.Dimension(40, 40));
         BtmExitConfig2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -735,7 +736,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373669794_Folder-Info.png"))); // NOI18N
+        BtmHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669794_Folder-Info.png"))); // NOI18N
         BtmHelp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmHelpMouseClicked(evt);
@@ -747,7 +748,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373669670_order.png"))); // NOI18N
+        BtmReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669670_order.png"))); // NOI18N
         BtmReload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmReloadMouseClicked(evt);
@@ -759,7 +760,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373669712_start.png"))); // NOI18N
+        BtmPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669712_start.png"))); // NOI18N
         BtmPlay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmPlayMouseClicked(evt);
@@ -771,7 +772,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373669652_hide-right.png"))); // NOI18N
+        BtmNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669652_hide-right.png"))); // NOI18N
         BtmNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtmNextMouseClicked(evt);
@@ -786,7 +787,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        BtmStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373669729_stop-red.png"))); // NOI18N
+        BtmStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669729_stop-red.png"))); // NOI18N
         BtmStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtmStopActionPerformed(evt);
@@ -813,6 +814,11 @@ public class Trees extends javax.swing.JFrame {
 
         GOperations.add(OptSearch);
         OptSearch.setText("Consultar");
+        OptSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OptSearchActionPerformed(evt);
+            }
+        });
 
         GOperations.add(OptDelete);
         OptDelete.setText("Eliminar");
@@ -987,7 +993,7 @@ public class Trees extends javax.swing.JFrame {
                 .addGap(3, 3, 3))
         );
 
-        BtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
+        BtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
         BtnExit.setMaximumSize(new java.awt.Dimension(40, 40));
         BtnExit.setMinimumSize(new java.awt.Dimension(40, 40));
         BtnExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1005,21 +1011,26 @@ public class Trees extends javax.swing.JFrame {
         TxtAlgorithm.setRows(5);
         jScrollPane8.setViewportView(TxtAlgorithm);
 
-        BtnSpain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/spain.png"))); // NOI18N
+        BtnSpain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/spain.png"))); // NOI18N
         BtnSpain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnSpainMouseClicked(evt);
             }
         });
+        BtnSpain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSpainActionPerformed(evt);
+            }
+        });
 
-        BtnEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uk.png"))); // NOI18N
+        BtnEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/uk.png"))); // NOI18N
         BtnEnglish.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnEnglishMouseClicked(evt);
             }
         });
 
-        BtnCatalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/catalonia.png"))); // NOI18N
+        BtnCatalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/catalonia.png"))); // NOI18N
         BtnCatalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnCatalanMouseClicked(evt);
@@ -1049,11 +1060,11 @@ public class Trees extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 779, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 282, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         jInternalFrame1.setBounds(0, 0, 790, 310);
@@ -1373,17 +1384,20 @@ public class Trees extends javax.swing.JFrame {
             BtnCatalan.setEnabled( true );
             BtnEnglish.setEnabled( false );
             //jPanel1.setToolTipText("Configuration:");
-            jLabel1.setText( "Example:" );
-            jLabel2.setText( "Key:" );
-            jLabel3.setText( "Value:" );
-            jLabel8.setText( "Configuration:" );
-            jLabel9.setText( "Options:" );
-            OptInsert.setText( "Insert:" );
-            OptDelete.setText( "Delete:" );
-            OptSearch.setText( "Select:" );
-            OptSearchFather.setText( "Select Father:" );
-            OptCut.setText( "<Podar" );
-            OptLeaves.setText( "Select <HOjas>:" );
+            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_configuracion"));
+            optABC.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_ABC"));
+            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_AVL"));
+            optRN.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_RN"));
+            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_ejemplo"));
+            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_clave"));
+            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_valor"));
+            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_opciones"));
+            OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_insertar"));
+            OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_eliminar"));
+            OptSearch.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_consultar"));
+            OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
+            OptCut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
+            OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<SELECT ONE>" );
             CmbExamples.addItem( "1" );
@@ -1421,19 +1435,25 @@ public class Trees extends javax.swing.JFrame {
             BtnSpain.setEnabled( false );
             BtnCatalan.setEnabled( true );
             BtnEnglish.setEnabled( true );
-            //jPanel1.setToolTipText("Configuration:");
-            jLabel1.setText( "Ejemplo:" );
-            jLabel2.setText( "Clave:" );
-            jLabel3.setText( "Valor:" );
-            jLabel8.setText( "Configuración:" );
-            jLabel9.setText( "Opciones:" );
-            OptInsert.setText( "Insertar:" );
-            OptDelete.setText( "Eliminar:" );
-            OptSearch.setText( "Consultar:" );
-            OptSearchFather.setText( "Consultar Padre:" ); 
-            OptCut.setText( "Podar" );            
-            OptLeaves.setText( "Consultar Hojas:" );
-            optRN.setText( "Rojo-Negro" );
+            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_configuracion"));
+            optABC.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_ABC"));
+            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_AVL"));
+            optRN.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_RN"));
+            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_ejemplo"));
+            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_clave"));
+            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_valor"));
+            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_opciones"));
+            OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_insertar"));
+            OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_eliminar"));
+            OptSearch.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_consultar"));
+            OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_padre"));
+            OptCut.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_podar"));
+            OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_hojas"));
+            
+            
+            //OptCut.setText( "Podar" );            
+           // OptLeaves.setText( "Consultar Hojas:" );
+           // optRN.setText( "Rojo-Negro" );
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<SELECCIONA UNO>" );
             CmbExamples.addItem( "1" );
@@ -1452,7 +1472,13 @@ public class Trees extends javax.swing.JFrame {
             jTextArea5.setText("");
             jTextArea6.setText("");
             jTextArea7.setText("");
-            load_help( "AVL" , "AVL" );
+            
+             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1")+'\n');
+             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2")+'\n');
+             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3")+'\n');
+             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4")+'\n');
+             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5")+'\n');
+            //load_help( "AVL" , "AVL" );
             load_help( "ABC", "ABC" );
             load_help( "RN", "RN" );
             load_help( "INSERTAR" , "add" );
@@ -1472,7 +1498,24 @@ public class Trees extends javax.swing.JFrame {
             BtnCatalan.setEnabled( false );
             BtnEnglish.setEnabled( true );
             //jPanel1.setToolTipText("Configuration:");
-            jLabel1.setText( "Exemple:" );
+            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_configuracion"));
+            optABC.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_ABC"));
+            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_AVL"));
+            optRN.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_RN"));
+            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_ejemplo"));
+            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_clave"));
+            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_valor"));
+            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_opciones"));
+            OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_insertar"));
+            OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_eliminar"));
+            OptSearch.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_consultar"));
+            OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_padre"));
+            OptCut.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_podar"));
+            OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_hojas"));
+            
+            
+            
+            /*jLabel1.setText( "Exemple:" );
             jLabel2.setText( "Clau:" );
             jLabel3.setText( "Valor:" );
             jLabel8.setText( "Configuració:" );
@@ -1483,6 +1526,7 @@ public class Trees extends javax.swing.JFrame {
             OptSearchFather.setText("Consultar Padre:" );
             OptCut.setText( "Podar:" );
             OptLeaves.setText( "Consultar Hojas:" );
+            * */
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<TRIA UN>" );
             CmbExamples.addItem( "1" );
@@ -1670,6 +1714,14 @@ public class Trees extends javax.swing.JFrame {
         this.jInternalFrame1.setEnabled( false );  
         jInternalFrame1.getContentPane().setVisible( true );        
     }//GEN-LAST:event_BtmStopActionPerformed
+
+    private void OptSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OptSearchActionPerformed
+
+    private void BtnSpainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSpainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSpainActionPerformed
  
     
     /**
