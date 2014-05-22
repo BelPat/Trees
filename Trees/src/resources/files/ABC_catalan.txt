@@ -1,6 +1,0 @@
-
-Un arbre ABC (Arbre Binari Complet), és un áarbre que es caracteritza perque tot els seus nodes,
-excepte els del últim nivell tenen dos fills:
-
-- El subarbre esquerre, on hi són les claus més petitas que l'arrel.
-- El subarbre dret,on hi són les claus més grans que l'arrel.

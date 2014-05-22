@@ -30,7 +30,7 @@
                           <Component id="TabHelpOperations" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,7 +118,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="&#xa;Un &#xe1;rbol AVL (Adelson-Velskii y Landis), es un &#xe1;rbol binario de b&#xfa;squeda, en el que todo &#xa;sub&#xe1;rbol cumple:&#xa;&#xa;- El sub&#xe1;rbol izquierdo, donde est&#xe1;n ubicadas las claves m&#xe1;s peque&#xf1;as que la ra&#xed;z.&#xa;- El sub&#xe1;rbol derecho, donde est&#xe1;n ubicadas las claves m&#xe1;s grandes que la ra&#xed;z.&#xa;- fe(T&#x2019;)=0, fe(T&#x2019;)=1 &#xf3; fe(T&#x2019;)=-1; donde fe es el Factor de equilibrio de un &#xe1;rbol binario T:&#xa;&#xa;&#x9;fe(T)=profundidad(izq(T))&#x2013;profundidad(der(T))"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion2&quot;)" type="code"/>
+                        </Property>
                         <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
@@ -183,7 +185,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="&#xa;Un &#xe1;rbol ABC (&#xc1;rbol Binario Completo), es un &#xe1;rbol que se caracteriza porque todos sus nodos,&#xa;excepto los del &#xfa;ltimo nivel  tienen dos hijos:&#xa;&#xa;- El sub&#xe1;rbol izquierdo, donde est&#xe1;n ubicadas las claves m&#xe1;s peque&#xf1;as que la ra&#xed;z.&#xa;- El sub&#xe1;rbol derecho, donde est&#xe1;n ubicadas las claves m&#xe1;s grandes que la ra&#xed;z."/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion1&quot;)&#xa;            " type="code"/>
+                        </Property>
                         <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -232,7 +236,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="&#xa;Un &#xe1;rbol rojo-negro es un &#xe1;rbol binario de b&#xfa;squeda en el que cada nodo tiene un atributo &#xa;de color cuyo valor es rojo o negro. Adem&#xe1;s de los requisitos impuestos a los &#xe1;rboles &#xa;binarios de b&#xfa;squeda convencionales, se deben satisfacer los siguientes para tener un &#xa;&#xe1;rbol rojo-negro v&#xe1;lido:&#xa;&#xa;- Todo nodo es o bien rojo o bien negro.&#xa;- La ra&#xed;z es negra.&#xa;- Todas las hojas son negras (las hojas son los hijos nulos).&#xa;- Los hijos de todo nodo rojo son negros (tambi&#xe9;n llamada &quot;Propiedad del rojo&quot;).&#xa;- Cada camino simple desde un nodo a una hoja descendiente contiene el mismo n&#xfa;mero de &#xa;  nodos negros, ya sea contando siempre los nodos negros nulos, o bien no cont&#xe1;ndolos &#xa;  nunca (el resultado es equivalente). Tambi&#xe9;n es llamada &quot;Propiedad del camino&quot;, y al &#xa;  n&#xfa;mero de nodos negros de cada camino, que es constante para todos los caminos, se le &#xa;  denomina &quot;Altura negra del &#xe1;rbol&quot;, y por tanto el c&#xe1;mino no puede tener dos rojos seguidos.&#xa;- El camino m&#xe1;s largo desde la ra&#xed;z hasta una hoja no es m&#xe1;s largo que 2 veces el camino &#xa;  m&#xe1;s corto desde la ra&#xed;z del &#xe1;rbol a una hoja en dicho &#xe1;rbol. El resultado es que dicho &#xa;  &#xe1;rbol est&#xe1; aproximadamente equilibrado."/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion3&quot;)" type="code"/>
+                        </Property>
                         <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -276,7 +282,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="219" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="228" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -297,7 +303,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Si realizamos la operaci&#xf3;n de insertar una CLAVE K con un VALOR V dentro de un &#xe1;rbol, se &#xa;introduce dentro del &#xe1;rbol la pareja &lt;clave, valor&gt; corerspondiente a la inserci&#xf3;n.&#xa;&#xa;POSIBILIDADES:&#xa;&#xa;* Si la clave K no existe en el &#xe1;rbol, se introducir&#xe1; en el &#xe1;rbol la pareja &lt;clave, valor&gt;&#xa;&#xa;* Si la clave K ya exista en el &#xe1;rbol, se proceder&#xe1; a actualizar su valor.&#xa;&#xa;* Si la clave K tiene un valor indefinido, se generar&#xe1; un ERROR."/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion4&quot;)" type="code"/>
+                        </Property>
                         <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
@@ -332,7 +340,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane5" pref="219" max="32767" attributes="0"/>
+                          <Component id="jScrollPane5" pref="228" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -353,7 +361,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Si realizamos la operaci&#xf3;n de eliminar una CLAVE K  de un &#xe1;rbol; se proceder&#xe1; a eliminar la&#xa;pareja &lt;clave, valor&gt;.&#xa;&#xa;POSIBILIDADES:&#xa;&#xa;* Si la clave K existe en el &#xe1;rbol, se eliminar&#xe1; y se actualizar&#xe1; la estructura del &#xe1;rbol .&#xa;&#xa;* Si la clave K no existe en el &#xe1;rbol, se generar&#xe1; un ERROR.  &#xa;"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion5&quot;)" type="code"/>
+                        </Property>
                         <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
@@ -388,7 +398,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" pref="219" max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" pref="228" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -409,7 +419,9 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Si realizamos la operaci&#xf3;n de consultar una CLAVE K  de un &#xe1;rbol; obtendremos el valor de dicha&#xa;clave.&#xa;&#xa;POSIBILIDADES:&#xa;&#xa;* Si la clave K existe en el &#xe1;rbol, se indicar&#xe1; por mensaje cu&#xe1;l es el valor de dicha clave.&#xa;&#xa;* Si la clave K no existe en el &#xe1;rbol, se generar&#xe1; un ERROR.  &#xa;"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="ResourceBundle.getBundle(&quot;resources.properties.help_es_ES&quot;).getString(&quot;descripcion6&quot;)" type="code"/>
+                        </Property>
                         <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>

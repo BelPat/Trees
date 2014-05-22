@@ -1,6 +1,0 @@
-
-Un árbol ABC (Árbol Binario Completo), es un árbol que se caracteriza porque todos sus nodos,
-excepto los del último nivel  tienen dos hijos:
-
-- El subárbol izquierdo, donde están ubicadas las claves más pequeñas que la raíz.
-- El subárbol derecho, donde están ubicadas las claves más grandes que la raíz.

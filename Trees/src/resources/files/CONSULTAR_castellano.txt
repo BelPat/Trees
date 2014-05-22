@@ -1,9 +1,0 @@
-Si realizamos la operación de consultar una CLAVE K  de un árbol; obtendremos el valor de dicha
-clave.
-
-POSIBILIDADES:
-
-* Si la clave K existe en el árbol, se indicará por mensaje cuál es el valor de dicha clave.
-
-* Si la clave K no existe en el árbol, se generará un ERROR.  
-

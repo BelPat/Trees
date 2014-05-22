@@ -1,9 +1,0 @@
-Si realitzem l'operación d'eliminar una CLAU K  d'un arbre; s'eliminarà la
-parella <clau, valor>.
-
-POSIBILITATS:
-
-* Si la clau K existeix al arbre, s'eliminarà i s'actualizarà la estructura del arbre.
-
-* Si la clau K no existeix al arbre, es generarà un ERROR.  
-

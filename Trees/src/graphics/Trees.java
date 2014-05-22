@@ -419,7 +419,7 @@ public class Trees extends javax.swing.JFrame {
         jTextArea2.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("\nUn árbol AVL (Adelson-Velskii y Landis), es un árbol binario de búsqueda, en el que todo \nsubárbol cumple:\n\n- El subárbol izquierdo, donde están ubicadas las claves más pequeñas que la raíz.\n- El subárbol derecho, donde están ubicadas las claves más grandes que la raíz.\n- fe(T’)=0, fe(T’)=1 ó fe(T’)=-1; donde fe es el Factor de equilibrio de un árbol binario T:\n\n\tfe(T)=profundidad(izq(T))–profundidad(der(T))");
+        jTextArea2.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2"));
         jTextArea2.setAutoscrolls(false);
         jTextArea2.setBorder(null);
         jTextArea2.setOpaque(false);
@@ -447,7 +447,8 @@ public class Trees extends javax.swing.JFrame {
         jTextArea3.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
-        jTextArea3.setText("\nUn árbol ABC (Árbol Binario Completo), es un árbol que se caracteriza porque todos sus nodos,\nexcepto los del último nivel  tienen dos hijos:\n\n- El subárbol izquierdo, donde están ubicadas las claves más pequeñas que la raíz.\n- El subárbol derecho, donde están ubicadas las claves más grandes que la raíz.");
+        jTextArea3.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1")
+        );
         jTextArea3.setOpaque(false);
         jScrollPane3.setViewportView(jTextArea3);
 
@@ -479,7 +480,7 @@ public class Trees extends javax.swing.JFrame {
         jTextArea7.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea7.setColumns(20);
         jTextArea7.setRows(5);
-        jTextArea7.setText("\nUn árbol rojo-negro es un árbol binario de búsqueda en el que cada nodo tiene un atributo \nde color cuyo valor es rojo o negro. Además de los requisitos impuestos a los árboles \nbinarios de búsqueda convencionales, se deben satisfacer los siguientes para tener un \nárbol rojo-negro válido:\n\n- Todo nodo es o bien rojo o bien negro.\n- La raíz es negra.\n- Todas las hojas son negras (las hojas son los hijos nulos).\n- Los hijos de todo nodo rojo son negros (también llamada \"Propiedad del rojo\").\n- Cada camino simple desde un nodo a una hoja descendiente contiene el mismo número de \n  nodos negros, ya sea contando siempre los nodos negros nulos, o bien no contándolos \n  nunca (el resultado es equivalente). También es llamada \"Propiedad del camino\", y al \n  número de nodos negros de cada camino, que es constante para todos los caminos, se le \n  denomina \"Altura negra del árbol\", y por tanto el cámino no puede tener dos rojos seguidos.\n- El camino más largo desde la raíz hasta una hoja no es más largo que 2 veces el camino \n  más corto desde la raíz del árbol a una hoja en dicho árbol. El resultado es que dicho \n  árbol está aproximadamente equilibrado.");
+        jTextArea7.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3"));
         jTextArea7.setOpaque(false);
         jScrollPane7.setViewportView(jTextArea7);
 
@@ -505,7 +506,7 @@ public class Trees extends javax.swing.JFrame {
         jTextArea4.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Si realizamos la operación de insertar una CLAVE K con un VALOR V dentro de un árbol, se \nintroduce dentro del árbol la pareja <clave, valor> corerspondiente a la inserción.\n\nPOSIBILIDADES:\n\n* Si la clave K no existe en el árbol, se introducirá en el árbol la pareja <clave, valor>\n\n* Si la clave K ya exista en el árbol, se procederá a actualizar su valor.\n\n* Si la clave K tiene un valor indefinido, se generará un ERROR.");
+        jTextArea4.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4"));
         jTextArea4.setAutoscrolls(false);
         jTextArea4.setBorder(null);
         jTextArea4.setOpaque(false);
@@ -524,7 +525,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaInsertarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Insertar", PAyudaInsertar);
@@ -533,7 +534,7 @@ public class Trees extends javax.swing.JFrame {
         jTextArea5.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea5.setColumns(20);
         jTextArea5.setRows(5);
-        jTextArea5.setText("Si realizamos la operación de eliminar una CLAVE K  de un árbol; se procederá a eliminar la\npareja <clave, valor>.\n\nPOSIBILIDADES:\n\n* Si la clave K existe en el árbol, se eliminará y se actualizará la estructura del árbol .\n\n* Si la clave K no existe en el árbol, se generará un ERROR.  \n");
+        jTextArea5.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5"));
         jTextArea5.setAutoscrolls(false);
         jTextArea5.setBorder(null);
         jTextArea5.setOpaque(false);
@@ -552,7 +553,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaEliminarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Eliminar", PAyudaEliminar);
@@ -561,7 +562,7 @@ public class Trees extends javax.swing.JFrame {
         jTextArea6.setBackground(new java.awt.Color(214, 217, 223));
         jTextArea6.setColumns(20);
         jTextArea6.setRows(5);
-        jTextArea6.setText("Si realizamos la operación de consultar una CLAVE K  de un árbol; obtendremos el valor de dicha\nclave.\n\nPOSIBILIDADES:\n\n* Si la clave K existe en el árbol, se indicará por mensaje cuál es el valor de dicha clave.\n\n* Si la clave K no existe en el árbol, se generará un ERROR.  \n");
+        jTextArea6.setText(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion6"));
         jTextArea6.setAutoscrolls(false);
         jTextArea6.setBorder(null);
         jTextArea6.setOpaque(false);
@@ -580,7 +581,7 @@ public class Trees extends javax.swing.JFrame {
             PAyudaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAyudaConsultarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
         TabHelpOperations.addTab("Consultar", PAyudaConsultar);
@@ -595,7 +596,7 @@ public class Trees extends javax.swing.JFrame {
                     .addGroup(FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(TabHelp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(TabHelpOperations, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         FrmHelpLayout.setVerticalGroup(
             FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1258,10 +1259,16 @@ public class Trees extends javax.swing.JFrame {
                 } else {
                     //OPERAMOS PARA INICIAR EL ALGORITMO
                     if ( OptInsert.isSelected() ) {
-                        try {
-                            load_help( "add_abc","algoritmo" );
-                        } catch ( URISyntaxException ex ) {
-                            Logger.getLogger( Trees.class.getName() ).log( Level.SEVERE, null, ex );
+                        switch ( language ) {
+                        case "castellano":
+                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
+                            break;
+                        case "ingles":
+                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+                            break;
+                        case "catalan":
+                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
+                            break;
                         }
                         Integer i = new Integer( TxtKey.getText() );
                         addKey( i.intValue() );
@@ -1271,6 +1278,7 @@ public class Trees extends javax.swing.JFrame {
                         printConsole("Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Delete (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
                         deleteKey( i.intValue() );
                     } else if ( OptSearch.isSelected() ) {
+                        TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
                         Integer i = new Integer( TxtKey.getText() );
                         operation = "Consultar";
                         printConsole("Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Query (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
@@ -1361,12 +1369,13 @@ public class Trees extends javax.swing.JFrame {
         optABC.setSelected( false );
         optAVL.setSelected( false );
         CmbExamples.setSelectedIndex( 0 );       
+        TxtAlgorithm.setText("");
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:        
         this.simulator.deleteTree();
         this.AVLsimulator.deleteTree();
-        this.RBSimulator.deleteTree();        
+        this.RBSimulator.deleteTree();
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         this.repaintTree();
@@ -1377,7 +1386,7 @@ public class Trees extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnExitActionPerformed
 
     private void BtnEnglishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEnglishMouseClicked
-        try {
+
             language = "ingles";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
             BtnSpain.setEnabled( true );
@@ -1398,6 +1407,9 @@ public class Trees extends javax.swing.JFrame {
             OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
+            if (OptInsert.isSelected()==true)TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+            if (OptSearch.isSelected()==true)TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
+            //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<SELECT ONE>" );
             CmbExamples.addItem( "1" );
@@ -1416,20 +1428,16 @@ public class Trees extends javax.swing.JFrame {
             jTextArea5.setText("");
             jTextArea6.setText("");
             jTextArea7.setText("");
-            load_help( "AVL" , "AVL" );
-            load_help( "ABC" , "ABC" );
-            load_help( "RN" , "RN");
-            load_help( "INSERTAR" , "add" );
-            load_help( "ELIMINAR" , "eliminar" );
-            load_help( "CONSULTAR" , "consultar" );
+            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion1"));
+            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion2"));
+            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion3"));
+            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion4"));
+            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion5"));
+            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion6"));
             reloadScreen();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger (Trees.class.getName() ).log( Level.SEVERE, null, ex );
-        }
     }//GEN-LAST:event_BtnEnglishMouseClicked
 
     private void BtnSpainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSpainMouseClicked
-        try {
             language = "castellano";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
             BtnSpain.setEnabled( false );
@@ -1450,10 +1458,6 @@ public class Trees extends javax.swing.JFrame {
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_hojas"));
             
-            
-            //OptCut.setText( "Podar" );            
-           // OptLeaves.setText( "Consultar Hojas:" );
-           // optRN.setText( "Rojo-Negro" );
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<SELECCIONA UNO>" );
             CmbExamples.addItem( "1" );
@@ -1473,60 +1477,39 @@ public class Trees extends javax.swing.JFrame {
             jTextArea6.setText("");
             jTextArea7.setText("");
             
-             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1")+'\n');
-             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2")+'\n');
-             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3")+'\n');
-             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4")+'\n');
-             jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5")+'\n');
-            //load_help( "AVL" , "AVL" );
-            load_help( "ABC", "ABC" );
-            load_help( "RN", "RN" );
-            load_help( "INSERTAR" , "add" );
-            load_help( "ELIMINAR" , "eliminar" );
-            load_help( "CONSULTAR" , "consultar" );
+            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1"));
+            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2"));
+            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3"));
+            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4"));
+            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5"));
+            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion6"));
+            
             reloadScreen();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger( Trees.class.getName()).log(Level.SEVERE, null, ex );
-        }
     }//GEN-LAST:event_BtnSpainMouseClicked
 
     private void BtnCatalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCatalanMouseClicked
-        try {
+
             language = "catalan";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
             BtnSpain.setEnabled( true );
             BtnCatalan.setEnabled( false );
             BtnEnglish.setEnabled( true );
             //jPanel1.setToolTipText("Configuration:");
-            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_configuracion"));
-            optABC.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_ABC"));
-            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_AVL"));
-            optRN.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_RN"));
-            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_ejemplo"));
-            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_clave"));
-            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_valor"));
-            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_lbl_opciones"));
-            OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_insertar"));
-            OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_eliminar"));
-            OptSearch.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_consultar"));
-            OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_padre"));
-            OptCut.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_podar"));
-            OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_cat_CAT").getString("etiqueta_opt_hojas"));
+            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_configuracion"));
+            optABC.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_ABC"));
+            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_AVL"));
+            optRN.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_RN"));
+            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_ejemplo"));
+            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_clave"));
+            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_valor"));
+            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_opciones"));
+            OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_insertar"));
+            OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_eliminar"));
+            OptSearch.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_consultar"));
+            OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_padre"));
+            OptCut.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_podar"));
+            OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_hojas"));
             
-            
-            
-            /*jLabel1.setText( "Exemple:" );
-            jLabel2.setText( "Clau:" );
-            jLabel3.setText( "Valor:" );
-            jLabel8.setText( "Configuració:" );
-            jLabel9.setText( "Opcions:" );
-            OptInsert.setText( "Inserir:" );
-            OptDelete.setText( "Suprimir:" );
-            OptSearch.setText( "Consultar:" );
-            OptSearchFather.setText("Consultar Padre:" );
-            OptCut.setText( "Podar:" );
-            OptLeaves.setText( "Consultar Hojas:" );
-            * */
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<TRIA UN>" );
             CmbExamples.addItem( "1" );
@@ -1546,16 +1529,14 @@ public class Trees extends javax.swing.JFrame {
             jTextArea5.setText("");
             jTextArea6.setText("");
             jTextArea7.setText("");
-            load_help( "AVL", "AVL" );
-            load_help( "ABC", "ABC" );
-            load_help( "RN", "RN" );
-            load_help( "INSERTAR", "add" );
-            load_help( "ELIMINAR", "eliminar" );
-            load_help( "CONSULTAR", "consultar" );
+            
+            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion1"));
+            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion2"));
+            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion3"));
+            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion4"));
+            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion5"));
+            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion6"));
             reloadScreen();
-        } catch ( URISyntaxException ex ) {
-            Logger.getLogger( Trees.class.getName()).log(Level.SEVERE, null, ex );
-        }
     }//GEN-LAST:event_BtnCatalanMouseClicked
 
     private void uncheked()

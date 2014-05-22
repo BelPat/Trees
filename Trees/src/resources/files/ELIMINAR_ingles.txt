@@ -1,7 +1,0 @@
-If we make the removal of a KEY K of a tree shall be removed partner <key, value>
-
-POSSIBILITIES:
-
-* If the key K exists in the tree, will be removed and updated tree structure.
-
-* If the key K is not in the tree, you will get an ERROR.

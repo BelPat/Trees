@@ -1,9 +1,0 @@
-Si realitzem la operació de consultar una CLAU K  d'un arbre; obtindrem el valor de la
-clau.
-
-POSIBILITATS:
-
-* Si la clau K existeix al arbre, es mostrarà amb un missatge quin és el valor de la clau.
-
-* Si la clau K no existeix al arbre, es generarà un ERROR.  
-
