@@ -8,7 +8,7 @@ import javax.swing.*;
 
 
 public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
-    private AVLTree<T> myTree;
+    private AVLTree < T > myTree;
     private HashMap positionNodes = null;
     private HashMap subtreeSizes = null;
     private boolean dirty = true;
@@ -75,7 +75,8 @@ public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
           int w = ld.width + child2child + rd.width;
           
           Dimension d = new Dimension(w, h);
-          subtreeSizes.put(n.getKey(), d);
+       //   subtreeSizes.put(n.getKey(), d);
+            subtreeSizes.put(n, d);
       //    System.out.println("FIN arbolavlexpresiongrafico.foundSizeTree");
           return d;
     }
@@ -118,7 +119,7 @@ public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
             center = left + ld.width + child2child/2; 
           }
           int width = fm.stringWidth(n.getKey().toString());
-          positionNodes.put( n.getKey() ,new Rectangle(center - width/2 - 3, top, width + 6, fm.getHeight()));
+          positionNodes.put(n ,new Rectangle(center - width/2 - 3, top, width + 6, fm.getHeight()));
           foundPosition(n.getLeft(), Integer.MAX_VALUE, center - child2child/2, top + fm.getHeight() + parent2child);
           foundPosition(n.getRight(), center + child2child/2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
 
