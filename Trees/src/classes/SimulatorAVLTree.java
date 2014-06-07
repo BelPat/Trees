@@ -6,28 +6,29 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
 
-public class SimulatorAVLTree {
+public class SimulatorAVLTree <T extends Comparable < T >>{
 
-    AVLTree < Integer > myTree = new AVLTree < Integer > ();
+    AVLTree < T > myTree = new AVLTree < T > ();
 
     public SimulatorAVLTree() {
 
     }
 
-    public boolean add( Integer new_key ){
+    public boolean add( T new_key ){
         return ( this.myTree.add( new_key ) );
     }
 
-    public String delete( Integer new_key ){
-        Integer x = this.myTree.delete( new_key );
+    public String delete( T new_key ){
+        T x = this.myTree.delete( new_key );
 
         if ( x == null )
             return ( "No existe el new_key en el arbol\n" );
 
-        return ( "Borrado el new_key: " + x.toString() + "\n" );
+        return ( "Borrado el new_key : " + x.toString() + "\n" );
     }
+    
     public void deleteTree(){
-        Iterator< Integer > it=this.myTree.preOrder();
+        Iterator< T > it=this.myTree.preOrder();
         //String r=msg+"\n";
         while(it.hasNext()){
             delete(it.next());
@@ -36,11 +37,11 @@ public class SimulatorAVLTree {
 
     public String preOrder()
     {
-        Iterator< Integer > it=this.myTree.preOrder();
+        Iterator< T > it=this.myTree.preOrder();
         return (walk(it, "Recorrido PreOrden"));
     }
 
-    public String isHere( Integer new_key )    {
+    public String isHere( T new_key )    {
          boolean here = this.myTree.find( new_key );
          String r = "El new_key:" + new_key.toString() + "\n";
          r += here ? "Si se encuentra en el arbol":"No se encuentra en el arbol\n";
@@ -48,15 +49,15 @@ public class SimulatorAVLTree {
     }
 
     public String getLeaves()    {
-        Iterator < Integer > it = this.myTree.getLeaves();
+        Iterator < T > it = this.myTree.getLeaves();
         return ( walk( it, "Hojas del Arbol" ) );
     }
 
-    public String getFather(Integer child)   {
+    public String getFather(T child)   {
         if( this.myTree.getRoot().getKey().equals( child ) )
             return ( "La raiz no tiene father" );
         
-        Integer father = this.myTree.getFather( child );
+        T father = this.myTree.getFather( child );
         
         if ( father == null )
             return ("No existe el Dato: " + child.toString() );
@@ -64,7 +65,7 @@ public class SimulatorAVLTree {
         return ( "El father de: " + child + "\n es : " + father.toString() );
     }
 
-    private String walk( Iterator < Integer > it , String msg )    {
+    private String walk( Iterator < T > it , String msg )    {
         String r = msg + "\n";
         
         while( it.hasNext() )
@@ -85,7 +86,7 @@ public class SimulatorAVLTree {
         return ( this.myTree.getPaint() );                
     }
 
-    public boolean add( int new_key , JInternalFrame jInternalFrame1 ) {
+    public boolean add( T new_key , JInternalFrame jInternalFrame1 ) {
         return ( this.myTree.add( new_key ) );
     }
 

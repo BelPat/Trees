@@ -2,7 +2,7 @@
 package classes;
 import java.util.Iterator;
 
-public class SimpleList < T >  implements Iterable < T > {
+public class SimpleList < T extends Comparable < T > >  implements Iterable < T > {
     private Node < T >  head;
     private int size;
 
@@ -295,7 +295,7 @@ public class SimpleList < T >  implements Iterable < T > {
 
     }*/
 
-    public class IteratorLS < T >  implements Iterator < T > 
+    public class IteratorLS < T extends Comparable < T > >  implements Iterator < T > 
     {
 
         private Node < T >  posicion;

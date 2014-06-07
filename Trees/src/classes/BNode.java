@@ -1,7 +1,7 @@
 package classes;
 
 
-public class BNode < T > {
+public class BNode < T extends Comparable < T > > {
     
     private T key;
     private BNode < T >  left, right;

@@ -8,7 +8,7 @@ package classes;
  *
  * @author 
  */
-class Node<T> implements java.io.Serializable{
+class Node<T extends Comparable < T > > implements java.io.Serializable{
     private T key;
     private Node<T> right;
 	

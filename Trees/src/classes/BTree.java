@@ -6,7 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-public class BTree<T> {
+public class BTree<T extends Comparable<T>> {
 
     private BNode<T> root;
 
@@ -206,11 +206,11 @@ public class BTree<T> {
     }
 
     public JPanel getPaint() {
-        return new GraphicTree(this);
+        return new GraphicTree( this );
     }
     
    public HashMap getPositionNodes()  {     
-       GraphicTree ae =new GraphicTree(this);
+       GraphicTree ae =new GraphicTree < T >(this);
        return ae.getPositionNodes();
    }
 }

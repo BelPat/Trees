@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class GraphicAVLTree<T> extends JPanel{
+public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
     private AVLTree<T> myTree;
     private HashMap positionNodes = null;
     private HashMap subtreeSizes = null;
@@ -24,7 +24,7 @@ public class GraphicAVLTree<T> extends JPanel{
      * @param miExpresion: dato de tipo ArbolExpresion que contiene el Arbol a
      * dibujar.
      */
-    public GraphicAVLTree(AVLTree<T> myTree)     {
+    public GraphicAVLTree ( AVLTree < T > myTree)     {
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
           positionNodes = new HashMap();
@@ -61,10 +61,10 @@ public class GraphicAVLTree<T> extends JPanel{
      * referencia calcular el tamaño de cada subárbol.
      * @return Dimension con el tamaño de cada subárbol.
      */
-    private Dimension foundSizeTree(AVLNode<T> n)    {
+    private Dimension foundSizeTree( AVLNode<T> n )    {
         
      //     System.out.println("INICIO arbolavlexpresiongrafico.foundSizeTree");
-          if (n == null) {
+          if ( n == null ) {
               return new Dimension(0,0);
           }
  
@@ -75,7 +75,7 @@ public class GraphicAVLTree<T> extends JPanel{
           int w = ld.width + child2child + rd.width;
           
           Dimension d = new Dimension(w, h);
-          subtreeSizes.put(n, d);
+          subtreeSizes.put(n.getKey(), d);
       //    System.out.println("FIN arbolavlexpresiongrafico.foundSizeTree");
           return d;
     }
@@ -118,7 +118,7 @@ public class GraphicAVLTree<T> extends JPanel{
             center = left + ld.width + child2child/2; 
           }
           int width = fm.stringWidth(n.getKey().toString());
-          positionNodes.put(n,new Rectangle(center - width/2 - 3, top, width + 6, fm.getHeight()));
+          positionNodes.put( n.getKey() ,new Rectangle(center - width/2 - 3, top, width + 6, fm.getHeight()));
           foundPosition(n.getLeft(), Integer.MAX_VALUE, center - child2child/2, top + fm.getHeight() + parent2child);
           foundPosition(n.getRight(), center + child2child/2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
 

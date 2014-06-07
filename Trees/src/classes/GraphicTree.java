@@ -6,7 +6,7 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class GraphicTree<T> extends JPanel {
+public class GraphicTree<T extends Comparable<T>> extends JPanel {
     private BTree<T> myTree;
     private HashMap positionNodes = null;
     private HashMap subtreeSizes = null;

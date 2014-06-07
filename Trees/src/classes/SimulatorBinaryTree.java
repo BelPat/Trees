@@ -8,20 +8,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-public class SimulatorBinaryTree {
+public class SimulatorBinaryTree <T extends Comparable < T >> {
 
-    BBTree < Integer > myTree = new BBTree < Integer > ();
+ //   BBTree < Integer > myTree = new BBTree < Integer > ();
+    BBTree < T > myTree = new BBTree < T > ();
 
     public SimulatorBinaryTree() {
 
     }
 
-    public boolean add ( Integer new_key )  {
+    public boolean add ( T new_key )  {
         return ( this.myTree.add( new_key ) );
     }
 
-    public String delete ( Integer new_key )    {
-        Integer x = this.myTree.delete( new_key );
+    public String delete ( T new_key )    {
+        T x = this.myTree.delete( new_key );
        
         if ( x == null )
             return ("No existe el new_key en el arbol\n");
@@ -30,7 +31,7 @@ public class SimulatorBinaryTree {
     }
      
     public void deleteTree(){
-        Iterator < Integer > it = this.myTree.preOrder();
+        Iterator < T > it = this.myTree.preOrder();
         //String r=msg+"\n";
       
         while( it.hasNext() ){
@@ -39,22 +40,22 @@ public class SimulatorBinaryTree {
     }
 
     public String preOrder()   {
-        Iterator < Integer > it = this.myTree.preOrder();
+        Iterator < T > it = this.myTree.preOrder();
        
         return ( recorrido( it, "Recorrido PreOrden" ) );
     }
 
     public String getLeaves()   {
-        Iterator < Integer > it = this.myTree.getLeaves();
+        Iterator < T > it = this.myTree.getLeaves();
         
         return ( recorrido( it, "Leaves del Arbol" ) );
     }
 
-    public String getFather( Integer child )    {
+    public String getFather( T child )    {
         if ( this.myTree.getRoot().getKey().equals( child ) )
             return ("La root no tiene father");
         
-        Integer father = this.myTree.getFather( child );
+        T father = this.myTree.getFather( child );
         
         if ( father == null )
             return ( "No existe el Dato: " + child.toString() );
@@ -62,7 +63,7 @@ public class SimulatorBinaryTree {
         return ( "El father de: "+child+"\n es : "+father.toString() );
     }
 
-    public String isHere( Integer new_key )    {
+    public String isHere( T new_key )    {
          boolean here = this.myTree.find( new_key );
          String r = "El new_key:" + new_key.toString() + "\n";
          r += here ? "Si se encuentra en el arbol":"No se encuentra en el arbol\n";
@@ -70,13 +71,13 @@ public class SimulatorBinaryTree {
          return( r );
     }
 
-    public BNode findNode( Integer new_key )   {
+    public BNode findNode( T new_key )   {
          BNode here = this.myTree.findNode( new_key );
 
          return ( here );
     }
     
-    private String recorrido( Iterator < Integer > it , String msg ) {
+    private String recorrido( Iterator < T > it , String msg ) {
     String r = msg + "\n";
     
     while( it.hasNext() )

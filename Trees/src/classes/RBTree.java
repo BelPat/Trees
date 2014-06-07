@@ -14,7 +14,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 
-public class RBTree <T> {
+public class RBTree <T extends Comparable < T > > {
 
 // La root se inicializa a empty.
 private RBNode<T> empty = new RBNode<T>();
@@ -196,7 +196,7 @@ private void add(RBNode<T> z) {
     while (!isEmpty(x)){
     y = x;
 
-    if (((Comparable)z.getKey()).compareTo(x.getKey()) < 0){
+    if ( ( z.getKey() ).compareTo( x.getKey() ) < 0){
         x.setNumLeft( x.getNumLeft() + 1 );
         x = x.getLeft();
     } else {
@@ -209,7 +209,7 @@ private void add(RBNode<T> z) {
 
     if (isEmpty(y)){
         root = z;
-    } else if (((Comparable)z.getKey()).compareTo(y.getKey()) < 0){
+    } else if ((z.getKey()).compareTo(y.getKey()) < 0){
         y.setLeft( z );
     }else{
         y.setRight( z );
@@ -228,10 +228,10 @@ private void add(RBNode<T> z) {
 //de las propiedades del RBTree
 // Corrige el posible incumlimiento de las propiedades tras la inserción
 
-private void addModifyNum(RBNode<T> z){
+private void addModifyNum( RBNode<T> z ){
 
 RBNode<T> y = empty;
-while (z.getRoot().getColor() == RBNode.RED){
+while ( z.getRoot().getColor() == RBNode.RED ){
 
 if (z.getRoot() == z.getRoot().getRoot().getLeft()){
 
@@ -367,7 +367,7 @@ private void fixNodeData(RBNode<T> x, RBNode<T> y){
     while (!isEmpty(current)){
 
         if (y.getKey() != current.getKey()) {
-             compara=((Comparable)y.getKey()).compareTo(current.getKey());
+             compara=(y.getKey()).compareTo(current.getKey());
             if (compara > 0) {
                 current.setNumRight(current.getNumRight()-1);
             }
@@ -491,7 +491,7 @@ private void deleteModificarNum(RBNode<T> x){
             }
         }
         return false;
-    }// fin find(int key)
+    }// fin find( key)
 
      /**
      * Retorna el Node si existe un dato en el árbol binario, o null en caso

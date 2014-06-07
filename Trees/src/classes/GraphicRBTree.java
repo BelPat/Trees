@@ -15,7 +15,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 
-public class GraphicRBTree<T>  extends JPanel {
+public class GraphicRBTree<T extends Comparable < T > >  extends JPanel {
     private RBTree<T> myTree;
     private HashMap posicionNodos = null;
     private HashMap subtreeSizes = null;

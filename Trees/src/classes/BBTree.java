@@ -2,7 +2,7 @@ package classes;
 
 import java.util.Iterator;
 
-public class BBTree<T> extends BTree<T>{
+public class BBTree<T extends Comparable<T>> extends BTree<T>{
 
     /**
     *  Crea un árbol binario vacío
@@ -29,7 +29,7 @@ public class BBTree<T> extends BTree<T>{
         if( new_node == null ){
             return( new BNode< T > ( new_key , null , null ) );
         }
-        int compara = ( ( Comparable )new_node.getKey() ).compareTo( new_key );
+        int compara = ( new_node.getKey() ).compareTo( new_key );
         if( compara > 0 ) { // new_keydelarbol es menor que new_key
             new_node.setLeft(add(new_node.getLeft(), new_key));
         }  else{
@@ -64,7 +64,7 @@ public class BBTree<T> extends BTree<T>{
         if ( r == null ){
             return null;//<--new_key no encontrado		
         }
-        int compara = (  (Comparable )r.getKey() ).compareTo( x );
+        int compara = ( r.getKey() ).compareTo( x );
         if( compara > 0 ){
             r.setLeft( delete ( r.getLeft() , x ) );
         }  else
@@ -113,7 +113,7 @@ public class BBTree<T> extends BTree<T>{
         if (r==null){
             return (false);
         }
-        int compara=((Comparable)r.getKey()).compareTo(x);
+        int compara=(r.getKey()).compareTo(x);
         if(compara>0){            
             return(find(r.getLeft(),x));
         } else{
@@ -130,9 +130,9 @@ public class BBTree<T> extends BTree<T>{
     * Elimina las hojas(nodos terminales) del árbol binario.
     */
     public void cutLeaves() {
-    Iterator<Integer> it=(Iterator<Integer>) this.getLeaves();
+    Iterator<T> it=(Iterator<T>) this.getLeaves();
         while(it.hasNext())    {
-            delete(this.getRoot(),(T)(Comparable)it.next().intValue());
+            delete(this.getRoot(),(T)it.next());
         }
     }
 

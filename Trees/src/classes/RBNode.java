@@ -8,7 +8,7 @@ package classes;
  *
  * @author nusatres
  */
-  public class RBNode < T >  {
+  public class RBNode < T extends Comparable < T > >  {
 
     /** Possible color for this node */
     public static final int BLACK = 0;

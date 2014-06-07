@@ -6,9 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class AVLTree<T> {
+public class AVLTree< T extends Comparable < T > > {
  
- private AVLNode root; // the root node
+ private AVLNode < T > root; // the root node
  
 /***************************** Core Functions ************************************/
 
@@ -28,10 +28,10 @@ public class AVLTree<T> {
                                 
     public boolean add(T k) {
       // create new node
-      AVLNode n = new AVLNode(k);
+      AVLNode < T >  n = new AVLNode < T > (k);
       // start recursive procedure for inserting the node
       if (this.find(k)==false){
-            return (add(this.root,n));
+            return ( add( this.root ,n ) );
       }
       return false;
     }
@@ -42,13 +42,14 @@ public class AVLTree<T> {
     * @param p The node currently compared, usually you start with the root.
     * @param q The node to be inserted.
     */
-    public boolean add(AVLNode p, AVLNode q) {
+    public boolean add(AVLNode < T > p, AVLNode < T > q) {
       // If  node to compare is null, the node is inserted. If the root is null, it is the root of the tree.
       if(p==null) {
            this.root=q;
       } else {   
        // If compare node is smaller, continue with the getLeft() node
-       if(q.toInt()<p.toInt()) {
+       //if(q.toInt()<p.toInt()) {
+       if( q.getKey().compareTo(p.getKey()) < 0 ) {    
             if(p.getLeft()==null) {
                  p.setLeft(q);
                  q.setRoot(p);
@@ -58,7 +59,8 @@ public class AVLTree<T> {
                  add(p.getLeft(),q);
             }
 
-       } else if(q.toInt()>p.toInt()) {
+      // } else if(q.toInt()>p.toInt()) {
+         } else if(q.getKey().compareTo(p.getKey())>0) {
             if(p.getRight()==null) {
                  p.setRight(q);
                  q.setRoot(p);     
@@ -79,23 +81,23 @@ public class AVLTree<T> {
     * 
     * @param cur : The node to check the balance for, usually you start with the root of a leaf.
     */
-    public void recursiveBalance(AVLNode cur) {
+    public void recursiveBalance(AVLNode < T > cur) {
       // we do not use the balance in this class, but the store it anyway
       setBalance(cur);
       int balance = cur.getBalance();
 
       // check the balance
-      if(balance==-2) {
-           if(height(cur.getLeft().getLeft())>=height(cur.getLeft().getRight())) {
-                cur = rotateRight(cur);
+      if( balance == -2 ) {
+           if( height(cur.getLeft().getLeft()) >= height(cur.getLeft().getRight()) ) {
+                cur = rotateRight( cur );
            } else {
-                cur = doubleRotateLeftRight(cur);
+                cur = doubleRotateLeftRight( cur );
            }
-      } else if(balance==2) {
-           if(height(cur.getRight().getRight())>=height(cur.getRight().getLeft())) {
-                cur = rotateLeft(cur);
+      } else if( balance == 2 ) {
+           if( height(cur.getRight().getRight()) >= height(cur.getRight().getLeft()) ) {
+                cur = rotateLeft( cur );
            } else {
-                cur = doubleRotateRightLeft(cur);
+                cur = doubleRotateRightLeft( cur );
            }
       }
       // we did not reach the root yet
@@ -110,9 +112,11 @@ public class AVLTree<T> {
     /**
     * Removes a node from the tree, if it is existent.
     */
-    public T delete(int k) {
+    public T delete(T k) {
       // First we must find the node, after this we can delete it.
-      return(deleteAVL(this.root,k).getKey());
+        T aux_key = deleteAVL(this.root,k);
+        
+      return(aux_key);
     }
 
     /**
@@ -121,20 +125,33 @@ public class AVLTree<T> {
     * @param p The node to start the search.
     * @param q The KEY of node to remove.
     */
-    public AVLNode<T> deleteAVL(AVLNode p,int q) {
-      if(p==null) {
+    public T deleteAVL(AVLNode < T > p,T q) {
+      if( p == null ) {
            // getRight() Wert existiert nicht in diesem Baum, daher ist nichts zu tun
            return null;
       } else {
-           if(p.toInt()>q)  {
+           /*if(p.toInt()>q)  {
                 deleteAVL(p.getLeft(),q);
            } else if(p.toInt()<q) {
-                deleteAVL(p.getRight(),q);
+                delketeAVL(p.getRight(),q);
            } else if(p.getKey()==q) {
                 // we found the node in the tree.. now lets go on!
                 deleteNode(p);
+           }*/
+          System.out.println("Delete_avl p" + p.getKey() + "q " + q);
+          if( p.getKey().compareTo( q ) > 0 )  {
+                System.out.println("Delete_avl p>q" + p.getKey() + "q " + q);
+                deleteAVL(p.getLeft(),q);
+           } else if( p.getKey().compareTo( q ) < 0 ) {
+                 System.out.println("Delete_avl p<q" + p.getKey() + "q " + q);
+                deleteAVL(p.getRight(),q);
+           } else if( p.getKey().compareTo( q ) ==0 ) {
+                System.out.println("Delete_avl p=q" + p.getKey() + "q " + q);
+                // we found the node in the tree.. now lets go on!
+                
+                deleteNode(p);
            }
-       return p;
+       return q;
       }
     }
 
@@ -143,12 +160,12 @@ public class AVLTree<T> {
     * 
     * @param q The node to be removed.
     */
-    public void deleteNode(AVLNode q) {
-      AVLNode r;
+    public void deleteNode(AVLNode < T > q) {
+      AVLNode < T > r;
       // at least one child of q, q will be removed directly
-      if(q.getLeft()==null || q.getRight()==null) {
+      if( q.getLeft()==null || q.getRight()==null ) {
            // the root is deleted
-           if(q.getRoot()==null) {
+           if( q.getRoot()==null ) {
                 this.root=null;
                 q=null;
                 return;
@@ -156,10 +173,10 @@ public class AVLTree<T> {
            r = q;
       } else {
            // q has two children --> will be replaced by successor
-           r = successor(q);
-           q.setKey(r.getKey());
+           r = successor( q );
+           q.setKey( r.getKey() );
       }
-      AVLNode p;
+      AVLNode < T > p;
       if(r.getLeft()!=null) {
            p = r.getLeft();
       } else {
@@ -193,7 +210,7 @@ public class AVLTree<T> {
      */
     //La clase T debe tener sobreescrito el metodo equals
     public boolean find(T key) {
-        return (find(this.getRoot(), key));
+        return ( find( this.getRoot(), key ) );
     }
 
     private boolean find(AVLNode<T> r, T key) {
@@ -245,7 +262,7 @@ public class AVLTree<T> {
         if (key == null || this.getRoot() == null) {
             return null;
         }
-        AVLNode<T> x = getFather(this.getRoot(), key);
+        AVLNode < T >  x = getFather(this.getRoot(), key);
         if (x == null) {
             return null;
         }
@@ -273,10 +290,11 @@ public class AVLTree<T> {
      */
     public void cutLeaves() {
 
-        Iterator<Integer> it=(Iterator<Integer>) this.getLeaves();        
+        Iterator<T> it=(Iterator<T>) this.getLeaves();        
         while(it.hasNext())
         {
-            delete(it.next().intValue());
+         //   delete(it.next().intValue());
+            delete(it.next());
         }
     }
 
@@ -373,19 +391,19 @@ public class AVLTree<T> {
     * 
     * @return The root of the rotated tree.
     */
-    public AVLNode rotateLeft(AVLNode n) {
-      AVLNode v = n.getRight();
-      v.setRoot(n.getRoot()) ;
-      n.setRight(v.getLeft());
-      if(n.getRight()!=null) {
+    public AVLNode rotateLeft(AVLNode < T > n) {
+      AVLNode < T > v = n.getRight();
+      v.setRoot( n.getRoot() ) ;
+      n.setRight( v.getLeft() );
+      if( n.getRight() != null ) {
            n.getRight().setRoot(n);
       }
       v.setLeft( n );
       n.setRoot ( v );
-      if(v.getRoot()!=null) {
-           if(v.getRoot().getRight()==n) {
+      if( v.getRoot() != null ) {
+           if( v.getRoot().getRight() == n ) {
                 v.getRoot().setRight(v) ;
-           } else if(v.getRoot().getLeft()==n) {
+           } else if( v.getRoot().getLeft() == n ) {
                 v.getRoot().setLeft(v);
            }
       }
@@ -402,19 +420,19 @@ public class AVLTree<T> {
     * 
     * @return The root of the new rotated tree.
     */
-    public AVLNode rotateRight(AVLNode n) {  
-      AVLNode v = n.getLeft();
+    public AVLNode rotateRight( AVLNode < T > n ) {  
+      AVLNode < T > v = n.getLeft();
       v.setRoot( n.getRoot());  
-      n.setLeft(v.getRight());  
-      if(n.getLeft()!=null) {
+      n.setLeft( v.getRight() );  
+      if( n.getLeft() != null ) {
            n.getLeft().setRoot(n);
       }
       v.setRight(n);
       n.setRoot(v);
-      if(v.getRoot()!=null) {
-           if(v.getRoot().getRight()==n) {
+      if( v.getRoot() != null ) {
+           if( v.getRoot().getRight() == n ) {
                 v.getRoot().setRight(v);
-           } else if(v.getRoot().getLeft()==n) {
+           } else if( v.getRoot().getLeft() == n ) {
                 v.getRoot().setLeft(v);
            }
       }
@@ -428,9 +446,9 @@ public class AVLTree<T> {
     * @param u The node for the rotation.
     * @return The root after the double rotation.
     */
-    public AVLNode doubleRotateLeftRight(AVLNode u) {
-        u.setLeft(rotateLeft(u.getLeft()));
-        return rotateRight(u);
+    public AVLNode doubleRotateLeftRight(AVLNode < T > u) {
+        u.setLeft( rotateLeft( u.getLeft()) );
+        return rotateRight( u );
     }
 
     /**
@@ -438,9 +456,9 @@ public class AVLTree<T> {
     * @param u The node for the rotation.
     * @return The root after the double rotation.
     */
-    public AVLNode doubleRotateRightLeft(AVLNode u) {
-        u.setRight(rotateRight(u.getRight()));
-        return rotateLeft(u);
+    public AVLNode doubleRotateRightLeft( AVLNode < T > u ) {
+        u.setRight( rotateRight( u.getRight()) );
+        return rotateLeft( u );
     }
 
     /***************************** Helper Functions ************************************/
@@ -451,16 +469,16 @@ public class AVLTree<T> {
     * @param q The predecessor.
     * @return The successor of node q.
     */
-    public AVLNode successor(AVLNode q) {
-      if(q.getRight()!=null) {
-           AVLNode r = q.getRight();
-           while(r.getLeft()!=null) {
+    public AVLNode successor(AVLNode < T > q) {
+      if( q.getRight() != null ) {
+           AVLNode < T > r = q.getRight();
+           while( r.getLeft() != null ) {
                 r = r.getLeft();
            }
            return r;
       } else {
-           AVLNode p = q.getRoot();
-           while(p!=null && q==p.getRight()) {
+           AVLNode < T > p = q.getRoot();
+           while( p!=null && q==p.getRight() ) {
                 q = p;
                 p = q.getRoot();
            }
@@ -474,18 +492,18 @@ public class AVLTree<T> {
     * @param cur
     * @return The height of a node (-1, if node is not existent eg. NULL).
     */
-    private int height(AVLNode cur) {
+    private int height(AVLNode < T > cur) {
       if(cur==null) {
            return -1;
       }
-      if(cur.getLeft()==null && cur.getRight()==null) {
+      if( cur.getLeft() == null && cur.getRight() == null ) {
            return 0;
-      } else if(cur.getLeft()==null) {
-           return 1+height(cur.getRight());
-      } else if(cur.getRight()==null) {
-           return 1+height(cur.getLeft());
+      } else if ( cur.getLeft() == null ) {
+           return 1 + height( cur.getRight() );
+      } else if( cur.getRight() == null ) {
+           return 1 + height( cur.getLeft() );
       } else {
-           return 1+maximum(height(cur.getLeft()),height(cur.getRight()));
+           return 1 + maximum( height ( cur.getLeft() ) , height( cur.getRight())  );
       }
     }
 
@@ -505,21 +523,21 @@ public class AVLTree<T> {
 
     * @param n The node to write keyrmation about.
     */
-    public void debug(AVLNode n) {
-      int l = 0;
-      int r = 0;
-      int p = 0;
+ /*   public void debug(AVLNode n) {
+      T l;
+      T r;
+      T p;
       if(n.getLeft()!=null) {
-           l = n.getLeft().toInt();
+           l = (T) n.getLeft().getKey();
       }
       if(n.getRight()!=null) {
-           r = n.getRight().toInt();
+           r = (T) n.getRight().getKey();
       }
       if(n.getRoot()!=null) {
-           p = n.getRoot().toInt();
+           p = (T) n.getRoot().getKey();
       }
 
-      System.out.println("Left: "+l+" Key: "+n+" Right: "+r+" Parent: "+p+" Balance: "+n.getBalance());
+     // System.out.println("Left: "+l+" Key: "+n+" Right: "+r+" Parent: "+p+" Balance: "+n.getBalance());
 
       if(n.getLeft()!=null) {
            debug(n.getLeft());
@@ -527,7 +545,7 @@ public class AVLTree<T> {
       if(n.getRight()!=null) {
            debug(n.getRight());
       }
-    }
+    }*/
 
     /**
      * Crea un árbol de la clase JTree. Esta clase permite dibujar el árbol
@@ -559,7 +577,7 @@ public class AVLTree<T> {
     }
 
     public JPanel getPaint() {
-        return new GraphicAVLTree(this);
+        return new GraphicAVLTree( this );
     }
 
     /**
@@ -568,12 +586,12 @@ public class AVLTree<T> {
      * @return true si el árbol binario esta vacío o false en caso contrario
      */
     public boolean isEmpty() {
-        return (this.getRoot() == null);
+        return ( this.getRoot() == null );
     }
 
 
-    private void setBalance(AVLNode cur) {
-        cur.setBalance( height(cur.getRight())-height(cur.getLeft()));
+    private void setBalance(AVLNode < T > cur) {
+        cur.setBalance( height(cur.getRight()) - height(cur.getLeft()));
     }
 
 
@@ -596,11 +614,11 @@ public class AVLTree<T> {
         }
     }
 
-    public AVLNode getRoot() {
+    public AVLNode < T > getRoot() {
         return root;
     }
 
-    public void setRoot(AVLNode root) {
+    public void setRoot(AVLNode < T > root) {
         this.root = root;
     }
  

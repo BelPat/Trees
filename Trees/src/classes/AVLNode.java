@@ -9,7 +9,7 @@ package classes;
  * @author nusatres
  */
 
- public class AVLNode < T >  {
+ public class AVLNode < T extends Comparable < T >  >  {
 
     private AVLNode < T >  left;
     private AVLNode < T >  right;
@@ -87,9 +87,6 @@ package classes;
         return "" + key;
     }
 
-    public int toInt() {
-        return ( int )( Comparable ) key;
-    }
 }
 
     
