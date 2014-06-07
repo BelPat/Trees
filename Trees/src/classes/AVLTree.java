@@ -391,7 +391,7 @@ public class AVLTree< T extends Comparable < T > > {
     * 
     * @return The root of the rotated tree.
     */
-    public AVLNode rotateLeft(AVLNode < T > n) {
+    public AVLNode<T> rotateLeft(AVLNode < T > n) {
       AVLNode < T > v = n.getRight();
       v.setRoot( n.getRoot() ) ;
       n.setRight( v.getLeft() );
@@ -420,7 +420,7 @@ public class AVLTree< T extends Comparable < T > > {
     * 
     * @return The root of the new rotated tree.
     */
-    public AVLNode rotateRight( AVLNode < T > n ) {  
+    public AVLNode<T> rotateRight( AVLNode < T > n ) {  
       AVLNode < T > v = n.getLeft();
       v.setRoot( n.getRoot());  
       n.setLeft( v.getRight() );  
@@ -446,7 +446,7 @@ public class AVLTree< T extends Comparable < T > > {
     * @param u The node for the rotation.
     * @return The root after the double rotation.
     */
-    public AVLNode doubleRotateLeftRight(AVLNode < T > u) {
+    public AVLNode<T> doubleRotateLeftRight(AVLNode < T > u) {
         u.setLeft( rotateLeft( u.getLeft()) );
         return rotateRight( u );
     }
@@ -456,7 +456,7 @@ public class AVLTree< T extends Comparable < T > > {
     * @param u The node for the rotation.
     * @return The root after the double rotation.
     */
-    public AVLNode doubleRotateRightLeft( AVLNode < T > u ) {
+    public AVLNode<T> doubleRotateRightLeft( AVLNode < T > u ) {
         u.setRight( rotateRight( u.getRight()) );
         return rotateLeft( u );
     }
@@ -469,7 +469,7 @@ public class AVLTree< T extends Comparable < T > > {
     * @param q The predecessor.
     * @return The successor of node q.
     */
-    public AVLNode successor(AVLNode < T > q) {
+    public AVLNode<T> successor(AVLNode < T > q) {
       if( q.getRight() != null ) {
            AVLNode < T > r = q.getRight();
            while( r.getLeft() != null ) {

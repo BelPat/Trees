@@ -24,7 +24,7 @@ public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
      * @param miExpresion: dato de tipo ArbolExpresion que contiene el Arbol a
      * dibujar.
      */
-    public GraphicAVLTree ( AVLTree < T > myTree)     {
+    public GraphicAVLTree( AVLTree < T > myTree)     {
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
           positionNodes = new HashMap();

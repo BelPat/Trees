@@ -25,10 +25,7 @@ package classes;
         height = 0;
         key = k;
     }
-
-    /**
-    * Contructor vacio de la clase
-    */
+    
     public AVLNode ( AVLNode < T >  x) {
         this.key=x.getKey();
         this.left=x.getLeft();

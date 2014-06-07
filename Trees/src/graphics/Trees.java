@@ -359,7 +359,7 @@ public class Trees extends javax.swing.JFrame {
         optABC = new javax.swing.JRadioButton();
         optAVL = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        CmbExamples = new javax.swing.JComboBox();
+        CmbExamples = new javax.swing.JComboBox<String>();
         BtmHelp = new javax.swing.JButton();
         BtmReload = new javax.swing.JButton();
         BtmPlay = new javax.swing.JButton();
@@ -1732,7 +1732,7 @@ public class Trees extends javax.swing.JFrame {
     private javax.swing.JButton BtnEnglish;
     private javax.swing.JButton BtnExit;
     private javax.swing.JButton BtnSpain;
-    private javax.swing.JComboBox CmbExamples;
+    private javax.swing.JComboBox<String> CmbExamples;
     private javax.swing.JFrame FrmConfigKeys;
     private javax.swing.JFrame FrmConfigTree;
     private javax.swing.JFrame FrmHelp;
