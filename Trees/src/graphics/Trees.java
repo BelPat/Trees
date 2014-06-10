@@ -1316,13 +1316,13 @@ public class Trees extends javax.swing.JFrame {
     private void BtmHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmHelpMouseClicked
         // TODO add your handling code here:
         FrmHelp.setLocationRelativeTo( null );
-        FrmHelp.show( true );
+        FrmHelp.setVisible(true);
 
     }//GEN-LAST:event_BtmHelpMouseClicked
 
     private void BtmExitHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitHelpMouseClicked
         // TODO add your handling code here:
-        FrmHelp.show( false );
+        FrmHelp.setVisible(false);
     }//GEN-LAST:event_BtmExitHelpMouseClicked
 
     private void BtmExitHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitHelpActionPerformed
@@ -1344,7 +1344,7 @@ public class Trees extends javax.swing.JFrame {
 
     private void BtmExitConfig1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitConfig1MouseClicked
         // TODO add your handling code here:
-        FrmConfigTree.show( false );
+        FrmConfigTree.setVisible(false);
     }//GEN-LAST:event_BtmExitConfig1MouseClicked
 
     private void BtmExitConfig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitConfig1ActionPerformed
@@ -1353,7 +1353,7 @@ public class Trees extends javax.swing.JFrame {
 
     private void BtmExitConfig2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitConfig2MouseClicked
         // TODO add your handling code here:
-        FrmConfigKeys.show( false );
+        FrmConfigKeys.setVisible(false);
     }//GEN-LAST:event_BtmExitConfig2MouseClicked
 
     private void BtmExitConfig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitConfig2ActionPerformed
