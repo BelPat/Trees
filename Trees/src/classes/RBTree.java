@@ -481,7 +481,7 @@ private void deleteModificarNum(RBNode<T> x){
         int compara;
 
         while (!isEmpty(r)){
-            compara=((Comparable)r.getKey()).compareTo(key);
+            compara=r.getKey().compareTo(key);
            if (compara==0){
                 return true;
            }else if (compara < 0) {
@@ -505,7 +505,7 @@ private void deleteModificarNum(RBNode<T> x){
 
         int compara;
         while (!isEmpty(current)){
-            compara=((Comparable)current.getKey()).compareTo(key);
+            compara=current.getKey().compareTo(key);
 
             if (compara==0){
                  return current;
@@ -581,7 +581,7 @@ private void deleteModificarNum(RBNode<T> x){
      */
     
       public JPanel getPaint() {
-        return new GraphicRBTree(this);
+        return new GraphicRBTree<T>(this);
     }
       
 /**

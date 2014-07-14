@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public class GraphicTree<T extends Comparable<T>> extends JPanel {
     private BTree<T> myTree;
-    private HashMap positionNodes = null;
-    private HashMap subtreeSizes = null;
+    private HashMap<BNode<T>, Rectangle> positionNodes = null;
+    private HashMap<BNode<T>, Dimension> subtreeSizes = null;
     private boolean dirty = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
@@ -26,8 +26,8 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
     public GraphicTree(BTree<T> myTree)    {      
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
-          positionNodes = new HashMap();
-          subtreeSizes = new HashMap();
+          positionNodes = new HashMap<>();
+          subtreeSizes = new HashMap<>();
        //   dirty = true;
           repaint();      
     }

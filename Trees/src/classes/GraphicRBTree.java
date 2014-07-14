@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 
 public class GraphicRBTree<T extends Comparable < T > >  extends JPanel {
     private RBTree<T> myTree;
-    private HashMap posicionNodos = null;
-    private HashMap subtreeSizes = null;
+    private HashMap<RBNode<T>, Rectangle> posicionNodos = null;
+    private HashMap<RBNode<T>, Dimension> subtreeSizes = null;
     private boolean dirty = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
@@ -34,8 +34,8 @@ public class GraphicRBTree<T extends Comparable < T > >  extends JPanel {
     public GraphicRBTree(RBTree<T> myTree)    {
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
-          posicionNodos = new HashMap();
-          subtreeSizes = new HashMap();
+          posicionNodos = new HashMap<>();
+          subtreeSizes = new HashMap<>();
           dirty = true;
           repaint();      
     }

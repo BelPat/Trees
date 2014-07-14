@@ -57,8 +57,8 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
             Node < T >  y = x;
 
             while(x != null) {                
-                Comparable comparador = ( Comparable )info;
-                int rta = comparador.compareTo( x.getKey() );
+                //Comparable<T> comparador = ( Comparable )info;
+                int rta = info.compareTo( x.getKey() );
 
                 if( rta < 0 )
                 break;
@@ -252,6 +252,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     * Retorna la lista simple en un array 
     * @return un Array Object  de la lista
     */
+    @SuppressWarnings("unchecked")
     public T[] toArray() {
 
     if( this.isEmpty() )
@@ -263,7 +264,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     while(it.hasNext())
     vector[i++] = it.next();
 
-    return( ( T[] ) vector );
+    return( ( T[] )  vector );
 
     }
 

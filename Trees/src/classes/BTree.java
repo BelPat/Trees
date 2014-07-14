@@ -206,7 +206,7 @@ public class BTree<T extends Comparable<T>> {
     }
 
     public JPanel getPaint() {
-        return new GraphicTree( this );
+        return new GraphicTree<T>( this );
     }
     
    public HashMap getPositionNodes()  {     
