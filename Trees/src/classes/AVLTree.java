@@ -25,7 +25,7 @@ public class AVLTree< T extends Comparable < T > > {
      */
     public AVLTree() {
     }                              
-                                
+             
     public boolean add(T k) {
       // create new node
       AVLNode < T >  n = new AVLNode < T > (k);

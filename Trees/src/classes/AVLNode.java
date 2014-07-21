@@ -26,6 +26,13 @@ package classes;
         key = k;
     }
     
+ public AVLNode( ) {
+        left = right = root = null;
+        balance = 0;
+        height = 0;
+    }
+    
+    
     public AVLNode ( AVLNode < T >  x) {
         this.key=x.getKey();
         this.left=x.getLeft();
@@ -78,10 +85,6 @@ package classes;
 
     public void setHeight( int height ) {
         this.height = height;
-    }
-
-    public String toString() {
-        return "" + key;
     }
 
 }
