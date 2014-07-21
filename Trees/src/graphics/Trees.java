@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
  *
  * @author BelenPatricia
  */
-public class Trees extends javax.swing.JFrame {
+public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     //private int ERROR_MESSAGE;
 
     private int WARNING_MESSAGE;
@@ -68,6 +68,15 @@ public class Trees extends javax.swing.JFrame {
         language = "castellano";
     }
 
+          public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {  
+        
+      T result = null;         
+        
+        result = cT.newInstance();   
+        
+      return result;  
+    } 
+    
     public void reloadScreen() {        
         SwingUtilities.updateComponentTreeUI( this );
         this.validate();
@@ -91,7 +100,7 @@ public class Trees extends javax.swing.JFrame {
    
     public void addKey( int key ) {
         operation = "Insertar";
-        printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Inserir (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
+        printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ",) \n", "Inserir (" + TxtKey.getText() + ",) \n");
         if( optABC.isSelected() ) {
             if ( this.simulator.add( key ) ) { this.repaintTree(); }
             else { System.out.println("Errorrrrrrr ABB");        }
@@ -126,7 +135,7 @@ public class Trees extends javax.swing.JFrame {
 
     public void deleteKey(int key) {
         operation = "Eliminar";
-        printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Inserir (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
+        printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ") \n", "Inserir (" + TxtKey.getText() + ",) \n");
         String msgexit = "";
         if( optABC.isSelected() ){
              msgexit = this.simulator.delete( key );
@@ -157,17 +166,30 @@ public class Trees extends javax.swing.JFrame {
         this.repaintTree();
         printConsole( "podado","podado","podado" );
       }
-
-     public void getFather( Integer i ) {
+/*
+       public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {  
+        
+      T result = null;         
+        
+        result = cT.newInstance();   
+        
+      return result;  
+    } 
+ */
+     public void getFather( T i ) throws InstantiationException, IllegalAccessException {
         String msgexit="";
-        if(optABC.isSelected()){              
+        System.out.println(" Treees.getFather " + i);
+                
+            
+        if(optABC.isSelected()){           
+          //  Class<T> aux = (Class<T>) i.getClass();
                msgexit=this.simulator.getFather(i);   
         }
         if(optAVL.isSelected())  {
            msgexit=this.AVLsimulator.getFather(i);
         }
         if(optRN.isSelected())  {
-          msgexit=this.RBSimulator.getFather(i);
+          msgexit = this.RBSimulator.getFather(i);
         }
         printConsole( msgexit,msgexit,msgexit);
     }
@@ -371,9 +393,7 @@ public class Trees extends javax.swing.JFrame {
         OptSearch = new javax.swing.JRadioButton();
         OptDelete = new javax.swing.JRadioButton();
         TxtKey = new javax.swing.JTextField();
-        TxtValue = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         OptSearchFather = new javax.swing.JRadioButton();
         OptLeaves = new javax.swing.JRadioButton();
         OptCut = new javax.swing.JRadioButton();
@@ -829,15 +849,7 @@ public class Trees extends javax.swing.JFrame {
             }
         });
 
-        TxtValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtValueActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Clave:");
-
-        jLabel3.setText("Valor:");
 
         GOperations.add(OptSearchFather);
         OptSearchFather.setText("Consultar Padre");
@@ -879,10 +891,7 @@ public class Trees extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TxtKey, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TxtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -911,10 +920,7 @@ public class Trees extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(9, 9, 9)
                                 .addComponent(TxtKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, 0)
-                                .addComponent(TxtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(54, 54, 54)))))
                 .addComponent(OptLeaves)
                 .addContainerGap())
         );
@@ -1061,11 +1067,11 @@ public class Trees extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGap(0, 779, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 282, Short.MAX_VALUE)
         );
 
         jInternalFrame1.setBounds(0, 0, 790, 310);
@@ -1275,20 +1281,28 @@ public class Trees extends javax.swing.JFrame {
                     } else if ( OptDelete.isSelected() ) {
                         Integer i = new Integer( TxtKey.getText() );
                         operation = "Eliminar";
-                        printConsole("Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Delete (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
+                        printConsole("Eliminar (" + TxtKey.getText() + ") \n", "Delete (" + TxtKey.getText() + ",) \n", "Eliminar (" + TxtKey.getText() + ") \n");
                         deleteKey( i.intValue() );
                     } else if ( OptSearch.isSelected() ) {
                         TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
                         Integer i = new Integer( TxtKey.getText() );
                         operation = "Consultar";
-                        printConsole("Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Query (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
+                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ",) \n", "Consultar (" + TxtKey.getText() + ") \n");
                          //Integer i = new Integer(TxtClave.getText());
                         findKey( i.intValue() );
                     } else if ( OptSearchFather.isSelected() ) {
                         Integer i = new Integer( TxtKey.getText() );
+                     //   Object o = TxtKey.getText() ;
+
                         operation = "ConsultarPadre";
-                        printConsole("Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Query (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Consultar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
-                        getFather( i.intValue() );   
+                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ") \n", "Consultar (" + TxtKey.getText() + ") \n");
+                        try {   
+                            getFather( (T) i);
+                        } catch (InstantiationException ex) {
+                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }  else if ( OptCut.isSelected() ) {
                         operation = "Podar";
                         cutLeaves();
@@ -1308,9 +1322,9 @@ public class Trees extends javax.swing.JFrame {
         OptCut.setEnabled( true );
         OptLeaves.setEnabled( true );
         TxtKey.setEnabled( true );
-        TxtValue.setEnabled( true );
+       // TxtValue.setEnabled( true );
         jLabel2.setEnabled( true );
-        jLabel3.setEnabled( true );
+       // jLabel3.setEnabled( true );
         BtmNext.setEnabled( true );
     }//GEN-LAST:event_BtmPlayMouseClicked
     private void BtmHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmHelpMouseClicked
@@ -1399,7 +1413,7 @@ public class Trees extends javax.swing.JFrame {
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_clave"));
-            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_valor"));
+//            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_valor"));
             jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_opciones"));
             OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_insertar"));
             OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_eliminar"));
@@ -1449,7 +1463,7 @@ public class Trees extends javax.swing.JFrame {
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_clave"));
-            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_valor"));
+//            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_valor"));
             jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_opciones"));
             OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_insertar"));
             OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_eliminar"));
@@ -1501,7 +1515,7 @@ public class Trees extends javax.swing.JFrame {
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_clave"));
-            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_valor"));
+//            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_valor"));
             jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_opciones"));
             OptInsert.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_insertar"));
             OptDelete.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_eliminar"));
@@ -1555,10 +1569,10 @@ public class Trees extends javax.swing.JFrame {
         OptSearchFather.setEnabled( false );
         TxtKey.setText( null );
         TxtKey.setEnabled( false );
-        TxtValue.setText( null );
-        TxtValue.setEnabled( false );
+//        TxtValue.setText( null );
+       // TxtValue.setEnabled( false );
         jLabel2.setEnabled( false );
-        jLabel3.setEnabled( false );     
+      //  jLabel3.setEnabled( false );     
     }    
     
     private void CmbExamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbExamplesActionPerformed
@@ -1636,10 +1650,6 @@ public class Trees extends javax.swing.JFrame {
     private void OptInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptInsertActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OptInsertActionPerformed
-
-    private void TxtValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtValueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtValueActionPerformed
 
     private void OptDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptDeleteActionPerformed
         // TODO add your handling code here:
@@ -1755,12 +1765,10 @@ public class Trees extends javax.swing.JFrame {
     private javax.swing.JTextArea TxtAlgorithm;
     private javax.swing.JTextArea TxtConsole;
     private javax.swing.JTextField TxtKey;
-    private javax.swing.JTextField TxtValue;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1857,7 +1865,7 @@ class runStep implements ActionListener {
         if ( OptDelete.isSelected() ) {
             Integer i = new Integer ( TxtKey.getText() );
             operation = "Eliminar";
-            printConsole("Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Delete (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n", "Eliminar (" + TxtKey.getText() + "," + TxtValue.getText() + ") \n");
+            printConsole("Eliminar (" + TxtKey.getText() + ") \n", "Delete (" + TxtKey.getText() + ") \n", "Eliminar (" + TxtKey.getText() + ") \n");
             deleteKey( i.intValue() );
         }
 
@@ -1868,9 +1876,9 @@ class runStep implements ActionListener {
         OptCut.setEnabled( true );
         OptLeaves.setEnabled( true );
         TxtKey.setEnabled( true );
-        TxtValue.setEnabled( true );
+   //     TxtValue.setEnabled( true );
         jLabel2.setEnabled( true );
-        jLabel3.setEnabled( true );
+     //   jLabel3.setEnabled( true );
         BtmNext.setEnabled( true );
 
     }
