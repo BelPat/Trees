@@ -46,9 +46,9 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
   // private JFrame dibujoEmergente = new JFrame("Representación gráfica");
    // private ArbolBB<Integer> miArbol=new ArbolBB <Integer>();
    // private AVLTree<Integer> miArbolAVL=new AVLTree <Integer>();
-    public SimulatorBinaryTree simulator = new SimulatorBinaryTree();
-    public SimulatorAVLTree AVLsimulator =new SimulatorAVLTree();
-    public SimulatorRBTree RBSimulator = new SimulatorRBTree();
+    public SimulatorBinaryTree<Integer> simulator = new SimulatorBinaryTree<>();
+    public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
+    public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
 
     /**
      * Creates new form ARBRES

@@ -9,8 +9,8 @@ import javax.swing.*;
 
 public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
     private AVLTree < T > myTree;
-    private HashMap positionNodes = null;
-    private HashMap subtreeSizes = null;
+    private HashMap<AVLNode<T>, Rectangle> positionNodes = null;
+    private HashMap<AVLNode<T>, Dimension> subtreeSizes = null;
     private boolean dirty = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
@@ -27,8 +27,8 @@ public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
     public GraphicAVLTree( AVLTree < T > myTree)     {
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
-          positionNodes = new HashMap();
-          subtreeSizes = new HashMap();
+          positionNodes = new HashMap<>();
+          subtreeSizes = new HashMap<>();
           dirty = true;
           repaint();      
     }
