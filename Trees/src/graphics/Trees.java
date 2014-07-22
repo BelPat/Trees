@@ -176,7 +176,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
       return result;  
     } 
  */
-     public void getFather( T i ) throws InstantiationException, IllegalAccessException {
+     public void getFather( Integer i ) throws InstantiationException, IllegalAccessException {
         String msgexit="";
         System.out.println(" Treees.getFather " + i);
                 
@@ -1297,7 +1297,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
                         operation = "ConsultarPadre";
                         printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ") \n", "Consultar (" + TxtKey.getText() + ") \n");
                         try {   
-                            getFather( (T) i);
+                            getFather(i);
                         } catch (InstantiationException ex) {
                             Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (IllegalAccessException ex) {

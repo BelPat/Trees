@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class SimulatorRBTree <T extends Comparable < T >> {
 
-    RBTree < T > myTree = new RBTree < T > () ;
+    RBTree < T > myTree = new RBTree <  > () ;
 
     public SimulatorRBTree () {
 
@@ -40,20 +40,31 @@ public class SimulatorRBTree <T extends Comparable < T >> {
     }
 
 
+    /**
+     *
+     * @param child
+     * @return
+     */
     public String getFather ( T child ) {
         if ( this.myTree.getRoot().getKey().equals ( child )  ) 
-            return  ( "La raiz no tiene father" ) ;
+            return  ( "La raiz no tiene padre" ) ;
 
         T father = this.myTree.getFather ( child ) ;
 
         if  ( father == null ) 
             return  ( "No existe el Dato: " + child.toString () ) ;
 
-        return  ( "El father de: " + child + "\n es : " + father.toString () ) ;
+        return  ( "El padre de: " + child + "\n es : " + father.toString () ) ;
     }
 
+    /**
+     *
+     * @param new_key
+     * @return
+     */
     public String isHere ( T new_key ) {
-         boolean here = this.myTree.find ( new_key ) ;
+         boolean here ;
+        here = this.myTree.find ( new_key );
          String r = "El new_key:" + new_key.toString () +"\n";
          r += here ? "Si se encuentra en el arbol":"No se encuentra en el arbol\n";
 

@@ -577,7 +577,7 @@ public class AVLTree< T extends Comparable < T > > {
     }
 
     public JPanel getPaint() {
-        return new GraphicAVLTree<T>( this );
+        return new GraphicAVLTree<>( this );
     }
 
     /**

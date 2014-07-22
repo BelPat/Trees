@@ -21,7 +21,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     * debe ser un Objeto.
     */
     public void addInit( T x ){        
-        this.head = new Node < T > ( x, this.head );
+        this.head = new Node <  > ( x, this.head );
         this.size++;         
     }
 
@@ -37,7 +37,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         }else {
             try {
                 Node < T >  ult = this.getPos( this.size-1 );
-                ult.setRight( new Node < T > ( x, null ) );
+                ult.setRight( new Node <  > ( x, null ) );
                 this.size++;
             }catch( ExceptionUFPS e ) {                
                 System.err.println( e.getMessage() );                
@@ -70,7 +70,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
             if(x == y){
                 this.addInit(info);
             } else {                
-                y.setRight( new Node < T > ( info, x ) );
+                y.setRight( new Node <  > ( info, x ) );
                 this.size++;                
              }            
         }    
@@ -245,7 +245,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     */
     @Override
     public Iterator < T >  iterator() {        
-    return new IteratorLS < T > (this.head);        
+    return new IteratorLS <  > (this.head);        
     }
 
     /**
