@@ -29,7 +29,9 @@ import classes.AVLTree;
 import classes.SimulatorAVLTree;
 import classes.SimulatorBinaryTree;
 import classes.SimulatorRBTree;
+import java.awt.Color;
 import java.util.ResourceBundle;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -102,6 +104,11 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ",) \n", "Inserir (" + TxtKey.getText() + ",) \n");
         if( optABC.isSelected() ) {
+            go(2,TxtAlgorithm);
+            //TxtAlgorithm.setCaretColor(Color.blue);
+            //TxtAlgorithm.setCaretPosition(2);
+           
+            
             if ( this.simulator.add( key ) ) { this.repaintTree(); }
             else { System.out.println("Errorrrrrrr ABB");        }
         }
@@ -1016,6 +1023,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
 
         TxtAlgorithm.setColumns(20);
         TxtAlgorithm.setRows(5);
+        TxtAlgorithm.setSelectedTextColor(new java.awt.Color(255, 51, 51));
         jScrollPane8.setViewportView(TxtAlgorithm);
 
         BtnSpain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/spain.png"))); // NOI18N
@@ -1067,11 +1075,11 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 779, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 282, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         jInternalFrame1.setBounds(0, 0, 790, 310);
@@ -1253,13 +1261,13 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
                 //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
                     switch ( language ) {
                         case "castellano":
-                            JOptionPane.showMessageDialog( null, "INTRODUZCA UNA CLAVE Y UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE );
+                            JOptionPane.showMessageDialog( null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE );
                             break;
                         case "ingles":
-                            JOptionPane.showMessageDialog( null, "INSERT A KEY AND A VALUE CORRECT.", "Configuration Options", WARNING_MESSAGE );
+                            JOptionPane.showMessageDialog( null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE );
                             break;
                         case "catalan":
-                            JOptionPane.showMessageDialog( null, "INTRODUEIX UNA CLAU I UN VALOR CORRECTES.", "Opcions de Configuració", WARNING_MESSAGE );
+                            JOptionPane.showMessageDialog( null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE );
                             break;
                     }
                 } else {
@@ -1276,6 +1284,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
                             TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
                             break;
                         }
+                        
                         Integer i = new Integer( TxtKey.getText() );
                         addKey( i.intValue() );
                     } else if ( OptDelete.isSelected() ) {
@@ -1729,6 +1738,16 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
      SwingUtilities.updateComponentTreeUI(this);
      this.validateTree();
      }*/
+    public void go(int line, JTextArea TxtAlgorithm){
+        String[]t=TxtAlgorithm.getText().split("\n");
+        int position=0;
+        for(int index=0;index<t.length;index++){
+		if(index == line-1)break;
+		if(t[index].length()!=0)
+		        position+=t[index].length();
+	}
+	TxtAlgorithm.moveCaretPosition(position+line);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtmExitConfig1;
     private javax.swing.JButton BtmExitConfig2;
