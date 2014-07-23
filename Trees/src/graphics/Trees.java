@@ -8,30 +8,19 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import java.lang.*;
-import java.util.HashMap;
-import datastructures.AVLTree;
 import datastructures.SimulatorAVLTree;
 import datastructures.SimulatorBinaryTree;
 import datastructures.SimulatorRBTree;
 import java.awt.Color;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
+import javax.swing.text.Caret;
 
 /**
  *
@@ -103,6 +92,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     public void addKey( int key ) {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ",) \n", "Inserir (" + TxtKey.getText() + ",) \n");
+        go (2, txtAlgorithm);
         if( optABC.isSelected() ) {
             //go(2,txtAlgorithm);
             if ( this.simulator.add( key ) ) { this.repaintTree(); }
@@ -253,6 +243,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             return true;
         }
     }
+    
 public boolean comboSelectionExamples(){
     if ( CmbExamples.getSelectedIndex() == 0 ) {
                 switch ( language ) {
@@ -370,6 +361,26 @@ public void startAlgorithm(){
                         operation = "ConsultarHojas";
                         getLeaves();
                     }
+}
+
+  public void go(int line, JTextArea txtAlgorithm){
+        String[]t=txtAlgorithm.getText().split("\n");
+        int position = 0;
+        line = 3;
+        txtAlgorithm.setCaretColor(Color.red);
+                
+        for(int index=0 ; index < line; index++ ){
+	   position += t[index].length();
+	}
+	txtAlgorithm.setCaretPosition( position + 2 );
+       // TxtAlgorithm.insert("-- " + position + "--", position);
+        //int aux =  t[line].length()+position;
+        //TxtAlgorithm.insert("** " +aux + "**", t[line].length()+position);
+        txtAlgorithm.moveCaretPosition( position + t[line].length() + 2);
+        Caret txtseleccion = txtAlgorithm.getCaret();
+        txtseleccion.setSelectionVisible(true);
+        txtseleccion.setVisible(true);
+       
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1767,5 +1778,7 @@ class runStep implements ActionListener {
     }
     
     }
+
+
 
 }
