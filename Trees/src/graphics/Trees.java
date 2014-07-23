@@ -25,10 +25,10 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.lang.*;
 import java.util.HashMap;
-import classes.AVLTree;
-import classes.SimulatorAVLTree;
-import classes.SimulatorBinaryTree;
-import classes.SimulatorRBTree;
+import datastructures.AVLTree;
+import datastructures.SimulatorAVLTree;
+import datastructures.SimulatorBinaryTree;
+import datastructures.SimulatorRBTree;
 import java.awt.Color;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
@@ -70,14 +70,14 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         language = "castellano";
     }
 
-          public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {  
-        
-      T result = null;         
-        
-        result = cT.newInstance();   
-        
-      return result;  
-    } 
+    /*  public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {
+     * 
+     * T result = null;
+     * 
+     * result = cT.newInstance();
+     * 
+     * return result;
+     * } */
     
     public void reloadScreen() {        
         SwingUtilities.updateComponentTreeUI( this );
@@ -104,23 +104,19 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ",) \n", "Inserir (" + TxtKey.getText() + ",) \n");
         if( optABC.isSelected() ) {
-            go(2,TxtAlgorithm);
-            //TxtAlgorithm.setCaretColor(Color.blue);
-            //TxtAlgorithm.setCaretPosition(2);
-           
-            
+            //go(2,txtAlgorithm);
             if ( this.simulator.add( key ) ) { this.repaintTree(); }
             else { System.out.println("Errorrrrrrr ABB");        }
         }
         if( optAVL.isSelected() )  {            
             System.out.println("add avl");
             if(this.AVLsimulator.add(key)){  this.repaintTree();}
-            else {            System.out.println("Errorrrrrrr AVL");        }
+            else { System.out.println("Errorrrrrrr AVL");        }
         }
         if( optRN.isSelected() )  {           
             System.out.println("add RN");
             if(this.RBSimulator.add(key)){  this.repaintTree();}
-              else {            System.out.println("Errorrrrrrr AVL");        }
+              else { System.out.println("Errorrrrrrr AVL");        }
         }       
     }
     
@@ -128,8 +124,6 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         String msgexit = new String ();
         if( optABC.isSelected() )   {
            msgexit = this.simulator.isHere( key );
-           // msgexit= (String) this.simulator.buscarNodo(key).getInfo();
-          //  this.simulator.esHoja(this);
         } 
         if( optAVL.isSelected() )  {
               msgexit = this.AVLsimulator.isHere( key );
@@ -173,24 +167,12 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         this.repaintTree();
         printConsole( "podado","podado","podado" );
       }
-/*
-       public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {  
-        
-      T result = null;         
-        
-        result = cT.newInstance();   
-        
-      return result;  
-    } 
- */
+
      public void getFather( Integer i ) throws InstantiationException, IllegalAccessException {
         String msgexit="";
         System.out.println(" Treees.getFather " + i);
-                
-            
         if(optABC.isSelected()){           
-          //  Class<T> aux = (Class<T>) i.getClass();
-               msgexit=this.simulator.getFather(i);   
+           msgexit=this.simulator.getFather(i);   
         }
         if(optAVL.isSelected())  {
            msgexit=this.AVLsimulator.getFather(i);
@@ -205,48 +187,18 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         String msgexit="";
         if(optABC.isSelected())    {              
           msgexit=this.simulator.getLeaves();
-
         }
         if(optAVL.isSelected())  {
            msgexit=this.AVLsimulator.getLeaves();
         }
         if(optRN.isSelected())  {
-
           msgexit=this.RBSimulator.getLeaves();
         }
         printConsole( msgexit , msgexit , msgexit );
    }
 
-    public void repaintTree( int kind_tree, AVLTree aux ) {
-        //this.jDesktopPane1.removeAll();      
-        Rectangle size = this.jInternalFrame1.getBounds();
-        this.jInternalFrame1 = null;
-        this.jInternalFrame1 = new JInternalFrame( "Representación gráfica", true );
-        this.jDesktopPane1.add(this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER);
-        this.jInternalFrame1.setVisible( true );
-        this.jInternalFrame1.setBounds (size );
-        this.jInternalFrame1.setEnabled( false );        
-        if( kind_tree == 0 )  {
-            System.out.println(" repaintTree ArobolAbc");    
-            this.jInternalFrame1.add( this.simulator.getPaint(), BorderLayout.CENTER );
-            //  this.dibujoEmergente.getContentPane().add(this.simulator.getDibujo());
-        }
-        if( kind_tree == 1 )      {
-            System.out.print("ARBRES.repaintTree avl");
-            this.jInternalFrame1.add( this.AVLsimulator.getPaint(), BorderLayout.CENTER );
-            // this.dibujoEmergente.getContentPane().add(this.AVLsimulator.getDibujo());
-        }
-        if( kind_tree == 2 )   {
-            System.out.print("ARBRES.repaintTree RN");
-            this.jInternalFrame1.add( this.RBSimulator.getPaint(), BorderLayout.CENTER );
-            //  this.dibujoEmergente.getContentPane().add(this.RBSimulator.getDibujo());
-        }
-        jInternalFrame1.getContentPane().setVisible( true );
-    }
-   
+      
     public void repaintTree() {
-        //this.jDesktopPane1.removeAll();       
-
         Rectangle size = this.jInternalFrame1.getBounds();
         this.jInternalFrame1 = null;
         this.jInternalFrame1 = new JInternalFrame( "Representación gráfica" , true );
@@ -257,93 +209,168 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         if( optABC.isSelected() )    {
             System.out.println( " repaintTree ArobolAbc" ); 
             this.jInternalFrame1.add( this.simulator.getPaint() , BorderLayout.CENTER );
-        //  this.dibujoEmergente.getContentPane().add(this.simulator.getDibujo());
         }
         if( optAVL.isSelected() )  {
             System.out.print("ARBRES.repaintTree avl");
             this.jInternalFrame1.add( this.AVLsimulator.getPaint() , BorderLayout.CENTER );
-            //  this.dibujoEmergente.getContentPane().add(this.AVLsimulator.getDibujo());
         }
         if( optRN.isSelected() )      {
             System.out.print("ARBRES.repaintTree RN");
             this.jInternalFrame1.add( this.RBSimulator.getPaint() , BorderLayout.CENTER );
-            // this.dibujoEmergente.getContentPane().add(this.RBSimulator.getDibujo());
         }
         jInternalFrame1.getContentPane().setVisible( true );
     }
-
-    public void load_help( String ayuda , String tipo ) throws URISyntaxException {
-        //Cargaremos un fichero u otro dependiendo del idioma que hay seleccionado
-        String message; //vble a guardar la lectura
-        InputStream istr;
-        //declaramos la vble del archivo como un file y le damos la path
-        switch ( language ) {
-            case "castellano":
-                //File archivo;
-                path = "/resources/files/" + ayuda + "_castellano.txt";
-                break;
-            case "ingles":
-                path = "/resources/files/" + ayuda + "_ingles.txt";
-                break;
-            case "catalan":
-                path = "/resources/files/" + ayuda + "_catalan.txt";
-                break;
-        }
-        try {
-            istr = this.getClass().getResourceAsStream(path);
-            BufferedReader br = new BufferedReader( new InputStreamReader( istr ) );
-
-            while ( (message = br.readLine() ) != null ) {
-                switch ( tipo ) {
-                    case "AVL":
-                        jTextArea2.append (message + "\n" );
-                        break;
-                    case "ABC":
-                        //System.out.println(message + "\n");
-                        //TxtAreaAlgoritmo.append(message + "\n");
-                        jTextArea3.append( message + "\n" );
-                        break;
-                    case "RN":
-                        jTextArea7.append (message + "\n" );
-                        break;
-                    case "add":                         
-                        jTextArea4.append( message + "\n" );
-                        break;
-                    case "eliminar":
-                        jTextArea5.append(message + "\n");
-                        break;
-                    case "consultar":
-                        jTextArea6.append( message + "\n" );
-                        break;
-                    case "consultarpadre":
-                        jTextArea6.append( message + "\n" );
-                        break;
-                    case "consultarhojas":
-                        jTextArea6.append( message + "\n" );
-                        break;
-                    case "algoritmo":
-                        TxtAlgorithm.append( message + "\n" );
-                        break;
-                    case "podar":
-                        TxtAlgorithm.append( message + "\n" );
-                        break;
-                }
-            }
-        } catch ( IOException ioe ) {
+    public void activeOptions(){
+        OptInsert.setEnabled( true );
+        OptDelete.setEnabled( true );
+        OptSearch.setEnabled( true );
+        OptSearchFather.setEnabled( true ); 
+        OptCut.setEnabled( true );
+        OptLeaves.setEnabled( true );
+        TxtKey.setEnabled( true );
+        jLabel2.setEnabled( true );
+        BtmNext.setEnabled( true );
+    }
+    public boolean minimParameters(){
+        if ( optABC.isSelected() == false && optAVL.isSelected() == false && optRN.isSelected() == false ) {
             switch ( language ) {
                 case "castellano":
-                    JOptionPane.showMessageDialog( rootPane , "Error al leer el archivo" );
+                    JOptionPane.showMessageDialog (null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE );
                     break;
                 case "ingles":
-                    JOptionPane.showMessageDialog( rootPane , "Error to read file" );
+                    JOptionPane.showMessageDialog( null, "SELECT A TREE", "Configuration", WARNING_MESSAGE );
                     break;
                 case "catalan":
-                    JOptionPane.showMessageDialog( rootPane , "Error al llegir l'archiu" );
+                    JOptionPane.showMessageDialog( null, "SELECCIONA UN TIPUS D'ARBRE", "Configuració", WARNING_MESSAGE );
                     break;
             }
+            return false;
+        } else {
+            //Block controls 
+            optABC.setEnabled( false );
+            optAVL.setEnabled( false );
+            optRN.setEnabled( false );
+            return true;
         }
     }
-
+public boolean comboSelectionExamples(){
+    if ( CmbExamples.getSelectedIndex() == 0 ) {
+                switch ( language ) {
+                    case "castellano":
+                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE );
+                        break;
+                    case "ingles":
+                        JOptionPane.showMessageDialog( null, "SELECT AN EXAMPLE", "Configuration", WARNING_MESSAGE );
+                        break;
+                    case "catalan":
+                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EXEMPLE", "Configuració", WARNING_MESSAGE );
+                        break;
+                }
+                return true;
+            } else if ( ( CmbExamples.getSelectedIndex() == 1 ) && CmbExamples.isEnabled() ) {               
+                CmbExamples.setEnabled( false );
+                //Carga el example 1
+                addKey( 22 );
+                addKey( 33 );
+                addKey( 44 );
+                addKey( 23 );
+                addKey( 11 );
+                addKey( 15 );
+                addKey( 60 );
+                addKey( 38 );
+                addKey( 72 );
+                return true;
+            } else if ( CmbExamples.getSelectedIndex() == 2 && CmbExamples.isEnabled() ) {
+                CmbExamples.setEnabled( false );
+                //Carga el example 2
+                addKey( 13 );
+                addKey( 8 );
+                addKey( 1 );
+                addKey( 17 );
+                addKey( 15 );
+                addKey( 25 );
+                addKey( 6 );
+                addKey( 11 );
+                addKey( 22 );
+                addKey( 27 );
+                return true;
+            } else if ( CmbExamples.getSelectedIndex() == 3 && CmbExamples.isEnabled() ) {
+                CmbExamples.setEnabled( false );
+                //Carga el example 3
+                addKey( 4 );
+                addKey( 2 );
+                addKey( 6 );
+                addKey( 1 );
+                addKey( 3 );
+                addKey( 5 );
+                addKey( 8 );
+                addKey( 7 );
+                addKey( 9 );
+                return true;
+            } else if ( CmbExamples.getSelectedIndex() == 4 && CmbExamples.isEnabled() ) {
+                CmbExamples.setEnabled( false );
+                //Carga el example 4            
+                //rojo-negro http://www.cosc.canterbury.ac.nz/research/RG/alg/rbtree.gif
+                
+                addKey( 38 );
+                addKey( 13 );
+                addKey( 51 );
+                addKey( 10 );
+                addKey( 12 );
+                addKey( 40 );
+                addKey( 84 );
+                addKey( 25 );
+                return true;
+            } else if ( CmbExamples.getSelectedIndex() == 5 || !CmbExamples.isEnabled() ) {
+                CmbExamples.setEnabled( false );
+                return false;
+            }
+        return false;
+}
+public void startAlgorithm(){
+    if ( OptInsert.isSelected() ) {
+                        switch ( language ) {
+                        case "castellano":
+                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
+                            break;
+                        case "ingles":
+                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+                            break;
+                        case "catalan":
+                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
+                            break;
+                        }
+                        Integer i = new Integer( TxtKey.getText() );
+                        addKey( i.intValue() );
+                    } else if ( OptDelete.isSelected() ) {
+                        Integer i = new Integer( TxtKey.getText() );
+                        operation = "Eliminar";
+                        printConsole("Eliminar (" + TxtKey.getText() + ") \n", "Delete (" + TxtKey.getText() + ",) \n", "Eliminar (" + TxtKey.getText() + ") \n");
+                        deleteKey( i.intValue() );
+                    } else if ( OptSearch.isSelected() ) {
+                        txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
+                        Integer i = new Integer( TxtKey.getText() );
+                        operation = "Consultar";
+                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ",) \n", "Consultar (" + TxtKey.getText() + ") \n");
+                        findKey( i.intValue() );
+                    } else if ( OptSearchFather.isSelected() ) {
+                        Integer i = new Integer( TxtKey.getText() );operation = "ConsultarPadre";
+                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ") \n", "Consultar (" + TxtKey.getText() + ") \n");
+                        try {   
+                            getFather(i);
+                        } catch (InstantiationException ex) {
+                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }  else if ( OptCut.isSelected() ) {
+                        operation = "Podar";
+                        cutLeaves();
+                    }  else if ( OptLeaves.isSelected() ) {
+                        operation = "ConsultarHojas";
+                        getLeaves();
+                    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -407,7 +434,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         optRN = new javax.swing.JRadioButton();
         BtnExit = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
-        TxtAlgorithm = new javax.swing.JTextArea();
+        txtAlgorithm = new javax.swing.JTextArea();
         BtnSpain = new javax.swing.JButton();
         BtnEnglish = new javax.swing.JButton();
         BtnCatalan = new javax.swing.JButton();
@@ -1021,10 +1048,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             }
         });
 
-        TxtAlgorithm.setColumns(20);
-        TxtAlgorithm.setRows(5);
-        TxtAlgorithm.setSelectedTextColor(new java.awt.Color(255, 51, 51));
-        jScrollPane8.setViewportView(TxtAlgorithm);
+        txtAlgorithm.setColumns(20);
+        txtAlgorithm.setRows(5);
+        txtAlgorithm.setSelectedTextColor(new java.awt.Color(255, 51, 51));
+        jScrollPane8.setViewportView(txtAlgorithm);
 
         BtnSpain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/spain.png"))); // NOI18N
         BtnSpain.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1154,109 +1181,8 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
 
     private void BtmPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmPlayMouseClicked
         jInternalFrame1.setVisible( true );
-        //INICIAR EL PROGRAMA CON EJECUCIÓN CONTINUA.
-        //VAMOS A COMPROBAR QUE TENEMOS MARCADOS LOS VALORES MÍNIMOS PARA PODER EJECUTAR.
-        if ( optABC.isSelected() == false && optAVL.isSelected() == false && optRN.isSelected() == false ) {
-            switch ( language ) {
-                case "castellano":
-                    JOptionPane.showMessageDialog (null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE );
-                    break;
-                case "ingles":
-                    JOptionPane.showMessageDialog( null, "SELECT A TREE", "Configuration", WARNING_MESSAGE );
-                    break;
-                case "catalan":
-                    JOptionPane.showMessageDialog( null, "SELECCIONA UN TIPUS D'ARBRE", "Configuració", WARNING_MESSAGE );
-                    break;
-            }
-        } else {
-            //BLOQUEAMOS LOS CONTROLES PARA QUE NO SE PUEDAN MODIFICAR DETERMINADOS PARÁMETROS
-            optABC.setEnabled( false );
-            optAVL.setEnabled( false );
-            optRN.setEnabled( false );
-
-            //Miramos que se ha seleccionado algo del combobox
-            if ( CmbExamples.getSelectedIndex() == 0 ) {
-                switch ( language ) {
-                    case "castellano":
-                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE );
-                        break;
-                    case "ingles":
-                        JOptionPane.showMessageDialog( null, "SELECT AN EXAMPLE", "Configuration", WARNING_MESSAGE );
-                        break;
-                    case "catalan":
-                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EXEMPLE", "Configuració", WARNING_MESSAGE );
-                        break;
-                }
-            } else if ( ( CmbExamples.getSelectedIndex() == 1 ) && CmbExamples.isEnabled() ) {               
-                CmbExamples.setEnabled( false );
-                //Carga el example 1
-                addKey( 22 );
-                addKey( 33 );
-                addKey( 44 );
-                addKey( 23 );
-                addKey( 11 );
-                addKey( 15 );
-                addKey( 60 );
-                addKey( 38 );
-                addKey( 72 );
-            } else if ( CmbExamples.getSelectedIndex() == 2 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
-                //Carga el example 2
-                addKey( 13 );
-                addKey( 8 );
-                addKey( 1 );
-                addKey( 17 );
-                addKey( 15 );
-                addKey( 25 );
-                addKey( 6 );
-                addKey( 11 );
-                addKey( 22 );
-                addKey( 27 ); 
-            } else if ( CmbExamples.getSelectedIndex() == 3 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
-                //Carga el example 3
-                addKey( 4 );
-                addKey( 2 );
-                addKey( 6 );
-                addKey( 1 );
-                addKey( 3 );
-                addKey( 5 );
-                addKey( 8 );
-                addKey( 7 );
-                addKey( 9 );
-            } else if ( CmbExamples.getSelectedIndex() == 4 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
-                //Carga el example 4
-           /*  addKey(100);
-                addKey(29);
-                addKey(71);
-                addKey(82);
-                addKey(48);
-                addKey(39);
-                addKey(101);
-                addKey(22);
-                addKey(46);
-                addKey(17);
-                addKey(3);
-                addKey(20);
-                addKey(25);
-                addKey(10);*/               
-                
-                //rojo-negro http://www.cosc.canterbury.ac.nz/research/RG/alg/rbtree.gif
-                
-                addKey( 38 );
-                addKey( 13 );
-                addKey( 51 );
-                addKey( 10 );
-                addKey( 12 );
-                addKey( 40 );
-                addKey( 84 );
-                addKey( 25 );
-            } else if ( CmbExamples.getSelectedIndex() == 5 || !CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
-                //Aqui creamos un arbol nuevo, por lo que tenemos que tener activadas
-                //las opciones del panel. 
-             //   if ((OptInsertar.isSelected() || OptEliminar.isSelected() || OptConsultar.isSelected()) && (TxtClave.getText().trim().length() == 0 || TxtValor.getText().trim().length() == 0)) {
+        if (minimParameters()==true){
+            if (comboSelectionExamples()==false){
                 if ( ( OptInsert.isSelected() || OptDelete.isSelected() || OptSearch.isSelected() ) && ( TxtKey.getText().trim().length() == 0 ) ) {                      
                 //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
                     switch ( language ) {
@@ -1271,70 +1197,11 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
                             break;
                     }
                 } else {
-                    //OPERAMOS PARA INICIAR EL ALGORITMO
-                    if ( OptInsert.isSelected() ) {
-                        switch ( language ) {
-                        case "castellano":
-                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
-                            break;
-                        case "ingles":
-                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
-                            break;
-                        case "catalan":
-                            TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
-                            break;
-                        }
-                        
-                        Integer i = new Integer( TxtKey.getText() );
-                        addKey( i.intValue() );
-                    } else if ( OptDelete.isSelected() ) {
-                        Integer i = new Integer( TxtKey.getText() );
-                        operation = "Eliminar";
-                        printConsole("Eliminar (" + TxtKey.getText() + ") \n", "Delete (" + TxtKey.getText() + ",) \n", "Eliminar (" + TxtKey.getText() + ") \n");
-                        deleteKey( i.intValue() );
-                    } else if ( OptSearch.isSelected() ) {
-                        TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
-                        Integer i = new Integer( TxtKey.getText() );
-                        operation = "Consultar";
-                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ",) \n", "Consultar (" + TxtKey.getText() + ") \n");
-                         //Integer i = new Integer(TxtClave.getText());
-                        findKey( i.intValue() );
-                    } else if ( OptSearchFather.isSelected() ) {
-                        Integer i = new Integer( TxtKey.getText() );
-                     //   Object o = TxtKey.getText() ;
-
-                        operation = "ConsultarPadre";
-                        printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ") \n", "Consultar (" + TxtKey.getText() + ") \n");
-                        try {   
-                            getFather(i);
-                        } catch (InstantiationException ex) {
-                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IllegalAccessException ex) {
-                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }  else if ( OptCut.isSelected() ) {
-                        operation = "Podar";
-                        cutLeaves();
-                    }  else if ( OptLeaves.isSelected() ) {
-                        operation = "ConsultarHojas";
-                        getLeaves();
-                    }
-                    //Indicamos en la consola lo que se va a hacer
-                    //Lo primero de todo es cargar el algoritmo en el Area de Texto.
+                    startAlgorithm();
                 }
             }
         }
-        OptInsert.setEnabled( true );
-        OptDelete.setEnabled( true );
-        OptSearch.setEnabled( true );
-        OptSearchFather.setEnabled( true ); 
-        OptCut.setEnabled( true );
-        OptLeaves.setEnabled( true );
-        TxtKey.setEnabled( true );
-       // TxtValue.setEnabled( true );
-        jLabel2.setEnabled( true );
-       // jLabel3.setEnabled( true );
-        BtmNext.setEnabled( true );
+        activeOptions();
     }//GEN-LAST:event_BtmPlayMouseClicked
     private void BtmHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmHelpMouseClicked
         // TODO add your handling code here:
@@ -1392,7 +1259,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         optABC.setSelected( false );
         optAVL.setSelected( false );
         CmbExamples.setSelectedIndex( 0 );       
-        TxtAlgorithm.setText("");
+        txtAlgorithm.setText("");
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:        
@@ -1430,8 +1297,8 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
-            if (OptInsert.isSelected()==true)TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
-            if (OptSearch.isSelected()==true)TxtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
+            if (OptInsert.isSelected()==true)txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+            if (OptSearch.isSelected()==true)txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
             //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
             CmbExamples.removeAllItems();
             CmbExamples.addItem( "<SELECT ONE>" );
@@ -1734,20 +1601,17 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             }
         });
     }
-    /*public void reloadScreen(){
-     SwingUtilities.updateComponentTreeUI(this);
-     this.validateTree();
-     }*/
-    public void go(int line, JTextArea TxtAlgorithm){
-        String[]t=TxtAlgorithm.getText().split("\n");
+
+   /* public void go(int line, JTextArea txtAlgorithm){
+        String[]t=txtAlgorithm.getText().split("\n");
         int position=0;
         for(int index=0;index<t.length;index++){
 		if(index == line-1)break;
 		if(t[index].length()!=0)
 		        position+=t[index].length();
 	}
-	TxtAlgorithm.moveCaretPosition(position+line);
-}
+	txtAlgorithm.moveCaretPosition(position+line);
+}*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtmExitConfig1;
     private javax.swing.JButton BtmExitConfig2;
@@ -1781,7 +1645,6 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     private javax.swing.JPanel PHelpRN;
     private javax.swing.JTabbedPane TabHelp;
     private javax.swing.JTabbedPane TabHelpOperations;
-    private javax.swing.JTextArea TxtAlgorithm;
     private javax.swing.JTextArea TxtConsole;
     private javax.swing.JTextField TxtKey;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -1812,6 +1675,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     private javax.swing.JRadioButton optABC;
     private javax.swing.JRadioButton optAVL;
     private javax.swing.JRadioButton optRN;
+    private javax.swing.JTextArea txtAlgorithm;
     // End of variables declaration//GEN-END:variables
 
 class runStep implements ActionListener {    
@@ -1901,59 +1765,7 @@ class runStep implements ActionListener {
         BtmNext.setEnabled( true );
 
     }
-    /********************************/
-    /*     if (optABC.isSelected() == false && optAVL.isSelected() == false && optRN.isSelected() == false) {
-    switch (language) {
-    case "castellano":
-    JOptionPane.showMessageDialog(null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE);
-    break;
-    case "ingles":
-    JOptionPane.showMessageDialog(null, "SELECT A TREE", "Configuration", WARNING_MESSAGE);
-    break;
-    case "catalan":
-    JOptionPane.showMessageDialog(null, "SELECCIONA UN TIPUS D'ARBRE", "Configuració", WARNING_MESSAGE);
-    break;
-    }
-    } else {
-    //BLOQUEAMOS LOS CONTROLES PARA QUE NO SE PUEDAN MODIFICAR DETERMINADOS PARÁMETROS
-    optABC.setEnabled( false );
-    optAVL.setEnabled( false );
-    optRN.setEnabled( false );
-
-    //Miramos que se ha seleccionado algo del combobox
-    if (CmbEjemplos.getSelectedIndex() == 0) {
-    switch (language) {
-    case "castellano":
-    JOptionPane.showMessageDialog(null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE);
-    break;
-    case "ingles":
-    JOptionPane.showMessageDialog(null, "SELECT AN EXAMPLE", "Configuration", WARNING_MESSAGE);
-    break;
-    case "catalan":
-    JOptionPane.showMessageDialog(null, "SELECCIONA UN EXEMPLE", "Configuració", WARNING_MESSAGE);
-    break;
-    }
-    } else if ((CmbEjemplos.getSelectedIndex() == 1) && CmbEjemplos.isEnabled()) {
-
-    CmbEjemplos.setEnabled( false );
-    //Carga el example 1
-    addKey(example1[cont]);
-    cont++;
-
-    } else if (CmbEjemplos.getSelectedIndex() == 2 && CmbEjemplos.isEnabled()) {
-    CmbEjemplos.setEnabled( false );
-
-    //Carga el example 2
-
-    addKey(example2[cont]);
-    cont++;
-
-    } 
-    }
-
-
-
-    }*/
+    
     }
 
 }

@@ -1,4 +1,4 @@
-package classes;
+package datastructures;
 
 
 public class BNode < T extends Comparable < T > > {

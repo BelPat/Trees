@@ -1,5 +1,5 @@
 
-package classes;
+package datastructures;
 
 public class ExceptionUFPS extends Exception{
     public ExceptionUFPS(String smsError) {        

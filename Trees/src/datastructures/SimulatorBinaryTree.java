@@ -3,7 +3,7 @@
  
  */
 
-package classes;
+package datastructures;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JPanel;

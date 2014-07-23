@@ -1,5 +1,5 @@
 
-package classes;
+package datastructures;
 import java.util.Iterator;
 
 public class SimpleList < T extends Comparable < T > >  implements Iterable < T > {

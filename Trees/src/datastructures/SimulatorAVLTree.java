@@ -1,5 +1,5 @@
 
-package classes;
+package datastructures;
 
 import java.util.Iterator;
 import javax.swing.JInternalFrame;
