@@ -15,38 +15,18 @@ import static org.junit.Assert.*;
  *
  * @author nusatres
  */
-public class AVLNodeTest<T extends Comparable < T > >  {
+public class AVLNodeTest  {
     
-    public AVLNodeTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of getLeft method, of class AVLNode.
      */
     @Test
     public void testGetLeft() {
-        System.out.println("getLeft");
-        AVLNode < Integer > left = new AVLNode<> ( 4 );
-        AVLNode < Integer > instance = new AVLNode<>( 7);
+         AVLNode<Integer> left = new AVLNode<> ( 4 );
+        AVLNode<Integer> instance = new AVLNode<>( 7);
         instance.setLeft(left);
-        AVLNode < Integer > expResult = left;
-        AVLNode < Integer > result = instance.getLeft();
+        AVLNode<Integer> expResult = left;
+        AVLNode<Integer> result = instance.getLeft();
         assertEquals(expResult, result);
     }
 
@@ -55,12 +35,11 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testGetRight() {
-        System.out.println("getRight");
-        AVLNode < Integer > right = new AVLNode<> ( 10 );
-        AVLNode < Integer > instance = new AVLNode<>( 7);
+        AVLNode<Integer> right = new AVLNode<> ( 10 );
+        AVLNode<Integer> instance = new AVLNode<>( 7);
         instance.setRight(right);
-        AVLNode < Integer > expResult = right;
-        AVLNode < Integer > result = instance.getRight();
+        AVLNode<Integer> expResult = right;
+        AVLNode<Integer> result = instance.getRight();
         assertEquals(expResult, result);
     }
 
@@ -69,11 +48,10 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testGetRoot() {
-        System.out.println("getRoot");
-        AVLNode < Integer >  instance = new AVLNode<> ( 7 );
-        AVLNode < Integer >  expResult = new AVLNode<> ();   
+        AVLNode<Integer>  instance = new AVLNode<> ( 7 );
+        AVLNode<Integer>  expResult = new AVLNode<> ();   
         expResult.setRoot(new AVLNode<>( 7 ));
-        AVLNode < Integer >  result = instance;
+        AVLNode<Integer>  result = instance;
         assertEquals(expResult.getRoot().getKey(), result.getKey());
     }
 
@@ -82,8 +60,7 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testGetKey() {
-        System.out.println("getKey");
-        AVLNode < Integer >  instance = new AVLNode<> ( 7 );
+        AVLNode<Integer>  instance = new AVLNode<> ( 7 );
         Object expResult = 7;
         Object result = instance.getKey();
         assertEquals(expResult, result);
@@ -94,13 +71,11 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testGetBalance() {
-        System.out.println("getBalance");
-        AVLNode < Integer >  instance = new AVLNode<> ();
+        AVLNode<Integer>  instance = new AVLNode<> ();
         instance.setBalance( 4 );
         int expResult = 4;
         int result = instance.getBalance();
         assertEquals(expResult, result);
-
     }
 
     /**
@@ -108,8 +83,7 @@ public class AVLNodeTest<T extends Comparable < T > >  {
     */
     @Test
     public void testGetHeight() {
-        System.out.println("getHeight");
-        AVLNode < Integer >  instance = new AVLNode<> ();
+        AVLNode<Integer>  instance = new AVLNode<> ();
         instance.setHeight( 12 );
         int expResult = 12;
         int result = instance.getHeight();
@@ -121,8 +95,7 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetLeft() {
-        System.out.println("setLeft");
-        AVLNode < Integer >  instance = new AVLNode<> ( );
+        AVLNode<Integer>  instance = new AVLNode<> ( );
         Integer left = 7;
         instance.setLeft( new AVLNode<> ( left ) );
         assertEquals( instance.getLeft().getKey(), left );
@@ -133,8 +106,7 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetRight() {
-        System.out.println("setRight");
-        AVLNode < Integer >  instance = new AVLNode<> ( );
+        AVLNode<Integer>  instance = new AVLNode<> ( );
         Integer right = 7;
          instance.setRight( new AVLNode<> ( right ) );
         assertEquals( instance.getRight().getKey(), right );
@@ -145,8 +117,7 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetRoot() {
-        System.out.println("setRoot");
-        AVLNode < Integer >  instance = new AVLNode<> ( );
+        AVLNode<Integer>  instance = new AVLNode<> ( );
         Integer root = 7;
         instance.setRoot( new AVLNode<> ( root ) );
         assertEquals( instance.getRoot().getKey(), root );
@@ -157,9 +128,8 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetKey() {
-        System.out.println("setKey");
         Integer key = 12;
-        AVLNode < Integer >  instance = new AVLNode<> ();
+        AVLNode<Integer>  instance = new AVLNode<> ();
         instance.setKey( key );
         assertEquals( instance.getKey(), key );
     }
@@ -169,9 +139,8 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetBalance() {
-        System.out.println("setBalance");
         int balance = 13;
-        AVLNode < Integer >  instance = new AVLNode<> ( );
+        AVLNode<Integer>  instance = new AVLNode<> ( );
         instance.setBalance(13);
         assertEquals( instance.getBalance(), balance );
     }
@@ -181,9 +150,8 @@ public class AVLNodeTest<T extends Comparable < T > >  {
      */
     @Test
     public void testSetHeight() {
-        System.out.println("setHeight");
         int height = 0;
-        AVLNode < Integer >  instance = new AVLNode<> ( );
+        AVLNode<Integer>  instance = new AVLNode<> ( );
         instance.setHeight( height );
         assertEquals( instance.getHeight(), height);
     }
