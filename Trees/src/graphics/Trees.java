@@ -8,30 +8,17 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.lang.*;
-import java.util.HashMap;
-import datastructures.AVLTree;
 import datastructures.SimulatorAVLTree;
 import datastructures.SimulatorBinaryTree;
 import datastructures.SimulatorRBTree;
-import java.awt.Color;
 import java.util.ResourceBundle;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -58,44 +45,35 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     public Trees() {
         initComponents();
         this.setLocationRelativeTo( null );
-        FrmConfigTree.setLocationRelativeTo( null );
-        FrmConfigKeys.setLocationRelativeTo( null );
+        frmconfigtree.setLocationRelativeTo( null );
+        frmconfigkeys.setLocationRelativeTo( null );
         
         uncheked();
 
-        BtmNext.setEnabled( true );
-        BtmNext.addActionListener( ep );
+        btmnext.setEnabled( true );
+        btmnext.addActionListener( ep );
         //PAyudaRN.setName("Rojo-Negro");
-        BtnSpain.setEnabled( false );//por defecto queda arrancado el programa en castellano
+        btnspain.setEnabled( false );//por defecto queda arrancado el programa en castellano
         language = "castellano";
     }
-
-    /*  public T newElement(Class<T> cT) throws InstantiationException, IllegalAccessException {
-     * 
-     * T result = null;
-     * 
-     * result = cT.newInstance();
-     * 
-     * return result;
-     * } */
     
     public void reloadScreen() {        
         SwingUtilities.updateComponentTreeUI( this );
         this.validate();
-        SwingUtilities.updateComponentTreeUI( FrmHelp );
-        FrmHelp.validate();
+        SwingUtilities.updateComponentTreeUI( frmhelp );
+        frmhelp.validate();
     }
 
     public void printConsole( String messageC, String messageI, String messageCat ) {
         switch (language) {
             case "castellano":
-                TxtConsole.append( messageC );
+                txtconsole.append( messageC );
                 break;
             case "ingles":
-                TxtConsole.append( messageI );
+                txtconsole.append( messageI );
                 break;
             case "catalan":
-                TxtConsole.append(messageCat);
+                txtconsole.append(messageCat);
                 break;
         }
     }
@@ -103,12 +81,12 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     public void addKey( int key ) {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ",) \n", "Inserir (" + TxtKey.getText() + ",) \n");
-        if( optABC.isSelected() ) {
+        if( optabc.isSelected() ) {
             //go(2,txtAlgorithm);
             if ( this.simulator.add( key ) ) { this.repaintTree(); }
             else { System.out.println("Errorrrrrrr ABB");        }
         }
-        if( optAVL.isSelected() )  {            
+        if( optavl.isSelected() )  {            
             System.out.println("add avl");
             if(this.AVLsimulator.add(key)){  this.repaintTree();}
             else { System.out.println("Errorrrrrrr AVL");        }
@@ -122,10 +100,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     
     public void findKey ( int key ){
         String msgexit = new String ();
-        if( optABC.isSelected() )   {
+        if( optabc.isSelected() )   {
            msgexit = this.simulator.isHere( key );
         } 
-        if( optAVL.isSelected() )  {
+        if( optavl.isSelected() )  {
               msgexit = this.AVLsimulator.isHere( key );
         }
         if( optRN.isSelected() )  {
@@ -138,10 +116,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         operation = "Eliminar";
         printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + TxtKey.getText() + ") \n", "Inserir (" + TxtKey.getText() + ",) \n");
         String msgexit = "";
-        if( optABC.isSelected() ){
+        if( optabc.isSelected() ){
              msgexit = this.simulator.delete( key );
         }
-        if( optAVL.isSelected() )  {
+        if( optavl.isSelected() )  {
             System.out.println("eliminar avl");
             msgexit = this.AVLsimulator.delete( key );
         }
@@ -155,10 +133,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     }
     
      public void cutLeaves()   {
-        if( optABC.isSelected() )   {
+        if( optabc.isSelected() )   {
             this.simulator.cutLeaves();
         }
-        if(optAVL.isSelected())  {
+        if(optavl.isSelected())  {
           this.AVLsimulator.cutLeaves();
         }
         if(optRN.isSelected())  {
@@ -171,10 +149,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
      public void getFather( Integer i ) throws InstantiationException, IllegalAccessException {
         String msgexit="";
         System.out.println(" Treees.getFather " + i);
-        if(optABC.isSelected()){           
+        if(optabc.isSelected()){           
            msgexit=this.simulator.getFather(i);   
         }
-        if(optAVL.isSelected())  {
+        if(optavl.isSelected())  {
            msgexit=this.AVLsimulator.getFather(i);
         }
         if(optRN.isSelected())  {
@@ -185,10 +163,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
 
     public void getLeaves()  {
         String msgexit="";
-        if(optABC.isSelected())    {              
+        if(optabc.isSelected())    {              
           msgexit=this.simulator.getLeaves();
         }
-        if(optAVL.isSelected())  {
+        if(optavl.isSelected())  {
            msgexit=this.AVLsimulator.getLeaves();
         }
         if(optRN.isSelected())  {
@@ -206,11 +184,11 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         this.jInternalFrame1.setVisible( true );
         this.jInternalFrame1.setBounds( size );
         this.jInternalFrame1.setEnabled( false );
-        if( optABC.isSelected() )    {
+        if( optabc.isSelected() )    {
             System.out.println( " repaintTree ArobolAbc" ); 
             this.jInternalFrame1.add( this.simulator.getPaint() , BorderLayout.CENTER );
         }
-        if( optAVL.isSelected() )  {
+        if( optavl.isSelected() )  {
             System.out.print("ARBRES.repaintTree avl");
             this.jInternalFrame1.add( this.AVLsimulator.getPaint() , BorderLayout.CENTER );
         }
@@ -229,10 +207,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         OptLeaves.setEnabled( true );
         TxtKey.setEnabled( true );
         jLabel2.setEnabled( true );
-        BtmNext.setEnabled( true );
+        btmnext.setEnabled( true );
     }
     public boolean minimParameters(){
-        if ( optABC.isSelected() == false && optAVL.isSelected() == false && optRN.isSelected() == false ) {
+        if ( optabc.isSelected() == false && optavl.isSelected() == false && optRN.isSelected() == false ) {
             switch ( language ) {
                 case "castellano":
                     JOptionPane.showMessageDialog (null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE );
@@ -247,14 +225,14 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             return false;
         } else {
             //Block controls 
-            optABC.setEnabled( false );
-            optAVL.setEnabled( false );
+            optabc.setEnabled( false );
+            optavl.setEnabled( false );
             optRN.setEnabled( false );
             return true;
         }
     }
 public boolean comboSelectionExamples(){
-    if ( CmbExamples.getSelectedIndex() == 0 ) {
+    if ( cmbexamples.getSelectedIndex() == 0 ) {
                 switch ( language ) {
                     case "castellano":
                         JOptionPane.showMessageDialog( null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE );
@@ -267,8 +245,8 @@ public boolean comboSelectionExamples(){
                         break;
                 }
                 return true;
-            } else if ( ( CmbExamples.getSelectedIndex() == 1 ) && CmbExamples.isEnabled() ) {               
-                CmbExamples.setEnabled( false );
+            } else if ( ( cmbexamples.getSelectedIndex() == 1 ) && cmbexamples.isEnabled() ) {               
+                cmbexamples.setEnabled( false );
                 //Carga el example 1
                 addKey( 22 );
                 addKey( 33 );
@@ -280,8 +258,8 @@ public boolean comboSelectionExamples(){
                 addKey( 38 );
                 addKey( 72 );
                 return true;
-            } else if ( CmbExamples.getSelectedIndex() == 2 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
+            } else if ( cmbexamples.getSelectedIndex() == 2 && cmbexamples.isEnabled() ) {
+                cmbexamples.setEnabled( false );
                 //Carga el example 2
                 addKey( 13 );
                 addKey( 8 );
@@ -294,8 +272,8 @@ public boolean comboSelectionExamples(){
                 addKey( 22 );
                 addKey( 27 );
                 return true;
-            } else if ( CmbExamples.getSelectedIndex() == 3 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
+            } else if ( cmbexamples.getSelectedIndex() == 3 && cmbexamples.isEnabled() ) {
+                cmbexamples.setEnabled( false );
                 //Carga el example 3
                 addKey( 4 );
                 addKey( 2 );
@@ -307,11 +285,10 @@ public boolean comboSelectionExamples(){
                 addKey( 7 );
                 addKey( 9 );
                 return true;
-            } else if ( CmbExamples.getSelectedIndex() == 4 && CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
+            } else if ( cmbexamples.getSelectedIndex() == 4 && cmbexamples.isEnabled() ) {
+                cmbexamples.setEnabled( false );
                 //Carga el example 4            
                 //rojo-negro http://www.cosc.canterbury.ac.nz/research/RG/alg/rbtree.gif
-                
                 addKey( 38 );
                 addKey( 13 );
                 addKey( 51 );
@@ -321,8 +298,8 @@ public boolean comboSelectionExamples(){
                 addKey( 84 );
                 addKey( 25 );
                 return true;
-            } else if ( CmbExamples.getSelectedIndex() == 5 || !CmbExamples.isEnabled() ) {
-                CmbExamples.setEnabled( false );
+            } else if ( cmbexamples.getSelectedIndex() == 5 || !cmbexamples.isEnabled() ) {
+                cmbexamples.setEnabled( false );
                 return false;
             }
         return false;
@@ -331,13 +308,13 @@ public void startAlgorithm(){
     if ( OptInsert.isSelected() ) {
                         switch ( language ) {
                         case "castellano":
-                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
+                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
                             break;
                         case "ingles":
-                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
                             break;
                         case "catalan":
-                            txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
+                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
                             break;
                         }
                         Integer i = new Integer( TxtKey.getText() );
@@ -348,7 +325,7 @@ public void startAlgorithm(){
                         printConsole("Eliminar (" + TxtKey.getText() + ") \n", "Delete (" + TxtKey.getText() + ",) \n", "Eliminar (" + TxtKey.getText() + ") \n");
                         deleteKey( i.intValue() );
                     } else if ( OptSearch.isSelected() ) {
-                        txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
+                        txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
                         Integer i = new Integer( TxtKey.getText() );
                         operation = "Consultar";
                         printConsole("Consultar (" + TxtKey.getText() + ") \n", "Query (" + TxtKey.getText() + ",) \n", "Consultar (" + TxtKey.getText() + ") \n");
@@ -382,20 +359,20 @@ public void startAlgorithm(){
 
         GTrees = new javax.swing.ButtonGroup();
         GOperations = new javax.swing.ButtonGroup();
-        FrmHelp = new javax.swing.JFrame();
-        BtmExitHelp = new javax.swing.JButton();
-        TabHelp = new javax.swing.JTabbedPane();
-        PHelpAVL = new javax.swing.JPanel();
+        frmhelp = new javax.swing.JFrame();
+        btmexithelp = new javax.swing.JButton();
+        tabhelp = new javax.swing.JTabbedPane();
+        phelpavl = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        PHelpABC = new javax.swing.JPanel();
+        phelpabc = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
-        PHelpRN = new javax.swing.JPanel();
+        phelprn = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextArea7 = new javax.swing.JTextArea();
-        TabHelpOperations = new javax.swing.JTabbedPane();
+        tabhelpoperations = new javax.swing.JTabbedPane();
         PAyudaInsertar = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
@@ -405,22 +382,22 @@ public void startAlgorithm(){
         PAyudaConsultar = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextArea6 = new javax.swing.JTextArea();
-        FrmConfigTree = new javax.swing.JFrame();
-        BtmExitConfig1 = new javax.swing.JButton();
+        frmconfigtree = new javax.swing.JFrame();
+        btmexitconfig1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        FrmConfigKeys = new javax.swing.JFrame();
+        frmconfigkeys = new javax.swing.JFrame();
         jLabel5 = new javax.swing.JLabel();
-        BtmExitConfig2 = new javax.swing.JButton();
+        btmexitconfig2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        optABC = new javax.swing.JRadioButton();
-        optAVL = new javax.swing.JRadioButton();
+        optabc = new javax.swing.JRadioButton();
+        optavl = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        CmbExamples = new javax.swing.JComboBox<String>();
-        BtmHelp = new javax.swing.JButton();
-        BtmReload = new javax.swing.JButton();
-        BtmPlay = new javax.swing.JButton();
-        BtmNext = new javax.swing.JButton();
-        BtmStop = new javax.swing.JButton();
+        cmbexamples = new javax.swing.JComboBox<String>();
+        btmhelp = new javax.swing.JButton();
+        btmreload = new javax.swing.JButton();
+        btmplay = new javax.swing.JButton();
+        btmnext = new javax.swing.JButton();
+        btmstop = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         OptInsert = new javax.swing.JRadioButton();
@@ -432,42 +409,42 @@ public void startAlgorithm(){
         OptLeaves = new javax.swing.JRadioButton();
         OptCut = new javax.swing.JRadioButton();
         optRN = new javax.swing.JRadioButton();
-        BtnExit = new javax.swing.JButton();
+        btnexit = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
-        txtAlgorithm = new javax.swing.JTextArea();
-        BtnSpain = new javax.swing.JButton();
-        BtnEnglish = new javax.swing.JButton();
-        BtnCatalan = new javax.swing.JButton();
+        txtalgorithm = new javax.swing.JTextArea();
+        btnspain = new javax.swing.JButton();
+        btnenglish = new javax.swing.JButton();
+        btncatalan = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        TxtConsole = new javax.swing.JTextArea();
+        txtconsole = new javax.swing.JTextArea();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jInternalFrame1 = new javax.swing.JInternalFrame();
 
-        FrmHelp.setLocationByPlatform(true);
-        FrmHelp.setMinimumSize(new java.awt.Dimension(675, 513));
-        FrmHelp.setName("Ayuda"); // NOI18N
-        FrmHelp.setResizable(false);
-        FrmHelp.addComponentListener(new java.awt.event.ComponentAdapter() {
+        frmhelp.setLocationByPlatform(true);
+        frmhelp.setMinimumSize(new java.awt.Dimension(675, 513));
+        frmhelp.setName("Ayuda"); // NOI18N
+        frmhelp.setResizable(false);
+        frmhelp.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
-                FrmHelpComponentShown(evt);
+                frmhelpComponentShown(evt);
             }
         });
 
-        BtmExitHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
-        BtmExitHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmexithelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
+        btmexithelp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmExitHelpMouseClicked(evt);
+                btmexithelpMouseClicked(evt);
             }
         });
-        BtmExitHelp.addActionListener(new java.awt.event.ActionListener() {
+        btmexithelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmExitHelpActionPerformed(evt);
+                btmexithelpActionPerformed(evt);
             }
         });
 
-        TabHelp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        TabHelp.setName("Rojo-Negro"); // NOI18N
+        tabhelp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tabhelp.setName("Rojo-Negro"); // NOI18N
 
         jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(214, 217, 223));
@@ -479,23 +456,23 @@ public void startAlgorithm(){
         jTextArea2.setOpaque(false);
         jScrollPane2.setViewportView(jTextArea2);
 
-        javax.swing.GroupLayout PHelpAVLLayout = new javax.swing.GroupLayout(PHelpAVL);
-        PHelpAVL.setLayout(PHelpAVLLayout);
-        PHelpAVLLayout.setHorizontalGroup(
-            PHelpAVLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PHelpAVLLayout.createSequentialGroup()
+        javax.swing.GroupLayout phelpavlLayout = new javax.swing.GroupLayout(phelpavl);
+        phelpavl.setLayout(phelpavlLayout);
+        phelpavlLayout.setHorizontalGroup(
+            phelpavlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(phelpavlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        PHelpAVLLayout.setVerticalGroup(
-            PHelpAVLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PHelpAVLLayout.createSequentialGroup()
+        phelpavlLayout.setVerticalGroup(
+            phelpavlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(phelpavlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
         );
 
-        TabHelp.addTab("AVL", PHelpAVL);
+        tabhelp.addTab("AVL", phelpavl);
 
         jTextArea3.setEditable(false);
         jTextArea3.setBackground(new java.awt.Color(214, 217, 223));
@@ -506,29 +483,29 @@ public void startAlgorithm(){
         jTextArea3.setOpaque(false);
         jScrollPane3.setViewportView(jTextArea3);
 
-        javax.swing.GroupLayout PHelpABCLayout = new javax.swing.GroupLayout(PHelpABC);
-        PHelpABC.setLayout(PHelpABCLayout);
-        PHelpABCLayout.setHorizontalGroup(
-            PHelpABCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PHelpABCLayout.createSequentialGroup()
+        javax.swing.GroupLayout phelpabcLayout = new javax.swing.GroupLayout(phelpabc);
+        phelpabc.setLayout(phelpabcLayout);
+        phelpabcLayout.setHorizontalGroup(
+            phelpabcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(phelpabcLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addGap(2, 2, 2)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        PHelpABCLayout.setVerticalGroup(
-            PHelpABCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PHelpABCLayout.createSequentialGroup()
+        phelpabcLayout.setVerticalGroup(
+            phelpabcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(phelpabcLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel6)
                 .addContainerGap(165, Short.MAX_VALUE))
-            .addGroup(PHelpABCLayout.createSequentialGroup()
+            .addGroup(phelpabcLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3))
         );
 
-        TabHelp.addTab("ABC", PHelpABC);
+        tabhelp.addTab("ABC", phelpabc);
 
         jTextArea7.setEditable(false);
         jTextArea7.setBackground(new java.awt.Color(214, 217, 223));
@@ -538,23 +515,23 @@ public void startAlgorithm(){
         jTextArea7.setOpaque(false);
         jScrollPane7.setViewportView(jTextArea7);
 
-        javax.swing.GroupLayout PHelpRNLayout = new javax.swing.GroupLayout(PHelpRN);
-        PHelpRN.setLayout(PHelpRNLayout);
-        PHelpRNLayout.setHorizontalGroup(
-            PHelpRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PHelpRNLayout.createSequentialGroup()
+        javax.swing.GroupLayout phelprnLayout = new javax.swing.GroupLayout(phelprn);
+        phelprn.setLayout(phelprnLayout);
+        phelprnLayout.setHorizontalGroup(
+            phelprnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(phelprnLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        PHelpRNLayout.setVerticalGroup(
-            PHelpRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        phelprnLayout.setVerticalGroup(
+            phelprnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
         );
 
-        TabHelp.addTab("Rojo-Negro", PHelpRN);
+        tabhelp.addTab("Rojo-Negro", phelprn);
 
-        TabHelpOperations.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tabhelpoperations.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextArea4.setEditable(false);
         jTextArea4.setBackground(new java.awt.Color(214, 217, 223));
@@ -582,7 +559,7 @@ public void startAlgorithm(){
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
-        TabHelpOperations.addTab("Insertar", PAyudaInsertar);
+        tabhelpoperations.addTab("Insertar", PAyudaInsertar);
 
         jTextArea5.setEditable(false);
         jTextArea5.setBackground(new java.awt.Color(214, 217, 223));
@@ -610,7 +587,7 @@ public void startAlgorithm(){
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
-        TabHelpOperations.addTab("Eliminar", PAyudaEliminar);
+        tabhelpoperations.addTab("Eliminar", PAyudaEliminar);
 
         jTextArea6.setEditable(false);
         jTextArea6.setBackground(new java.awt.Color(214, 217, 223));
@@ -638,114 +615,114 @@ public void startAlgorithm(){
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
-        TabHelpOperations.addTab("Consultar", PAyudaConsultar);
+        tabhelpoperations.addTab("Consultar", PAyudaConsultar);
 
-        javax.swing.GroupLayout FrmHelpLayout = new javax.swing.GroupLayout(FrmHelp.getContentPane());
-        FrmHelp.getContentPane().setLayout(FrmHelpLayout);
-        FrmHelpLayout.setHorizontalGroup(
-            FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FrmHelpLayout.createSequentialGroup()
-                .addGroup(FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtmExitHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(TabHelp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(TabHelpOperations, javax.swing.GroupLayout.Alignment.LEADING)))
+        javax.swing.GroupLayout frmhelpLayout = new javax.swing.GroupLayout(frmhelp.getContentPane());
+        frmhelp.getContentPane().setLayout(frmhelpLayout);
+        frmhelpLayout.setHorizontalGroup(
+            frmhelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frmhelpLayout.createSequentialGroup()
+                .addGroup(frmhelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btmexithelp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(frmhelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(tabhelp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(tabhelpoperations, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        FrmHelpLayout.setVerticalGroup(
-            FrmHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrmHelpLayout.createSequentialGroup()
-                .addComponent(TabHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+        frmhelpLayout.setVerticalGroup(
+            frmhelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmhelpLayout.createSequentialGroup()
+                .addComponent(tabhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TabHelpOperations)
+                .addComponent(tabhelpoperations)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtmExitHelp))
+                .addComponent(btmexithelp))
         );
 
-        TabHelp.getAccessibleContext().setAccessibleName("");
-        TabHelp.getAccessibleContext().setAccessibleDescription("");
+        tabhelp.getAccessibleContext().setAccessibleName("");
+        tabhelp.getAccessibleContext().setAccessibleDescription("");
 
-        FrmConfigTree.setMinimumSize(new java.awt.Dimension(337, 139));
-        FrmConfigTree.setName("Configuración"); // NOI18N
-        FrmConfigTree.setResizable(false);
+        frmconfigtree.setMinimumSize(new java.awt.Dimension(337, 139));
+        frmconfigtree.setName("Configuración"); // NOI18N
+        frmconfigtree.setResizable(false);
 
-        BtmExitConfig1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
-        BtmExitConfig1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmexitconfig1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
+        btmexitconfig1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmExitConfig1MouseClicked(evt);
+                btmexitconfig1MouseClicked(evt);
             }
         });
-        BtmExitConfig1.addActionListener(new java.awt.event.ActionListener() {
+        btmexitconfig1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmExitConfig1ActionPerformed(evt);
+                btmexitconfig1ActionPerformed(evt);
             }
         });
 
         jLabel4.setText("SELECCIONE UN TIPO DE ÁRBOL!!!");
 
-        javax.swing.GroupLayout FrmConfigTreeLayout = new javax.swing.GroupLayout(FrmConfigTree.getContentPane());
-        FrmConfigTree.getContentPane().setLayout(FrmConfigTreeLayout);
-        FrmConfigTreeLayout.setHorizontalGroup(
-            FrmConfigTreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrmConfigTreeLayout.createSequentialGroup()
+        javax.swing.GroupLayout frmconfigtreeLayout = new javax.swing.GroupLayout(frmconfigtree.getContentPane());
+        frmconfigtree.getContentPane().setLayout(frmconfigtreeLayout);
+        frmconfigtreeLayout.setHorizontalGroup(
+            frmconfigtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmconfigtreeLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
-            .addGroup(FrmConfigTreeLayout.createSequentialGroup()
+            .addGroup(frmconfigtreeLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(BtmExitConfig1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btmexitconfig1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        FrmConfigTreeLayout.setVerticalGroup(
-            FrmConfigTreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrmConfigTreeLayout.createSequentialGroup()
+        frmconfigtreeLayout.setVerticalGroup(
+            frmconfigtreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmconfigtreeLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtmExitConfig1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btmexitconfig1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        FrmConfigKeys.setMinimumSize(new java.awt.Dimension(384, 137));
-        FrmConfigKeys.setResizable(false);
+        frmconfigkeys.setMinimumSize(new java.awt.Dimension(384, 137));
+        frmconfigkeys.setResizable(false);
 
         jLabel5.setText("INTRODUZCA UNA CLAVE Y UN VALOR CORRECTOS");
 
-        BtmExitConfig2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
-        BtmExitConfig2.setMaximumSize(new java.awt.Dimension(40, 40));
-        BtmExitConfig2.setMinimumSize(new java.awt.Dimension(40, 40));
-        BtmExitConfig2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmexitconfig2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/ok.png"))); // NOI18N
+        btmexitconfig2.setMaximumSize(new java.awt.Dimension(40, 40));
+        btmexitconfig2.setMinimumSize(new java.awt.Dimension(40, 40));
+        btmexitconfig2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmExitConfig2MouseClicked(evt);
+                btmexitconfig2MouseClicked(evt);
             }
         });
-        BtmExitConfig2.addActionListener(new java.awt.event.ActionListener() {
+        btmexitconfig2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmExitConfig2ActionPerformed(evt);
+                btmexitconfig2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout FrmConfigKeysLayout = new javax.swing.GroupLayout(FrmConfigKeys.getContentPane());
-        FrmConfigKeys.getContentPane().setLayout(FrmConfigKeysLayout);
-        FrmConfigKeysLayout.setHorizontalGroup(
-            FrmConfigKeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FrmConfigKeysLayout.createSequentialGroup()
-                .addGroup(FrmConfigKeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FrmConfigKeysLayout.createSequentialGroup()
+        javax.swing.GroupLayout frmconfigkeysLayout = new javax.swing.GroupLayout(frmconfigkeys.getContentPane());
+        frmconfigkeys.getContentPane().setLayout(frmconfigkeysLayout);
+        frmconfigkeysLayout.setHorizontalGroup(
+            frmconfigkeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frmconfigkeysLayout.createSequentialGroup()
+                .addGroup(frmconfigkeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(frmconfigkeysLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FrmConfigKeysLayout.createSequentialGroup()
+                    .addGroup(frmconfigkeysLayout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(BtmExitConfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btmexitconfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        FrmConfigKeysLayout.setVerticalGroup(
-            FrmConfigKeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FrmConfigKeysLayout.createSequentialGroup()
+        frmconfigkeysLayout.setVerticalGroup(
+            frmconfigkeysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmconfigkeysLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtmExitConfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btmexitconfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -756,96 +733,96 @@ public void startAlgorithm(){
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bitstream Vera Sans Mono", 3, 14))); // NOI18N
         jPanel1.setToolTipText("");
 
-        GTrees.add(optABC);
-        optABC.setText("ABC");
-        optABC.addMouseListener(new java.awt.event.MouseAdapter() {
+        GTrees.add(optabc);
+        optabc.setText("ABC");
+        optabc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                optABCMouseClicked(evt);
+                optabcMouseClicked(evt);
             }
         });
-        optABC.addActionListener(new java.awt.event.ActionListener() {
+        optabc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optABCActionPerformed(evt);
+                optabcActionPerformed(evt);
             }
         });
 
-        GTrees.add(optAVL);
-        optAVL.setText("AVL");
-        optAVL.addMouseListener(new java.awt.event.MouseAdapter() {
+        GTrees.add(optavl);
+        optavl.setText("AVL");
+        optavl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                optAVLMouseClicked(evt);
+                optavlMouseClicked(evt);
             }
         });
-        optAVL.addActionListener(new java.awt.event.ActionListener() {
+        optavl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optAVLActionPerformed(evt);
+                optavlActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Ejemplos:");
 
-        CmbExamples.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<SELECCIONA UNO>", "1", "2", "3", "4", "NUEVO" }));
-        CmbExamples.addActionListener(new java.awt.event.ActionListener() {
+        cmbexamples.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<SELECCIONA UNO>", "1", "2", "3", "4", "NUEVO" }));
+        cmbexamples.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CmbExamplesActionPerformed(evt);
+                cmbexamplesActionPerformed(evt);
             }
         });
 
-        BtmHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669794_Folder-Info.png"))); // NOI18N
-        BtmHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmhelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669794_Folder-Info.png"))); // NOI18N
+        btmhelp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmHelpMouseClicked(evt);
+                btmhelpMouseClicked(evt);
             }
         });
-        BtmHelp.addActionListener(new java.awt.event.ActionListener() {
+        btmhelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmHelpActionPerformed(evt);
+                btmhelpActionPerformed(evt);
             }
         });
 
-        BtmReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669670_order.png"))); // NOI18N
-        BtmReload.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmreload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669670_order.png"))); // NOI18N
+        btmreload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmReloadMouseClicked(evt);
+                btmreloadMouseClicked(evt);
             }
         });
-        BtmReload.addActionListener(new java.awt.event.ActionListener() {
+        btmreload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmReloadActionPerformed(evt);
+                btmreloadActionPerformed(evt);
             }
         });
 
-        BtmPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669712_start.png"))); // NOI18N
-        BtmPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669712_start.png"))); // NOI18N
+        btmplay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmPlayMouseClicked(evt);
+                btmplayMouseClicked(evt);
             }
         });
-        BtmPlay.addActionListener(new java.awt.event.ActionListener() {
+        btmplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmPlayActionPerformed(evt);
+                btmplayActionPerformed(evt);
             }
         });
 
-        BtmNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669652_hide-right.png"))); // NOI18N
-        BtmNext.addMouseListener(new java.awt.event.MouseAdapter() {
+        btmnext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669652_hide-right.png"))); // NOI18N
+        btmnext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtmNextMouseClicked(evt);
+                btmnextMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtmNextMouseEntered(evt);
+                btmnextMouseEntered(evt);
             }
         });
-        BtmNext.addActionListener(new java.awt.event.ActionListener() {
+        btmnext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmNextActionPerformed(evt);
+                btmnextActionPerformed(evt);
             }
         });
 
-        BtmStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669729_stop-red.png"))); // NOI18N
-        BtmStop.addActionListener(new java.awt.event.ActionListener() {
+        btmstop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669729_stop-red.png"))); // NOI18N
+        btmstop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtmStopActionPerformed(evt);
+                btmstopActionPerformed(evt);
             }
         });
 
@@ -980,20 +957,20 @@ public void startAlgorithm(){
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtmHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(BtmPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmplay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtmNext, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmnext, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtmStop, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmstop, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtmReload, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btmreload, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(69, 69, 69)
-                        .addComponent(CmbExamples, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbexamples, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(88, 88, 88))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1001,10 +978,10 @@ public void startAlgorithm(){
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(optAVL)
+                        .addComponent(optavl)
                         .addGap(28, 28, 28)
                         .addComponent(optRN))
-                    .addComponent(optABC))
+                    .addComponent(optabc))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1012,13 +989,13 @@ public void startAlgorithm(){
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(optABC)
-                    .addComponent(optAVL)
+                    .addComponent(optabc)
+                    .addComponent(optavl)
                     .addComponent(optRN))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(CmbExamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbexamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1026,70 +1003,70 @@ public void startAlgorithm(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BtmNext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(BtmPlay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(BtmHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtmStop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtmReload, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btmnext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(btmplay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(btmhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btmstop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btmreload, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3))
         );
 
-        BtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
-        BtnExit.setMaximumSize(new java.awt.Dimension(40, 40));
-        BtnExit.setMinimumSize(new java.awt.Dimension(40, 40));
-        BtnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/exit.png"))); // NOI18N
+        btnexit.setMaximumSize(new java.awt.Dimension(40, 40));
+        btnexit.setMinimumSize(new java.awt.Dimension(40, 40));
+        btnexit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnExitMouseClicked(evt);
+                btnexitMouseClicked(evt);
             }
         });
-        BtnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnExitActionPerformed(evt);
+                btnexitActionPerformed(evt);
             }
         });
 
-        txtAlgorithm.setColumns(20);
-        txtAlgorithm.setRows(5);
-        txtAlgorithm.setSelectedTextColor(new java.awt.Color(255, 51, 51));
-        jScrollPane8.setViewportView(txtAlgorithm);
+        txtalgorithm.setColumns(20);
+        txtalgorithm.setRows(5);
+        txtalgorithm.setSelectedTextColor(new java.awt.Color(255, 51, 51));
+        jScrollPane8.setViewportView(txtalgorithm);
 
-        BtnSpain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/spain.png"))); // NOI18N
-        BtnSpain.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnspain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/spain.png"))); // NOI18N
+        btnspain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnSpainMouseClicked(evt);
+                btnspainMouseClicked(evt);
             }
         });
-        BtnSpain.addActionListener(new java.awt.event.ActionListener() {
+        btnspain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSpainActionPerformed(evt);
+                btnspainActionPerformed(evt);
             }
         });
 
-        BtnEnglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/uk.png"))); // NOI18N
-        BtnEnglish.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnenglish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/uk.png"))); // NOI18N
+        btnenglish.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnEnglishMouseClicked(evt);
+                btnenglishMouseClicked(evt);
             }
         });
 
-        BtnCatalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/catalonia.png"))); // NOI18N
-        BtnCatalan.addMouseListener(new java.awt.event.MouseAdapter() {
+        btncatalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/catalonia.png"))); // NOI18N
+        btncatalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnCatalanMouseClicked(evt);
+                btncatalanMouseClicked(evt);
             }
         });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         jLabel8.setText("Configuración:");
 
-        TxtConsole.setEditable(false);
-        TxtConsole.setBackground(new java.awt.Color(214, 217, 223));
-        TxtConsole.setColumns(20);
-        TxtConsole.setRows(5);
-        TxtConsole.setAutoscrolls(false);
-        TxtConsole.setBorder(null);
-        TxtConsole.setOpaque(false);
-        jScrollPane9.setViewportView(TxtConsole);
+        txtconsole.setEditable(false);
+        txtconsole.setBackground(new java.awt.Color(214, 217, 223));
+        txtconsole.setColumns(20);
+        txtconsole.setRows(5);
+        txtconsole.setAutoscrolls(false);
+        txtconsole.setBorder(null);
+        txtconsole.setOpaque(false);
+        jScrollPane9.setViewportView(txtconsole);
 
         jInternalFrame1.setVisible(true);
         jInternalFrame1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1126,16 +1103,16 @@ public void startAlgorithm(){
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-                            .addComponent(BtnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnexit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDesktopPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnSpain, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnspain, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnEnglish, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnenglish, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnCatalan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btncatalan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -1144,10 +1121,10 @@ public void startAlgorithm(){
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BtnEnglish, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnCatalan, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnenglish, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btncatalan, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BtnSpain, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnspain, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1156,7 +1133,7 @@ public void startAlgorithm(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnexit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1167,19 +1144,19 @@ public void startAlgorithm(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void optAVLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAVLActionPerformed
+    private void optavlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optavlActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_optAVLActionPerformed
+    }//GEN-LAST:event_optavlActionPerformed
 
-    private void BtmReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmReloadActionPerformed
+    private void btmreloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmreloadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmReloadActionPerformed
+    }//GEN-LAST:event_btmreloadActionPerformed
 
-    private void BtmPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmPlayActionPerformed
+    private void btmplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmplayActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmPlayActionPerformed
+    }//GEN-LAST:event_btmplayActionPerformed
 
-    private void BtmPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmPlayMouseClicked
+    private void btmplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmplayMouseClicked
         jInternalFrame1.setVisible( true );
         if (minimParameters()==true){
             if (comboSelectionExamples()==false){
@@ -1202,64 +1179,64 @@ public void startAlgorithm(){
             }
         }
         activeOptions();
-    }//GEN-LAST:event_BtmPlayMouseClicked
-    private void BtmHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmHelpMouseClicked
+    }//GEN-LAST:event_btmplayMouseClicked
+    private void btmhelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmhelpMouseClicked
         // TODO add your handling code here:
-        FrmHelp.setLocationRelativeTo( null );
-        FrmHelp.setVisible(true);
+        frmhelp.setLocationRelativeTo( null );
+        frmhelp.setVisible(true);
 
-    }//GEN-LAST:event_BtmHelpMouseClicked
+    }//GEN-LAST:event_btmhelpMouseClicked
 
-    private void BtmExitHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitHelpMouseClicked
+    private void btmexithelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmexithelpMouseClicked
         // TODO add your handling code here:
-        FrmHelp.setVisible(false);
-    }//GEN-LAST:event_BtmExitHelpMouseClicked
+        frmhelp.setVisible(false);
+    }//GEN-LAST:event_btmexithelpMouseClicked
 
-    private void BtmExitHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitHelpActionPerformed
+    private void btmexithelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmexithelpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmExitHelpActionPerformed
+    }//GEN-LAST:event_btmexithelpActionPerformed
 
-    private void FrmHelpComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_FrmHelpComponentShown
+    private void frmhelpComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_frmhelpComponentShown
         // TODO add your handling code here:
-    }//GEN-LAST:event_FrmHelpComponentShown
+    }//GEN-LAST:event_frmhelpComponentShown
 
-    private void BtmHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmHelpActionPerformed
+    private void btmhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmhelpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmHelpActionPerformed
+    }//GEN-LAST:event_btmhelpActionPerformed
 
-    private void BtnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnExitMouseClicked
+    private void btnexitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexitMouseClicked
         // TODO add your handling code here:
         System.exit( 0 );
-    }//GEN-LAST:event_BtnExitMouseClicked
+    }//GEN-LAST:event_btnexitMouseClicked
 
-    private void BtmExitConfig1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitConfig1MouseClicked
+    private void btmexitconfig1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmexitconfig1MouseClicked
         // TODO add your handling code here:
-        FrmConfigTree.setVisible(false);
-    }//GEN-LAST:event_BtmExitConfig1MouseClicked
+        frmconfigtree.setVisible(false);
+    }//GEN-LAST:event_btmexitconfig1MouseClicked
 
-    private void BtmExitConfig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitConfig1ActionPerformed
+    private void btmexitconfig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmexitconfig1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmExitConfig1ActionPerformed
+    }//GEN-LAST:event_btmexitconfig1ActionPerformed
 
-    private void BtmExitConfig2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmExitConfig2MouseClicked
+    private void btmexitconfig2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmexitconfig2MouseClicked
         // TODO add your handling code here:
-        FrmConfigKeys.setVisible(false);
-    }//GEN-LAST:event_BtmExitConfig2MouseClicked
+        frmconfigkeys.setVisible(false);
+    }//GEN-LAST:event_btmexitconfig2MouseClicked
 
-    private void BtmExitConfig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmExitConfig2ActionPerformed
+    private void btmexitconfig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmexitconfig2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmExitConfig2ActionPerformed
+    }//GEN-LAST:event_btmexitconfig2ActionPerformed
 
-    private void BtmReloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmReloadMouseClicked
+    private void btmreloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmreloadMouseClicked
         // REINICIAMOS TODOS LOS VALORES
-        optABC.setEnabled( true );
-        optAVL.setEnabled( true );
+        optabc.setEnabled( true );
+        optavl.setEnabled( true );
         optRN.setEnabled( true );
-        CmbExamples.setEnabled( true );
-        optABC.setSelected( false );
-        optAVL.setSelected( false );
-        CmbExamples.setSelectedIndex( 0 );       
-        txtAlgorithm.setText("");
+        cmbexamples.setEnabled( true );
+        optabc.setSelected( false );
+        optavl.setSelected( false );
+        cmbexamples.setSelectedIndex( 0 );       
+        txtalgorithm.setText("");
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:        
@@ -1269,23 +1246,23 @@ public void startAlgorithm(){
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         this.repaintTree();
-    }//GEN-LAST:event_BtmReloadMouseClicked
+    }//GEN-LAST:event_btmreloadMouseClicked
 
-    private void BtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExitActionPerformed
+    private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnExitActionPerformed
+    }//GEN-LAST:event_btnexitActionPerformed
 
-    private void BtnEnglishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEnglishMouseClicked
+    private void btnenglishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnenglishMouseClicked
 
             language = "ingles";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            BtnSpain.setEnabled( true );
-            BtnCatalan.setEnabled( true );
-            BtnEnglish.setEnabled( false );
+            btnspain.setEnabled( true );
+            btncatalan.setEnabled( true );
+            btnenglish.setEnabled( false );
             //jPanel1.setToolTipText("Configuration:");
             jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_configuracion"));
-            optABC.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_ABC"));
-            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_AVL"));
+            optabc.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_ABC"));
+            optavl.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_AVL"));
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_clave"));
@@ -1297,21 +1274,21 @@ public void startAlgorithm(){
             OptSearchFather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
-            if (OptInsert.isSelected()==true)txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
-            if (OptSearch.isSelected()==true)txtAlgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
+            if (OptInsert.isSelected()==true)txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+            if (OptSearch.isSelected()==true)txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
             //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
-            CmbExamples.removeAllItems();
-            CmbExamples.addItem( "<SELECT ONE>" );
-            CmbExamples.addItem( "1" );
-            CmbExamples.addItem( "2" );
-            CmbExamples.addItem( "3" );
-            CmbExamples.addItem( "4" );
-            CmbExamples.addItem( "New" );
+            cmbexamples.removeAllItems();
+            cmbexamples.addItem( "<SELECT ONE>" );
+            cmbexamples.addItem( "1" );
+            cmbexamples.addItem( "2" );
+            cmbexamples.addItem( "3" );
+            cmbexamples.addItem( "4" );
+            cmbexamples.addItem( "New" );
             //Ahora vamos a actualizar los messages de otros pantallas.
-            TabHelp.setTitleAt( 2, "Red-Black" );
-            TabHelpOperations.setTitleAt( 0, "Insert" );
-            TabHelpOperations.setTitleAt( 1, "Delete" );
-            TabHelpOperations.setTitleAt( 2, "Query" );
+            tabhelp.setTitleAt( 2, "Red-Black" );
+            tabhelpoperations.setTitleAt( 0, "Insert" );
+            tabhelpoperations.setTitleAt( 1, "Delete" );
+            tabhelpoperations.setTitleAt( 2, "Query" );
             jTextArea2.setText("");
             jTextArea3.setText("");
             jTextArea4.setText("");
@@ -1325,17 +1302,17 @@ public void startAlgorithm(){
             jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion5"));
             jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion6"));
             reloadScreen();
-    }//GEN-LAST:event_BtnEnglishMouseClicked
+    }//GEN-LAST:event_btnenglishMouseClicked
 
-    private void BtnSpainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSpainMouseClicked
+    private void btnspainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnspainMouseClicked
             language = "castellano";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            BtnSpain.setEnabled( false );
-            BtnCatalan.setEnabled( true );
-            BtnEnglish.setEnabled( true );
+            btnspain.setEnabled( false );
+            btncatalan.setEnabled( true );
+            btnenglish.setEnabled( true );
             jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_configuracion"));
-            optABC.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_ABC"));
-            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_AVL"));
+            optabc.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_ABC"));
+            optavl.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_AVL"));
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_clave"));
@@ -1348,18 +1325,18 @@ public void startAlgorithm(){
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_hojas"));
             
-            CmbExamples.removeAllItems();
-            CmbExamples.addItem( "<SELECCIONA UNO>" );
-            CmbExamples.addItem( "1" );
-            CmbExamples.addItem( "2" );
-            CmbExamples.addItem( "3" );
-            CmbExamples.addItem( "4" );
-            CmbExamples.addItem( "Nuevo" );
+            cmbexamples.removeAllItems();
+            cmbexamples.addItem( "<SELECCIONA UNO>" );
+            cmbexamples.addItem( "1" );
+            cmbexamples.addItem( "2" );
+            cmbexamples.addItem( "3" );
+            cmbexamples.addItem( "4" );
+            cmbexamples.addItem( "Nuevo" );
             //Ahora vamos a actualizar los messages de otros pantallas.
-            TabHelp.setTitleAt( 2, "Rojo-Negro" );
-            TabHelpOperations.setTitleAt( 0, "Insertar" );
-            TabHelpOperations.setTitleAt( 1, "Eliminar" );
-            TabHelpOperations.setTitleAt( 2, "Consultar" );
+            tabhelp.setTitleAt( 2, "Rojo-Negro" );
+            tabhelpoperations.setTitleAt( 0, "Insertar" );
+            tabhelpoperations.setTitleAt( 1, "Eliminar" );
+            tabhelpoperations.setTitleAt( 2, "Consultar" );
             jTextArea2.setText("");
             jTextArea3.setText("");
             jTextArea4.setText("");
@@ -1375,19 +1352,19 @@ public void startAlgorithm(){
             jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion6"));
             
             reloadScreen();
-    }//GEN-LAST:event_BtnSpainMouseClicked
+    }//GEN-LAST:event_btnspainMouseClicked
 
-    private void BtnCatalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCatalanMouseClicked
+    private void btncatalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncatalanMouseClicked
 
             language = "catalan";
             //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            BtnSpain.setEnabled( true );
-            BtnCatalan.setEnabled( false );
-            BtnEnglish.setEnabled( true );
+            btnspain.setEnabled( true );
+            btncatalan.setEnabled( false );
+            btnenglish.setEnabled( true );
             //jPanel1.setToolTipText("Configuration:");
             jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_configuracion"));
-            optABC.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_ABC"));
-            optAVL.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_AVL"));
+            optabc.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_ABC"));
+            optavl.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_AVL"));
             optRN.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_RN"));
             jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_ejemplo"));
             jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_clave"));
@@ -1400,19 +1377,19 @@ public void startAlgorithm(){
             OptCut.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_podar"));
             OptLeaves.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_hojas"));
             
-            CmbExamples.removeAllItems();
-            CmbExamples.addItem( "<TRIA UN>" );
-            CmbExamples.addItem( "1" );
-            CmbExamples.addItem( "2" );
-            CmbExamples.addItem( "3" );
-            CmbExamples.addItem( "4" );
-            CmbExamples.addItem( "Nou" );
+            cmbexamples.removeAllItems();
+            cmbexamples.addItem( "<TRIA UN>" );
+            cmbexamples.addItem( "1" );
+            cmbexamples.addItem( "2" );
+            cmbexamples.addItem( "3" );
+            cmbexamples.addItem( "4" );
+            cmbexamples.addItem( "Nou" );
             //Ahora vamos a actualizar los messages de otros pantallas.
             //PAyudaRN.getAccessibleContext().setAccessibleName("Roig-Negre");
-            TabHelp.setTitleAt( 2, "Roig-Negre" );
-            TabHelpOperations.setTitleAt( 0, "Inserir" );
-            TabHelpOperations.setTitleAt( 1, "Eliminar" );
-            TabHelpOperations.setTitleAt( 2, "Consultar" );
+            tabhelp.setTitleAt( 2, "Roig-Negre" );
+            tabhelpoperations.setTitleAt( 0, "Inserir" );
+            tabhelpoperations.setTitleAt( 1, "Eliminar" );
+            tabhelpoperations.setTitleAt( 2, "Consultar" );
             jTextArea2.setText("");
             jTextArea3.setText("");
             jTextArea4.setText("");
@@ -1427,7 +1404,7 @@ public void startAlgorithm(){
             jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion5"));
             jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion6"));
             reloadScreen();
-    }//GEN-LAST:event_BtnCatalanMouseClicked
+    }//GEN-LAST:event_btncatalanMouseClicked
 
     private void uncheked()
     {
@@ -1451,9 +1428,9 @@ public void startAlgorithm(){
       //  jLabel3.setEnabled( false );     
     }    
     
-    private void CmbExamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbExamplesActionPerformed
+    private void cmbexamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbexamplesActionPerformed
         // TODO add your handling code here:
-        Integer indice = CmbExamples.getSelectedIndex();
+        Integer indice = cmbexamples.getSelectedIndex();
         if ( indice.equals( 1 ) ) {    //Ejemplo nº 1
             uncheked();
             printConsole("Seleccionamos el example nº 1 \n", "Select the example number 1 \n", "Triem l'exemple nº 1 \n");
@@ -1477,28 +1454,28 @@ public void startAlgorithm(){
             TxtKey.setText( null );
             TxtKey.setEnabled( true );
             OptInsert.setEnabled( true );
-            BtmNext.setEnabled( true );            
+            btmnext.setEnabled( true );            
         //    TxtValor.setText( null );
         //    TxtValor.setEnabled( true );
             jLabel2.setEnabled( true );
            // jLabel3.setEnabled( true );
             printConsole("Creamos un árbol desde cero --> \n", "Make a new tree --> \n", "Creem un arbre de zero --> \n");
         }
-    }//GEN-LAST:event_CmbExamplesActionPerformed
+    }//GEN-LAST:event_cmbexamplesActionPerformed
 
-    private void BtmNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmNextMouseClicked
+    private void btmnextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseClicked
 
     
-    }//GEN-LAST:event_BtmNextMouseClicked
+    }//GEN-LAST:event_btmnextMouseClicked
 
-    private void optABCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optABCMouseClicked
+    private void optabcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optabcMouseClicked
         //Imprimimos por la consola la acción seleccionada
         printConsole("Seleccionamos un árbol ABC \n", "Select an ABC tree \n", "Triem un arbre ABC \n");
-    }//GEN-LAST:event_optABCMouseClicked
+    }//GEN-LAST:event_optabcMouseClicked
 
-    private void optAVLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optAVLMouseClicked
+    private void optavlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optavlMouseClicked
         printConsole("Seleccionamos un árbol AVL \n", "Select an AVL tree \n", "Triem un arbre AVL \n");
-    }//GEN-LAST:event_optAVLMouseClicked
+    }//GEN-LAST:event_optavlMouseClicked
 
     private void optRNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optRNMouseClicked
         printConsole("Seleccionamos un árbol Rojo-Negro \n", "Select an Red-Black tree \n", "Triem un arbre Roig-Negre \n");
@@ -1519,9 +1496,9 @@ public void startAlgorithm(){
         // TODO add your handling code here:
     }//GEN-LAST:event_OptCutActionPerformed
 
-    private void optABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optABCActionPerformed
+    private void optabcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optabcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_optABCActionPerformed
+    }//GEN-LAST:event_optabcActionPerformed
 
     private void OptInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptInsertActionPerformed
         // TODO add your handling code here:
@@ -1535,34 +1512,34 @@ public void startAlgorithm(){
         // TODO add your handling code here:
     }//GEN-LAST:event_optRNActionPerformed
 
-    private void BtmNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmNextActionPerformed
+    private void btmnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmnextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmNextActionPerformed
+    }//GEN-LAST:event_btmnextActionPerformed
 
     private void jInternalFrame1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame1MouseClicked
         // TODO add your handling code here:        
           //  
     }//GEN-LAST:event_jInternalFrame1MouseClicked
 
-    private void BtmNextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtmNextMouseEntered
+    private void btmnextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtmNextMouseEntered
+    }//GEN-LAST:event_btmnextMouseEntered
 
-    private void BtmStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtmStopActionPerformed
+    private void btmstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmstopActionPerformed
         // TODO add your handling code here:        
         ep.reinitCount();
         ep.example1 = new int[ 9 ];
         ep.example2 = new int[ 9 ];
         ep = new runStep();
-        BtmNext.addActionListener( ep );            
+        btmnext.addActionListener( ep );            
          // REINICIAMOS TODOS LOS VALORES
-        optABC.setEnabled( true );
-        optAVL.setEnabled( true );
+        optabc.setEnabled( true );
+        optavl.setEnabled( true );
         optRN.setEnabled( true );
-        CmbExamples.setEnabled( true );
-        optABC.setSelected( false );
-        optAVL.setSelected( false );
-        CmbExamples.setSelectedIndex( 0 );        
+        cmbexamples.setEnabled( true );
+        optabc.setSelected( false );
+        optavl.setSelected( false );
+        cmbexamples.setSelectedIndex( 0 );        
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:    
@@ -1580,15 +1557,15 @@ public void startAlgorithm(){
         this.jInternalFrame1.setBounds( size );
         this.jInternalFrame1.setEnabled( false );  
         jInternalFrame1.getContentPane().setVisible( true );        
-    }//GEN-LAST:event_BtmStopActionPerformed
+    }//GEN-LAST:event_btmstopActionPerformed
 
     private void OptSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OptSearchActionPerformed
 
-    private void BtnSpainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSpainActionPerformed
+    private void btnspainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnspainActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnSpainActionPerformed
+    }//GEN-LAST:event_btnspainActionPerformed
  
     
     /**
@@ -1613,22 +1590,6 @@ public void startAlgorithm(){
 	txtAlgorithm.moveCaretPosition(position+line);
 }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtmExitConfig1;
-    private javax.swing.JButton BtmExitConfig2;
-    private javax.swing.JButton BtmExitHelp;
-    private javax.swing.JButton BtmHelp;
-    private javax.swing.JButton BtmNext;
-    private javax.swing.JButton BtmPlay;
-    private javax.swing.JButton BtmReload;
-    private javax.swing.JButton BtmStop;
-    private javax.swing.JButton BtnCatalan;
-    private javax.swing.JButton BtnEnglish;
-    private javax.swing.JButton BtnExit;
-    private javax.swing.JButton BtnSpain;
-    private javax.swing.JComboBox<String> CmbExamples;
-    private javax.swing.JFrame FrmConfigKeys;
-    private javax.swing.JFrame FrmConfigTree;
-    private javax.swing.JFrame FrmHelp;
     private javax.swing.ButtonGroup GOperations;
     private javax.swing.ButtonGroup GTrees;
     private javax.swing.JRadioButton OptCut;
@@ -1640,13 +1601,23 @@ public void startAlgorithm(){
     private javax.swing.JPanel PAyudaConsultar;
     private javax.swing.JPanel PAyudaEliminar;
     private javax.swing.JPanel PAyudaInsertar;
-    private javax.swing.JPanel PHelpABC;
-    private javax.swing.JPanel PHelpAVL;
-    private javax.swing.JPanel PHelpRN;
-    private javax.swing.JTabbedPane TabHelp;
-    private javax.swing.JTabbedPane TabHelpOperations;
-    private javax.swing.JTextArea TxtConsole;
     private javax.swing.JTextField TxtKey;
+    private javax.swing.JButton btmexitconfig1;
+    private javax.swing.JButton btmexitconfig2;
+    private javax.swing.JButton btmexithelp;
+    private javax.swing.JButton btmhelp;
+    private javax.swing.JButton btmnext;
+    private javax.swing.JButton btmplay;
+    private javax.swing.JButton btmreload;
+    private javax.swing.JButton btmstop;
+    private javax.swing.JButton btncatalan;
+    private javax.swing.JButton btnenglish;
+    private javax.swing.JButton btnexit;
+    private javax.swing.JButton btnspain;
+    private javax.swing.JComboBox<String> cmbexamples;
+    private javax.swing.JFrame frmconfigkeys;
+    private javax.swing.JFrame frmconfigtree;
+    private javax.swing.JFrame frmhelp;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -1672,10 +1643,16 @@ public void startAlgorithm(){
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea6;
     private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JRadioButton optABC;
-    private javax.swing.JRadioButton optAVL;
     private javax.swing.JRadioButton optRN;
-    private javax.swing.JTextArea txtAlgorithm;
+    private javax.swing.JRadioButton optabc;
+    private javax.swing.JRadioButton optavl;
+    private javax.swing.JPanel phelpabc;
+    private javax.swing.JPanel phelpavl;
+    private javax.swing.JPanel phelprn;
+    private javax.swing.JTabbedPane tabhelp;
+    private javax.swing.JTabbedPane tabhelpoperations;
+    private javax.swing.JTextArea txtalgorithm;
+    private javax.swing.JTextArea txtconsole;
     // End of variables declaration//GEN-END:variables
 
 class runStep implements ActionListener {    
@@ -1734,13 +1711,13 @@ class runStep implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {            
         System.out.println("key conT " + cont);
-        if ( (CmbExamples.getSelectedIndex() == 1 && cont<example1.length)) {
-            CmbExamples.setEnabled( false );
+        if ( (cmbexamples.getSelectedIndex() == 1 && cont<example1.length)) {
+            cmbexamples.setEnabled( false );
             //Carga el example 1
             addKey( example1[ cont ] );
             cont++;
-        } else if ( CmbExamples.getSelectedIndex() == 2  && cont < example2.length ) {
-            CmbExamples.setEnabled( false );
+        } else if ( cmbexamples.getSelectedIndex() == 2  && cont < example2.length ) {
+            cmbexamples.setEnabled( false );
             //Carga el example 2
             addKey( example2[ cont ] );
             cont++;
@@ -1762,7 +1739,7 @@ class runStep implements ActionListener {
    //     TxtValue.setEnabled( true );
         jLabel2.setEnabled( true );
      //   jLabel3.setEnabled( true );
-        BtmNext.setEnabled( true );
+        btmnext.setEnabled( true );
 
     }
     
