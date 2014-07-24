@@ -11,14 +11,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import java.lang.*;
 import datastructures.SimulatorAVLTree;
 import datastructures.SimulatorBinaryTree;
 import datastructures.SimulatorRBTree;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
 import javax.swing.text.Caret;
-
 
 /**
  *
@@ -77,28 +75,15 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
                 break;
         }
     }
-   
+
     public void addKey( int key ) {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ",) \n", "Inserir (" + txtkey.getText() + ",) \n");
+        go (2, txtalgorithm);
         if( optabc.isSelected() ) {
-
-            go (2, txtalgorithm);
-            if( optabc.isSelected() ) {
-                //go(2,txtAlgorithm);
-                if ( this.simulator.add( key ) ) { this.repaintTree(); }
-                else { System.out.println("Errorrrrrrr ABB");        }
-            }
-            if( optavl.isSelected() )  {            
-                System.out.println("add avl");
-                if(this.AVLsimulator.add(key)){  this.repaintTree();}
-                else { System.out.println("Errorrrrrrr AVL");        }
-            }
-            if( optrn.isSelected() )  {           
-                System.out.println("add RN");
-                if(this.RBSimulator.add(key)){  this.repaintTree();}
-                  else { System.out.println("Errorrrrrrr AVL");        }
-            }       
+            //go(2,txtAlgorithm);
+            if ( this.simulator.add( key ) ) { this.repaintTree(); }
+            else { System.out.println("Errorrrrrrr ABB");        }
         }
     }
     public void findKey(int key){
@@ -353,21 +338,21 @@ public void startAlgorithm(){
                     }
 }
 
-  public void go(int line, JTextArea txtalgorithm){
-        String[]t=txtalgorithm.getText().split("\n");
+  public void go(int line, JTextArea txtAlgorithm){
+        String[]t=txtAlgorithm.getText().split("\n");
         int position = 0;
         line = 3;
-        txtalgorithm.setCaretColor(Color.red);
+        txtAlgorithm.setCaretColor(Color.red);
                 
         for(int index=0 ; index < line; index++ ){
 	   position += t[index].length();
 	}
-	txtalgorithm.setCaretPosition( position + 2 );
+	txtAlgorithm.setCaretPosition( position + 2 );
        // TxtAlgorithm.insert("-- " + position + "--", position);
         //int aux =  t[line].length()+position;
         //TxtAlgorithm.insert("** " +aux + "**", t[line].length()+position);
-        txtalgorithm.moveCaretPosition( position + t[line].length() + 2);
-        Caret txtseleccion = txtalgorithm.getCaret();
+        txtAlgorithm.moveCaretPosition( position + t[line].length() + 2);
+        Caret txtseleccion = txtAlgorithm.getCaret();
         txtseleccion.setSelectionVisible(true);
         txtseleccion.setVisible(true);
        
