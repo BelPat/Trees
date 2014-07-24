@@ -348,9 +348,6 @@ public void startAlgorithm(){
 	   position += t[index].length();
 	}
 	txtAlgorithm.setCaretPosition( position + 2 );
-       // TxtAlgorithm.insert("-- " + position + "--", position);
-        //int aux =  t[line].length()+position;
-        //TxtAlgorithm.insert("** " +aux + "**", t[line].length()+position);
         txtAlgorithm.moveCaretPosition( position + t[line].length() + 2);
         Caret txtseleccion = txtAlgorithm.getCaret();
         txtseleccion.setSelectionVisible(true);
@@ -1431,43 +1428,24 @@ public void startAlgorithm(){
         optsearchfather.setEnabled( false );
         txtkey.setText( null );
         txtkey.setEnabled( false );
-//        TxtValue.setText( null );
-       // TxtValue.setEnabled( false );
-        jLabel2.setEnabled( false );
-      //  jLabel3.setEnabled( false );     
+        jLabel2.setEnabled( false );    
     }    
     
     private void cmbexamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbexamplesActionPerformed
-        // TODO add your handling code here:
-        Integer indice = cmbexamples.getSelectedIndex();
-        if ( indice.equals( 1 ) ) {    //Ejemplo nº 1
+        Integer index=cmbexamples.getSelectedIndex();
+        if(index<=4){
             uncheked();
-            printConsole("Seleccionamos el example nº 1 \n", "Select the example number 1 \n", "Triem l'exemple nº 1 \n");
-            //Iniciamos el example:
-        } else if ( indice.equals( 2 ) ) {          //Ejemplo nº 2
-            uncheked();
-            printConsole("Seleccionamos el example nº 2 \n", "Select the example number 2 \n", "Triem l'exemple nº 2 \n");
-            //Iniciamos el example:
-        } else if ( indice.equals( 3 ) ) {//Ejemplo nº 3
-            uncheked();
-            printConsole("Seleccionamos el example nº 3 \n", "Select the example number 3 \n", "Triem l'exemple nº 3 \n");
-            //Iniciamos el example:
-        } else if ( indice.equals( 4 ) ) {  //Ejemplo nº 4  
-            uncheked();
-            printConsole("Seleccionamos el example nº 4 \n", "Select the example number 4 \n", "Triem l'exemple nº 4 \n");
-            //Iniciamos el example:
-        } else if ( indice.equals( 5 ) ) {
-            //Introducimos un arbol desde cero nosotros mismos, por lo que hay 
-            //que desbloquear el cuadro de opciones
+            String cast =String.format("Seleccionamos el ejemplo nº %1$d\n", index);
+            String eng =String.format("Select the example number %1$d\n", index);
+            String cat=String.format("Triem l'exemple nº %1$d\n", index);
+            printConsole(cast,eng,cat);
+        }else if (index == 5) {
             optinsert.setSelected( true );
             txtkey.setText( null );
             txtkey.setEnabled( true );
             optinsert.setEnabled( true );
-            btmnext.setEnabled( true );            
-        //    TxtValor.setText( null );
-        //    TxtValor.setEnabled( true );
+            btmnext.setEnabled( true );
             jLabel2.setEnabled( true );
-           // jLabel3.setEnabled( true );
             printConsole("Creamos un árbol desde cero --> \n", "Make a new tree --> \n", "Creem un arbre de zero --> \n");
         }
     }//GEN-LAST:event_cmbexamplesActionPerformed
