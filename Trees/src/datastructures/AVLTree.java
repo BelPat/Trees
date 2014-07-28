@@ -1,12 +1,11 @@
 package datastructures;
  
-import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class AVLTree< T extends Comparable < T > > {
+public class AVLTree< T extends Comparable < T > > extends Tree {
  
  private AVLNode < T > root; // the root node
  
@@ -24,11 +23,13 @@ public class AVLTree< T extends Comparable < T > > {
      *
      */
     public AVLTree() {
+       super();
     }                              
              
-    public boolean add(T k) {
+ @Override
+    public boolean add(Comparable k) {
       // create new node
-      AVLNode < T >  n = new AVLNode < T > (k);
+      AVLNode < T >  n = new AVLNode < > ((T)k);
       // start recursive procedure for inserting the node
       if (this.find(k)==false){
             return ( add( this.root ,n ) );
@@ -36,6 +37,7 @@ public class AVLTree< T extends Comparable < T > > {
       return false;
     }
  
+    
     /**
     * Recursive method to insert a node into a tree.
     * 
@@ -56,7 +58,7 @@ public class AVLTree< T extends Comparable < T > > {
                  // Node is inserted now, continue checking the balance
                  recursiveBalance(p);
             } else {
-                 add(p.getLeft(),q);
+                 add((AVLNode)p.getLeft(),q);
             }
 
       // } else if(q.toInt()>p.toInt()) {
@@ -112,9 +114,10 @@ public class AVLTree< T extends Comparable < T > > {
     /**
     * Removes a node from the tree, if it is existent.
     */
-    public T delete(T k) {
+ @Override
+    public Comparable delete(Comparable k) {
       // First we must find the node, after this we can delete it.
-        T aux_key = deleteAVL(this.root,k);
+        T aux_key = deleteAVL(this.root, (T)k);
         
       return(aux_key);
     }
@@ -209,8 +212,11 @@ public class AVLTree< T extends Comparable < T > > {
      * @return un boolean , true si el dato está o false en caso contrario.
      */
     //La clase T debe tener sobreescrito el metodo equals
-    public boolean find(T key) {
-        return ( find( this.getRoot(), key ) );
+ @Override
+    public boolean find(Comparable key) {
+     
+     System.out.println("********************** find *********************************");
+        return ( find( this.getRoot(), (T) key ) );
     }
 
     private boolean find(AVLNode<T> r, T key) {
@@ -246,11 +252,12 @@ public class AVLTree< T extends Comparable < T > > {
     }
 
 
-    protected boolean isLeaf(AVLNode<T> x) {
+ /*   protected boolean isLeaf(AVLNode<T> x) {
         return (x != null && x.getLeft() == null && x.getRight() == null);
     }
+*/
 
-     /**
+       /**
      * Dado un dato almacenado en el árbol , retorna el padre de ese dato. Se
      * parte de la premisa que el árbol no contiene elementos repetidos.
      *
@@ -258,16 +265,7 @@ public class AVLTree< T extends Comparable < T > > {
      * @return el padre del dato almacenado en el árbol, null en caso no existir
      * el dato
      */
-    public T getFather(T key) {
-        if (key == null || this.getRoot() == null) {
-            return null;
-        }
-        AVLNode < T >  x = getFather(this.getRoot(), key);
-        if (x == null) {
-            return null;
-        }
-        return (x.getKey());
-    }
+
 
     private AVLNode<T> getFather(AVLNode<T> x, T key) {
         if (x == null) {
@@ -288,6 +286,7 @@ public class AVLTree< T extends Comparable < T > > {
     /**
      * Elimina las hojas(nodos terminales) del árbol binario.
      */
+ @Override
     public void cutLeaves() {
 
         Iterator<T> it=(Iterator<T>) this.getLeaves();        
@@ -614,6 +613,7 @@ public class AVLTree< T extends Comparable < T > > {
         }
     }
 
+ @Override
     public AVLNode < T > getRoot() {
         return root;
     }

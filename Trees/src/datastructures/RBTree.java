@@ -4,20 +4,14 @@
  */
 package datastructures;
 
-import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.lang.Math;
 import java.util.Iterator;
 import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 
-public class RBTree <T extends Comparable < T > > {
+public class RBTree <T extends Comparable < T > >  extends Tree {
 
 // La root se inicializa a empty.
-private RBNode<T> empty = new RBNode<T>();
+private RBNode<T> empty = new RBNode<>();
 private RBNode<T> root = empty;
 
 
@@ -38,8 +32,12 @@ private RBNode<T> root = empty;
      * @return un tipo de objeto de la clase RBNode<T> con la dirección de
      * memoria de la raíz del árbol
      */
+@Override
     public RBNode<T> getRoot() {
-        return this.root;
+        RBNode<T> aux = new RBNode<> (super.getRoot());
+        aux.setRoot(this.root);
+        
+        return aux;
     }
     
     /**
@@ -173,12 +171,13 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
      * @param key, el dato que se desea add
      * @return true si dato ha sido insertado de forma correcta, false en caso contraio
      */
-    public boolean add(T key) {
+@Override
+    public boolean add(Comparable key) {
         
-        findNode(key);
-        if ( findNode(key)== null)
+        findNode((T)key);
+        if ( findNode((T)key)== null)
         {
-            add(new RBNode<T>(key));
+            add(new RBNode<>((T)key));
              return true;
         }
         else
@@ -309,9 +308,10 @@ return y;
 
 // @param: v, T el valor que queremos delete del RBTree
 // Borramos v del RBTree
-public void delete(T v){
+@Override
+public Comparable delete(Comparable v){
 
-    RBNode<T> z = findNode(v);
+    RBNode<T> z = findNode((T)v);
     RBNode<T> x = empty;
     RBNode<T> y = empty;
 
@@ -346,6 +346,7 @@ public void delete(T v){
     if (y.getColor() == RBNode.BLACK){
         deleteModificarNum(x);
     }
+    return v;
 }// fin delete(RBNode z)
 
 
@@ -474,7 +475,8 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un boolean , true si el dato está o false en caso contrario.
      */
 
-    public boolean find(T key){
+@Override
+    public boolean find(Comparable key){
 
         RBNode<T> r = root;
 
@@ -500,7 +502,6 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un RBNode ,si el dato está o null en caso contrario.
      */
     public RBNode<T> findNode(T key){
-
         RBNode<T> current = root;
 
         int compara;
@@ -591,16 +592,7 @@ private void deleteModificarNum(RBNode<T> x){
      * @return el padre del dato almacenado en el árbol, null en caso no existir
      * el dato
      */
-    public T getFather(T key) {
-        if (key == null || this.root.getKey() == null) {
-            return null;
-        }
-        RBNode<T> x = getFather(this.root, key);
-        if (x == null) {
-            return null;
-        }
-        return (x.getKey());
-    }
+    
     
      private RBNode<T> getFather(RBNode<T> x, T key) {
         if (isEmpty(x)) {

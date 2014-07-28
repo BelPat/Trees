@@ -12,8 +12,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import datastructures.SimulatorAVLTree;
-import datastructures.SimulatorBinaryTree;
 import datastructures.SimulatorRBTree;
+import datastructures.Simulator;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
 import javax.swing.text.Caret;
@@ -33,7 +33,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
   // private JFrame dibujoEmergente = new JFrame("Representación gráfica");
    // private ArbolBB<Integer> miArbol=new ArbolBB <Integer>();
    // private AVLTree<Integer> miArbolAVL=new AVLTree <Integer>();
-    public SimulatorBinaryTree<Integer> simulator = new SimulatorBinaryTree<>();
+    public Simulator<Integer> simulator = new Simulator<>();
     public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
     public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
 
@@ -79,10 +79,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     public void addKey( int key ) {
         operation = "Insertar";
         printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ",) \n", "Inserir (" + txtkey.getText() + ",) \n");
-        go (2, txtalgorithm);
+      //  go (2, txtalgorithm);
         if( optabc.isSelected() ) {
             //go(2,txtAlgorithm);
-            if ( this.simulator.add( key ) ) { this.repaintTree(); }
+            if ( this.simulator.add( new Integer (key) ) ) { this.repaintTree(); }
             else { System.out.println("Errorrrrrrr ABB");        }
         }
     }

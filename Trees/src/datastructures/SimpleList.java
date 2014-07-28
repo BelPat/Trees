@@ -21,7 +21,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     * debe ser un Objeto.
     */
     public void addInit( T x ){        
-        this.head = new Node <  > ( x, this.head );
+        this.head = new Node<> ( x, this.head );
         this.size++;         
     }
 
@@ -30,19 +30,21 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     * @param x Keyrmación que desea almacenar en la Lista. La informacipon
     * debe ser un Objeto.
     */
-    public void addEnd( T x ) {
 
-        if( this.head == null ){
-            this.addInit( x );
+    
+   public void addEnd(Comparable x) {
+               if( this.head == null ){
+            this.addInit(  (T) x);
         }else {
             try {
                 Node < T >  ult = this.getPos( this.size-1 );
-                ult.setRight( new Node <  > ( x, null ) );
+                ult.setRight( new Node<> ( (T)x, null ) );
                 this.size++;
             }catch( ExceptionUFPS e ) {                
                 System.err.println( e.getMessage() );                
             }   
-        }        
+        }   
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -277,6 +279,8 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     public boolean containTo( T info ) {        
     return ( this.indexOf ( info ) != -1 );        
     }
+
+
 
     /** NO se utiliza
     * Concatena dos listas simples. La lista2 , se borra. 

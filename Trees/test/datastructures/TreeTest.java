@@ -12,15 +12,15 @@ import static org.junit.Assert.*;
  *
  * @author nusatres
  */
-public class BTreeTest {
+public class TreeTest {
     
     /**
-     * Test of getRaiz method, of class BTree.
+     * Test of getRaiz method, of class Tree.
      */
     @Test
     public void testGetRaiz() {
-        BTree<Integer> instance = new BTree<> ();
-        BBTree<Integer> arbol = new BBTree<> ();
+        Tree<Integer> instance = new Tree<> ();
+        BTree<Integer> arbol = new BTree<> ();
   
         arbol.add( 4 );
         arbol.add( 2 );
@@ -37,11 +37,11 @@ public class BTreeTest {
         assertEquals( expResult.getKey(), result.getKey() );
     }
      /**
-     * Test of setRaiz method, of class BTree.
+     * Test of setRaiz method, of class Tree.
      */
     @Test
     public void testSetRaiz() {
-        BTree<Integer> instance = new BTree<> ();
+        Tree<Integer> instance = new Tree<> ();
         BNode<Integer> expResult = new BNode<>( 4 );
         instance.setRoot(expResult);
         
@@ -49,11 +49,11 @@ public class BTreeTest {
     }
 
      /**
-     * Test of getHojas method, of class BTree.
+     * Test of getHojas method, of class Tree.
      */
     @Test
     public void testGetHojas() {
-        BBTree<Integer> instance = new BBTree<>();
+        BTree<Integer> instance = new BTree<>();
         
         instance.add( 13 );
         instance.add( 8 );
@@ -91,12 +91,12 @@ public class BTreeTest {
     }
     
         /**
-     * Test of esta method, of class BTree.
+     * Test of esta method, of class Tree.
      */
     @Test
     public void testBuscar() {
         Integer info = 17;
-        BBTree<Integer> instance = new BBTree<> ();
+        BTree<Integer> instance = new BTree<> ();
         
         instance.add( 14 );
         instance.add( 15 );
@@ -116,25 +116,25 @@ public class BTreeTest {
     }
     
     /**
-     * Test of esVacio method, of class BTree.
+     * Test of esVacio method, of class Tree.
      */
     @Test
     public void testEsVacio() {
-        BTree<Integer> instance = new BTree<> ();
+        Tree<Integer> instance = new Tree<> ();
     
         boolean result = instance.isEmpty();
         assertTrue(result);
     }
 
         /**
-     * Test of getPadre method, of class BTree.
+     * Test of getPadre method, of class Tree.
      */
     @Test
     public void testGetPadre() {
         Integer info = 7;
         Integer expResult = 8;
 
-        BBTree<Integer> instance = new BBTree<>();
+        BTree<Integer> instance = new BTree<>();
         instance.add( 4 );
         instance.add( 2 );
         instance.add( 6 );
@@ -151,11 +151,11 @@ public class BTreeTest {
 
     
     /**
-     * Test of preOrden method, of class BTree.
+     * Test of preOrden method, of class Tree.
      */
     @Test
     public void testPreOrden() {
-        BBTree<Integer> instance = new BBTree<>();
+        BTree<Integer> instance = new BTree<>();
         
         instance.add( 14 );
         instance.add( 15 );

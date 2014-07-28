@@ -7,9 +7,9 @@ import javax.swing.*;
 
 
 public class GraphicTree<T extends Comparable<T>> extends JPanel {
-    private BTree<T> myTree;
-    private HashMap<BNode<T>, Rectangle> positionNodes = null;
-    private HashMap<BNode<T>, Dimension> subtreeSizes = null;
+    private Tree<T> myTree;
+    private HashMap<Node<T>, Rectangle> positionNodes = null;
+    private HashMap<Node<T>, Dimension> subtreeSizes = null;
     private boolean dirty = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
@@ -23,7 +23,7 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
      * @param miExpresion: dato de tipo ArbolExpresion que contiene el Arbol a
      * dibujar.
      */
-    public GraphicTree(BTree<T> myTree)    {      
+    public GraphicTree(Tree<T> myTree)    {      
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
           positionNodes = new HashMap<>();
@@ -41,7 +41,7 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
     private void foundPositions()    {
          positionNodes.clear();
          subtreeSizes.clear();
-         BNode<T> root = this.myTree.getRoot();
+         Node<T> root = this.myTree.getRoot();
          if (root != null)   {
              foundSizeSubTree(root);
              foundPosition(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
@@ -56,7 +56,7 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
      * referencia calcular el tamaño de cada subárbol.
      * @return Dimension con el tamaño de cada subárbol.
      */
-    private Dimension foundSizeSubTree(BNode<T> n)    {
+    private Dimension foundSizeSubTree(Node<T> n)    {
           if (n == null) {
               return new Dimension(0,0);
           }
@@ -80,7 +80,7 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
      * @param right: int con alineación y orientación a la rightecha.
      * @param top: int con el tope.
      */
-        private void foundPosition(BNode<T> n, int left, int right, int top)     {
+        private void foundPosition(Node<T> n, int left, int right, int top)     {
           if (n == null) {
               return;
           }
@@ -118,7 +118,7 @@ public class GraphicTree<T extends Comparable<T>> extends JPanel {
      * @param position_y: int con la posición en y desde donde se va a dibujar la línea hasta el siguiente hijo.
      * @param yoffs: int con la altura del FontMetrics.
      */
-    private void getPaint(Graphics2D g, BNode<T> n, int position_x, int position_y, int yoffs)    {
+    private void getPaint(Graphics2D g, Node<T> n, int position_x, int position_y, int yoffs)    {
          if (n == null) {
              return;
          }     
