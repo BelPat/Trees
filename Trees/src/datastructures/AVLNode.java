@@ -9,7 +9,7 @@ package datastructures;
  * @author nusatres
  */
 
- public class AVLNode < T extends Comparable < T >  > extends Node  {
+ public class AVLNode < T extends Comparable < T >  > extends Node<T>  {
 
    /* private AVLNode < T >  left;
     private AVLNode < T >  right;*/
@@ -60,7 +60,8 @@ package datastructures;
     }
     @Override
       public AVLNode < T >  getRight() {
-        AVLNode< T > aux = new AVLNode<> (super.getRight());
+        AVLNode< T > aux;
+        aux = new AVLNode<> (super.getRight());
         aux.balance = this.getRight().getBalance();
         aux.height = this.getRight().getHeight();
         aux.root = this.getRight().getRoot();

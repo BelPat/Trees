@@ -1,7 +1,7 @@
 package datastructures;
 
 
-public class BNode < T extends Comparable < T > > extends Node{
+public class BNode < T extends Comparable < T > > extends Node<T>{
     
   /*  private T key;
     private BNode < T >  left, right;*/
