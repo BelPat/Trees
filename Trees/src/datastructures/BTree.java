@@ -2,12 +2,13 @@ package datastructures;
 
 import java.util.Iterator;
 
-public class BTree<T extends Comparable<T>> extends Tree{
+/**
+ *
+ * @author patricia
+ * @param <T>
+ */
+public class BTree<T extends Comparable<T>> extends Tree<T>{
 
-    /**
-    *  Crea un árbol binario vacío
-    * 
-    */
     public BTree()    {
         super();
     }
@@ -18,8 +19,9 @@ public class BTree<T extends Comparable<T>> extends Tree{
     * @return  true si el elemento fue insertado o false en caso contrario
     */
     @Override
-    public boolean add( Comparable new_key )    {
-        Node< T > new_node = this.find((T) new_key ) ? null : add( this.getRoot() ,(T) new_key );
+    public boolean add( T key )    {
+        Node< T > new_node;
+        new_node = this.find(key) ? null : add( super.getRoot(), key );
         if( new_node != null ){
             this.setRoot( new_node );
         }
@@ -28,7 +30,7 @@ public class BTree<T extends Comparable<T>> extends Tree{
 
     private Node< T > add( Node< T >  new_node, T new_key)   {
         if( new_node == null ){
-            return( new Node<  > ( new_key , null , null ) );
+            return( new Node< > ( new_key , null , null ) );
         }
         int compara = ( new_node.getKey() ).compareTo( new_key );
         if( compara > 0 ) { // new_keydelarbol es menor que new_key
@@ -52,11 +54,12 @@ public class BTree<T extends Comparable<T>> extends Tree{
     * @return  el new_key bonew_nodeado o null si no lo encontro
     */
 
-        public Comparable delete( Comparable x )    {
+    @Override
+        public Comparable delete( T x )    {
         if(!this.find(x))   {
                     return null;
         }
-        Node <T > z = delete( this.getRoot(), (T)x );
+        Node <T > z = delete( this.getRoot(),x );
         this.setRoot( z );
         return x;
     }
@@ -105,9 +108,9 @@ public class BTree<T extends Comparable<T>> extends Tree{
     */
 
     @Override
-    public boolean find(Comparable x)
+        public boolean find(T x)
     {
-        return(find(this.getRoot(), (T) x));
+        return(find(this.getRoot(),x));
     }
 
     private boolean find(Node<T> r, T x)
@@ -115,7 +118,9 @@ public class BTree<T extends Comparable<T>> extends Tree{
         if (r==null){
             return (false);
         }
-        int compara=(r.getKey()).compareTo(x);
+        //le estamos diciendo que compare un T con un int.
+
+        int compara=(r.getKey().compareTo(x));
         if(compara>0){            
             return(find(r.getLeft(),x));
         } else{

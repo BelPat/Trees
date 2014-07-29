@@ -8,55 +8,38 @@ import javax.swing.JPanel;
 
 public abstract class Tree<T extends Comparable<T>> {
 
-    private Node<T> root;
+    private Node<T> root, left,right;
     public T value;
-    private Node<T> left;
-    private Node<T> right;
 
 
-    /**
-     * Crea un árbol con una raíz dada
-     *
-     * @param root un tipo BNode<T> , almacena la dirección de memoria de un
-     * nodo de un árbol binario
-     */
-    public Tree(Node<T> root) {
-        this.root = root;
-    }
-
-    /**
-     * Crea un árbol binario vacío
-     *
-     */
-    public Tree() {
+    Tree() {
         this.root = null;
     }
-
-    /**
-     * Retorna la raíz del árbol
-     *
-     * @return un tipo de objeto de la clase BNode<T> que contiene la raíz del árbol
-     */
-    public Node<T> getRoot() {
-        return this.root;
+    Tree(Node<T> root) {
+        this.root = root;
     }
-
-    /**
-     * Cambia la raíz del árbol por otra
-     *
-     * @param r recibe una nueva root para el árbol
-     */
-    public void setRoot(Node<T> r) {
+    void setRoot(Node<T> r) {
         this.root = r;
     }
+    Node<T> getRoot() {
+        return this.root;
+    }
+    void setLeft(Node<T> l){
+        this.left=l;
+    }
+    Node<T> getLeft() {
+        return this.left;
+    }
+    void setRight(Node<T> r){
+        this.right=r;
+    }
+    Node<T> getRight() {
+        return this.right;
+    }
+    
 
-    /**
-     * Retorna un iterador con el recorrido preOrder del árbol binario
-     *
-     * @return un iterador de la clase Iterator de la java.util
-     */
     public Iterator<T> preOrder() {
-        SimpleList<T> l = new SimpleList<T>();
+        SimpleList<T> l = new SimpleList<>();
         preOrder(this.getRoot(), l);
         return (l.iterator());
 
@@ -70,20 +53,10 @@ public abstract class Tree<T extends Comparable<T>> {
         }
     }
 
-    /** Dado un BNode<T>, nos indica si este es una hoja o no
-     * @param x, BNode<T> del cual queremos saber si es hoja o no
-     * @return , true en caso de que el nodo sea hoja, false en caso contrario
-     */
-    public boolean isLeaf(Node<T> x) {
+    boolean isLeaf(Node<T> x) {
         return (x != null && x.getLeft() == null && x.getRight() == null);
     }
 
-    /**
-     * Dado un dato info , retorna el padre de ese dato. 
-     * @param info dato que se desea buscar
-     * @return el padre del dato almacenado en el árbol, null en caso no existir
-     * el dato
-     */
     public T getFather(T key) {
         if (key == null || this.root == null) {
             return null;
@@ -110,22 +83,12 @@ public abstract class Tree<T extends Comparable<T>> {
         }
     }
 
-    /**
-     * Retorna si el árbol contiene o no elementos.
-     *
-     * @return true si el árbol binario esta vacío o false en caso contrario
-     */
     public boolean isEmpty() {
         return (this.root == null);
     }
 
-    /**
-     * Retorna un iterador con las Leaves del árbol binario
-     *
-     * @return un iterador de la clase Iterator de la java.util
-     */
     public Iterator<T> getLeaves() {
-        SimpleList<T> l = new SimpleList<T>();
+        SimpleList<T> l = new SimpleList<>();
         getLeaves(this.root, l);
         return (l.iterator());
     }
@@ -140,57 +103,17 @@ public abstract class Tree<T extends Comparable<T>> {
         }
 
     }
-    
-       /**
-    * Elimina las hojas(nodos terminales) del árbol binario.
-    */
+
     abstract void cutLeaves();
     
-    abstract boolean find(Comparable key);
+    abstract boolean find(T key);
     
-    abstract Comparable delete(Comparable key);
+    abstract Comparable delete(T key);
     
-    abstract boolean add( Comparable key )  ;
+    abstract boolean add( T key )  ;
  
-    
-        /**
-     * Retorna el Nodo si existe un dato info en el árbol binario, o null en caso
-     * contrario.     *
-     * @return un BNode ,si el dato está o null en caso contrario.
-   
-
-    public Node<T> findNode(T key) {
-        return (findNode(this.root, key));
-    }
-
-    private Node<T> findNode(Node<T> r, T key) {
-        if (r == null) {
-            return (null);
-        }  else if (r.getKey().equals(key)) {
-            return (r);
-        }
-        findNode(r.getLeft(), key);        
-        findNode(r.getRight(), key);        
-        return null;
-      }  
-  */
-
- /*   public boolean buscar(T info) {
-        return (buscar(this.root, info));
-    }
-
-    private boolean buscar(BNode<T> r, T info) {
-        if (r == null) {
-            return (false);
-        }
-        if (r.getKey().equals(info)) {
-            return (true);
-        }
-        return (buscar(r.getLeft(), info) || buscar(r.getRight(), info));
-    }
-*/
     protected DefaultMutableTreeNode createJtree(Node<T> r, String msg) {
-        if (isLeaf(r)) {
+        if (this.isLeaf(r)) {
             return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
         }
         DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
@@ -203,13 +126,6 @@ public abstract class Tree<T extends Comparable<T>> {
         return x;
     }
 
-    /**
-     * Crea un árbol de la clase JTree. Esta clase permite dibujar el árbol
-     * utilizando una distribución de ficheros y directorios de un explorador de
-     * archivos convencional
-     *
-     * @return un JTree con el árbol binario que se tiene creado
-     */
     public JTree getJtree() {
         DefaultMutableTreeNode x = new DefaultMutableTreeNode("ARBOL-VACIO");
         if (this.isEmpty()) {
@@ -219,11 +135,11 @@ public abstract class Tree<T extends Comparable<T>> {
     }
 
     public JPanel getPaint() {
-        return new GraphicTree<T>( this );
+        return new GraphicTree<>( this );
     }
     
    public HashMap getPositionNodes()  {     
-       GraphicTree ae =new GraphicTree < T >(this);
+       GraphicTree ae =new GraphicTree <>(this);
        return ae.getPositionNodes();
    }
 }

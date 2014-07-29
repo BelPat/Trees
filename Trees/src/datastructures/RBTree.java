@@ -8,7 +8,7 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 
-public class RBTree <T extends Comparable < T > >  extends Tree {
+public class RBTree <T extends Comparable < T > >  extends Tree<T> {
 
 // La root se inicializa a empty.
 private RBNode<T> empty = new RBNode<>();
@@ -172,7 +172,7 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
      * @return true si dato ha sido insertado de forma correcta, false en caso contraio
      */
 @Override
-    public boolean add(Comparable key) {
+    public boolean add(T key) {
         
         findNode((T)key);
         if ( findNode((T)key)== null)
@@ -309,9 +309,9 @@ return y;
 // @param: v, T el valor que queremos delete del RBTree
 // Borramos v del RBTree
 @Override
-public Comparable delete(Comparable v){
+public Comparable delete(T v){
 
-    RBNode<T> z = findNode((T)v);
+    RBNode<T> z = findNode(v);
     RBNode<T> x = empty;
     RBNode<T> y = empty;
 
@@ -476,7 +476,7 @@ private void deleteModificarNum(RBNode<T> x){
      */
 
 @Override
-    public boolean find(Comparable key){
+    public boolean find(T key){
 
         RBNode<T> r = root;
 
@@ -537,7 +537,7 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un iterador de la clase Iterator de la java.util
      */
     public Iterator<T> preOrder() {
-        SimpleList<T> l = new SimpleList<T>();
+        SimpleList<T> l = new SimpleList<>();
         preOrder(this.getRoot(), l);
         return (l.iterator());
 
@@ -570,6 +570,7 @@ private void deleteModificarNum(RBNode<T> x){
      * Elimina las hojas(nodes terminales) del árbol .
      */
 
+@Override
     public void cutLeaves() {
          Iterator<T> it= this.getLeaves();
           while(it.hasNext())
@@ -581,8 +582,9 @@ private void deleteModificarNum(RBNode<T> x){
      * @return retorna un nuevo GraphicRBTree
      */
     
+@Override
       public JPanel getPaint() {
-        return new GraphicRBTree<T>(this);
+        return new GraphicRBTree<>(this);
     }
       
 /**
@@ -614,8 +616,8 @@ private void deleteModificarNum(RBNode<T> x){
      *
      * @return un iterador de la clase Iterator de la java.util
      */
-    public Iterator<T> getLeaves() {
-        SimpleList<T> l = new SimpleList<T>();
+    public Iterator<T> getLe4aves() {
+        SimpleList<T> l = new SimpleList<>();
         getLeaves(this.root, l);
         return (l.iterator());
     }
@@ -628,7 +630,7 @@ private void deleteModificarNum(RBNode<T> x){
     private void getLeaves(RBNode<T> r, SimpleList<T> l) {
        // if (r != null) {
          if (!isEmpty(r)) {
-            if (this.isLeaf(r)) {
+            if (super.isLeaf(r)) {
                 l.addEnd(r.getKey());
             }
             getLeaves(r.getLeft(), l);

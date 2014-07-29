@@ -5,12 +5,16 @@ import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class AVLTree< T extends Comparable < T > > extends Tree {
+/**
+ *
+ * @author patricia
+ * @param <T>
+ */
+public class AVLTree<T extends Comparable <T>> extends Tree<T>{
  
  private AVLNode < T > root; // the root node
  
 /***************************** Core Functions ************************************/
-
  /**
   * Add a new element with key "k" into the tree.
   * 
@@ -27,9 +31,9 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
     }                              
              
  @Override
-    public boolean add(Comparable k) {
+     public boolean add(T k) {
       // create new node
-      AVLNode < T >  n = new AVLNode < > ((T)k);
+      AVLNode < T >  n = new AVLNode < > (k);
       // start recursive procedure for inserting the node
       if (this.find(k)==false){
             return ( add( this.root ,n ) );
@@ -58,7 +62,7 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
                  // Node is inserted now, continue checking the balance
                  recursiveBalance(p);
             } else {
-                 add((AVLNode)p.getLeft(),q);
+                 add(p.getLeft(),q);
             }
 
       // } else if(q.toInt()>p.toInt()) {
@@ -115,7 +119,7 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
     * Removes a node from the tree, if it is existent.
     */
  @Override
-    public Comparable delete(Comparable k) {
+     public Comparable delete(T k) {
       // First we must find the node, after this we can delete it.
         T aux_key = deleteAVL(this.root, (T)k);
         
@@ -213,10 +217,10 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
      */
     //La clase T debe tener sobreescrito el metodo equals
  @Override
-    public boolean find(Comparable key) {
+    public boolean find(T key) {
      
      System.out.println("********************** find *********************************");
-        return ( find( this.getRoot(), (T) key ) );
+        return ( find( this.getRoot(),key ) );
     }
 
     private boolean find(AVLNode<T> r, T key) {
@@ -242,8 +246,9 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
 
     private void getLeaves(AVLNode<T> r, SimpleList<T> l) {
         if (r != null) {
-            if (this.isLeaf(r)) {
+            if (super.isLeaf(r)) {
                 l.addEnd(r.getKey());
+            } else {
             }
             getLeaves(r.getLeft(), l);
             getLeaves(r.getRight(), l);
@@ -251,8 +256,8 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
 
     }
 
-
- /*   protected boolean isLeaf(AVLNode<T> x) {
+/*
+   protected boolean isLeaf(AVLNode<T> x) {
         return (x != null && x.getLeft() == null && x.getRight() == null);
     }
 */
@@ -286,8 +291,7 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
     /**
      * Elimina las hojas(nodos terminales) del árbol binario.
      */
- @Override
-    public void cutLeaves() {
+     public void cutLeaves() {
 
         Iterator<T> it=(Iterator<T>) this.getLeaves();        
         while(it.hasNext())
@@ -558,11 +562,11 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
         if (this.isEmpty()) {
             return (new JTree(x));
         }
-        return (new JTree(createJtree(this.getRoot(), "Root(T)->")));
+        return (new JTree(createJtree(super.getRoot(), "Root(T)->")));
     }
 
     protected DefaultMutableTreeNode createJtree(AVLNode<T> r, String msg) {
-        if (isLeaf(r)) {
+        if (super.isLeaf(r)) {
             return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
         }
         DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
@@ -579,11 +583,6 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
         return new GraphicAVLTree<>( this );
     }
 
-    /**
-     * Retorna si el árbol contiene o no elementos.
-     *
-     * @return true si el árbol binario esta vacío o false en caso contrario
-     */
     public boolean isEmpty() {
         return ( this.getRoot() == null );
     }
@@ -614,7 +613,7 @@ public class AVLTree< T extends Comparable < T > > extends Tree {
     }
 
  @Override
-    public AVLNode < T > getRoot() {
+     public AVLNode < T > getRoot() {
         return root;
     }
 
