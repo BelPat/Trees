@@ -5,10 +5,10 @@
 
 package datastructures;
 
-public class SimulatorBinaryTree <T extends Comparable < T >> extends Simulator{
+public class SimulatorBinaryTree <T extends Comparable < T >> extends Simulator<T>{
 
  //   BTree < Integer > myTree = new BTree < Integer > ();
-    BTree < T > myTree = new BTree <  > ();
+    BTree < T > myTreeB = new BTree <  > ();
 
     public SimulatorBinaryTree() {
 

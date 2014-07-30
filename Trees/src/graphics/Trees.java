@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 import datastructures.SimulatorAVLTree;
 import datastructures.SimulatorRBTree;
 import datastructures.Simulator;
+import datastructures.SimulatorBinaryTree;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
 import javax.swing.text.Caret;
@@ -33,7 +34,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
   // private JFrame dibujoEmergente = new JFrame("Representación gráfica");
    // private ArbolBB<Integer> miArbol=new ArbolBB <Integer>();
    // private AVLTree<Integer> miArbolAVL=new AVLTree <Integer>();
-    public Simulator<Integer> simulator = new Simulator<>();
+    public SimulatorBinaryTree<Integer> bsimulator = new SimulatorBinaryTree<>();
     public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
     public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
 
@@ -78,18 +79,31 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
 
     public void addKey( int key ) {
         operation = "Insertar";
-        printConsole("Insertar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ",) \n", "Inserir (" + txtkey.getText() + ",) \n");
+        printConsole("Insertar (" + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ") \n");
       //  go (2, txtalgorithm);
         if( optabc.isSelected() ) {
-            //go(2,txtAlgorithm);
-            if ( this.simulator.add( new Integer (key) ) ) { this.repaintTree(); }
-            else { System.out.println("Errorrrrrrr ABB");        }
+            if ( this.bsimulator.add( key,"abc" ) ) { 
+                System.out.println("add key");
+                this.repaintTree(); 
+            }
+            else { System.out.println("Errorrrrrrr ABB"); }
         }
+        if( optavl.isSelected() ) {
+            System.out.println("add avl");
+            if(this.AVLsimulator.add(key,"avl")){ this.repaintTree();}
+            else { System.out.println("Errorrrrrrr AVL"); }
+        }
+        if( optrn.isSelected() ) {
+            System.out.println("add RN");
+            if(this.RBSimulator.add(key,"rn")){ this.repaintTree();}
+              else { System.out.println("Errorrrrrrr AVL"); }
+        } 
+      
     }
     public void findKey(int key){
         String msgexit = new String ();
         if( optabc.isSelected() )   {
-           msgexit = this.simulator.isHere( key );
+           msgexit = this.bsimulator.isHere( key );
         } 
         if( optavl.isSelected() )  {
               msgexit = this.AVLsimulator.isHere( key );
@@ -105,7 +119,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
         if( optabc.isSelected() ){
-             msgexit = this.simulator.delete( key );
+             msgexit = this.bsimulator.delete( key );
         }
         if( optavl.isSelected() )  {
             System.out.println("eliminar avl");
@@ -122,7 +136,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     
      public void cutLeaves()   {
         if( optabc.isSelected() )   {
-            this.simulator.cutLeaves();
+            this.bsimulator.cutLeaves();
         }
         if(optavl.isSelected())  {
           this.AVLsimulator.cutLeaves();
@@ -138,7 +152,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         String msgexit="";
         System.out.println(" Treees.getFather " + i);
         if(optabc.isSelected()){           
-           msgexit=this.simulator.getFather(i);   
+           msgexit=this.bsimulator.getFather(i);   
         }
         if(optavl.isSelected())  {
            msgexit=this.AVLsimulator.getFather(i);
@@ -152,7 +166,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
     public void getLeaves()  {
         String msgexit="";
         if(optabc.isSelected())    {              
-          msgexit=this.simulator.getLeaves();
+          msgexit=this.bsimulator.getLeaves();
         }
         if(optavl.isSelected())  {
            msgexit=this.AVLsimulator.getLeaves();
@@ -174,7 +188,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         this.jInternalFrame1.setEnabled( false );
         if( optabc.isSelected() )    {
             System.out.println( " repaintTree ArobolAbc" ); 
-            this.jInternalFrame1.add( this.simulator.getPaint() , BorderLayout.CENTER );
+            this.jInternalFrame1.add( this.bsimulator.getPaint() , BorderLayout.CENTER );
         }
         if( optavl.isSelected() )  {
             System.out.print("ARBRES.repaintTree avl");
@@ -1241,14 +1255,15 @@ public void startAlgorithm(){
         cmbexamples.setEnabled( true );
         optabc.setSelected( false );
         optavl.setSelected( false );
+        optrn.setSelected(false);
         cmbexamples.setSelectedIndex( 0 );       
         txtalgorithm.setText("");
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:        
-        this.simulator.deleteTree();
-        this.AVLsimulator.deleteTree();
-        this.RBSimulator.deleteTree();
+        this.bsimulator.deleteTree();
+        //this.AVLsimulator.deleteTree();
+        //this.RBSimulator.deleteTree();
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         this.repaintTree();
@@ -1433,7 +1448,7 @@ public void startAlgorithm(){
     
     private void cmbexamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbexamplesActionPerformed
         Integer index=cmbexamples.getSelectedIndex();
-        if(index<=4){
+        if(index>0 && index<=4){
             uncheked();
             String cast =String.format("Seleccionamos el ejemplo nº %1$d\n", index);
             String eng =String.format("Select the example number %1$d\n", index);
@@ -1530,7 +1545,7 @@ public void startAlgorithm(){
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:    
-        this.simulator.deleteTree();
+        this.bsimulator.deleteTree();
         this.AVLsimulator.deleteTree();
         this.RBSimulator.deleteTree();        
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");

@@ -5,17 +5,17 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 
-public class SimulatorRBTree <T extends Comparable < T >> extends Simulator{
+public class SimulatorRBTree <T extends Comparable < T >> extends Simulator<T>{
 
-    RBTree < T > myTree = new RBTree <  > () ;
+    RBTree < T > myTreeRB = new RBTree <  > () ;
 
     public SimulatorRBTree () {
 
     }
 
-  
+  @Override
     public void deleteTree () {
-        Iterator< T > it=this.myTree.preOrder () ;
+        Iterator< T > it=this.myTreeRB.preOrder () ;
         //String r=msg+"\n";
         while ( it.hasNext () ) {
             delete ( it.next () ) ;

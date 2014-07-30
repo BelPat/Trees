@@ -1,34 +1,36 @@
 
 package datastructures;
 
-import java.util.Iterator;
 
+public class SimulatorAVLTree <T extends Comparable < T >> extends Simulator<T>{
 
-public class SimulatorAVLTree <T extends Comparable < T >> extends Simulator{
-
-    AVLTree < T > myTree = new AVLTree <  > ();
+    AVLTree < T > myTreeAvl = new AVLTree <> ();
 
     public SimulatorAVLTree() {
 
     }
 
-    @Override
+   /* @Override
     public void deleteTree(){
         Iterator< T > it=this.myTree.preOrder();
-        //String r=msg+"\n";
         while(it.hasNext()){
             delete(it.next());
         }
-    }
+    }*/
     
-    @Override
-          public String isHere( Comparable new_key )    {
-         boolean here = this.myTree.find( (T)new_key );
+    /**
+     *
+     * @param new_key
+     * @return
+     */
+   /*
+    public String isHere( T new_key )    {
+         boolean here = this.myTree.find( new_key );
          String r = "El new_key:" + new_key.toString() + "\n";
          r += here ? "Si se encuentra en el arbol":"No se encuentra en el arbol\n";
         
          return( r );
-    }
+    }*/
 
     /*   public String inOrden()
     {
