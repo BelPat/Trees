@@ -13,18 +13,36 @@ import javax.swing.JPanel;
  */
 public class Simulator <T extends Comparable < T >>{
      //   BBTree < Integer > myTree = new BBTree < Integer > ();
-    BTree < T > myTree = new BTree <  > ();
+  //  BTree < T > myTree = new BTree <  > ();
     //Tree < T > myTreeB;
-    AVLTree < T > myTreeAvl = new AVLTree <> ();
-    RBTree < T > myTreeRB = new RBTree <  > () ;
+//    AVLTree < T > myTreeAvl = new AVLTree <> ();
+ //   RBTree < T > myTreeRB = new RBTree <  > () ;
+    Tree < T > pTree;
+    
 
     public Simulator() {
      
      }
 
+    public Simulator(String tree) {
+        
+     switch (tree) {
+            case "abc":
+               pTree = new  BTree<> ();
+                break;
+            case "avl":
+               pTree = new  AVLTree<> ();
+                break;
+            case "rn":
+               pTree = new  RBTree<> ();
+                break;
+        }
+    }
+    
+
     public void deleteTree () {
         Iterator< T > it ;
-        it = this.myTree.preOrder ();
+        it = this.pTree.preOrder ();
         //String r=msg+"\n";
         while ( it.hasNext () ) {
             delete ( it.next () ) ;
@@ -33,7 +51,7 @@ public class Simulator <T extends Comparable < T >>{
     
     
    public void cutLeaves()    {
-        this.myTree.cutLeaves();
+        this.pTree.cutLeaves();
     }
     
    public String walk ( Iterator< T > it, String msg )    {
@@ -44,20 +62,20 @@ public class Simulator <T extends Comparable < T >>{
     }
    
     public String getLeaves()    {
-        Iterator < T > it = this.myTree.getLeaves();
+        Iterator < T > it = this.pTree.getLeaves();
         return ( walk( it, "Hojas del Arbol" ) );
     }
     
     public String preOrder () {
-        Iterator< T > it = this.myTree.preOrder () ;
+        Iterator< T > it = this.pTree.preOrder () ;
         return  ( walk ( it, "Recorrido PreOrden" ) ) ;
     }
     
     public String getFather( T child )    {
-        if ( this.myTree.getRoot().getKey().equals( child ) )
+        if ( this.pTree.getRoot().getKey().equals( child ) )
             return ("La root no tiene father");
         
-        T father = this.myTree.getFather( child );
+        T father = this.pTree.getFather( child );
         
         if ( father == null )
             return ( "No existe el Dato: " + child.toString() );
@@ -66,7 +84,7 @@ public class Simulator <T extends Comparable < T >>{
     }
     
       public String isHere( T new_key )    {
-         boolean here = this.myTree.find(new_key );
+         boolean here = this.pTree.find(new_key );
          String r = "El new_key:" + new_key.toString() + "\n";
          r += here ? "Si se encuentra en el arbol":"No se encuentra en el arbol\n";
         
@@ -74,11 +92,11 @@ public class Simulator <T extends Comparable < T >>{
     }
       
      public JPanel getPaint() {
-        return ( this.myTree.getPaint() );                
+        return ( this.pTree.getPaint() );                
     }
      
      public String delete ( T new_key )    {
-        Comparable x = this.myTree.delete( new_key );
+        Comparable x = this.pTree.delete( new_key );
        
         if ( x == null )
             return ("No existe el new_key en el arbol\n");
@@ -89,18 +107,8 @@ public class Simulator <T extends Comparable < T >>{
     /*public boolean add( T new_key ){
         return ( this.myTree.add( new_key ) );
     }*/
-    public boolean add(T key, String tree){
-        switch (tree) {
-            case "abc":
-                return ( this.myTree.add( key ) );
-                //break;
-            case "avl":
-                return (this.myTreeAvl.add(key));
-                //break;
-            case "rn":
-                return ( this.myTreeRB.add(key) );
-                //break;
-        }
-        return false;
+    public boolean add( T key ){
+      return ( this.pTree.add( key ) );
+
     }
 }

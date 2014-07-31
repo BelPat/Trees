@@ -9,6 +9,11 @@ public class SimulatorAVLTree <T extends Comparable < T >> extends Simulator<T>{
     public SimulatorAVLTree() {
 
     }
+    
+    AVLTree< T > getmyTreeAvl (){
+        return myTreeAvl;
+    
+    }
 
    /* @Override
     public void deleteTree(){

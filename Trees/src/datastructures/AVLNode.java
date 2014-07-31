@@ -39,33 +39,36 @@ package datastructures;
     
     public AVLNode ( AVLNode < T >  x ) {
        super ( x.getKey(), x.getRight() ,x.getLeft());
-               this.root = null;
+
     }
 
    AVLNode( Node<T> aux) {        
         super.setKey(aux.getKey());
         super.setRight( aux.getRight());
         super.setLeft( aux.getLeft());   
-         this.root = null;       
-     
+    
     }
-    @Override
+  @Override
     public AVLNode < T >  getLeft() {
-        AVLNode< T > aux = new AVLNode<> (super.getLeft());
-        aux.balance = this.getLeft().getBalance();
-        aux.height = this.getLeft().getHeight();
-        aux.root = this.getLeft().getRoot();
-        
+     AVLNode< T > aux =null;
+        if (super.getLeft() != null){
+            aux = new AVLNode<> (super.getLeft());
+            aux.balance = this.getBalance();
+            aux.height = this.getHeight();
+            aux.root = this.getRoot();
+        }
         return aux;
     }
     @Override
       public AVLNode < T >  getRight() {
-        AVLNode< T > aux;
-        aux = new AVLNode<> (super.getRight());
-        aux.balance = this.getRight().getBalance();
-        aux.height = this.getRight().getHeight();
-        aux.root = this.getRight().getRoot();
-        
+        AVLNode< T > aux = null;
+            if (super.getRight() != null){
+            aux = new AVLNode<> (super.getRight());
+            aux.balance = this.getBalance();
+            aux.height = this.getHeight();
+            aux.root = this.getRoot();
+         }
+                      
         return aux;
     }
       public AVLNode < T >  getRoot() {

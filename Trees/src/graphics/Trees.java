@@ -34,9 +34,10 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
   // private JFrame dibujoEmergente = new JFrame("Representación gráfica");
    // private ArbolBB<Integer> miArbol=new ArbolBB <Integer>();
    // private AVLTree<Integer> miArbolAVL=new AVLTree <Integer>();
-    public SimulatorBinaryTree<Integer> bsimulator = new SimulatorBinaryTree<>();
-    public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
-    public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
+  //  public SimulatorBinaryTree<Integer> bsimulator = new SimulatorBinaryTree<>();
+  //  public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
+  //  public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
+    public Simulator<Integer> simulator;
 
     /**
      * Creates new form ARBRES
@@ -77,32 +78,20 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
     }
 
-    public void addKey( int key ) {
+    public void addKey( int key ) throws ClassNotFoundException {
         operation = "Insertar";
         printConsole("Insertar (" + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ") \n");
-      //  go (2, txtalgorithm);
-        if( optabc.isSelected() ) {
-            if ( this.bsimulator.add( key,"abc" ) ) { 
-                System.out.println("add key");
+      //  go (2, txtalgorithm); 
+        if ( this.simulator.add( key ) ) {                 
+                System.out.println("*****  add key  *****");
                 this.repaintTree(); 
             }
-            else { System.out.println("Errorrrrrrr ABB"); }
-        }
-        if( optavl.isSelected() ) {
-            System.out.println("add avl");
-            if(this.AVLsimulator.add(key,"avl")){ this.repaintTree();}
-            else { System.out.println("Errorrrrrrr AVL"); }
-        }
-        if( optrn.isSelected() ) {
-            System.out.println("add RN");
-            if(this.RBSimulator.add(key,"rn")){ this.repaintTree();}
-              else { System.out.println("Errorrrrrrr AVL"); }
-        } 
-      
+        else { System.out.println("Errorrrrrrr ABB"); }      
     }
+    
     public void findKey(int key){
         String msgexit = new String ();
-        if( optabc.isSelected() )   {
+   /*     if( optabc.isSelected() )   {
            msgexit = this.bsimulator.isHere( key );
         } 
         if( optavl.isSelected() )  {
@@ -110,7 +99,8 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
         if( optrn.isSelected() )  {
               msgexit = this.RBSimulator.isHere( key );
-        }
+        }*/
+         msgexit = this.simulator.isHere( key );
           printConsole( msgexit , msgexit , msgexit );
     }        
 
@@ -118,7 +108,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         operation = "Eliminar";
         printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
-        if( optabc.isSelected() ){
+     /*   if( optabc.isSelected() ){
              msgexit = this.bsimulator.delete( key );
         }
         if( optavl.isSelected() )  {
@@ -129,13 +119,15 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
             System.out.println("eliminar avl");
              msgexit="";
              this.RBSimulator.delete(key);
-        }
+        }*/
+        
+          this.simulator.delete(key);
         this.repaintTree();
         printConsole( msgexit , msgexit , msgexit );     
     }
     
      public void cutLeaves()   {
-        if( optabc.isSelected() )   {
+      /*  if( optabc.isSelected() )   {
             this.bsimulator.cutLeaves();
         }
         if(optavl.isSelected())  {
@@ -143,7 +135,8 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
         if(optrn.isSelected())  {
           this.RBSimulator.cutLeaves();
-        }
+        }*/
+        this.simulator.cutLeaves();
         this.repaintTree();
         printConsole( "podado","podado","podado" );
       }
@@ -151,7 +144,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
      public void getFather( Integer i ) throws InstantiationException, IllegalAccessException {
         String msgexit="";
         System.out.println(" Treees.getFather " + i);
-        if(optabc.isSelected()){           
+       /* if(optabc.isSelected()){           
            msgexit=this.bsimulator.getFather(i);   
         }
         if(optavl.isSelected())  {
@@ -159,21 +152,23 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
         if(optrn.isSelected())  {
           msgexit = this.RBSimulator.getFather(i);
-        }
+        }*/
+         msgexit = this.simulator.getFather(i);
         printConsole( msgexit,msgexit,msgexit);
     }
 
     public void getLeaves()  {
-        String msgexit="";
-        if(optabc.isSelected())    {              
-          msgexit=this.bsimulator.getLeaves();
+      String msgexit="";
+      /*    if(optabc.isSelected())    {              
+          msgexit=this.bsimulator.getLeaves( );
         }
         if(optavl.isSelected())  {
            msgexit=this.AVLsimulator.getLeaves();
         }
         if(optrn.isSelected())  {
           msgexit=this.RBSimulator.getLeaves();
-        }
+        }*/
+                msgexit=this.simulator.getLeaves();
         printConsole( msgexit , msgexit , msgexit );
    }
 
@@ -186,7 +181,7 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         this.jInternalFrame1.setVisible( true );
         this.jInternalFrame1.setBounds( size );
         this.jInternalFrame1.setEnabled( false );
-        if( optabc.isSelected() )    {
+     /*   if( optabc.isSelected() )    {
             System.out.println( " repaintTree ArobolAbc" ); 
             this.jInternalFrame1.add( this.bsimulator.getPaint() , BorderLayout.CENTER );
         }
@@ -197,7 +192,8 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         if( optrn.isSelected() )      {
             System.out.print("ARBRES.repaintTree RN");
             this.jInternalFrame1.add( this.RBSimulator.getPaint() , BorderLayout.CENTER );
-        }
+        }*/
+        this.jInternalFrame1.add( this.simulator.getPaint() , BorderLayout.CENTER );
         jInternalFrame1.getContentPane().setVisible( true );
     }
     public void activeOptions(){
@@ -234,7 +230,14 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
     }
     
-public boolean comboSelectionExamples(){
+public boolean comboSelectionExamples() throws ClassNotFoundException{
+           if( optabc.isSelected() ) {
+            this.simulator = new Simulator<> ("abc");
+        }  else if( optavl.isSelected() ) {
+            this.simulator = new Simulator<> ("avl");
+        }  else if( optrn.isSelected() ) {
+            this.simulator = new Simulator<> ("rn");
+        }
     if ( cmbexamples.getSelectedIndex() == 0 ) {
                 switch ( language ) {
                     case "castellano":
@@ -307,7 +310,8 @@ public boolean comboSelectionExamples(){
             }
         return false;
 }
-public void startAlgorithm(){
+public void startAlgorithm() throws ClassNotFoundException{
+
     if ( optinsert.isSelected() ) {
                         switch ( language ) {
                         case "castellano":
@@ -322,7 +326,7 @@ public void startAlgorithm(){
                         }
                         Integer i = new Integer( txtkey.getText() );
                         addKey( i.intValue() );
-                    } else if ( optdelete.isSelected() ) {
+          } else if ( optdelete.isSelected() ) {
                         Integer i = new Integer( txtkey.getText() );
                         operation = "Eliminar";
                         printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ",) \n", "Eliminar (" + txtkey.getText() + ") \n");
@@ -1179,23 +1183,27 @@ public void startAlgorithm(){
     private void btmplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmplayMouseClicked
         jInternalFrame1.setVisible( true );
         if (minimParameters()==true){
-            if (comboSelectionExamples()==false){
-                if ( ( optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected() ) && ( txtkey.getText().trim().length() == 0 ) ) {                      
-                //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
-                    switch ( language ) {
-                        case "castellano":
-                            JOptionPane.showMessageDialog( null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE );
-                            break;
-                        case "ingles":
-                            JOptionPane.showMessageDialog( null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE );
-                            break;
-                        case "catalan":
-                            JOptionPane.showMessageDialog( null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE );
-                            break;
+            try {
+                if (comboSelectionExamples()==false){
+                    if ( ( optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected() ) && ( txtkey.getText().trim().length() == 0 ) ) {                      
+                    //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
+                        switch ( language ) {
+                            case "castellano":
+                                JOptionPane.showMessageDialog( null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE );
+                                break;
+                            case "ingles":
+                                JOptionPane.showMessageDialog( null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE );
+                                break;
+                            case "catalan":
+                                JOptionPane.showMessageDialog( null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE );
+                                break;
+                        }
+                    } else {
+                        startAlgorithm();
                     }
-                } else {
-                    startAlgorithm();
                 }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         activeOptions();
@@ -1261,12 +1269,14 @@ public void startAlgorithm(){
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:        
-        this.bsimulator.deleteTree();
+        this.simulator.deleteTree();
+        this.simulator = new Simulator<> ();
         //this.AVLsimulator.deleteTree();
         //this.RBSimulator.deleteTree();
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         this.repaintTree();
+        
     }//GEN-LAST:event_btmreloadMouseClicked
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
@@ -1545,9 +1555,9 @@ public void startAlgorithm(){
         uncheked();       
         jInternalFrame1.getContentPane().setVisible( false );
         //Escribimos en la consola:    
-        this.bsimulator.deleteTree();
-        this.AVLsimulator.deleteTree();
-        this.RBSimulator.deleteTree();        
+        this.simulator.deleteTree();
+     //   this.AVLsimulator.deleteTree();
+     //   this.RBSimulator.deleteTree();        
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         
@@ -1715,13 +1725,21 @@ class runStep implements ActionListener {
         System.out.println("key conT " + cont);
         if ( (cmbexamples.getSelectedIndex() == 1 && cont<example1.length)) {
             cmbexamples.setEnabled( false );
-            //Carga el example 1
-            addKey( example1[ cont ] );
+            try {
+                //Carga el example 1
+                addKey( example1[ cont ] );
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+            }
             cont++;
         } else if ( cmbexamples.getSelectedIndex() == 2  && cont < example2.length ) {
             cmbexamples.setEnabled( false );
-            //Carga el example 2
-            addKey( example2[ cont ] );
+            try {
+                //Carga el example 2
+                addKey( example2[ cont ] );
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+            }
             cont++;
         } 
         if ( optdelete.isSelected() ) {

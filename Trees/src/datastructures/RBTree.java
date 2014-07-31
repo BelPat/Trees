@@ -173,11 +173,13 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
      */
 @Override
     public boolean add(T key) {
+    
+    System.out.println(" --- > rb.add " + key);
         
-        findNode((T)key);
-        if ( findNode((T)key)== null)
+        findNode(key);
+        if ( findNode(key)== null)
         {
-            add(new RBNode<>((T)key));
+            add(new RBNode<>(key));
              return true;
         }
         else

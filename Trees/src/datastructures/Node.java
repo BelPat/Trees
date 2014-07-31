@@ -23,7 +23,7 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
     }
 
     
-        Node(T key, Node<T> right, Node<T> left) {        
+    Node(T key, Node<T> right, Node<T> left) {        
         this.key = key;
         this.right = right;
         this.left = left;         
@@ -66,5 +66,7 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
     void setLeft(Node<T> new_node) {        
         this.left = new_node;        
     }
+
+
 
 }//Fin de la Clase
