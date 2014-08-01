@@ -11,10 +11,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import datastructures.SimulatorAVLTree;
-import datastructures.SimulatorRBTree;
 import datastructures.Simulator;
-import datastructures.SimulatorBinaryTree;
 import java.util.ResourceBundle;
 import javax.swing.JTextArea;
 import javax.swing.text.Caret;
@@ -23,54 +20,47 @@ import javax.swing.text.Caret;
  *
  * @author BelenPatricia
  */
-public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
-    //private int ERROR_MESSAGE;
+public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
 
     private int WARNING_MESSAGE;
     public String language; //castellano, catalan, ingles
     public String path;
     public String operation;
     public runStep ep = new runStep();
-  // private JFrame dibujoEmergente = new JFrame("Representación gráfica");
-   // private ArbolBB<Integer> miArbol=new ArbolBB <Integer>();
-   // private AVLTree<Integer> miArbolAVL=new AVLTree <Integer>();
-  //  public SimulatorBinaryTree<Integer> bsimulator = new SimulatorBinaryTree<>();
-  //  public SimulatorAVLTree<Integer> AVLsimulator =new SimulatorAVLTree<>();
-  //  public SimulatorRBTree<Integer> RBSimulator = new SimulatorRBTree<>();
     public Simulator<Integer> simulator;
+    public boolean seleccionarbol = false;
 
     /**
      * Creates new form ARBRES
      */
     public Trees() {
         initComponents();
-        this.setLocationRelativeTo( null );
-        frmconfigtree.setLocationRelativeTo( null );
-        frmconfigkeys.setLocationRelativeTo( null );
-        
+        this.setLocationRelativeTo(null);
+        frmconfigtree.setLocationRelativeTo(null);
+        frmconfigkeys.setLocationRelativeTo(null);
+
         uncheked();
 
-        btmnext.setEnabled( true );
-        btmnext.addActionListener( ep );
-        //PAyudaRN.setName("Rojo-Negro");
-        btnspain.setEnabled( false );//por defecto queda arrancado el programa en castellano
+        btmnext.setEnabled(true);
+        btmnext.addActionListener(ep);
+        btnspain.setEnabled(false);//por defecto queda arrancado el programa en castellano
         language = "castellano";
     }
-    
-    public void reloadScreen() {        
-        SwingUtilities.updateComponentTreeUI( this );
+
+    public void reloadScreen() {
+        SwingUtilities.updateComponentTreeUI(this);
         this.validate();
-        SwingUtilities.updateComponentTreeUI( frmhelp );
+        SwingUtilities.updateComponentTreeUI(frmhelp);
         frmhelp.validate();
     }
 
-    public void printConsole( String messageC, String messageI, String messageCat ) {
+    public void printConsole(String messageC, String messageI, String messageCat) {
         switch (language) {
             case "castellano":
-                txtconsole.append( messageC );
+                txtconsole.append(messageC);
                 break;
             case "ingles":
-                txtconsole.append( messageI );
+                txtconsole.append(messageI);
                 break;
             case "catalan":
                 txtconsole.append(messageCat);
@@ -78,300 +68,248 @@ public class Trees <T extends Comparable < T > >extends javax.swing.JFrame {
         }
     }
 
-    public void addKey( int key ) throws ClassNotFoundException {
+    public void addKey(int key) throws ClassNotFoundException {
         operation = "Insertar";
         printConsole("Insertar (" + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ") \n");
-      //  go (2, txtalgorithm); 
-        if ( this.simulator.add( key ) ) {                 
-                System.out.println("*****  add key  *****");
-                this.repaintTree(); 
-            }
-        else { System.out.println("Errorrrrrrr ABB"); }      
-    }
-    
-    public void findKey(int key){
-        String msgexit = new String ();
-   /*     if( optabc.isSelected() )   {
-           msgexit = this.bsimulator.isHere( key );
-        } 
-        if( optavl.isSelected() )  {
-              msgexit = this.AVLsimulator.isHere( key );
+        //  go (2, txtalgorithm); 
+        if (this.simulator.add(key)) {
+            System.out.println("*****  add key  *****");
+            this.repaintTree();
+        } else {
+            System.out.println("Errorrrrrrr ABB");
         }
-        if( optrn.isSelected() )  {
-              msgexit = this.RBSimulator.isHere( key );
-        }*/
-         msgexit = this.simulator.isHere( key );
-          printConsole( msgexit , msgexit , msgexit );
-    }        
+    }
+
+    public void findKey(int key) {
+        String msgexit = new String();
+        msgexit = this.simulator.isHere(key);
+        printConsole(msgexit, msgexit, msgexit);
+    }
 
     public void deleteKey(int key) {
         operation = "Eliminar";
-        printConsole("Eliminar (" + key + "," +key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
+        printConsole("Eliminar (" + key + "," + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
-     /*   if( optabc.isSelected() ){
-             msgexit = this.bsimulator.delete( key );
-        }
-        if( optavl.isSelected() )  {
-            System.out.println("eliminar avl");
-            msgexit = this.AVLsimulator.delete( key );
-        }
-        if(optrn.isSelected())  {
-            System.out.println("eliminar avl");
-             msgexit="";
-             this.RBSimulator.delete(key);
-        }*/
-        
-          this.simulator.delete(key);
+        this.simulator.delete(key);
         this.repaintTree();
-        printConsole( msgexit , msgexit , msgexit );     
+        printConsole(msgexit, msgexit, msgexit);
     }
-    
-     public void cutLeaves()   {
-      /*  if( optabc.isSelected() )   {
-            this.bsimulator.cutLeaves();
-        }
-        if(optavl.isSelected())  {
-          this.AVLsimulator.cutLeaves();
-        }
-        if(optrn.isSelected())  {
-          this.RBSimulator.cutLeaves();
-        }*/
+
+    public void cutLeaves() {
         this.simulator.cutLeaves();
         this.repaintTree();
-        printConsole( "podado","podado","podado" );
-      }
-
-     public void getFather( Integer i ) throws InstantiationException, IllegalAccessException {
-        String msgexit="";
-        System.out.println(" Treees.getFather " + i);
-       /* if(optabc.isSelected()){           
-           msgexit=this.bsimulator.getFather(i);   
-        }
-        if(optavl.isSelected())  {
-           msgexit=this.AVLsimulator.getFather(i);
-        }
-        if(optrn.isSelected())  {
-          msgexit = this.RBSimulator.getFather(i);
-        }*/
-         msgexit = this.simulator.getFather(i);
-        printConsole( msgexit,msgexit,msgexit);
+        printConsole("podado", "podado", "podado");
     }
 
-    public void getLeaves()  {
-      String msgexit="";
-      /*    if(optabc.isSelected())    {              
-          msgexit=this.bsimulator.getLeaves( );
-        }
-        if(optavl.isSelected())  {
-           msgexit=this.AVLsimulator.getLeaves();
-        }
-        if(optrn.isSelected())  {
-          msgexit=this.RBSimulator.getLeaves();
-        }*/
-                msgexit=this.simulator.getLeaves();
-        printConsole( msgexit , msgexit , msgexit );
-   }
+    public void getFather(Integer i) throws InstantiationException, IllegalAccessException {
+        String msgexit = "";
+        System.out.println(" Treees.getFather " + i);
+        msgexit = this.simulator.getFather(i);
+        printConsole(msgexit, msgexit, msgexit);
+    }
 
-      
+    public void getLeaves() {
+        String msgexit = "";
+        msgexit = this.simulator.getLeaves();
+        printConsole(msgexit, msgexit, msgexit);
+    }
+
     public void repaintTree() {
         Rectangle size = this.jInternalFrame1.getBounds();
         this.jInternalFrame1 = null;
-        this.jInternalFrame1 = new JInternalFrame( "Representación gráfica" , true );
-        this.jDesktopPane1.add( this.jInternalFrame1 , JLayeredPane.DEFAULT_LAYER );
-        this.jInternalFrame1.setVisible( true );
-        this.jInternalFrame1.setBounds( size );
-        this.jInternalFrame1.setEnabled( false );
-     /*   if( optabc.isSelected() )    {
-            System.out.println( " repaintTree ArobolAbc" ); 
-            this.jInternalFrame1.add( this.bsimulator.getPaint() , BorderLayout.CENTER );
-        }
-        if( optavl.isSelected() )  {
-            System.out.print("ARBRES.repaintTree avl");
-            this.jInternalFrame1.add( this.AVLsimulator.getPaint() , BorderLayout.CENTER );
-        }
-        if( optrn.isSelected() )      {
-            System.out.print("ARBRES.repaintTree RN");
-            this.jInternalFrame1.add( this.RBSimulator.getPaint() , BorderLayout.CENTER );
-        }*/
-        this.jInternalFrame1.add( this.simulator.getPaint() , BorderLayout.CENTER );
-        jInternalFrame1.getContentPane().setVisible( true );
+        this.jInternalFrame1 = new JInternalFrame("Representación gráfica", true);
+        this.jDesktopPane1.add(this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER);
+        this.jInternalFrame1.setVisible(true);
+        this.jInternalFrame1.setBounds(size);
+        this.jInternalFrame1.setEnabled(false);
+        this.jInternalFrame1.add(this.simulator.getPaint(), BorderLayout.CENTER);
+        jInternalFrame1.getContentPane().setVisible(true);
     }
-    public void activeOptions(){
-        optinsert.setEnabled( true );
-        optdelete.setEnabled( true );
-        optsearch.setEnabled( true );
-        optsearchfather.setEnabled( true ); 
-        optcut.setEnabled( true );
-        optleaves.setEnabled( true );
-        txtkey.setEnabled( true );
-        jLabel2.setEnabled( true );
-        btmnext.setEnabled( true );
+
+    public void activeOptions() {
+        optinsert.setEnabled(true);
+        optdelete.setEnabled(true);
+        optsearch.setEnabled(true);
+        optsearchfather.setEnabled(true);
+        optcut.setEnabled(true);
+        optleaves.setEnabled(true);
+        txtkey.setEnabled(true);
+        jLabel2.setEnabled(true);
+        btmnext.setEnabled(true);
     }
-    public boolean minimParameters(){
-        if ( optabc.isSelected() == false && optavl.isSelected() == false && optrn.isSelected() == false ) {
-            switch ( language ) {
+
+    public boolean minimParameters() {
+        if (optabc.isSelected() == false && optavl.isSelected() == false && optrn.isSelected() == false) {
+            switch (language) {
                 case "castellano":
-                    JOptionPane.showMessageDialog (null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE );
+                    JOptionPane.showMessageDialog(null, "SELECCIONA UN TIPO DE ARBOL", "Configuración", WARNING_MESSAGE);
                     break;
                 case "ingles":
-                    JOptionPane.showMessageDialog( null, "SELECT A TREE", "Configuration", WARNING_MESSAGE );
+                    JOptionPane.showMessageDialog(null, "SELECT A TREE", "Configuration", WARNING_MESSAGE);
                     break;
                 case "catalan":
-                    JOptionPane.showMessageDialog( null, "SELECCIONA UN TIPUS D'ARBRE", "Configuració", WARNING_MESSAGE );
+                    JOptionPane.showMessageDialog(null, "SELECCIONA UN TIPUS D'ARBRE", "Configuració", WARNING_MESSAGE);
                     break;
             }
             return false;
         } else {
+            if (seleccionarbol == false) {
+                if (optabc.isSelected()) {
+                    this.simulator = new Simulator<>("abc");
+                } else if (optavl.isSelected()) {
+                    this.simulator = new Simulator<>("avl");
+                } else if (optrn.isSelected()) {
+                    this.simulator = new Simulator<>("rn");
+                }
+                seleccionarbol=true;
+            }
             //Block controls 
-            optabc.setEnabled( false );
-            optavl.setEnabled( false );
-            optrn.setEnabled( false );
+            optabc.setEnabled(false);
+            optavl.setEnabled(false);
+            optrn.setEnabled(false);
             return true;
         }
     }
-    
-public boolean comboSelectionExamples() throws ClassNotFoundException{
-           if( optabc.isSelected() ) {
-            this.simulator = new Simulator<> ("abc");
-        }  else if( optavl.isSelected() ) {
-            this.simulator = new Simulator<> ("avl");
-        }  else if( optrn.isSelected() ) {
-            this.simulator = new Simulator<> ("rn");
-        }
-    if ( cmbexamples.getSelectedIndex() == 0 ) {
-                switch ( language ) {
-                    case "castellano":
-                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE );
-                        break;
-                    case "ingles":
-                        JOptionPane.showMessageDialog( null, "SELECT AN EXAMPLE", "Configuration", WARNING_MESSAGE );
-                        break;
-                    case "catalan":
-                        JOptionPane.showMessageDialog( null, "SELECCIONA UN EXEMPLE", "Configuració", WARNING_MESSAGE );
-                        break;
-                }
-                return true;
-            } else if ( ( cmbexamples.getSelectedIndex() == 1 ) && cmbexamples.isEnabled() ) {               
-                cmbexamples.setEnabled( false );
-                //Carga el example 1
-                addKey( 22 );
-                addKey( 33 );
-                addKey( 44 );
-                addKey( 23 );
-                addKey( 11 );
-                addKey( 15 );
-                addKey( 60 );
-                addKey( 38 );
-                addKey( 72 );
-                return true;
-            } else if ( cmbexamples.getSelectedIndex() == 2 && cmbexamples.isEnabled() ) {
-                cmbexamples.setEnabled( false );
-                //Carga el example 2
-                addKey( 13 );
-                addKey( 8 );
-                addKey( 1 );
-                addKey( 17 );
-                addKey( 15 );
-                addKey( 25 );
-                addKey( 6 );
-                addKey( 11 );
-                addKey( 22 );
-                addKey( 27 );
-                return true;
-            } else if ( cmbexamples.getSelectedIndex() == 3 && cmbexamples.isEnabled() ) {
-                cmbexamples.setEnabled( false );
-                //Carga el example 3
-                addKey( 4 );
-                addKey( 2 );
-                addKey( 6 );
-                addKey( 1 );
-                addKey( 3 );
-                addKey( 5 );
-                addKey( 8 );
-                addKey( 7 );
-                addKey( 9 );
-                return true;
-            } else if ( cmbexamples.getSelectedIndex() == 4 && cmbexamples.isEnabled() ) {
-                cmbexamples.setEnabled( false );
-                //Carga el example 4            
-                //rojo-negro http://www.cosc.canterbury.ac.nz/research/RG/alg/rbtree.gif
-                addKey( 38 );
-                addKey( 13 );
-                addKey( 51 );
-                addKey( 10 );
-                addKey( 12 );
-                addKey( 40 );
-                addKey( 84 );
-                addKey( 25 );
-                return true;
-            } else if ( cmbexamples.getSelectedIndex() == 5 || !cmbexamples.isEnabled() ) {
-                cmbexamples.setEnabled( false );
-                return false;
+
+    public boolean comboSelectionExamples() throws ClassNotFoundException {
+
+        if (cmbexamples.getSelectedIndex() == 0) {
+            switch (language) {
+                case "castellano":
+                    JOptionPane.showMessageDialog(null, "SELECCIONA UN EJEMPLO", "Configuración", WARNING_MESSAGE);
+                    break;
+                case "ingles":
+                    JOptionPane.showMessageDialog(null, "SELECT AN EXAMPLE", "Configuration", WARNING_MESSAGE);
+                    break;
+                case "catalan":
+                    JOptionPane.showMessageDialog(null, "SELECCIONA UN EXEMPLE", "Configuració", WARNING_MESSAGE);
+                    break;
             }
+            return true;
+        } else if ((cmbexamples.getSelectedIndex() == 1) && cmbexamples.isEnabled()) {
+            cmbexamples.setEnabled(false);
+            //Carga el example 1
+            addKey(22);
+            addKey(33);
+            addKey(44);
+            addKey(23);
+            addKey(11);
+            addKey(15);
+            addKey(60);
+            addKey(38);
+            addKey(72);
+            return true;
+        } else if (cmbexamples.getSelectedIndex() == 2 && cmbexamples.isEnabled()) {
+            cmbexamples.setEnabled(false);
+            //Carga el example 2
+            addKey(13);
+            addKey(8);
+            addKey(1);
+            addKey(17);
+            addKey(15);
+            addKey(25);
+            addKey(6);
+            addKey(11);
+            addKey(22);
+            addKey(27);
+            return true;
+        } else if (cmbexamples.getSelectedIndex() == 3 && cmbexamples.isEnabled()) {
+            cmbexamples.setEnabled(false);
+            //Carga el example 3
+            addKey(4);
+            addKey(2);
+            addKey(6);
+            addKey(1);
+            addKey(3);
+            addKey(5);
+            addKey(8);
+            addKey(7);
+            addKey(9);
+            return true;
+        } else if (cmbexamples.getSelectedIndex() == 4 && cmbexamples.isEnabled()) {
+            cmbexamples.setEnabled(false);
+            //Carga el example 4            
+            //rojo-negro http://www.cosc.canterbury.ac.nz/research/RG/alg/rbtree.gif
+            addKey(38);
+            addKey(13);
+            addKey(51);
+            addKey(10);
+            addKey(12);
+            addKey(40);
+            addKey(84);
+            addKey(25);
+            return true;
+        } else if (cmbexamples.getSelectedIndex() == 5 || !cmbexamples.isEnabled()) {
+            cmbexamples.setEnabled(false);
+            return false;
+        }
         return false;
-}
-public void startAlgorithm() throws ClassNotFoundException{
+    }
 
-    if ( optinsert.isSelected() ) {
-                        switch ( language ) {
-                        case "castellano":
-                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
-                            break;
-                        case "ingles":
-                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
-                            break;
-                        case "catalan":
-                            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
-                            break;
-                        }
-                        Integer i = new Integer( txtkey.getText() );
-                        addKey( i.intValue() );
-          } else if ( optdelete.isSelected() ) {
-                        Integer i = new Integer( txtkey.getText() );
-                        operation = "Eliminar";
-                        printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ",) \n", "Eliminar (" + txtkey.getText() + ") \n");
-                        deleteKey( i.intValue() );
-                    } else if ( optsearch.isSelected() ) {
-                        txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
-                        Integer i = new Integer( txtkey.getText() );
-                        operation = "Consultar";
-                        printConsole("Consultar (" + txtkey.getText() + ") \n", "Query (" + txtkey.getText() + ",) \n", "Consultar (" + txtkey.getText() + ") \n");
-                        findKey( i.intValue() );
-                    } else if ( optsearchfather.isSelected() ) {
-                        Integer i = new Integer( txtkey.getText() );operation = "ConsultarPadre";
-                        printConsole("Consultar (" + txtkey.getText() + ") \n", "Query (" + txtkey.getText() + ") \n", "Consultar (" + txtkey.getText() + ") \n");
-                        try {   
-                            getFather(i);
-                        } catch (InstantiationException ex) {
-                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IllegalAccessException ex) {
-                            Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }  else if ( optcut.isSelected() ) {
-                        operation = "Podar";
-                        cutLeaves();
-                    }  else if ( optleaves.isSelected() ) {
-                        operation = "ConsultarHojas";
-                        getLeaves();
-                    }
-}
+    public void startAlgorithm() throws ClassNotFoundException {
 
-  public void go(int line, JTextArea txtAlgorithm){
-        String[]t=txtAlgorithm.getText().split("\n");
+        if (optinsert.isSelected()) {
+            switch (language) {
+                case "castellano":
+                    txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion2"));
+                    break;
+                case "ingles":
+                    txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+                    break;
+                case "catalan":
+                    txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_ca_ES").getString("descripcion2"));
+                    break;
+            }
+            Integer i = new Integer(txtkey.getText());
+            addKey(i.intValue());
+        } else if (optdelete.isSelected()) {
+            Integer i = new Integer(txtkey.getText());
+            operation = "Eliminar";
+            printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ",) \n", "Eliminar (" + txtkey.getText() + ") \n");
+            deleteKey(i.intValue());
+        } else if (optsearch.isSelected()) {
+            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_es_ES").getString("descripcion1"));
+            Integer i = new Integer(txtkey.getText());
+            operation = "Consultar";
+            printConsole("Consultar (" + txtkey.getText() + ") \n", "Query (" + txtkey.getText() + ",) \n", "Consultar (" + txtkey.getText() + ") \n");
+            findKey(i.intValue());
+        } else if (optsearchfather.isSelected()) {
+            Integer i = new Integer(txtkey.getText());
+            operation = "ConsultarPadre";
+            printConsole("Consultar (" + txtkey.getText() + ") \n", "Query (" + txtkey.getText() + ") \n", "Consultar (" + txtkey.getText() + ") \n");
+            try {
+                getFather(i);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (optcut.isSelected()) {
+            operation = "Podar";
+            cutLeaves();
+        } else if (optleaves.isSelected()) {
+            operation = "ConsultarHojas";
+            getLeaves();
+        }
+    }
+
+    public void go(int line, JTextArea txtAlgorithm) {
+        String[] t = txtAlgorithm.getText().split("\n");
         int position = 0;
         line = 3;
         txtAlgorithm.setCaretColor(Color.red);
-                
-        for(int index=0 ; index < line; index++ ){
-	   position += t[index].length();
-	}
-	txtAlgorithm.setCaretPosition( position + 2 );
-        txtAlgorithm.moveCaretPosition( position + t[line].length() + 2);
+
+        for (int index = 0; index < line; index++) {
+            position += t[index].length();
+        }
+        txtAlgorithm.setCaretPosition(position + 2);
+        txtAlgorithm.moveCaretPosition(position + t[line].length() + 2);
         Caret txtseleccion = txtAlgorithm.getCaret();
         txtseleccion.setSelectionVisible(true);
         txtseleccion.setVisible(true);
-       
-}
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1181,21 +1119,21 @@ public void startAlgorithm() throws ClassNotFoundException{
     }//GEN-LAST:event_btmplayActionPerformed
 
     private void btmplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmplayMouseClicked
-        jInternalFrame1.setVisible( true );
-        if (minimParameters()==true){
+        jInternalFrame1.setVisible(true);
+        if (minimParameters() == true) {
             try {
-                if (comboSelectionExamples()==false){
-                    if ( ( optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected() ) && ( txtkey.getText().trim().length() == 0 ) ) {                      
-                    //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
-                        switch ( language ) {
+                if (comboSelectionExamples() == false) {
+                    if ((optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected()) && (txtkey.getText().trim().length() == 0)) {
+                        //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
+                        switch (language) {
                             case "castellano":
-                                JOptionPane.showMessageDialog( null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE );
+                                JOptionPane.showMessageDialog(null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE);
                                 break;
                             case "ingles":
-                                JOptionPane.showMessageDialog( null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE );
+                                JOptionPane.showMessageDialog(null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE);
                                 break;
                             case "catalan":
-                                JOptionPane.showMessageDialog( null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE );
+                                JOptionPane.showMessageDialog(null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE);
                                 break;
                         }
                     } else {
@@ -1210,7 +1148,7 @@ public void startAlgorithm() throws ClassNotFoundException{
     }//GEN-LAST:event_btmplayMouseClicked
     private void btmhelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmhelpMouseClicked
         // TODO add your handling code here:
-        frmhelp.setLocationRelativeTo( null );
+        frmhelp.setLocationRelativeTo(null);
         frmhelp.setVisible(true);
 
     }//GEN-LAST:event_btmhelpMouseClicked
@@ -1234,7 +1172,7 @@ public void startAlgorithm() throws ClassNotFoundException{
 
     private void btnexitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexitMouseClicked
         // TODO add your handling code here:
-        System.exit( 0 );
+        System.exit(0);
     }//GEN-LAST:event_btnexitMouseClicked
 
     private void btmexitconfig1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmexitconfig1MouseClicked
@@ -1257,26 +1195,24 @@ public void startAlgorithm() throws ClassNotFoundException{
 
     private void btmreloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmreloadMouseClicked
         // REINICIAMOS TODOS LOS VALORES
-        optabc.setEnabled( true );
-        optavl.setEnabled( true );
-        optrn.setEnabled( true );
-        cmbexamples.setEnabled( true );
-        optabc.setSelected( false );
-        optavl.setSelected( false );
+        optabc.setEnabled(true);
+        optavl.setEnabled(true);
+        optrn.setEnabled(true);
+        cmbexamples.setEnabled(true);
+        optabc.setSelected(false);
+        optavl.setSelected(false);
         optrn.setSelected(false);
-        cmbexamples.setSelectedIndex( 0 );       
+        cmbexamples.setSelectedIndex(0);
         txtalgorithm.setText("");
-        uncheked();       
-        jInternalFrame1.getContentPane().setVisible( false );
-        //Escribimos en la consola:        
+        uncheked();
+        seleccionarbol=false;
+        jInternalFrame1.getContentPane().setVisible(false);
         this.simulator.deleteTree();
-        this.simulator = new Simulator<> ();
-        //this.AVLsimulator.deleteTree();
-        //this.RBSimulator.deleteTree();
+        this.simulator = new Simulator<>();
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
         this.repaintTree();
-        
+
     }//GEN-LAST:event_btmreloadMouseClicked
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
@@ -1285,199 +1221,200 @@ public void startAlgorithm() throws ClassNotFoundException{
 
     private void btnenglishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnenglishMouseClicked
 
-            language = "ingles";
-            //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            btnspain.setEnabled( true );
-            btncatalan.setEnabled( true );
-            btnenglish.setEnabled( false );
-            //jPanel1.setToolTipText("Configuration:");
-            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_configuracion"));
-            optabc.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_ABC"));
-            optavl.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_AVL"));
-            optrn.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_RN"));
-            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_ejemplo"));
-            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_clave"));
+        language = "ingles";
+        //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
+        btnspain.setEnabled(true);
+        btncatalan.setEnabled(true);
+        btnenglish.setEnabled(false);
+        //jPanel1.setToolTipText("Configuration:");
+        jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_configuracion"));
+        optabc.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_ABC"));
+        optavl.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_AVL"));
+        optrn.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_RN"));
+        jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_ejemplo"));
+        jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_clave"));
 //            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_valor"));
-            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_opciones"));
-            optinsert.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_insertar"));
-            optdelete.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_eliminar"));
-            optsearch.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_consultar"));
-            optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
-            optcut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
-            optleaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
-            if (optinsert.isSelected()==true)txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
-            if (optsearch.isSelected()==true)txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1")); 
-            //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
-            cmbexamples.removeAllItems();
-            cmbexamples.addItem( "<SELECT ONE>" );
-            cmbexamples.addItem( "1" );
-            cmbexamples.addItem( "2" );
-            cmbexamples.addItem( "3" );
-            cmbexamples.addItem( "4" );
-            cmbexamples.addItem( "New" );
-            //Ahora vamos a actualizar los messages de otros pantallas.
-            tabhelp.setTitleAt( 2, "Red-Black" );
-            tabhelpoperations.setTitleAt( 0, "Insert" );
-            tabhelpoperations.setTitleAt( 1, "Delete" );
-            tabhelpoperations.setTitleAt( 2, "Query" );
-            jTextArea2.setText("");
-            jTextArea3.setText("");
-            jTextArea4.setText("");
-            jTextArea5.setText("");
-            jTextArea6.setText("");
-            jTextArea7.setText("");
-            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion1"));
-            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion2"));
-            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion3"));
-            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion4"));
-            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion5"));
-            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion6"));
-            reloadScreen();
+        jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_lbl_opciones"));
+        optinsert.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_insertar"));
+        optdelete.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_eliminar"));
+        optsearch.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_consultar"));
+        optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_padre"));
+        optcut.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_podar"));
+        optleaves.setText(ResourceBundle.getBundle("resources.properties.file_en_US").getString("etiqueta_opt_hojas"));
+        if (optinsert.isSelected() == true) {
+            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion2"));
+        }
+        if (optsearch.isSelected() == true) {
+            txtalgorithm.setText(ResourceBundle.getBundle("resources.properties.functions_en_US").getString("descripcion1"));
+        }
+        //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
+        cmbexamples.removeAllItems();
+        cmbexamples.addItem("<SELECT ONE>");
+        cmbexamples.addItem("1");
+        cmbexamples.addItem("2");
+        cmbexamples.addItem("3");
+        cmbexamples.addItem("4");
+        cmbexamples.addItem("New");
+        //Ahora vamos a actualizar los messages de otros pantallas.
+        tabhelp.setTitleAt(2, "Red-Black");
+        tabhelpoperations.setTitleAt(0, "Insert");
+        tabhelpoperations.setTitleAt(1, "Delete");
+        tabhelpoperations.setTitleAt(2, "Query");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea4.setText("");
+        jTextArea5.setText("");
+        jTextArea6.setText("");
+        jTextArea7.setText("");
+        jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion1"));
+        jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion2"));
+        jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion3"));
+        jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion4"));
+        jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion5"));
+        jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_en_US").getString("descripcion6"));
+        reloadScreen();
     }//GEN-LAST:event_btnenglishMouseClicked
 
     private void btnspainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnspainMouseClicked
-            language = "castellano";
-            //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            btnspain.setEnabled( false );
-            btncatalan.setEnabled( true );
-            btnenglish.setEnabled( true );
-            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_configuracion"));
-            optabc.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_ABC"));
-            optavl.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_AVL"));
-            optrn.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_RN"));
-            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_ejemplo"));
-            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_clave"));
+        language = "castellano";
+        //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
+        btnspain.setEnabled(false);
+        btncatalan.setEnabled(true);
+        btnenglish.setEnabled(true);
+        jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_configuracion"));
+        optabc.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_ABC"));
+        optavl.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_AVL"));
+        optrn.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_RN"));
+        jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_ejemplo"));
+        jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_clave"));
 //            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_valor"));
-            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_opciones"));
-            optinsert.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_insertar"));
-            optdelete.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_eliminar"));
-            optsearch.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_consultar"));
-            optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_padre"));
-            optcut.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_podar"));
-            optleaves.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_hojas"));
-            
-            cmbexamples.removeAllItems();
-            cmbexamples.addItem( "<SELECCIONA UNO>" );
-            cmbexamples.addItem( "1" );
-            cmbexamples.addItem( "2" );
-            cmbexamples.addItem( "3" );
-            cmbexamples.addItem( "4" );
-            cmbexamples.addItem( "Nuevo" );
-            //Ahora vamos a actualizar los messages de otros pantallas.
-            tabhelp.setTitleAt( 2, "Rojo-Negro" );
-            tabhelpoperations.setTitleAt( 0, "Insertar" );
-            tabhelpoperations.setTitleAt( 1, "Eliminar" );
-            tabhelpoperations.setTitleAt( 2, "Consultar" );
-            jTextArea2.setText("");
-            jTextArea3.setText("");
-            jTextArea4.setText("");
-            jTextArea5.setText("");
-            jTextArea6.setText("");
-            jTextArea7.setText("");
-            
-            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1"));
-            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2"));
-            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3"));
-            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4"));
-            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5"));
-            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion6"));
-            
-            reloadScreen();
+        jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_lbl_opciones"));
+        optinsert.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_insertar"));
+        optdelete.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_eliminar"));
+        optsearch.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_consultar"));
+        optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_padre"));
+        optcut.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_podar"));
+        optleaves.setText(ResourceBundle.getBundle("resources.properties.file_es_ES").getString("etiqueta_opt_hojas"));
+
+        cmbexamples.removeAllItems();
+        cmbexamples.addItem("<SELECCIONA UNO>");
+        cmbexamples.addItem("1");
+        cmbexamples.addItem("2");
+        cmbexamples.addItem("3");
+        cmbexamples.addItem("4");
+        cmbexamples.addItem("Nuevo");
+        //Ahora vamos a actualizar los messages de otros pantallas.
+        tabhelp.setTitleAt(2, "Rojo-Negro");
+        tabhelpoperations.setTitleAt(0, "Insertar");
+        tabhelpoperations.setTitleAt(1, "Eliminar");
+        tabhelpoperations.setTitleAt(2, "Consultar");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea4.setText("");
+        jTextArea5.setText("");
+        jTextArea6.setText("");
+        jTextArea7.setText("");
+
+        jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion1"));
+        jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion2"));
+        jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion3"));
+        jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion4"));
+        jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion5"));
+        jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_es_ES").getString("descripcion6"));
+
+        reloadScreen();
     }//GEN-LAST:event_btnspainMouseClicked
 
     private void btncatalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncatalanMouseClicked
 
-            language = "catalan";
-            //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
-            btnspain.setEnabled( true );
-            btncatalan.setEnabled( false );
-            btnenglish.setEnabled( true );
-            //jPanel1.setToolTipText("Configuration:");
-            jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_configuracion"));
-            optabc.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_ABC"));
-            optavl.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_AVL"));
-            optrn.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_RN"));
-            jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_ejemplo"));
-            jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_clave"));
+        language = "catalan";
+        //activamos el boton del idioma que estaba desactivado y traducimos toda la interfaz.
+        btnspain.setEnabled(true);
+        btncatalan.setEnabled(false);
+        btnenglish.setEnabled(true);
+        //jPanel1.setToolTipText("Configuration:");
+        jLabel8.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_configuracion"));
+        optabc.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_ABC"));
+        optavl.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_AVL"));
+        optrn.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_RN"));
+        jLabel1.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_ejemplo"));
+        jLabel2.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_clave"));
 //            jLabel3.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_valor"));
-            jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_opciones"));
-            optinsert.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_insertar"));
-            optdelete.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_eliminar"));
-            optsearch.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_consultar"));
-            optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_padre"));
-            optcut.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_podar"));
-            optleaves.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_hojas"));
-            
-            cmbexamples.removeAllItems();
-            cmbexamples.addItem( "<TRIA UN>" );
-            cmbexamples.addItem( "1" );
-            cmbexamples.addItem( "2" );
-            cmbexamples.addItem( "3" );
-            cmbexamples.addItem( "4" );
-            cmbexamples.addItem( "Nou" );
-            //Ahora vamos a actualizar los messages de otros pantallas.
-            //PAyudaRN.getAccessibleContext().setAccessibleName("Roig-Negre");
-            tabhelp.setTitleAt( 2, "Roig-Negre" );
-            tabhelpoperations.setTitleAt( 0, "Inserir" );
-            tabhelpoperations.setTitleAt( 1, "Eliminar" );
-            tabhelpoperations.setTitleAt( 2, "Consultar" );
-            jTextArea2.setText("");
-            jTextArea3.setText("");
-            jTextArea4.setText("");
-            jTextArea5.setText("");
-            jTextArea6.setText("");
-            jTextArea7.setText("");
-            
-            jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion1"));
-            jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion2"));
-            jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion3"));
-            jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion4"));
-            jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion5"));
-            jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion6"));
-            reloadScreen();
+        jLabel9.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_lbl_opciones"));
+        optinsert.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_insertar"));
+        optdelete.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_eliminar"));
+        optsearch.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_consultar"));
+        optsearchfather.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_padre"));
+        optcut.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_podar"));
+        optleaves.setText(ResourceBundle.getBundle("resources.properties.file_ca_ES").getString("etiqueta_opt_hojas"));
+
+        cmbexamples.removeAllItems();
+        cmbexamples.addItem("<TRIA UN>");
+        cmbexamples.addItem("1");
+        cmbexamples.addItem("2");
+        cmbexamples.addItem("3");
+        cmbexamples.addItem("4");
+        cmbexamples.addItem("Nou");
+        //Ahora vamos a actualizar los messages de otros pantallas.
+        //PAyudaRN.getAccessibleContext().setAccessibleName("Roig-Negre");
+        tabhelp.setTitleAt(2, "Roig-Negre");
+        tabhelpoperations.setTitleAt(0, "Inserir");
+        tabhelpoperations.setTitleAt(1, "Eliminar");
+        tabhelpoperations.setTitleAt(2, "Consultar");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea4.setText("");
+        jTextArea5.setText("");
+        jTextArea6.setText("");
+        jTextArea7.setText("");
+
+        jTextArea3.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion1"));
+        jTextArea2.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion2"));
+        jTextArea7.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion3"));
+        jTextArea4.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion4"));
+        jTextArea5.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion5"));
+        jTextArea6.append(ResourceBundle.getBundle("resources.properties.help_ca_ES").getString("descripcion6"));
+        reloadScreen();
     }//GEN-LAST:event_btncatalanMouseClicked
 
-    private void uncheked()
-    {
-        optinsert.setSelected( false );
-        optsearch.setSelected( false );
-        optsearchfather.setSelected( false );
-        optcut.setSelected( false );
-        optleaves.setSelected( false );
-        optdelete.setSelected( false );
-        optinsert.setEnabled( false );
-        optdelete.setEnabled( false );
-        optsearch.setEnabled( false );
-        optleaves.setEnabled( false );
-        optcut.setEnabled( false );
-        optsearchfather.setEnabled( false );
-        txtkey.setText( null );
-        txtkey.setEnabled( false );
-        jLabel2.setEnabled( false );    
-    }    
-    
+    private void uncheked() {
+        optinsert.setSelected(false);
+        optsearch.setSelected(false);
+        optsearchfather.setSelected(false);
+        optcut.setSelected(false);
+        optleaves.setSelected(false);
+        optdelete.setSelected(false);
+        optinsert.setEnabled(false);
+        optdelete.setEnabled(false);
+        optsearch.setEnabled(false);
+        optleaves.setEnabled(false);
+        optcut.setEnabled(false);
+        optsearchfather.setEnabled(false);
+        txtkey.setText(null);
+        txtkey.setEnabled(false);
+        jLabel2.setEnabled(false);
+    }
+
     private void cmbexamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbexamplesActionPerformed
-        Integer index=cmbexamples.getSelectedIndex();
-        if(index>0 && index<=4){
+        Integer index = cmbexamples.getSelectedIndex();
+        if (index > 0 && index <= 4) {
             uncheked();
-            String cast =String.format("Seleccionamos el ejemplo nº %1$d\n", index);
-            String eng =String.format("Select the example number %1$d\n", index);
-            String cat=String.format("Triem l'exemple nº %1$d\n", index);
-            printConsole(cast,eng,cat);
-        }else if (index == 5) {
-            optinsert.setSelected( true );
-            txtkey.setText( null );
-            txtkey.setEnabled( true );
-            optinsert.setEnabled( true );
-            btmnext.setEnabled( true );
-            jLabel2.setEnabled( true );
+            String cast = String.format("Seleccionamos el ejemplo nº %1$d\n", index);
+            String eng = String.format("Select the example number %1$d\n", index);
+            String cat = String.format("Triem l'exemple nº %1$d\n", index);
+            printConsole(cast, eng, cat);
+        } else if (index == 5) {
+            optinsert.setSelected(true);
+            txtkey.setText(null);
+            txtkey.setEnabled(true);
+            optinsert.setEnabled(true);
+            btmnext.setEnabled(true);
+            jLabel2.setEnabled(true);
             printConsole("Creamos un árbol desde cero --> \n", "Make a new tree --> \n", "Creem un arbre de zero --> \n");
         }
     }//GEN-LAST:event_cmbexamplesActionPerformed
 
     private void btmnextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseClicked
-
-    
     }//GEN-LAST:event_btmnextMouseClicked
 
     private void optabcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optabcMouseClicked
@@ -1530,7 +1467,7 @@ public void startAlgorithm() throws ClassNotFoundException{
 
     private void jInternalFrame1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame1MouseClicked
         // TODO add your handling code here:        
-          //  
+        //  
     }//GEN-LAST:event_jInternalFrame1MouseClicked
 
     private void btmnextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseEntered
@@ -1540,35 +1477,33 @@ public void startAlgorithm() throws ClassNotFoundException{
     private void btmstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmstopActionPerformed
         // TODO add your handling code here:        
         ep.reinitCount();
-        ep.example1 = new int[ 9 ];
-        ep.example2 = new int[ 9 ];
+        ep.example1 = new int[9];
+        ep.example2 = new int[9];
         ep = new runStep();
-        btmnext.addActionListener( ep );            
-         // REINICIAMOS TODOS LOS VALORES
-        optabc.setEnabled( true );
-        optavl.setEnabled( true );
-        optrn.setEnabled( true );
-        cmbexamples.setEnabled( true );
-        optabc.setSelected( false );
-        optavl.setSelected( false );
-        cmbexamples.setSelectedIndex( 0 );        
-        uncheked();       
-        jInternalFrame1.getContentPane().setVisible( false );
+        btmnext.addActionListener(ep);
+        // REINICIAMOS TODOS LOS VALORES
+        optabc.setEnabled(true);
+        optavl.setEnabled(true);
+        optrn.setEnabled(true);
+        cmbexamples.setEnabled(true);
+        optabc.setSelected(false);
+        optavl.setSelected(false);
+        cmbexamples.setSelectedIndex(0);
+        uncheked();
+        jInternalFrame1.getContentPane().setVisible(false);
         //Escribimos en la consola:    
         this.simulator.deleteTree();
-     //   this.AVLsimulator.deleteTree();
-     //   this.RBSimulator.deleteTree();        
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
-        
+
         Rectangle size = this.jInternalFrame1.getBounds();
         this.jInternalFrame1 = null;
-        this.jInternalFrame1 = new JInternalFrame( "Representación gráfica" , true );
-        this.jDesktopPane1.add( this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER );
-        this.jInternalFrame1.setVisible( true );
-        this.jInternalFrame1.setBounds( size );
-        this.jInternalFrame1.setEnabled( false );  
-        jInternalFrame1.getContentPane().setVisible( true );        
+        this.jInternalFrame1 = new JInternalFrame("Representación gráfica", true);
+        this.jDesktopPane1.add(this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER);
+        this.jInternalFrame1.setVisible(true);
+        this.jInternalFrame1.setBounds(size);
+        this.jInternalFrame1.setEnabled(false);
+        jInternalFrame1.getContentPane().setVisible(true);
     }//GEN-LAST:event_btmstopActionPerformed
 
     private void optsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optsearchActionPerformed
@@ -1578,29 +1513,17 @@ public void startAlgorithm() throws ClassNotFoundException{
     private void btnspainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnspainActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnspainActionPerformed
- 
-    
+
     /**
      * @param args the command line arguments
      */
-    public static void main( String args[] ) {
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Trees().setVisible( true );
+                new Trees().setVisible(true);
             }
         });
     }
-
-   /* public void go(int line, JTextArea txtAlgorithm){
-        String[]t=txtAlgorithm.getText().split("\n");
-        int position=0;
-        for(int index=0;index<t.length;index++){
-		if(index == line-1)break;
-		if(t[index].length()!=0)
-		        position+=t[index].length();
-	}
-	txtAlgorithm.moveCaretPosition(position+line);
-}*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup GOperations;
     private javax.swing.ButtonGroup GTrees;
@@ -1667,104 +1590,102 @@ public void startAlgorithm() throws ClassNotFoundException{
     private javax.swing.JTextField txtkey;
     // End of variables declaration//GEN-END:variables
 
-class runStep implements ActionListener {    
-    int cont=0;
-    int[] example1=new int[ 9 ];
-    int[] example2=new int[ 9 ];
-    int[] example3=new int[ 4 ];
-    int[] example4=new int[ 4 ];
-    public runStep ()    {
-        /* example1[0]=22;
-        example1[1]=33;
-        example1[2]=44;
-        example1[3]=23;
-        example1[4]=11;
-        example1[5]=15;
-        example1[6]=60;
-        example1[7]=38;
-        example1[8]=72;
+    class runStep implements ActionListener {
 
-        example2[0]=13;
-        example2[1]=1;
-        example2[2]=17;
-        example2[3]=15;
-        example2[4]=25;
-        example2[5]=6;
-        example2[6]=11;
-        example2[7]=22;
-        example2[8]=27;*/
+        int cont = 0;
+        int[] example1 = new int[9];
+        int[] example2 = new int[9];
+        int[] example3 = new int[4];
+        int[] example4 = new int[4];
 
-        example1[0]=1;
-        example1[1]=8;
-        example1[2]=5;
-        example1[3]=4;
-        example1[4]=5;
-        example1[5]=3;
-        example1[6]=7;
-        example1[7]=2;
-        example1[8]=9;
+        public runStep() {
+            /* example1[0]=22;
+             example1[1]=33;
+             example1[2]=44;
+             example1[3]=23;
+             example1[4]=11;
+             example1[5]=15;
+             example1[6]=60;
+             example1[7]=38;
+             example1[8]=72;
 
-        example2[0]=13;
-        example2[1]=14;
-        example2[2]=17;
-        example2[3]=15;
-        example2[4]=25;
-        example2[5]=16;
-        example2[6]=11;
-        example2[7]=22;
-        example2[8]=27;               
-    }
-    
-    public void reinitCount()    {            
-        cont=0; 
-        System.out.println("key cont INICIALIZADO " + cont);
-    }
+             example2[0]=13;
+             example2[1]=1;
+             example2[2]=17;
+             example2[3]=15;
+             example2[4]=25;
+             example2[5]=6;
+             example2[6]=11;
+             example2[7]=22;
+             example2[8]=27;*/
 
-    @Override
-    public void actionPerformed(ActionEvent e) {            
-        System.out.println("key conT " + cont);
-        if ( (cmbexamples.getSelectedIndex() == 1 && cont<example1.length)) {
-            cmbexamples.setEnabled( false );
-            try {
-                //Carga el example 1
-                addKey( example1[ cont ] );
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            cont++;
-        } else if ( cmbexamples.getSelectedIndex() == 2  && cont < example2.length ) {
-            cmbexamples.setEnabled( false );
-            try {
-                //Carga el example 2
-                addKey( example2[ cont ] );
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            cont++;
-        } 
-        if ( optdelete.isSelected() ) {
-            Integer i = new Integer ( txtkey.getText() );
-            operation = "Eliminar";
-            printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ") \n", "Eliminar (" + txtkey.getText() + ") \n");
-            deleteKey( i.intValue() );
+            example1[0] = 1;
+            example1[1] = 8;
+            example1[2] = 5;
+            example1[3] = 4;
+            example1[4] = 5;
+            example1[5] = 3;
+            example1[6] = 7;
+            example1[7] = 2;
+            example1[8] = 9;
+
+            example2[0] = 13;
+            example2[1] = 14;
+            example2[2] = 17;
+            example2[3] = 15;
+            example2[4] = 25;
+            example2[5] = 16;
+            example2[6] = 11;
+            example2[7] = 22;
+            example2[8] = 27;
         }
 
-        optinsert.setEnabled( true );
-        optdelete.setEnabled( true );
-        optsearch.setEnabled( true );
-        optsearchfather.setEnabled( true ); 
-        optcut.setEnabled( true );
-        optleaves.setEnabled( true );
-        txtkey.setEnabled( true );
-   //     TxtValue.setEnabled( true );
-        jLabel2.setEnabled( true );
-     //   jLabel3.setEnabled( true );
-        btmnext.setEnabled( true );
+        public void reinitCount() {
+            cont = 0;
+            System.out.println("key cont INICIALIZADO " + cont);
+        }
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("key conT " + cont);
+            if ((cmbexamples.getSelectedIndex() == 1 && cont < example1.length)) {
+                cmbexamples.setEnabled(false);
+                try {
+                    //Carga el example 1
+                    addKey(example1[ cont]);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cont++;
+            } else if (cmbexamples.getSelectedIndex() == 2 && cont < example2.length) {
+                cmbexamples.setEnabled(false);
+                try {
+                    //Carga el example 2
+                    addKey(example2[ cont]);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cont++;
+            }
+            if (optdelete.isSelected()) {
+                Integer i = new Integer(txtkey.getText());
+                operation = "Eliminar";
+                printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ") \n", "Eliminar (" + txtkey.getText() + ") \n");
+                deleteKey(i.intValue());
+            }
+
+            optinsert.setEnabled(true);
+            optdelete.setEnabled(true);
+            optsearch.setEnabled(true);
+            optsearchfather.setEnabled(true);
+            optcut.setEnabled(true);
+            optleaves.setEnabled(true);
+            txtkey.setEnabled(true);
+            //     TxtValue.setEnabled( true );
+            jLabel2.setEnabled(true);
+            //   jLabel3.setEnabled( true );
+            btmnext.setEnabled(true);
+
+        }
     }
-    
-    }
-
-
-
 }

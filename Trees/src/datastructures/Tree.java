@@ -39,6 +39,7 @@ public abstract class Tree<T extends Comparable<T>> {
     
 
     public Iterator<T> preOrder() {
+        
         SimpleList<T> l = new SimpleList<>();
         preOrder(this.getRoot(), l);
         return (l.iterator());
@@ -46,10 +47,17 @@ public abstract class Tree<T extends Comparable<T>> {
     }
 
     private void preOrder(Node<T> r, SimpleList<T> l) {
+        System.out.println(r);
+        System.out.println("*******************************");
         if (r != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);
+            System.out.println("Left");
+            System.out.println(r.getLeft());
             preOrder(r.getRight(), l);
+            System.out.println("Right");
+            System.out.println(r.getRight());
+            
         }
     }
 

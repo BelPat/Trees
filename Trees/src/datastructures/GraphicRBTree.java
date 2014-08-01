@@ -36,7 +36,7 @@ public class GraphicRBTree<T extends Comparable < T > >  extends JPanel {
           this.setBackground(Color.WHITE);
           posicionNodos = new HashMap<>();
           subtreeSizes = new HashMap<>();
-          dirty = true;
+          //dirty = true;
           repaint();      
     }
 

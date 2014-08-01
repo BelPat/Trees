@@ -118,7 +118,6 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
         if (r==null){
             return (false);
         }
-        //le estamos diciendo que compare un T con un int.
 
         int compara=(r.getKey().compareTo(x));
         if(compara>0){            

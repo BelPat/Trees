@@ -12,11 +12,7 @@ import javax.swing.JPanel;
  * @author nusatres
  */
 public class Simulator <T extends Comparable < T >>{
-     //   BBTree < Integer > myTree = new BBTree < Integer > ();
-  //  BTree < T > myTree = new BTree <  > ();
-    //Tree < T > myTreeB;
-//    AVLTree < T > myTreeAvl = new AVLTree <> ();
- //   RBTree < T > myTreeRB = new RBTree <  > () ;
+
     Tree < T > pTree;
     
 
@@ -104,9 +100,6 @@ public class Simulator <T extends Comparable < T >>{
         return ("Borrado el new_key: " + x.toString() + "\n");
     }
 
-    /*public boolean add( T new_key ){
-        return ( this.myTree.add( new_key ) );
-    }*/
     public boolean add( T key ){
       return ( this.pTree.add( key ) );
 

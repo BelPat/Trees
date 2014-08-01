@@ -1,7 +1,6 @@
 package datastructures;
 
-
-  
+ 
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class GraphicAVLTree< T extends Comparable < T > > extends JPanel{
           this.setBackground(Color.WHITE);
           positionNodes = new HashMap<>();
           subtreeSizes = new HashMap<>();
-          dirty = true;
+          //dirty = true;
           repaint();      
     }
 
