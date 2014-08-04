@@ -595,7 +595,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
     }
 
     public JPanel getPaint() {
-        return new GraphicAVLTree<>( this );
+        return new Graphic<>( this );
     }
 
     public boolean isEmpty() {

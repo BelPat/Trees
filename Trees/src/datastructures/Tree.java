@@ -143,11 +143,11 @@ public abstract class Tree<T extends Comparable<T>> {
     }
 
     public JPanel getPaint() {
-        return new GraphicTree<>( this );
+        return new Graphic<>( this );
     }
     
    public HashMap getPositionNodes()  {     
-       GraphicTree ae =new GraphicTree <>(this);
+       Graphic ae =new Graphic <>(this);
        return ae.getPositionNodes();
    }
 }

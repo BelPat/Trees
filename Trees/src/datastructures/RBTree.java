@@ -176,9 +176,8 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
     
     System.out.println(" --- > rb.add " + key);
         
-        findNode(key);
-        if ( findNode(key)== null)
-        {
+      //  findNode(key);
+        if ( findNode(key)== null)    {
             add(new RBNode<>(key));
              return true;
         }
@@ -504,7 +503,7 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un RBNode ,si el dato está o null en caso contrario.
      */
     public RBNode<T> findNode(T key){
-        RBNode<T> current = root;
+        RBNode<T> current = new RBNode<>(root);
 
         int compara;
         while (!isEmpty(current)){
@@ -586,7 +585,7 @@ private void deleteModificarNum(RBNode<T> x){
     
 @Override
       public JPanel getPaint() {
-        return new GraphicRBTree<>(this);
+        return new Graphic<>(this);
     }
       
 /**

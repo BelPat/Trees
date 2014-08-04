@@ -16,10 +16,10 @@ package datastructures;
     public static final int RED = 1;
     // the key of each node
 
-    private T key;
+  //  private T key;
 
     private RBNode < T >  root;
-    private RBNode < T >  left, right;
+  //  private RBNode < T >  left, right;
     // the number of elements to the left of each node
     private int numLeft = 0;
     // the number of elements to the right of each node
@@ -48,14 +48,19 @@ package datastructures;
         numLeft = 0;
         numRight = 0;
         root = null;
-        left = null;
-        right = null;
+        super.setRight( null);
+        super.setLeft( null);   
     }
 
     // Constructor which sets key to the argument.
     RBNode( T key ){
-        this();
-        this.key = key;
+        super(key); 
+        color = BLACK;
+        numLeft = 0;
+        numRight = 0;
+        root = null;
+        
+       
     }
     
     RBNode( Node<T> aux) {        
@@ -69,22 +74,27 @@ package datastructures;
 
     @Override
     public RBNode < T > getLeft() {
-        RBNode< T > aux = new RBNode<> (super.getLeft());
-        aux.numLeft = this.getLeft().getNumLeft();
-        aux.numRight = this.getLeft().getNumRight();
-        aux.root = this.getLeft().getRoot();
-        aux.color  = this.getLeft().getColor();       
-        
+        RBNode< T > aux = null;
+        if(super.getLeft().getKey() != null){
+            aux = new RBNode<> (super.getLeft());
+            aux.numLeft = this.getNumLeft();
+            aux.numRight = this.getNumRight();
+            aux.root = this.getRoot();
+            aux.color  = this.getColor();       
+        }
         return aux;
     }
 
     @Override
     public RBNode < T > getRight() {
-        RBNode< T > aux = new RBNode<> (super.getRight());
-        aux.numLeft = this.getRight().getNumLeft();
-        aux.numRight = this.getRight().getNumRight();
-        aux.root = this.getRight().getRoot();
-        aux.color  = this.getRight().getColor();       
+        RBNode< T > aux = null;
+        if(super.getRight().getKey() != null){
+            aux = new RBNode<> (super.getRight());
+            aux.numLeft = this.getNumLeft();
+            aux.numRight = this.getNumRight();
+            aux.root = this.getRoot();
+            aux.color  = this.getColor(); 
+        }
         
         return aux;
     } 

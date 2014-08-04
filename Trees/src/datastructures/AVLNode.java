@@ -37,10 +37,10 @@ package datastructures;
     }
     
     
-    public AVLNode ( AVLNode < T >  x ) {
+   /* public AVLNode ( AVLNode < T >  x ) {
        super ( x.getKey(), x.getRight() ,x.getLeft());
 
-    }
+    }*/
 
    AVLNode( Node<T> aux) {        
         super.setKey(aux.getKey());

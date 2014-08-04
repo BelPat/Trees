@@ -22,6 +22,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         }else {
             try {
                 Node < T >  ult = this.getPos( this.size-1 );
+                ult.setRight( new Node<> ( x, null ) );
                 ult.setRight( new Node<> ( x, null ));
                 this.size++;
             }catch( ExceptionUFPS e ) {                
@@ -232,4 +233,3 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     }//Fin de la Clase
 
 }//Fin de la Clase
-
