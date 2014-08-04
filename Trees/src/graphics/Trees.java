@@ -110,6 +110,7 @@ public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
 
     public void getLeaves() {
         String msgexit = "";
+        System.out.println(" Treees.getLeaves ");
         msgexit = this.simulator.getLeaves();
         printConsole(msgexit, msgexit, msgexit);
     }

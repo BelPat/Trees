@@ -106,8 +106,8 @@ public abstract class Tree<T extends Comparable<T>> {
             if (this.isLeaf(r)) {
                 l.addEnd(r.getKey());
             }
-            getLeaves(r.getLeft(), l);
-            getLeaves(r.getRight(), l);
+           if(r.getLeft()!=null) getLeaves(r.getLeft(), l);
+           if(r.getRight()!=null)getLeaves(r.getRight(), l);
         }
 
     }

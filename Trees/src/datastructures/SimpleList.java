@@ -18,17 +18,16 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
  
    public void addEnd(T x) {
                if( this.head == null ){
-            this.addInit(  (T) x);
+            this.addInit(x);
         }else {
             try {
                 Node < T >  ult = this.getPos( this.size-1 );
-                ult.setRight( new Node<> ( (T)x, null ) );
+                ult.setRight( new Node<> ( x, null ));
                 this.size++;
             }catch( ExceptionUFPS e ) {                
                 System.err.println( e.getMessage() );                
             }   
         }   
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void addOrdenado(T info) {        
