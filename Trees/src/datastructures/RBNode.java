@@ -19,7 +19,7 @@ package datastructures;
   //  private T key;
 
     private RBNode < T >  root;
-  //  private RBNode < T >  left, right;
+    //private RBNode < T >  left, right;
     // the number of elements to the left of each node
     private int numLeft = 0;
     // the number of elements to the right of each node
@@ -88,14 +88,14 @@ package datastructures;
     @Override
     public RBNode < T > getRight() {
         RBNode< T > aux = null;
+        System.out.println(super.getRight().getKey());
         if(super.getRight().getKey() != null){
             aux = new RBNode<> (super.getRight());
             aux.numLeft = this.getNumLeft();
             aux.numRight = this.getNumRight();
             aux.root = this.getRoot();
             aux.color  = this.getColor(); 
-        }
-        
+        }  
         return aux;
     } 
 

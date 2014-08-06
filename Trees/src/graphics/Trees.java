@@ -30,9 +30,6 @@ public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
     public Simulator<Integer> simulator;
     public boolean seleccionarbol = false;
 
-    /**
-     * Creates new form ARBRES
-     */
     public Trees() {
         initComponents();
         this.setLocationRelativeTo(null);
