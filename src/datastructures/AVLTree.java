@@ -12,7 +12,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class AVLTree<T extends Comparable <T>> extends Tree<T>{
  
- private AVLNode < T > root; 
+// private AVLNode < T > root; 
+ 
+ 
     public AVLTree() {
        super();
     }                              
@@ -23,7 +25,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
       AVLNode < T >  n = new AVLNode < > (k);
              
       if (this.find(k)==false){
-            return ( add( this.root ,n ) );
+            return ( add( (AVLNode<T>)super.getRoot() ,n ) );
       }
       return false;
     }
@@ -32,8 +34,8 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
       // If  node to compare is null, the node is inserted. If the root is null, it is the root of the tree.
       if(p==null) {
            System.out.println("  if avltree.add(AVLNode, AVLNode) q.getKey()" + q.getKey());
-           this.root = q;
-           System.out.println("  if avltree.add(AVLNode, AVLNode) this.root.getKey()" + this.root.getKey());
+           super.setRoot(q);
+        //   System.out.println("  if avltree.add(AVLNode, AVLNode) this.root.getKey()" + this.root.getKey());
       } else {   
           
      System.out.println(" avlnode.add -> q.getKey " + q.getKey()+ " p.getkey " + p.getKey());
@@ -81,14 +83,14 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
       if(cur.getRoot()!=null) {
            recursiveBalance(cur.getRoot());
       } else {
-           this.root = cur;
+           super.setRoot(cur);
            System.out.println("------------ Balancing finished ----------------");
       }
     }
 
  @Override
      public Comparable delete(T k) {
-        T aux_key = deleteAVL(this.root, (T)k);
+        T aux_key = deleteAVL((AVLNode<T>)super.getRoot(), (T)k);
       return(aux_key);
     }
 
@@ -115,7 +117,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
       AVLNode < T > r;
       if( q.getLeft()==null || q.getRight()==null ) {
            if( q.getRoot()==null ) {
-                this.root=null;
+                super.setRoot(null);
                 q=null;
                 return;
            }
@@ -134,7 +136,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
            p.setRoot( r.getRoot());
       }
       if(r.getRoot()==null) {
-           this.root = p;
+           super.setRoot(p);
       } else {
                if(r==r.getRoot().getLeft()) {
                 r.getRoot().setLeft(p);
@@ -150,7 +152,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
     public boolean find(T key) {
      
      System.out.println("********************** avltree.find ************* " + key);
-        return ( find( this.getRoot(),key ) );
+        return ( find((AVLNode<T>) super.getRoot(),key ) );
     }
 
     private boolean find(AVLNode<T> r, T key) {
@@ -162,18 +164,20 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
         if (r.getKey().equals(key)) {
             return (true);
         }
-        if (r.getLeft() == null) {
+        if (r.getLeft() != null) {
             isleft = find(r.getLeft(), key);
         }
-        if (r.getRight() == null) {
+        if (r.getRight() != null) {
             isright = find(r.getRight(), key);
         }
         return ( isright || isleft );
     }
+   
 
+    
     public Iterator<T> getLeaves() {
         SimpleList<T> l = new SimpleList<T>();
-        getLeaves(this.getRoot(), l);
+        getLeaves((AVLNode<T>)super.getRoot(), l);
         return (l.iterator());
     }
 
@@ -370,11 +374,11 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
 
  @Override
      public AVLNode < T > getRoot() {
-        return root;
+        return (AVLNode<T>) super.getRoot();
     }
 
     public void setRoot(AVLNode < T > root) {
-        this.root = root;
+        this.setRoot(root);
     }
  
 }
