@@ -30,10 +30,10 @@ import static datastructures.RBNode.BLACK;
     private int color;
     
         RBNode(){
-        color = BLACK;
-        numLeft = 0;
-        numRight = 0;
-        root = null;
+        this.color = BLACK;
+        this.numLeft = 0;
+        this.numRight = 0;
+        this.root = null;
         super.setRight( null);
         super.setLeft( null);   
     }
@@ -41,10 +41,10 @@ import static datastructures.RBNode.BLACK;
     // Constructor which sets key to the argument.
     RBNode( T key ){
         super(key); 
-        color = BLACK;
-        numLeft = 0;
-        numRight = 0;
-        root = null;       
+        this.color = BLACK;
+        this.numLeft = 0;
+        this.numRight = 0;
+        this.root = null;       
        
     }
     
@@ -52,8 +52,7 @@ import static datastructures.RBNode.BLACK;
         super.setKey(aux.getKey());
         super.setRight( aux.getRight());
         super.setLeft( aux.getLeft());   
-        this.root = null;       
-     
+   
     }
 
 
@@ -76,31 +75,24 @@ import static datastructures.RBNode.BLACK;
 
     @Override
     public RBNode < T > getLeft() {
-        RBNode< T > aux = null;
-        if(super.getLeft().getKey() != null){
             return (RBNode<T>) (super.getLeft());
            /* aux.numLeft = this.getNumLeft();
             aux.numRight = this.getNumRight();
             aux.root = this.getRoot();
             aux.color  = this.getColor();     */  
-        }
-        return aux;
     }
 
     @Override
     public RBNode < T > getRight() {
-        RBNode< T > aux = null;
-        if(super.getRight().getKey() != null){
             return (RBNode<T>) (super.getRight());
            /* aux.numLeft = this.getNumLeft();
             aux.numRight = this.getNumRight();
             aux.root = this.getRoot();
             aux.color  = this.getColor(); */
-        }
-        
-        return aux;
     } 
-
+    
+    
+   
     public int getColor() {
         return color;
     }

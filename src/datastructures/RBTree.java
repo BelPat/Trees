@@ -12,7 +12,7 @@ public class RBTree <T extends Comparable < T > >  extends Tree<T> {
 
 // La root se inicializa a empty.
 private RBNode<T> empty = new RBNode<>();
-private RBNode<T> root = empty;
+//private RBNode<T> root = empty;
 
 
     /**
@@ -20,9 +20,12 @@ private RBNode<T> root = empty;
      *
      */
     public RBTree() {
-        root.setLeft( empty );
+        super.setRoot(empty);
+        super.getRoot().setLeft(empty);
+        super.getRoot().setRight(empty);
+      /*  root.setLeft( empty );
         root.setRight( empty );
-        root.setRoot ( empty );
+        root.setRoot ( empty );*/
     }
                   
 
@@ -34,11 +37,12 @@ private RBNode<T> root = empty;
      */
 @Override
     public RBNode<T> getRoot() {
-        RBNode<T> aux = new RBNode<> (super.getRoot());
-        aux.setRoot(this.root);
-        
-        return aux;
+       
+        return (RBNode<T>)super.getRoot();
     }
+
+
+ 
     
     /**
      * Realiza una rotación a la getLeft()uierda de x
@@ -58,14 +62,13 @@ private RBNode<T> root = empty;
 
     y.setRoot(x.getRoot());
 
-    if (isEmpty(x.getRoot()))
-        root = y;
-
-    else if (x.getRoot().getLeft() == x)
+    if (isEmpty(x.getRoot())){
+        super.setRoot(y);    
+    } else if (x.getRoot().getLeft() == x){
         x.getRoot().setLeft(y);
-
-    else
+    } else {
         x.getRoot().setRight(y);
+    }
 
     y.setLeft(x);
     x.setRoot(y);
@@ -125,8 +128,7 @@ rightRotationModifyNum(y);
         x.setRoot( y.getRoot( ) ); 
 
         if ( isEmpty( y.getRoot( ) ) )
-            root = x;
-
+            super.setRoot(x);
         else if ( y.getRoot( ).getRight( ) == y )
             y.getRoot( ).setRight(x); 
 
@@ -191,7 +193,7 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
 private void add(RBNode<T> z) {
 
     RBNode<T> y = empty;
-    RBNode<T> x = root;
+    RBNode<T> x = (RBNode<T>) super.getRoot();
 
     while (!isEmpty(x)){
     y = x;
@@ -208,7 +210,7 @@ private void add(RBNode<T> z) {
 
 
     if (isEmpty(y)){
-        root = z;
+        super.setRoot(z);
     } else if ((z.getKey()).compareTo(y.getKey()) < 0){
         y.setLeft( z );
     }else{
@@ -272,7 +274,7 @@ else{
     }
 }
 }   
-root.setColor( RBNode.BLACK );
+((RBNode<T>)super.getRoot()).setColor( RBNode.BLACK );
 
 }// fin addModifyNum(RBNode z)
 
@@ -331,7 +333,7 @@ public Comparable delete(T v){
     x.setRoot( y.getRoot( ) );
 
     if (isEmpty(y.getRoot( ))){
-        root = x;
+        super.setRoot(x);
     } else if (!isEmpty(y.getRoot( ).getLeft()) && y.getRoot( ).getLeft() == y){
         y.getRoot( ).setLeft( x );
     } else if (!isEmpty(y.getRoot( ).getRight()) && y.getRoot( ).getRight() == y){
@@ -404,7 +406,7 @@ private void deleteModificarNum(RBNode<T> x){
 
     RBNode<T> w;
 
-    while (x != root && x.getColor( ) == RBNode.BLACK){
+    while (x != super.getRoot() && x.getColor( ) == RBNode.BLACK){
 
     if (x == x.getRoot( ).getLeft()){
 
@@ -432,7 +434,7 @@ private void deleteModificarNum(RBNode<T> x){
                 x.getRoot( ).setColor( RBNode.BLACK );
                 w.getRight().setColor( RBNode.BLACK );
                 leftRotacion(x.getRoot( ));
-                x = root;
+                x = (RBNode<T>) super.getRoot();
         }
     }else{
         w = x.getRoot( ).getLeft();
@@ -457,7 +459,7 @@ private void deleteModificarNum(RBNode<T> x){
             x.getRoot( ).setColor( RBNode.BLACK );
             w.getLeft().setColor( RBNode.BLACK );
            rightRotation(x.getRoot( ));
-            x = root;
+            x = (RBNode<T>) super.getRoot();
             }
         }
     }// fin while
@@ -479,7 +481,7 @@ private void deleteModificarNum(RBNode<T> x){
 @Override
     public boolean find(T key){
 
-        RBNode<T> r = root;
+        RBNode<T> r = (RBNode<T>) super.getRoot();
 
         int compara;
 
@@ -503,7 +505,7 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un RBNode ,si el dato está o null en caso contrario.
      */
     public RBNode<T> findNode(T key){
-        RBNode<T> current = new RBNode<>(root);
+        RBNode<T> current = new RBNode<>(  super.getRoot());
 
         int compara;
         System.out.println(isEmpty(current));
@@ -624,7 +626,7 @@ private void deleteModificarNum(RBNode<T> x){
      */
     public Iterator<T> getLe4aves() {
         SimpleList<T> l = new SimpleList<>();
-        getLeaves(this.root, l);
+        getLeaves((RBNode<T>) super.getRoot(), l);
         return (l.iterator());
     }
         
