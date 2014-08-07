@@ -506,6 +506,7 @@ private void deleteModificarNum(RBNode<T> x){
         RBNode<T> current = new RBNode<>(root);
 
         int compara;
+        System.out.println(isEmpty(current));
         while (!isEmpty(current)){
             compara=current.getKey().compareTo(key);
 
@@ -519,7 +520,7 @@ private void deleteModificarNum(RBNode<T> x){
         }
         return null;
 
-    }// fin find(int key)
+    }
 
 
 
@@ -527,7 +528,11 @@ private void deleteModificarNum(RBNode<T> x){
     // @return: true si el node es igual a empty o false en caso contrario
     private boolean isEmpty(RBNode node){
 
-    return node == empty;
+        if (node.getKey()==null){
+            return true;
+        }else return false;
+            
+    //return node == empty;
 
     }// fin isEmpty(RBNode node)
 

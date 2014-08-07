@@ -2,7 +2,7 @@ package datastructures;
 
 /**
  *
- * @author 
+ * @author BelPat
  */
 class Node<T extends Comparable < T > > implements java.io.Serializable{
     private T key;
@@ -12,14 +12,12 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
         this.key = null;
         this.right = null;   
         this.left = null;   
-       // this.root = null;  
     }
     
     Node(T key) {        
         this.key = key;
         this.right = null;   
         this.left = null;   
-       // this.root = null;  
     }
 
     
@@ -46,15 +44,7 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
     Node<T> getLeft() {        
         return this.left;        
     }
-   /**
-     * Obtiene el Nodo Root
-     * @return El nodo root o null si el último nodo o si es una Lista
-     * con cardinalidad 1
-  
-    Node<T> getRoot() {        
-        return this.root;        
-    }*/
-
+ 
     void setKey(T new_node) {        
         this.key = new_node;        
     }
@@ -66,7 +56,22 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
     void setLeft(Node<T> new_node) {        
         this.left = new_node;        
     }
-
-
+@Override
+public boolean equals(Object o){
+    if(o==null) return false;
+    if(o==this) return true;
+    if(!(o instanceof Node)) return false;
+    Node p=(Node) o;
+    if((key==null)?(p.key!=null): !key.equals(p.key)) return false;
+    return true;
+}
+@Override
+public int hashCode(){
+    final int prim=31;
+    int result=17;
+    result = prim * result + Node.this.getKey().hashCode();
+    return result;
+    
+}
 
 }//Fin de la Clase
