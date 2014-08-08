@@ -1212,7 +1212,6 @@ public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
         this.simulator = new Simulator<>();
         printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
         reloadScreen();
-        this.repaintTree();
 
     }//GEN-LAST:event_btmreloadMouseClicked
 
