@@ -34,14 +34,14 @@ private RBNode<T> empty = new RBNode<>();
      *
      * @return un tipo de objeto de la clase RBNode<T> con la dirección de
      * memoria de la raíz del árbol
-     */
+   
 @Override
     public RBNode<T> getRoot() {
        
         return (RBNode<T>)super.getRoot();
     }
 
-
+  */
  
     
     /**
@@ -131,11 +131,10 @@ rightRotationModifyNum(y);
             super.setRoot(x);
         else if ( y.getRoot( ).getRight( ) == y )
             y.getRoot( ).setRight(x); 
-
         else
             y.getRoot( ).setLeft( x );
+        
         x.setRight( y );
-
         y.setRoot( x );
 
 }// finrightRotation(RBNode y)
@@ -508,7 +507,7 @@ private void deleteModificarNum(RBNode<T> x){
         RBNode<T> current = new RBNode<>(  super.getRoot());
 
         int compara;
-        System.out.println(isEmpty(current));
+
         while (!isEmpty(current)){
             compara=current.getKey().compareTo(key);
 
@@ -546,7 +545,7 @@ private void deleteModificarNum(RBNode<T> x){
      */
     public Iterator<T> preOrder() {
         SimpleList<T> l = new SimpleList<>();
-        preOrder(this.getRoot(), l);
+        preOrder((RBNode<T>) super.getRoot(), l);
         return (l.iterator());
 
     }
@@ -624,7 +623,7 @@ private void deleteModificarNum(RBNode<T> x){
      *
      * @return un iterador de la clase Iterator de la java.util
      */
-    public Iterator<T> getLe4aves() {
+    public Iterator<T> getLeaves() {
         SimpleList<T> l = new SimpleList<>();
         getLeaves((RBNode<T>) super.getRoot(), l);
         return (l.iterator());

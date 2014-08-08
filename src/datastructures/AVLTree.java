@@ -360,7 +360,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
 
     public Iterator<T> preOrder() {
         SimpleList<T> l = new SimpleList<T>();
-        preOrder(this.getRoot(), l);
+        preOrder((AVLNode<T>) super.getRoot(), l);
         return (l.iterator());
     }
 
@@ -371,7 +371,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
             preOrder(r.getRight(), l);
         }
     }
-
+/*
  @Override
      public AVLNode < T > getRoot() {
         return (AVLNode<T>) super.getRoot();
@@ -379,7 +379,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
 
     public void setRoot(AVLNode < T > root) {
         this.setRoot(root);
-    }
+    }*/
  
 }
 

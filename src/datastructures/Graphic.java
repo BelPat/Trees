@@ -56,7 +56,7 @@ public class Graphic<T extends Comparable<T>> extends JPanel {
      * @return Dimension con el tamaño de cada subárbol.
      */
     private Dimension foundSizeSubTree(Node<T> n)    {
-          if (n == null) {
+          if (n==null || n.getNode()) {
               return new Dimension(0,0);
           }
           Dimension ld = foundSizeSubTree(n.getLeft());
@@ -79,7 +79,7 @@ public class Graphic<T extends Comparable<T>> extends JPanel {
      * @param top: int con el tope.
      */
         private void foundPosition(Node<T> n, int left, int right, int top)     {
-          if (n == null) {
+          if (n==null || n.getNode()) {
               return;
           }
 
@@ -117,7 +117,7 @@ public class Graphic<T extends Comparable<T>> extends JPanel {
      * @param yoffs: int con la altura del FontMetrics.
      */
     private void getPaint(Graphics2D g, Node<T> n, int position_x, int position_y, int yoffs)    {
-         if (n == null) {
+         if (n==null || n.getNode()) {
              return;
          }     
          Rectangle r = (Rectangle) positionNodes.get(n);

@@ -108,6 +108,13 @@ import static datastructures.RBNode.BLACK;
        public void setRoot( RBNode < T >  root ) {
         this.root = root;
     }
+       
+
+ public boolean getNode(){
+       if (this.getKey()==null){
+            return true;
+        }else return false;
+    }
 }// end class RedBlackNode
 
 

@@ -69,9 +69,14 @@ public boolean equals(Object o){
 public int hashCode(){
     final int prim=31;
     int result=17;
-    result = prim * result + Node.this.getKey().hashCode();
+    result = prim * result;// + Node.this.getKey().hashCode();
     return result;
     
+}
+public boolean getNode(){
+        if (this != null) return false;else {
+            return true;
+        }
 }
 
 }//Fin de la Clase
