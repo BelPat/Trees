@@ -62,7 +62,7 @@ public abstract class Tree<T extends Comparable<T>> {
     }
 
     boolean isLeaf(Node<T> x) {
-        return (x != null && x.getLeft() == null && x.getRight() == null);
+      return (x != null && x.getLeft() == null && x.getRight() == null);
     }
 
     public T getFather(T key) {

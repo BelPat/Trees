@@ -637,7 +637,7 @@ private void deleteModificarNum(RBNode<T> x){
     private void getLeaves(RBNode<T> r, SimpleList<T> l) {
        // if (r != null) {
          if (!isEmpty(r)) {
-            if (super.isLeaf(r)) {
+            if (isLeaf(r)) {
                 l.addEnd(r.getKey());
             }
             getLeaves(r.getLeft(), l);
