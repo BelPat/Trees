@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package datastructures;
 
 /**
@@ -11,41 +8,32 @@ package datastructures;
 
  public class AVLNode < T extends Comparable < T >  > extends Node<T>  {
 
-   /* private AVLNode < T >  left;
-    private AVLNode < T >  right;*/
     private AVLNode < T >  root;
 
-  //  private T key;
     private int balance;
     private int height;
 
     public AVLNode( T k ) {
         super (k);
-        //left = right = root = null;
         this.balance = 0;
         this.height = 0;
         this.root = null;
-       // key = k;
     }
     
  public AVLNode( ) {
         super ();
-        //left = right = root = null;
         this.balance = 0;
         this.height = 0;
         this.root = null;
     }
-    
-    
-   /* public AVLNode ( AVLNode < T >  x ) {
-       super ( x.getKey(), x.getRight() ,x.getLeft());
-
-    }*/
 
    AVLNode( Node<T> aux) {        
         super.setKey(aux.getKey());
         super.setRight( aux.getRight());
         super.setLeft( aux.getLeft());   
+        this.balance = 0;
+        this.height = 0;
+        this.root = null;
     
     }
   @Override
@@ -53,9 +41,6 @@ package datastructures;
      AVLNode< T > aux =null;
         if (super.getLeft() != null){
            return (AVLNode<T>) super.getLeft();
-          /*  aux.balance = this.getBalance();
-            aux.height = this.getHeight();
-            aux.root = this.getRoot();*/
         }
         return aux;
     }
@@ -64,10 +49,6 @@ package datastructures;
         AVLNode< T > aux = null;
             if (super.getRight() != null){
                 return (AVLNode<T>) super.getRight();
-         /*   aux = new AVLNode<> (super.getRight());
-            aux.balance = this.getBalance();
-            aux.height = this.getHeight();
-            aux.root = this.getRoot();*/
          }
                       
         return aux;
@@ -96,6 +77,28 @@ package datastructures;
     public void setHeight( int height ) {
         this.height = height;
     }
+    
+ /*   @Override
+public boolean equals(Object o){
+    if(o==null) return false;
+    if(o==this) return true;
+    if(!(o instanceof Node)) return false;
+    AVLNode p=(AVLNode) o;
+    if(!super.getKey().equals(p.getKey()) && !super.getLeft().equals(p.getLeft()) && !super.getRight().equals(p.getRight()) && !this.root.equals(p.root) && this.balance!=p.balance && this.height!=p.height){
+        return false;
+    }else
+        return true;
+    //if((super.getKey()==null)?(p.getKey()!=null): !super.getKey().equals(p.getKey())) return false;
+    //return true;
+}
+@Override
+public int hashCode(){
+    final int prim=31;
+    int result=17;
+    result = prim * result;// + Node.this.getKey().hashCode();
+    return result;
+    
+}*/
 
 }
 

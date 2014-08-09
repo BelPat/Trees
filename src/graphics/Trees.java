@@ -29,7 +29,7 @@ public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
     public runStep ep = new runStep();
     public Simulator<Integer> simulator;
     public boolean seleccionarbol = false;
-
+    public static String chosse;
     /**
      * Creates new form ARBRES
      */
@@ -198,7 +198,7 @@ public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
             addKey(15);
             addKey(60);
             addKey(38);
-        //    addKey(72);
+            addKey(72);
             return true;
         } else if (cmbexamples.getSelectedIndex() == 2 && cmbexamples.isEnabled()) {
             cmbexamples.setEnabled(false);
