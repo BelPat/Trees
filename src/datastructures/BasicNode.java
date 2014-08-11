@@ -4,44 +4,44 @@ package datastructures;
  *
  * @author BelPat
  */
-class Node<T extends Comparable < T > > implements java.io.Serializable{
+public class BasicNode<Node, T > {
     private T key;
-    private Node<T> right, left;
+    private Node right, left;
 
-    Node() {        
+    public BasicNode() {        
         this.key = null;
         this.right = null;   
         this.left = null;   
     }
     
-    Node(T key) {        
+    public BasicNode(T key) {        
         this.key = key;
         this.right = null;   
         this.left = null;   
     }
 
     
-    Node(T key, Node<T> right, Node<T> left) {        
+    public BasicNode(T key, Node right, Node left) {        
         this.key = key;
         this.right = right;
         this.left = left;         
     }
        
             
-    Node(T key, Node<T> right) {        
+    public BasicNode(T key, Node right) {        
         this.key = key;
         this.right = right;
     
     } 
-     T getKey() {        
+    public T getKey() {        
         return this.key;        
     }
 
-    Node<T> getRight() {        
+    public Node getRight() {        
         return this.right;        
     }
 
-    Node<T> getLeft() {        
+    public Node getLeft() {        
         return this.left;        
     }
  
@@ -49,27 +49,26 @@ class Node<T extends Comparable < T > > implements java.io.Serializable{
         this.key = new_node;        
     }
 
-    void setRight(Node<T> new_node) {        
+    void setRight(Node new_node) {        
         this.right = new_node;        
     }
    
-    void setLeft(Node<T> new_node) {        
+    void setLeft(Node new_node) {        
         this.left = new_node;        
     }
 @Override
 public boolean equals(Object o){
     if(o==null) return false;
     if(o==this) return true;
-    if(!(o instanceof Node)) return false;
-    Node p=(Node) o;
-    if((key==null)?(p.key!=null): !key.equals(p.key)) return false;
-    return true;
+    if(!(o instanceof BasicNode)) return false;
+    BasicNode p=(BasicNode) o;
+    return !((key==null)?(p.key!=null): !key.equals(p.key));
 }
 @Override
 public int hashCode(){
     final int prim=31;
     int result=17;
-    result = prim * result;// + Node.this.getKey().hashCode();
+    result = prim * result + BasicNode.this.getKey().hashCode();
     return result;
     
 }

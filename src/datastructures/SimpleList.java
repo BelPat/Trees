@@ -2,8 +2,8 @@
 package datastructures;
 import java.util.Iterator;
 
-public class SimpleList < T extends Comparable < T > >  implements Iterable < T > {
-    private Node < T >  head;
+public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T>>  implements Iterable < T > {
+    private Node head;
     private int size;
 
     public SimpleList() {        
@@ -12,7 +12,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     }
 
     public void addInit( T x ){        
-        this.head = new Node<> ( x, this.head );
+        this.head = (Node) new BasicNode ( x, this.head );
         this.size++;         
     }
  
@@ -21,9 +21,9 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
             this.addInit(x);
         }else {
             try {
-                Node < T >  ult = this.getPos( this.size-1 );
-                ult.setRight( new Node<> ( x, null ) );
-                ult.setRight( new Node<> ( x, null ));
+                BasicNode ult = this.getPos( this.size-1 );
+                ult.setRight( new BasicNode<> ( x, null ) );
+                ult.setRight( new BasicNode<> ( x, null ));
                 this.size++;
             }catch( ExceptionUFPS e ) {                
                 System.err.println( e.getMessage() );                
@@ -35,24 +35,26 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         if ( this.isEmpty() ){
             this.addInit( info );        
         } else {            
-            Node < T >  x = this.head;
-            Node < T >  y = x;
+            BasicNode x = this.head;
+            BasicNode y = x;
 
             while(x != null) {                
                 //Comparable<T> comparador = ( Comparable )info;
-                int rta = info.compareTo( x.getKey() );
+                int rta = info.compareTo( (T) x.getKey() );
 
-                if( rta < 0 )
-                break;
+                if( rta >= 0 ) {
+                } else {
+                    break;
+                }
 
                 y = x;
-                x = x.getRight();
+                x = (BasicNode) x.getRight();
             }
 
             if(x == y){
                 this.addInit(info);
             } else {                
-                y.setRight( new Node <  > ( info, x ) );
+                y.setRight( new BasicNode <  > ( info, x ) );
                 this.size++;                
              }            
         }    
@@ -60,7 +62,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
       
     public void set( int i, T dato ){        
     try{            
-        Node < T >  t = this.getPos( i );
+        BasicNode t = this.getPos( i );
           t.setKey(dato);            
         }catch( ExceptionUFPS e ) {            
           System.err.println( e.getMessage() );            
@@ -69,8 +71,8 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
 
     public T get( int i ) {        
         try {
-            Node < T >  t = this.getPos( i );
-            return ( t.getKey() );
+            BasicNode t = this.getPos( i );
+            return (T) ( t.getKey() );
 
         }catch( ExceptionUFPS e ) {            
           System.err.println( e.getMessage() );            
@@ -78,12 +80,12 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         return( null );        
     }
 
-    private Node < T >  getPos( int i ) throws ExceptionUFPS {
+    private Node getPos( int i ) throws ExceptionUFPS {
 
         if( this.isEmpty() || i > this.size  || i < 0 )
         throw new ExceptionUFPS("El indice solicitado no existe en la Lista Simple");
 
-        Node < T >  t = this.head;
+        Node t = this.head;
 
         for ( int cont=0; cont< i; cont++)
         t= t.getRight();
@@ -97,14 +99,14 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         if( this.isEmpty() )
         return null;
 
-        Node < T >  t = this.head;
+        Node  t = this.head;
 
         if(i == 0){
            this.head = this.head.getRight();
         } else {
 
             try {
-                Node < T >  y = this.getPos( i-1 );
+                Node y = this.getPos( i-1 );
                 t = y.getRight();
                 y.setRight( t.getRight() );
 
@@ -117,7 +119,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
 
         this.size--;
 
-        return( t.getKey() );        
+        return(T) ( t.getKey() );        
     }
 
     public void removeAll(){        
@@ -130,7 +132,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     }
 
     public void Invertir() {        
-        Node < T >  a,p;
+        Node  a,p;
         a = p = null;
 
         while( this.head != null ) {
@@ -153,7 +155,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
         return ("Lista Vacia");        
         String r = "";
 
-        for( Node < T >  x = this.head;x != null;x = x.getRight() )
+        for( BasicNode  x = this.head;x != null;x = (BasicNode) x.getRight() )
         r += x.getKey().toString()+"->";
 
         return( r );        
@@ -162,7 +164,7 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     public int indexOf( T info ) {        
         int i = 0;
 
-        for( Node < T >  x = this.head ; x != null ; x = x.getRight() ) {
+        for( BasicNode  x = this.head ; x != null ; x = (BasicNode) x.getRight() ) {
 
         if(x.getKey().equals(info))
         return (i);            
@@ -200,9 +202,9 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
     public class IteratorLS < T extends Comparable < T > >  implements Iterator < T > 
     {
 
-        private Node < T >  posicion;
+        private BasicNode  posicion;
 
-        IteratorLS ( Node < T >  posicion ) {            
+        IteratorLS ( BasicNode  posicion ) {            
             this.posicion = posicion;	            
         }
 
@@ -224,10 +226,10 @@ public class SimpleList < T extends Comparable < T > >  implements Iterable < T 
 
             }
 
-            Node < T >  actual = posicion;
-            posicion = posicion.getRight();
+            BasicNode actual = posicion;
+            posicion = (BasicNode) posicion.getRight();
 
-            return( actual.getKey() );
+            return(T) ( actual.getKey() );
         }
 
     }//Fin de la Clase

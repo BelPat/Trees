@@ -20,14 +20,14 @@ import javax.swing.text.Caret;
  *
  * @author BelenPatricia
  */
-public class Trees<T extends Comparable< T>> extends javax.swing.JFrame {
+public class Trees extends javax.swing.JFrame {
 
     private int WARNING_MESSAGE;
     public String language; //castellano, catalan, ingles
     public String path;
     public String operation;
     public runStep ep = new runStep();
-    public Simulator<Integer> simulator;
+    public Simulator simulator;
     public boolean seleccionarbol = false;
     public static String chosse;
     /**

@@ -7,7 +7,7 @@ import java.util.Iterator;
  * @author patricia
  * @param <T>
  */
-public class BTree<T extends Comparable<T>> extends Tree<T>{
+public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
 
     public BTree()    {
         super();
@@ -15,12 +15,12 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
 
     /**
     *  Inserta un new_key en el árbol binario de búsqueda según factor de ordenamiento
-    * @param new_key un elemento tipo T que se desea almacenar en el árbol
+     * @param key
     * @return  true si el elemento fue insertado o false en caso contrario
     */
     @Override
     public boolean add( T key )    {
-        Node< T > new_node;
+        BNode< T > new_node;
         new_node = this.find(key) ? null : add( super.getRoot(), key );
         if( new_node != null ){
             this.setRoot( new_node );
@@ -28,9 +28,9 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
         return ( new_node != null );
     }
 
-    private Node< T > add( Node< T >  new_node, T new_key)   {
+    private BNode< T > add( BNode< T >  new_node, T new_key)   {
         if( new_node == null ){
-            return( new Node< > ( new_key , null , null ) );
+            return( new BNode< > ( new_key , null , null ) );
         }
         int compara = ( new_node.getKey() ).compareTo( new_key );
         if( compara > 0 ) { // new_keydelarbol es menor que new_key
@@ -59,12 +59,12 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
         if(!this.find(x))   {
                     return null;
         }
-        Node <T > z = delete( this.getRoot(),x );
+        BNode <T > z = delete( this.getRoot(),x );
         this.setRoot( z );
         return x;
     }
     
-    private Node< T > delete( Node< T > r, T x )    {
+    private BNode< T > delete( BNode< T > r, T x )    {
         if ( r == null ){
             return null;//<--new_key no encontrado		
         }
@@ -77,7 +77,7 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
             }   else   {
                 System.out.println("Encontro el new_key:"+x.toString());
                 if(r.getLeft()!=null && r.getRight()!=null)       {
-                         Node<T> cambiar=findMin(r.getRight());
+                         BNode<T> cambiar=findMin(r.getRight());
                          T aux=cambiar.getKey();
                          cambiar.setKey(r.getKey());
                          r.setKey(aux);
@@ -95,7 +95,7 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
     *	Busca el menor new_key del árbol. El menor new_key
     *	del árbol se encuentra en el nodo mas Leftuierdo.
     **/
-    private Node<T> findMin(Node<T> r)
+    private BNode<T> findMin(BNode<T> r)
     {
         for(; r.getLeft()!=null; r=r.getLeft());
         return(r);
@@ -104,6 +104,7 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
 
     /**
     *  Retorna true si existe un new_key en el árbol binario de búsqueda, o false en caso contrario.
+     * @param x
     * @return un boolean , true si el new_key está o false en caso contrario.
     */
 
@@ -113,7 +114,7 @@ public class BTree<T extends Comparable<T>> extends Tree<T>{
         return(find(this.getRoot(),x));
     }
 
-    private boolean find(Node<T> r, T x)
+    private boolean find(BNode<T> r, T x)
     {
         if (r==null){
             return (false);

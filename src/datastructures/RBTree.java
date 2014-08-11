@@ -8,7 +8,7 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 
-public class RBTree <T extends Comparable < T > >  extends Tree<T> {
+public class RBTree<T extends Comparable<T>> extends BasicTree<RBNode<T>, T>{
 
 // La root se inicializa a empty.
 private RBNode<T> empty = new RBNode<>();
@@ -398,7 +398,7 @@ private void fixNodeData(RBNode<T> x, RBNode<T> y){
 }//fin fixNodeData()
 
 
-// @param: x, Node afectado tras delete el valor v
+// @param: x, BasicNode afectado tras delete el valor v
 // Restaura las propiedades incompatibles tras delete un node
 
 private void deleteModificarNum(RBNode<T> x){
@@ -473,7 +473,7 @@ private void deleteModificarNum(RBNode<T> x){
       /**
      * Retorna true si existe un dato en el árbol binario, o false en caso
      * contrario.
-     *  @param: key, T dato a find en el AbolRN
+     * @param key
      * @return un boolean , true si el dato está o false en caso contrario.
      */
 
@@ -498,8 +498,8 @@ private void deleteModificarNum(RBNode<T> x){
     }// fin find( key)
 
      /**
-     * Retorna el Node si existe un dato en el árbol binario, o null en caso
-     * contrario.     
+     * Retorna el BasicNode si existe un dato en el árbol binario, o null en caso
+ contrario.     
      *  @param: key, T dato a find en el AbolRN
      * @return un RBNode ,si el dato está o null en caso contrario.
      */
@@ -544,13 +544,13 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un iterador de la clase Iterator de la java.util
      */
     public Iterator<T> preOrder() {
-        SimpleList<T> l = new SimpleList<>();
+        SimpleList l = new SimpleList<>();
         preOrder((RBNode<T>) super.getRoot(), l);
         return (l.iterator());
 
     }
 
-    private void preOrder(RBNode<T> r, SimpleList<T> l) {
+    private void preOrder(RBNode<T> r, SimpleList l) {
         if (r.getKey() != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);
@@ -589,7 +589,6 @@ private void deleteModificarNum(RBNode<T> x){
      * @return retorna un nuevo GraphicRBTree
      */
     
-@Override
       public JPanel getPaint() {
         return new Graphic<>(this);
     }
@@ -623,8 +622,9 @@ private void deleteModificarNum(RBNode<T> x){
      *
      * @return un iterador de la clase Iterator de la java.util
      */
+@Override
     public Iterator<T> getLeaves() {
-        SimpleList<T> l = new SimpleList<>();
+        SimpleList l = new SimpleList();
         getLeaves((RBNode<T>) super.getRoot(), l);
         return (l.iterator());
     }
@@ -634,7 +634,7 @@ private void deleteModificarNum(RBNode<T> x){
      *  @param r RBNode<T>, node a recorrer hasta llegar a las hojas
      * @param l, lista que contendrá las hojas del RBTree
      */
-    private void getLeaves(RBNode<T> r, SimpleList<T> l) {
+    private void getLeaves(RBNode<T> r, SimpleList l) {
        // if (r != null) {
          if (!isEmpty(r)) {
             if (isLeaf(r)) {

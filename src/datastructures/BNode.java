@@ -1,24 +1,23 @@
 package datastructures;
 
 
-public class BNode < T extends Comparable < T > > extends Node<T>{
+public class BNode <T> extends BasicNode<BNode<T>, T>{
 
     public BNode() {
         super();
     }
+    
+    public BNode(T key) {
+        super(key);
+    }
 
-    public BNode ( T x, Node < T >  i, Node < T >  d ) { 
+    public BNode ( T x, BNode <T>  i, BNode <T>  d ) { 
         super( x, d, i);        
     }
  
-    public BNode( Node < T >  x) {
+    public BNode( BNode <T>  x) {
         super( x.getKey(), x.getRight(), x.getLeft());   
              
-    }
- 
-    public BNode(T x) {   
-        super (x);
-   
     }
     
 }//Fin de la Clase

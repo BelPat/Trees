@@ -10,7 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author patricia
  * @param <T>
  */
-public class AVLTree<T extends Comparable <T>> extends Tree<T>{
+public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
  
 // private AVLNode < T > root; 
  
@@ -175,16 +175,17 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
    
 
     
-    public Iterator<T> getLeaves() {
-        SimpleList<T> l = new SimpleList<T>();
+    @Override
+    public Iterator getLeaves() {
+        SimpleList l = new SimpleList();
         getLeaves((AVLNode<T>)super.getRoot(), l);
         return (l.iterator());
     }
 
-    private void getLeaves(AVLNode<T> r, SimpleList<T> l) {
+    private void getLeaves(AVLNode r, SimpleList l) {
         if (r != null) {
             if (super.isLeaf(r)) {
-                l.addEnd(r.getKey());
+                l.addEnd( (Comparable) r.getKey());
             } else {
             }
             getLeaves(r.getLeft(), l);
@@ -208,6 +209,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
         }
     }
 
+    @Override
      public void cutLeaves() {
 
         Iterator<T> it=(Iterator<T>) this.getLeaves();        
@@ -318,6 +320,7 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
         return (new JTree(createJtree(super.getRoot(), "Root(T)->")));
     }
 
+    @Override
     protected DefaultMutableTreeNode createJtree(AVLNode<T> r, String msg) {
         if (super.isLeaf(r)) {
             return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
@@ -332,10 +335,12 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
         return x;
     }
 
+    @Override
     public JPanel getPaint() {
         return new Graphic<>( this );
     }
 
+    @Override
     public boolean isEmpty() {
         return ( this.getRoot() == null );
     }
@@ -358,13 +363,14 @@ public class AVLTree<T extends Comparable <T>> extends Tree<T>{
         cur.setBalance( heightright - heightleft);
     }
 
+    @Override
     public Iterator<T> preOrder() {
-        SimpleList<T> l = new SimpleList<T>();
+        SimpleList l = new SimpleList();
         preOrder((AVLNode<T>) super.getRoot(), l);
         return (l.iterator());
     }
 
-    private void preOrder(AVLNode<T> r, SimpleList<T> l) {
+    private void preOrder(AVLNode<T> r, SimpleList l) {
         if (r != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);

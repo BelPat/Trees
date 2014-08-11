@@ -6,47 +6,47 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-public abstract class Tree<T extends Comparable<T>> {
+public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>> {
 
-    private Node<T> root, left,right;
+    private Node root, left,right;
     public T value;
 
 
-    Tree() {
+    public BasicTree() {
         this.root = null;
     }
-    Tree(Node<T> root) {
+    public BasicTree(Node root) {
         this.root = root;
     }
-    void setRoot(Node<T> r) {
+    void setRoot(Node r) {
         this.root = r;
     }
-    Node<T> getRoot() {
+    public Node getRoot() {
         return this.root;
     }
-    void setLeft(Node<T> l){
+    void setLeft(Node l){
         this.left=l;
     }
-    Node<T> getLeft() {
+    public Node getLeft() {
         return this.left;
     }
-    void setRight(Node<T> r){
+    void setRight(Node r){
         this.right=r;
     }
-    Node<T> getRight() {
+    public Node getRight() {
         return this.right;
     }
     
 
-    public Iterator<T> preOrder() {
+    public Iterator preOrder() {
         
-        SimpleList<T> l = new SimpleList<>();
+        SimpleList l = new SimpleList<>();
         preOrder(this.getRoot(), l);
         return (l.iterator());
 
     }
 
-    private void preOrder(Node<T> r, SimpleList<T> l) {
+    private void preOrder(Node r, SimpleList l) {
         System.out.println(r);
         System.out.println("*******************************");
         if (r != null) {
@@ -61,7 +61,7 @@ public abstract class Tree<T extends Comparable<T>> {
         }
     }
 
-    boolean isLeaf(Node<T> x) {
+    boolean isLeaf(Node x) {
       return (x != null && x.getLeft() == null && x.getRight() == null);
     }
 
@@ -69,21 +69,21 @@ public abstract class Tree<T extends Comparable<T>> {
         if (key == null || this.root == null) {
             return null;
         }
-        Node<T> x = getFather(this.root, key);
+        Node x = getFather(this.root, key);
         if (x == null) {
             return null;
         }
         return (x.getKey());
     }
 
-    private Node<T> getFather(Node<T> x, T key) {
+    private Node getFather(Node x, T key) {
         if (x == null) {
             return null;
         }
         if ((x.getLeft() != null && x.getLeft().getKey().equals(key)) || (x.getRight() != null && x.getRight().getKey().equals(key))) {
             return (x);
         }
-        Node<T> y = getFather(x.getLeft(), key);
+        Node y = getFather(x.getLeft(), key);
         if (y == null) {
             return (getFather(x.getRight(), key));
         } else {
@@ -95,13 +95,13 @@ public abstract class Tree<T extends Comparable<T>> {
         return (this.root == null);
     }
 
-    public Iterator<T> getLeaves() {
-        SimpleList<T> l = new SimpleList<>();
+    public Iterator getLeaves() {
+        SimpleList l = new SimpleList<>();
         getLeaves(this.root, l);
         return (l.iterator());
     }
 
-    private void getLeaves(Node<T> r, SimpleList<T> l) {
+    private void getLeaves(Node r, SimpleList l) {
         if (r != null) {
             if (this.isLeaf(r)) {
                 l.addEnd(r.getKey());
@@ -120,7 +120,7 @@ public abstract class Tree<T extends Comparable<T>> {
     
     abstract boolean add( T key )  ;
  
-    protected DefaultMutableTreeNode createJtree(Node<T> r, String msg) {
+    protected DefaultMutableTreeNode createJtree(Node r, String msg) {
         if (this.isLeaf(r)) {
             return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
         }

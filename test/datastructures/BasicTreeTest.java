@@ -12,14 +12,14 @@ import static org.junit.Assert.*;
  *
  * @author nusatres
  */
-public class TreeTest {
+public class BasicTreeTest {
     
     /**
-     * Test of getRaiz method, of class Tree.
+     * Test of getRaiz method, of class BasicTree.
      */
     @Test
     public void testGetRaiz() {
-        Tree<Integer> instance = new Tree<> ();
+        BasicTree<Integer> instance = new BasicTree<> ();
         BTree<Integer> arbol = new BTree<> ();
   
         arbol.add( 4 );
@@ -37,11 +37,11 @@ public class TreeTest {
         assertEquals( expResult.getKey(), result.getKey() );
     }
      /**
-     * Test of setRaiz method, of class Tree.
+     * Test of setRaiz method, of class BasicTree.
      */
     @Test
     public void testSetRaiz() {
-        Tree<Integer> instance = new Tree<> ();
+        BasicTree<Integer> instance = new BasicTree<> ();
         BNode<Integer> expResult = new BNode<>( 4 );
         instance.setRoot(expResult);
         
@@ -49,7 +49,7 @@ public class TreeTest {
     }
 
      /**
-     * Test of getHojas method, of class Tree.
+     * Test of getHojas method, of class BasicTree.
      */
     @Test
     public void testGetHojas() {
@@ -91,7 +91,7 @@ public class TreeTest {
     }
     
         /**
-     * Test of esta method, of class Tree.
+     * Test of esta method, of class BasicTree.
      */
     @Test
     public void testBuscar() {
@@ -116,18 +116,18 @@ public class TreeTest {
     }
     
     /**
-     * Test of esVacio method, of class Tree.
+     * Test of esVacio method, of class BasicTree.
      */
     @Test
     public void testEsVacio() {
-        Tree<Integer> instance = new Tree<> ();
+        BasicTree<Integer> instance = new BasicTree<> ();
     
         boolean result = instance.isEmpty();
         assertTrue(result);
     }
 
         /**
-     * Test of getPadre method, of class Tree.
+     * Test of getPadre method, of class BasicTree.
      */
     @Test
     public void testGetPadre() {
@@ -151,7 +151,7 @@ public class TreeTest {
 
     
     /**
-     * Test of preOrden method, of class Tree.
+     * Test of preOrden method, of class BasicTree.
      */
     @Test
     public void testPreOrden() {

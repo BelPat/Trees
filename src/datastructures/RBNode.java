@@ -9,8 +9,9 @@ import static datastructures.RBNode.BLACK;
 /**
  *
  * @author nusatres
+ * @param <T>
  */
-  public class RBNode < T extends Comparable < T > >  extends Node<T>{
+  public class RBNode<T> extends BasicNode<RBNode<T>, T>{
 
     /** Possible color for this node */
     public static final int BLACK = 0;
@@ -22,7 +23,7 @@ import static datastructures.RBNode.BLACK;
     private int numRight = 0;
     private int color;
     
-        RBNode(){
+    public RBNode(){
         this.color = BLACK;
         this.numLeft = 0;
         this.numRight = 0;
@@ -31,7 +32,7 @@ import static datastructures.RBNode.BLACK;
         super.setLeft( null);   
     }
 
-    RBNode( T key ){
+    public RBNode( T key ){
         super(key); 
         this.color = BLACK;
         this.numLeft = 0;
@@ -40,7 +41,7 @@ import static datastructures.RBNode.BLACK;
        
     }
     
-    RBNode( Node<T> aux) {        
+    public RBNode( RBNode<T> aux) {        
         super.setKey(aux.getKey());
         super.setRight( aux.getRight());
         super.setLeft( aux.getLeft());  
@@ -96,6 +97,11 @@ import static datastructures.RBNode.BLACK;
     }
        
 
+    /**
+     *
+     * @return
+     */
+    @Override
  public boolean getNode(){
        if (this.getKey()==null){
             return true;
