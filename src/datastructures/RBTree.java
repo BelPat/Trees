@@ -544,13 +544,13 @@ private void deleteModificarNum(RBNode<T> x){
      * @return un iterador de la clase Iterator de la java.util
      */
     public Iterator<T> preOrder() {
-        SimpleList l = new SimpleList<>();
-        preOrder((RBNode<T>) super.getRoot(), l);
+        SimpleList<RBNode<T>,T> l = new SimpleList<>();
+        preOrder(super.getRoot(), l);
         return (l.iterator());
 
     }
 
-    private void preOrder(RBNode<T> r, SimpleList l) {
+    private void preOrder(RBNode<T> r, SimpleList<RBNode<T>,T> l) {
         if (r.getKey() != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);
@@ -624,8 +624,8 @@ private void deleteModificarNum(RBNode<T> x){
      */
 @Override
     public Iterator<T> getLeaves() {
-        SimpleList l = new SimpleList();
-        getLeaves((RBNode<T>) super.getRoot(), l);
+        SimpleList<RBNode<T>,T> l = new SimpleList<>();
+        getLeaves(super.getRoot(), l);
         return (l.iterator());
     }
         
@@ -634,7 +634,7 @@ private void deleteModificarNum(RBNode<T> x){
      *  @param r RBNode<T>, node a recorrer hasta llegar a las hojas
      * @param l, lista que contendrá las hojas del RBTree
      */
-    private void getLeaves(RBNode<T> r, SimpleList l) {
+    private void getLeaves(RBNode<T> r, SimpleList<RBNode<T>,T> l) {
        // if (r != null) {
          if (!isEmpty(r)) {
             if (isLeaf(r)) {

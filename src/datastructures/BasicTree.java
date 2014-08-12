@@ -38,15 +38,15 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
     }
     
 
-    public Iterator preOrder() {
+    public Iterator<T> preOrder() {
         
-        SimpleList l = new SimpleList<>();
+        SimpleList<Node, T> l = new SimpleList<>();
         preOrder(this.getRoot(), l);
         return (l.iterator());
 
     }
 
-    private void preOrder(Node r, SimpleList l) {
+    private void preOrder(Node r, SimpleList<Node, T> l) {
         System.out.println(r);
         System.out.println("*******************************");
         if (r != null) {
@@ -95,13 +95,13 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
         return (this.root == null);
     }
 
-    public Iterator getLeaves() {
-        SimpleList l = new SimpleList<>();
+    public Iterator<T> getLeaves() {
+        SimpleList<Node, T> l = new SimpleList<>();
         getLeaves(this.root, l);
         return (l.iterator());
     }
 
-    private void getLeaves(Node r, SimpleList l) {
+    private void getLeaves(Node r, SimpleList<Node, T> l) {
         if (r != null) {
             if (this.isLeaf(r)) {
                 l.addEnd(r.getKey());

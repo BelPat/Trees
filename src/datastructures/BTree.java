@@ -138,7 +138,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     */
     @Override
     public void cutLeaves() {
-    Iterator<T> it=(Iterator<T>) this.getLeaves();
+    Iterator<T> it = this.getLeaves();
         while(it.hasNext())    {
             delete(it.next());
         }

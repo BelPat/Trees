@@ -3,6 +3,8 @@ package datastructures;
 /**
  *
  * @author BelPat
+ * @param <Node>
+ * @param <T>
  */
 public class BasicNode<Node, T > {
     private T key;
@@ -33,6 +35,8 @@ public class BasicNode<Node, T > {
         this.right = right;
     
     } 
+
+   
     public T getKey() {        
         return this.key;        
     }

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>>{
 
-    BasicTree pTree;
+    BasicTree<Node, T> pTree;
     
 
     public Simulator() {
@@ -24,13 +24,13 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
         
      switch (tree) {
             case "abc":
-               pTree = new  BTree<> ();
+               pTree = (BasicTree<Node, T>) new  BTree<Integer> ();
                 break;
             case "avl":
-               pTree = new  AVLTree<> ();
+               pTree = (BasicTree<Node, T>) new  AVLTree<Integer> ();
                 break;
             case "rn":
-               pTree = new  RBTree<> ();
+               pTree = (BasicTree<Node, T>) new  RBTree<> ();
                 break;
         }
     }
@@ -58,12 +58,12 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
     }
    
     public String getLeaves()    {
-        Iterator it = this.pTree.getLeaves();
+        Iterator<T> it = this.pTree.getLeaves();
         return ( walk( it, "Hojas del Arbol" ) );
     }
     
     public String preOrder () {
-        Iterator it = this.pTree.preOrder () ;
+        Iterator<T> it = this.pTree.preOrder () ;
         return  ( walk ( it, "Recorrido PreOrden" ) ) ;
     }
     
@@ -71,7 +71,7 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
         if ( this.pTree.getRoot().getKey().equals( child ) )
             return ("La root no tiene father");
         
-        T father = (T) this.pTree.getFather( child );
+        T father = this.pTree.getFather( child );
         
         if ( father == null )
             return ( "No existe el Dato: " + child.toString() );

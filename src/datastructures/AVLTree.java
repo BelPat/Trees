@@ -176,16 +176,16 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
 
     
     @Override
-    public Iterator getLeaves() {
-        SimpleList l = new SimpleList();
-        getLeaves((AVLNode<T>)super.getRoot(), l);
+    public Iterator<T> getLeaves() {
+        SimpleList<AVLNode<T>,T> l = new SimpleList<>();
+        getLeaves(super.getRoot(), l);
         return (l.iterator());
     }
 
-    private void getLeaves(AVLNode r, SimpleList l) {
+    private void getLeaves(AVLNode<T> r, SimpleList<AVLNode<T>,T> l) {
         if (r != null) {
             if (super.isLeaf(r)) {
-                l.addEnd( (Comparable) r.getKey());
+                l.addEnd(r.getKey());
             } else {
             }
             getLeaves(r.getLeft(), l);
@@ -212,7 +212,7 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     @Override
      public void cutLeaves() {
 
-        Iterator<T> it=(Iterator<T>) this.getLeaves();        
+        Iterator<T> it= this.getLeaves();        
         while(it.hasNext())
         {
             delete(it.next());
@@ -365,12 +365,12 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
 
     @Override
     public Iterator<T> preOrder() {
-        SimpleList l = new SimpleList();
-        preOrder((AVLNode<T>) super.getRoot(), l);
+        SimpleList<AVLNode<T>,T> l = new SimpleList<>();
+        preOrder(super.getRoot(), l);
         return (l.iterator());
     }
 
-    private void preOrder(AVLNode<T> r, SimpleList l) {
+    private void preOrder(AVLNode<T> r, SimpleList<AVLNode<T>,T> l) {
         if (r != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);

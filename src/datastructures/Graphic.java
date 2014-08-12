@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> extends JPanel {
     private BasicTree<Node,T> myTree;
-    private HashMap<BasicNode, Rectangle> positionNodes = null;
-    private HashMap<BasicNode, Dimension> subtreeSizes = null;
+    private HashMap<BasicNode<Node,T>, Rectangle> positionNodes = null;
+    private HashMap<BasicNode<Node,T>, Dimension> subtreeSizes;
     private boolean dirty = true;
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
@@ -19,10 +19,10 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * Constructor de la clase GraphicTree.
      * El constructor permite inicializar los atributos de la clase GraphicTree
      * y llama al método repaint(), que es el encargado de pintar el Arbol.
-     * @param miExpresion: dato de tipo ArbolExpresion que contiene el Arbol a
-     * dibujar.
+     * @param myTree
      */
-    public Graphic(BasicTree myTree)    {      
+    public Graphic(BasicTree<Node,T> myTree)    {      
+        this.subtreeSizes = null;
           this.myTree = myTree;
           this.setBackground(Color.WHITE);
           positionNodes = new HashMap<>();
@@ -39,7 +39,8 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
     private void foundPositions()    {
          positionNodes.clear();
          subtreeSizes.clear();
-         BasicNode root = this.myTree.getRoot();
+         BasicNode<Node,T> root;
+        root = this.myTree.getRoot();
          if (root != null)   {
              foundSizeSubTree(root);
              foundPosition(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
@@ -55,12 +56,12 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * referencia calcular el tamaño de cada subárbol.
      * @return Dimension con el tamaño de cada subárbol.
      */
-    private Dimension foundSizeSubTree(BasicNode n)    {
+    private Dimension foundSizeSubTree(BasicNode<Node,T> n)    {
           if (n==null || n.getNode()) {
               return new Dimension(0,0);
           }
-          Dimension ld = foundSizeSubTree((BasicNode) n.getLeft());
-          Dimension rd = foundSizeSubTree((BasicNode) n.getRight());          
+          Dimension ld = foundSizeSubTree( n.getLeft());
+          Dimension rd = foundSizeSubTree( n.getRight());          
           int h = fm.getHeight() + parent2child + Math.max(ld.height, rd.height);
           int w = ld.width + child2child + rd.width;          
           Dimension d = new Dimension(w, h);
@@ -78,7 +79,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * @param right: int con alineación y orientación a la rightecha.
      * @param top: int con el tope.
      */
-        private void foundPosition(BasicNode n, int left, int right, int top)     {
+        private void foundPosition(BasicNode<Node,T> n, int left, int right, int top)     {
           if (n==null || n.getNode()) {
               return;
           }
@@ -103,8 +104,8 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
 
           positionNodes.put(n,new Rectangle(center - width/2 - 3, top, width + 6, fm.getHeight()));
 
-          foundPosition((BasicNode) n.getLeft(), Integer.MAX_VALUE, center - child2child/2, top + fm.getHeight() + parent2child);
-          foundPosition((BasicNode) n.getRight(), center + child2child/2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
+          foundPosition( n.getLeft(), Integer.MAX_VALUE, center - child2child/2, top + fm.getHeight() + parent2child);
+          foundPosition( n.getRight(), center + child2child/2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
     }
         
         /**
@@ -116,7 +117,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * @param position_y: int con la posición en y desde donde se va a dibujar la línea hasta el siguiente hijo.
      * @param yoffs: int con la altura del FontMetrics.
      */
-    private void getPaint(Graphics2D g, BasicNode n, int position_x, int position_y, int yoffs)    {
+    private void getPaint(Graphics2D g, BasicNode<Node,T> n, int position_x, int position_y, int yoffs)    {
         System.out.println("!!!!!!!!!!!1  get paint ********************"); 
         if (n==null || n.getNode()) {
              return;
@@ -131,8 +132,8 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
             g.drawLine(position_x, position_y, (int)(r.x + r.width/2), r.y);
          }
 
-         getPaint(g, (BasicNode) n.getLeft(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
-         getPaint(g, (BasicNode) n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
+         getPaint(g, n.getLeft(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
+         getPaint(g, n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
      }   
     
       /**
@@ -143,8 +144,8 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * @param position_x: int con la posición en x desde donde se va a dibujar la línea hasta el siguiente hijo.
      * @param position_y: int con la posición en y desde donde se va a dibujar la línea hasta el siguiente hijo.
      * @param yoffs: int con la altura del FontMetrics.
-     */
-    private void getPaintB(Graphics2D g, RBNode<T> n, int position_x, int position_y, int yoffs)     {
+     
+    private void getPaintB(Graphics2D g, BasicNode<Node,T> n, int position_x, int position_y, int yoffs)     {
         System.out.println("&&&&&&&&&&&  RB get paint ********************"); 
         if (n.getKey() == null) {
              return;
@@ -168,7 +169,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
          getPaint(g, n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
      
    }
-    
+    */
        /**
      * Sobreescribe el metodo paint y se encarga de pintar todo el árbol.
      * @param g: Objeto de la clase Graphics.
