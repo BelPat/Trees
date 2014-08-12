@@ -80,9 +80,9 @@ private RBNode<T> empty = new RBNode<>();
     * @param: x, El node que va a rotar hacia la getLeft()uierda
     * 
    */
-    private void leftRotationModifyNum(RBNode x){
+    private void leftRotationModifyNum(RBNode<T> x){
 
-    if (isEmpty(x.getLeft()) && isEmpty(x.getRight().getLeft())){
+    if (isEmpty(x.getLeft()) && isEmpty((RBNode) x.getRight().getLeft())){
         x.setNumLeft ( 0 );
         x.setNumRight( 0 );
         x.getRight().setNumLeft ( 1 );
@@ -144,7 +144,7 @@ rightRotationModifyNum(y);
     * @param: y, El node que va a rotar hacia la getRight()echa
     * 
    */
-private void rightRotationModifyNum(RBNode y){
+private void rightRotationModifyNum(RBNode<T> y){
 
 if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
     y.setNumRight( 0 );

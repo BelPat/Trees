@@ -69,7 +69,7 @@ import static datastructures.RBNode.BLACK;
         return numRight;
     }
 
-
+/*
     @Override
     public RBNode < T > getLeft() {
             return (RBNode<T>) (super.getLeft());
@@ -79,7 +79,7 @@ import static datastructures.RBNode.BLACK;
     public RBNode < T > getRight() {
             return (RBNode<T>) (super.getRight());
     } 
-
+*/
     public int getColor() {
         return color;
     }

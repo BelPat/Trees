@@ -37,23 +37,7 @@ package datastructures;
         this.root = null;
     
     }
-  @Override
-    public AVLNode < T >  getLeft() {
-     AVLNode< T > aux =null;
-        if (super.getLeft() != null){
-           return (AVLNode<T>) super.getLeft();
-        }
-        return aux;
-    }
-    @Override
-      public AVLNode < T >  getRight() {
-        AVLNode< T > aux = null;
-            if (super.getRight() != null){
-                return (AVLNode<T>) super.getRight();
-         }
-                      
-        return aux;
-    }
+
       public AVLNode < T >  getRoot() {        
         return root;
     }
