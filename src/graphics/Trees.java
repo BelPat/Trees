@@ -72,16 +72,15 @@ public class Trees extends javax.swing.JFrame {
         operation = "Insertar";
         printConsole("Insertar (" + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ") \n");
         //  go (2, txtalgorithm); 
-        if (this.simulator.add(key)) {
-            System.out.println("*****  add key  *****");
-            this.repaintTree();
-        } else {
+        if (!this.simulator.add(key)) {
             System.out.println("Errorrrrrrr ABB");
+        } else {
+            this.repaintTree();
         }
     }
 
     public void findKey(int key) {
-        String msgexit = new String();
+        String msgexit ;
         msgexit = this.simulator.isHere(key);
         printConsole(msgexit, msgexit, msgexit);
     }

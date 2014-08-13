@@ -28,7 +28,7 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
      switch (tree) {
             case "abc":
                 //pTree1 =new BTree<>();
-                pTree = (BasicTree<Node, T>) new  BTree<Integer> ();
+                pTree = (BasicTree<Node, T>) new  RBTree<Integer> ();
                 break;
             case "avl":
                 //pTree2=new AVLTree<>();

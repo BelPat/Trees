@@ -96,11 +96,22 @@ import static datastructures.RBNode.BLACK;
         this.root = root;
     }
        
-
-    /**
-     *
-     * @return
-     */
+    @Override
+    public boolean equals(Object o){
+    if(o==null) return false;
+    if(o==this) return true;
+    if(!(o instanceof RBNode)) return false;
+    RBNode p=(RBNode) o;
+    return !((super.getKey()==null)?(p.getKey()!=null): !super.getKey().equals(p.getKey()));
+}
+@Override
+public int hashCode(){
+    final int prim=31;
+    int result=17;
+    result = prim * result + RBNode.this.getKey().hashCode();
+    return result;
+    
+}
     @Override
  public boolean getNode(){
        if (this.getKey()==null){

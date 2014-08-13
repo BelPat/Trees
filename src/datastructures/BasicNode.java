@@ -35,6 +35,12 @@ public class BasicNode<Node, T > {
         this.right = right;
     
     } 
+    
+      public void setNode(T key, Node right) {        
+        this.key = key;
+        this.right = right;
+    
+    } 
 
    
     public T getKey() {        
@@ -53,7 +59,12 @@ public class BasicNode<Node, T > {
         this.key = new_node;        
     }
 
-    void setRight(Node new_node) {        
+    void setRight(T key, Node right) {        
+        this.right = right;     
+        this.key = key;
+    }
+    
+        void setRight(Node new_node) {        
         this.right = new_node;        
     }
    
