@@ -12,7 +12,6 @@ public class RBTree<T extends Comparable<T>> extends BasicTree<RBNode<T>, T>{
 
 // La root se inicializa a empty.
 private RBNode<T> empty = new RBNode<>();
-//private RBNode<T> root = empty;
 
 
     /**
@@ -23,25 +22,9 @@ private RBNode<T> empty = new RBNode<>();
         super.setRoot(empty);
         super.getRoot().setLeft(empty);
         super.getRoot().setRight(empty);
-      /*  root.setLeft( empty );
-        root.setRight( empty );
-        root.setRoot ( empty );*/
-    }
-                  
 
-    /**
-     * Retorna la raíz del árbol
-     *
-     * @return un tipo de objeto de la clase RBNode<T> con la dirección de
-     * memoria de la raíz del árbol
-   
-@Override
-    public RBNode<T> getRoot() {
-       
-        return (RBNode<T>)super.getRoot();
     }
-
-  */
+ 
  
     
     /**

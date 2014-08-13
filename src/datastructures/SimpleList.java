@@ -22,8 +22,8 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
         }else {
             try {
                 BasicNode ult = this.getPos( this.size-1 );
-                ult.setRight( new BasicNode<> ( x, null ) );
-                ult.setRight( new BasicNode<> ( x, null ));
+                ult.setRight( new BasicNode<Node,T> ( x, null ) );
+                ult.setRight( new BasicNode<Node,T> ( x, null ));
                 this.size++;
             }catch( ExceptionUFPS e ) {                
                 System.err.println( e.getMessage() );                
@@ -35,8 +35,8 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
         if ( this.isEmpty() ){
             this.addInit( info );        
         } else {            
-            BasicNode x = this.head;
-            BasicNode y = x;
+            BasicNode<Node,T> x = this.head;
+            BasicNode<Node,T> y = x;
 
             while(x != null) {                
                 //Comparable<T> comparador = ( Comparable )info;
@@ -54,7 +54,7 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
             if(x == y){
                 this.addInit(info);
             } else {                
-                y.setRight( new BasicNode <  > ( info, x ) );
+                y.setRight( (Node) new BasicNode ( info, x ));
                 this.size++;                
              }            
         }    
@@ -62,7 +62,7 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
       
     public void set( int i, T dato ){        
     try{            
-        BasicNode t = this.getPos( i );
+        BasicNode<Node,T> t = this.getPos( i );
           t.setKey(dato);            
         }catch( ExceptionUFPS e ) {            
           System.err.println( e.getMessage() );            
@@ -71,8 +71,8 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
 
     public T get( int i ) {        
         try {
-            BasicNode t = this.getPos( i );
-            return (T) ( t.getKey() );
+            BasicNode<Node,T> t = this.getPos( i );
+            return ( t.getKey() );
 
         }catch( ExceptionUFPS e ) {            
           System.err.println( e.getMessage() );            
@@ -90,7 +90,7 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
         for ( int cont=0; cont< i; cont++)
         t= t.getRight();
 
-        return( t );        
+        return t;        
     }
 
 
@@ -213,9 +213,9 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
             }
 
             BasicNode<Node,T> actual = posicion;
-            posicion = (BasicNode) posicion.getRight();
+            posicion = (BasicNode<Node, T>) posicion.getRight();
 
-            return (T) ( actual.getKey() );
+            return actual.getKey();
         }
 
     }//Fin de la Clase
