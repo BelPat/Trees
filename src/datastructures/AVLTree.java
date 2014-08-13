@@ -377,6 +377,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
             preOrder(r.getRight(), l);
         }
     }
+     @Override
+    public AVLNode<T> createNode(T key){
+        return new AVLNode<>(key);
+    }
 /*
  @Override
      public AVLNode < T > getRoot() {

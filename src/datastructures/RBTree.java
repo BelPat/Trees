@@ -627,84 +627,10 @@ private void deleteModificarNum(RBNode<T> x){
             getLeaves(r.getRight(), l);
         }
     }
-    
-    /*
-
-// @return: return's the size of the tree
-// Return's the # of nodes including the root which the RBTree
-// rooted at root has.
-public int size(){
-
-// Return the number of nodes to the root's getLeft() + the number of
-// nodes on the root's getRight() + the root itself.
-return root.numgetLeft() + root.numgetRight() + 1;
-}// fin size()
-
-*/
-    
-    /**
-     * 
-     
-     * Crea un árbol de la clase JTree. Esta clase permite dibujar el árbol
-     * utuloizando una distribución de ficheros y directorios de un explorador de
-     * archivos convencional
-     *
-     * @return un JTree con el árbol binario que se tiene creado
-   
-    public JTree darJTree() {
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("ARBOL-VACIO");
-        if (this.esVacio()) {
-            return (new JTree(x));
-        }
-        return (new JTree(crearJtree(this.root, "root(T)->")));
-    }
-    
-      protected DefaultMutableTreeNode crearJtree(RBNode<T> r, String msg) {
-
-          
-        if (esLeaf(r)) {
-            return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
-        }
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
-        if (r.getLeft()!= null) {
-            x.add(crearJtree(r.getLeft(), "getLeft()->"));
-        }
-        if (r.getRight()!= null) {
-            x.add(crearJtree(r.getRight(), "getRight()->"));
-        }
-        return x;
-
-    }
-      
-     */
-      /**
-* Returns sorted list of keys greater than key. Size of list
-* wulol not exceed maxReturned
-* @param key Key to find for
-* @param maxReturned Maximum number of results to return
-* @return List of keys greater than key. List may not exceed maxReturned
-
-    public List<T> getGreaterThan(T key, Integer maxReturned) {
-        List<T> list = new ArrayList<T>();
-        getGreaterThan(root, key, list);
-        return list.subList(0, Math.min(maxReturned, list.size()));
-    }
-
-
-    private void getGreaterThan(RBNode<T> node, T key,
-                                List<T> list) {
-        if (isEmpty(node)) {
-            return;
-        } else if (node.key.compareTo(key) > 0) {
-            getGreaterThan(node.getLeft(), key, list);
-            list.add(node.key);
-            getGreaterThan(node.getRight(), key, list);
-        } else {
-            getGreaterThan(node.getRight(), key, list);
-        }
-    }
-*/
-    
+    @Override
+    public RBNode<T> createNode(T key){
+        return new RBNode<>(key);
+    }  
   
     
 }// fin class RBTree

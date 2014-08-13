@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>>{
 
     BasicTree<Node, T> pTree;
+    BTree<Integer> pTree1;
+    AVLTree<Integer> pTree2;
+    RBTree<Integer> pTree3;
     
 
     public Simulator() {
@@ -24,15 +27,19 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
         
      switch (tree) {
             case "abc":
-               pTree = (BasicTree<Node, T>) new  BTree<Integer> ();
+                //pTree1 =new BTree<>();
+                pTree = (BasicTree<Node, T>) new  BTree<Integer> ();
                 break;
             case "avl":
-               pTree = (BasicTree<Node, T>) new  AVLTree<Integer> ();
+                //pTree2=new AVLTree<>();
+                pTree = (BasicTree<Node, T>) new  AVLTree<Integer> ();
                 break;
             case "rn":
-               pTree = (BasicTree<Node, T>) new  RBTree<> ();
+                pTree3=new RBTree<>();
+                pTree = (BasicTree<Node, T>) new  RBTree<> ();
                 break;
         }
+     
     }
     
 

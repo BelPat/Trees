@@ -118,7 +118,9 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
     
     abstract Comparable delete(T key);
     
-    abstract boolean add( T key )  ;
+    abstract boolean add( T key );
+    
+    abstract public Node createNode(T key);
  
     protected DefaultMutableTreeNode createJtree(Node r, String msg) {
         if (this.isLeaf(r)) {

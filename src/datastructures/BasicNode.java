@@ -60,22 +60,22 @@ public class BasicNode<Node, T > {
     void setLeft(Node new_node) {        
         this.left = new_node;        
     }
-@Override
+/*@Override
 public boolean equals(Object o){
     if(o==null) return false;
     if(o==this) return true;
-    if(!(o instanceof BasicNode)) return false;
-    BasicNode p=(BasicNode) o;
+    if(!(o instanceof Node)) return false;
+    Node p=(Node) o;
     return !((key==null)?(p.key!=null): !key.equals(p.key));
 }
 @Override
 public int hashCode(){
     final int prim=31;
     int result=17;
-    result = prim * result + BasicNode.this.getKey().hashCode();
+    result = prim * result + Node.this.getKey().hashCode();
     return result;
     
-}
+}*/
 public boolean getNode(){
         if (this != null) return false;else {
             return true;

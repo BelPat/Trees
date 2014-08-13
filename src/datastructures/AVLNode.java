@@ -83,7 +83,7 @@ public int hashCode(){
 public boolean equals(Object o){
     if(o==null) return false;
     if(o==this) return true;
-    if(!(o instanceof BasicNode)) return false;
+    if(!(o instanceof BasicNode)Nodefalse;
     AVLNode p=(AVLNode) o;
     if(!super.getKey().equals(p.getKey()) && !super.getLeft().equals(p.getLeft()) && !super.getRight().equals(p.getRight()) && !this.root.equals(p.root) && this.balance!=p.balance && this.height!=p.height){
         return false;
@@ -96,7 +96,7 @@ public boolean equals(Object o){
 public int hashCode(){
     final int prim=31;
     int result=17;
-    result = prim * result;// + BasicNode.this.getKey().hashCode();
+    result = prim * result;// + BasicNode.this.NodehashCode();
     return result;
     
 }*/

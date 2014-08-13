@@ -144,6 +144,10 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         }
     }
 
+    @Override
+    public BNode<T> createNode(T key){
+        return new BNode<>(key);
+    }
 
 } //Fin de clase
 
