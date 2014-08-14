@@ -312,28 +312,7 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
-    public JTree getJTree() {
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("ARBOL-VACIO");
-        if (this.isEmpty()) {
-            return (new JTree(x));
-        }
-        return (new JTree(createJtree(super.getRoot(), "Root(T)->")));
-    }
 
-    @Override
-    protected DefaultMutableTreeNode createJtree(AVLNode<T> r, String msg) {
-        if (super.isLeaf(r)) {
-            return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
-        }
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
-        if (r.getLeft() != null) {
-            x.add(createJtree(r.getLeft(), "Left->"));
-        }
-        if (r.getRight() != null) {
-            x.add(createJtree(r.getRight(), "Right->"));
-        }
-        return x;
-    }
 
     @Override
     public JPanel getPaint() {
@@ -377,7 +356,7 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
             preOrder(r.getRight(), l);
         }
     }
-     @Override
+
     public AVLNode<T> createNode(T key){
         return new AVLNode<>(key);
     }

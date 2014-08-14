@@ -185,7 +185,7 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
     }
 
 
-    public class IteratorLS < T extends Comparable < T > >  implements Iterator < T > 
+    public class IteratorLS <Node extends BasicNode<Node, T>, T extends Comparable<T>>  implements Iterator < T > 
     {
 
         private Node posicion;
@@ -207,9 +207,8 @@ public class SimpleList <Node extends BasicNode<Node, T>, T extends Comparable<T
         @Override
         public T next() {            
             if( !this.hasNext() ) {                
-            System.err.println("Error no hay mas elementos");
-            return null;
-
+                System.err.println("Error no hay mas elementos");
+                return null;
             }
 
             Node actual = posicion;

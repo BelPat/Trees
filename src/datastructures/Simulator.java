@@ -7,18 +7,18 @@ package datastructures;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author nusatres
  */
-public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>>{
+public class Simulator < Node extends BasicNode<Node, T>, T extends Comparable<T>>{
 
-    BasicTree<Node, T> pTree;
+    BasicTree<Node,T> pTree;
     BTree<Integer> pTree1;
     AVLTree<Integer> pTree2;
     RBTree<Integer> pTree3;
     
-
     public Simulator() {
      
      }
@@ -27,16 +27,14 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
         
      switch (tree) {
             case "abc":
-                //pTree1 =new BTree<>();
-                pTree = (BasicTree<Node, T>) new  RBTree<Integer> ();
+                pTree.getBTree();
                 break;
             case "avl":
-                //pTree2=new AVLTree<>();
-                pTree = (BasicTree<Node, T>) new  AVLTree<Integer> ();
+                    pTree.getAVLTree();
                 break;
             case "rn":
-                pTree3=new RBTree<>();
-                pTree = (BasicTree<Node, T>) new  RBTree<> ();
+              //  pTree = new  RBTree<> ();
+                     pTree.getRBTree();
                 break;
         }
      
@@ -44,7 +42,7 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
     
 
     public void deleteTree () {
-        Iterator< T > it ;
+        Iterator<T> it ;
         it = this.pTree.preOrder ();
         //String r=msg+"\n";
         while ( it.hasNext () ) {
@@ -78,7 +76,7 @@ public class Simulator <Node extends BasicNode<Node, T>, T extends Comparable<T>
         if ( this.pTree.getRoot().getKey().equals( child ) )
             return ("La root no tiene father");
         
-        T father = this.pTree.getFather( child );
+        Comparable father = this.pTree.getFather( child );
         
         if ( father == null )
             return ( "No existe el Dato: " + child.toString() );

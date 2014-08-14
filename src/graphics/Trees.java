@@ -1,5 +1,6 @@
 package graphics;
 
+import datastructures.BasicNode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -19,8 +20,9 @@ import javax.swing.text.Caret;
 /**
  *
  * @author BelenPatricia
+ * @param <T>
  */
-public class Trees extends javax.swing.JFrame {
+public class Trees  <T extends Comparable> extends javax.swing.JFrame {
 
     private int WARNING_MESSAGE;
     public String language; //castellano, catalan, ingles
@@ -89,7 +91,8 @@ public class Trees extends javax.swing.JFrame {
         operation = "Eliminar";
         printConsole("Eliminar (" + key + "," + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
-        this.simulator.delete(key);
+        String delete;
+        delete = this.simulator.delete(key);
         this.repaintTree();
         printConsole(msgexit, msgexit, msgexit);
     }
@@ -1670,7 +1673,7 @@ public class Trees extends javax.swing.JFrame {
                 Integer i = new Integer(txtkey.getText());
                 operation = "Eliminar";
                 printConsole("Eliminar (" + txtkey.getText() + ") \n", "Delete (" + txtkey.getText() + ") \n", "Eliminar (" + txtkey.getText() + ") \n");
-                deleteKey(i.intValue());
+                deleteKey(i);
             }
 
             optinsert.setEnabled(true);

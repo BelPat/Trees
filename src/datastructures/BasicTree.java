@@ -6,7 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
-public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>> {
+public class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>> {
 
     private Node root, left,right;
     public T value;
@@ -112,38 +112,38 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
 
     }
 
-    abstract void cutLeaves();
+  //  abstract void cutLeaves();
     
-    abstract boolean find(T key);
+ //   abstract boolean find(T key);
     
-    abstract Comparable delete(T key);
+  //  abstract Comparable delete(T key);
     
-    abstract boolean add( T key );
+ //   abstract boolean add( T key );
     
-    abstract public Node createNode(T key);
+  //  abstract public Node createNode(T key);
  
-    protected DefaultMutableTreeNode createJtree(Node r, String msg) {
-        if (this.isLeaf(r)) {
-            return (new DefaultMutableTreeNode(msg + r.getKey().toString()));
-        }
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode(msg + r.getKey().toString());
-        if (r.getLeft() != null) {
-            x.add(createJtree(r.getLeft(), "Left->"));
-        }
-        if (r.getRight() != null) {
-            x.add(createJtree(r.getRight(), "Right->"));
-        }
-        return x;
+    public boolean find(T key){
+        return true;
     }
-
-    public JTree getJtree() {
-        DefaultMutableTreeNode x = new DefaultMutableTreeNode("ARBOL-VACIO");
-        if (this.isEmpty()) {
-            return (new JTree(x));
-        }
-        return (new JTree(createJtree(this.root, "root(T)->")));
+    
+    public boolean add(T key){
+        return true;
     }
-
+    
+    public Comparable delete(T key){
+        return key;
+    }
+    public BTree getBTree(){
+        return new BTree<Integer>();
+    }
+    
+    public RBTree getRBTree(){
+        return new RBTree();
+    }
+    
+    public AVLTree getAVLTree(){
+        return new AVLTree();
+    }
     public JPanel getPaint() {
         return new Graphic<>( this );
     }
@@ -152,4 +152,10 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
        Graphic ae =new Graphic <>(this);
        return ae.getPositionNodes();
    }
+
+    void cutLeaves() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
+   
 }
