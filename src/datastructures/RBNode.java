@@ -69,17 +69,6 @@ import static datastructures.RBNode.BLACK;
         return numRight;
     }
 
-/*
-    @Override
-    public RBNode < T > getLeft() {
-            return (RBNode<T>) (super.getLeft());
-    }
-
-    @Override
-    public RBNode < T > getRight() {
-            return (RBNode<T>) (super.getRight());
-    } 
-*/
     public int getColor() {
         return color;
     }

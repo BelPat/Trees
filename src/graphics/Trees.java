@@ -93,7 +93,8 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         operation = "Eliminar";
         printConsole("Eliminar (" + key + "," + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
-        String delete = this.simulator.delete(key);
+        String delete;
+        delete = this.simulator.delete(key);
         this.repaintTree();
         printConsole(msgexit, msgexit, msgexit);
     }

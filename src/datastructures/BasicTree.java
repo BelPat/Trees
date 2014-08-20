@@ -134,15 +134,15 @@ public class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>>
         return key;
     }
     public BTree getBTree(){
-        return new BTree<Integer>();
+        return new BTree<>();
     }
     
     public RBTree getRBTree(){
-        return new RBTree();
+        return new RBTree<>();
     }
     
     public AVLTree getAVLTree(){
-        return new AVLTree();
+        return new AVLTree<>();
     }
     public JPanel getPaint() {
         return new Graphic<>( this );
