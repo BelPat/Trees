@@ -1,8 +1,6 @@
 package datastructures;
 
 import java.util.HashMap;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
@@ -47,17 +45,11 @@ public class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>>
     }
 
     private void preOrder(Node r, SimpleList<Node, T> l) {
-        System.out.println(r);
-        System.out.println("*******************************");
+
         if (r != null) {
             l.addEnd(r.getKey());
             preOrder(r.getLeft(), l);
-            System.out.println("Left");
-            System.out.println(r.getLeft());
-            preOrder(r.getRight(), l);
-            System.out.println("Right");
-            System.out.println(r.getRight());
-            
+            preOrder(r.getRight(), l);        
         }
     }
 
@@ -130,7 +122,7 @@ public class BasicTree<Node extends BasicNode<Node, T>, T extends Comparable<T>>
         return true;
     }
     
-    public Comparable delete(T key){
+    public T delete(T key){
         return key;
     }
     public BTree getBTree(){

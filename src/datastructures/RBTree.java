@@ -294,7 +294,7 @@ return y;
 // @param: v, T el valor que queremos delete del RBTree
 // Borramos v del RBTree
 @Override
-public Comparable delete(T v){
+public T delete(T v){
 
     RBNode<T> z = findNode(v);
     RBNode<T> x = empty;
@@ -483,7 +483,7 @@ private void deleteModificarNum(RBNode<T> x){
      /**
      * Retorna el BasicNode si existe un dato en el árbol binario, o null en caso
  contrario.     
-     *  @param: key, T dato a find en el AbolRN
+     * @param key
      * @return un RBNode ,si el dato está o null en caso contrario.
      */
     public RBNode<T> findNode(T key){
@@ -512,11 +512,7 @@ private void deleteModificarNum(RBNode<T> x){
     // @return: true si el node es igual a empty o false en caso contrario
     private boolean isEmpty(RBNode node){
 
-        if (node.getKey()==null){
-            return true;
-        }else return false;
-            
-    //return node == empty;
+    return node.getKey()==null;
 
     }// fin isEmpty(RBNode node)
 
@@ -526,6 +522,7 @@ private void deleteModificarNum(RBNode<T> x){
      *
      * @return un iterador de la clase Iterator de la java.util
      */
+@Override
     public Iterator<T> preOrder() {
         SimpleList<RBNode<T>,T> l = new SimpleList<>();
         preOrder(super.getRoot(), l);

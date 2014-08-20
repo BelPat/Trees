@@ -55,7 +55,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     */
 
     @Override
-        public Comparable delete( T x )    {
+        public T delete( T x )    {
         if(!this.find(x))   {
                     return null;
         }
@@ -149,6 +149,3 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     }
 
 } //Fin de clase
-
-
- 

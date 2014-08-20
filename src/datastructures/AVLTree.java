@@ -2,8 +2,6 @@ package datastructures;
  
 import java.util.Iterator;
 import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -89,7 +87,7 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
  @Override
-     public Comparable delete(T k) {
+     public T delete(T k) {
         T aux_key = deleteAVL((AVLNode<T>)super.getRoot(), (T)k);
       return(aux_key);
     }
@@ -371,4 +369,3 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }*/
  
 }
-

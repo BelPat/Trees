@@ -1,20 +1,23 @@
 package graphics;
 
+import datastructures.AVLTree;
+import datastructures.BTree;
 import datastructures.BasicNode;
+import datastructures.RBTree;
+import datastructures.Simulator;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import datastructures.Simulator;
-import java.util.ResourceBundle;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.text.Caret;
 
 /**
@@ -30,7 +33,7 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
     public String path;
     public String operation;
     public runStep ep = new runStep();
-    public Simulator simulator;
+    public Simulator<Integer> simulator;
     public boolean seleccionarbol = false;
     public static String chosse;
 
@@ -158,13 +161,16 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
             return false;
         } else {
-            if (seleccionarbol == false) {
+             if (seleccionarbol == false) {
                 if (optabc.isSelected()) {
-                    this.simulator = new Simulator<>("abc");
+                    BTree<Integer> bTree=new BTree<>();
+                    this.simulator = new Simulator<>(bTree);
                 } else if (optavl.isSelected()) {
-                    this.simulator = new Simulator<>("avl");
+                    AVLTree<Integer> aTree=new AVLTree<>();
+                    this.simulator = new Simulator<>(aTree);
                 } else if (optrn.isSelected()) {
-                    this.simulator = new Simulator<>("rn");
+                    RBTree<Integer> rTree=new RBTree<>();
+                    this.simulator = new Simulator<>(rTree);
                 }
                 seleccionarbol = true;
             }
