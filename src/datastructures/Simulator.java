@@ -14,14 +14,14 @@ import javax.swing.JPanel;
  */
 public class Simulator <T extends Comparable<T>> {
 
-    BasicTree pTree;
+    BasicTree<?,T> pTree;
     
     
     public Simulator() {
      
      }
     
-    public Simulator(BasicTree t) {
+    public Simulator(BasicTree<?,T> t) {
             pTree=t;    
      }
 
@@ -44,11 +44,11 @@ public class Simulator <T extends Comparable<T>> {
     
 
     public void deleteTree () {
-        Iterator it ;
+        Iterator<T> it ;
         it = this.pTree.preOrder ();
         //String r=msg+"\n";
         while ( it.hasNext () ) {
-            delete ( (T) it.next ()) ;
+            delete ( it.next ()) ;
         }
     } 
     
@@ -78,7 +78,7 @@ public class Simulator <T extends Comparable<T>> {
         if ( this.pTree.getRoot().getKey().equals( child ) )
             return ("La root no tiene father");
         
-        Comparable father = this.pTree.getFather( child );
+         T father = this.pTree.getFather( child );
         
         if ( father == null )
             return ( "No existe el Dato: " + child.toString() );
