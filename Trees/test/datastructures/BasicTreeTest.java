@@ -4,6 +4,7 @@
  */
 package datastructures;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,7 +20,6 @@ public class BasicTreeTest {
      */
     @Test
     public void testGetRaiz() {
-        BasicTree<Integer> instance = new BasicTree<> ();
         BTree<Integer> arbol = new BTree<> ();
   
         arbol.add( 4 );
@@ -41,7 +41,7 @@ public class BasicTreeTest {
      */
     @Test
     public void testSetRaiz() {
-        BasicTree<Integer> instance = new BasicTree<> ();
+        BTree<Integer> instance = new BTree<> ();
         BNode<Integer> expResult = new BNode<>( 4 );
         instance.setRoot(expResult);
         
@@ -66,12 +66,12 @@ public class BasicTreeTest {
         instance.add( 22 );
         instance.add( 27 );
 
-        SimpleList<Integer>  l = new SimpleList<> ();
-        l.addEnd( 6 );
-        l.addEnd( 11 );
-        l.addEnd( 15 );
-        l.addEnd( 22 );
-        l.addEnd( 27 );        
+        ArrayList l = new ArrayList ();
+        l.add( 6 );
+        l.add( 11 );
+        l.add( 15 );
+        l.add( 22 );
+        l.add( 27 );        
 
        Iterator expResult = l.iterator();
        Iterator result = instance.getLeaves();
@@ -120,7 +120,7 @@ public class BasicTreeTest {
      */
     @Test
     public void testEsVacio() {
-        BasicTree<Integer> instance = new BasicTree<> ();
+        BTree<Integer> instance = new BTree<> ();
     
         boolean result = instance.isEmpty();
         assertTrue(result);
@@ -157,7 +157,7 @@ public class BasicTreeTest {
     public void testPreOrden() {
         BTree<Integer> instance = new BTree<>();
         
-        instance.add( 14 );
+        instance.add( new Integer(4) );
         instance.add( 15 );
         instance.add( 4 );
         instance.add( 9 );
@@ -169,19 +169,19 @@ public class BasicTreeTest {
         instance.add( 5 );
         instance.add( 17 );
 
-        SimpleList<Integer> l = new SimpleList<>();
+        ArrayList l = new ArrayList ();
         
-        l.addEnd( 14 );
-        l.addEnd( 4 );
-        l.addEnd( 3 );
-        l.addEnd( 9 );
-        l.addEnd( 7 );
-        l.addEnd( 5 );
-        l.addEnd( 15 );
-        l.addEnd( 18 );
-        l.addEnd( 16 );
-        l.addEnd( 17 );
-        l.addEnd( 20 );        
+        l.add( 14 );
+        l.add( 4 );
+        l.add( 3 );
+        l.add( 9 );
+        l.add( 7 );
+        l.add( 5 );
+        l.add( 15 );
+        l.add( 18 );
+        l.add( 16 );
+        l.add( 17 );
+        l.add( 20 );        
 
        Iterator expResult = l.iterator();
        Iterator result = instance.preOrder();

@@ -20,8 +20,7 @@ private RBNode<T> empty = new RBNode<>();
 
 
     /**
-     * Crea un árbol con los nodes a empty
-     *
+     * Construye un árbol con los nodos vacíos.
      */
     public RBTree() {
         super.setRoot(empty);
@@ -30,13 +29,11 @@ private RBNode<T> empty = new RBNode<>();
 
     }
  
- 
-    
     /**
      * Realiza una rotación a la getLeft()uierda de x
-    * @param: x, El node que va a rotar hacia la getLeft()uierda
-    * 
-   */
+     * @param: x, El node que va a rotar hacia la getLeft()uierda
+     * 
+     */
     private void leftRotacion(RBNode<T> x){
 
     leftRotationModifyNum(x);
@@ -62,27 +59,22 @@ private RBNode<T> empty = new RBNode<>();
     x.setRoot(y);
     }// fin leftRotacion(RBNode x)
 
-
-  /**
+    /**
      * Modifica el valor de numgetLeft() y numgetRight()
-    * @param: x, El node que va a rotar hacia la getLeft()uierda
-    * 
-   */
+     * 
+     * @param x El node que va a rotar hacia la getLeft()uierda
+     */
     private void leftRotationModifyNum(RBNode<T> x){
 
     if (isEmpty(x.getLeft()) && isEmpty((RBNode) x.getRight().getLeft())){
         x.setNumLeft ( 0 );
         x.setNumRight( 0 );
         x.getRight().setNumLeft ( 1 );
-    }
-
-    else if (isEmpty(x.getLeft()) && !isEmpty(x.getRight().getLeft())){
+    } else if (isEmpty(x.getLeft()) && !isEmpty(x.getRight().getLeft())){
         x.setNumLeft ( 0 );
         x.setNumRight(  1 + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight() );
         x.getRight().setNumLeft ( 2 + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight() );
-    }
-
-    else if (!isEmpty(x.getLeft()) && isEmpty(x.getRight().getLeft())){
+    }  else if (!isEmpty(x.getLeft()) && isEmpty(x.getRight().getLeft())){
         x.setNumRight(0); 
         x.getRight().setNumLeft ( 2 + x.getLeft().getNumLeft() + x.getLeft().getNumRight() );
 
@@ -95,18 +87,15 @@ private RBNode<T> empty = new RBNode<>();
     }
 
     }// fin leftRotationModifyNum(RBNode x)
-
-    
-  /**
-     * Realiza una rotación a la dereecha de y
-    * @param: y, El node que va a rotar hacia la getRight()echa
-    * 
-   */
-
-
-private void rightRotation(RBNode<T> y){
-
-rightRotationModifyNum(y);
+ 
+    /**
+     * Realiza una rotación a la dereecha de y.
+     * 
+     * @param y El node que va a rotar hacia la getRight()echa
+     * 
+     */
+    private void rightRotation(RBNode<T> y){
+        rightRotationModifyNum(y);
 
         RBNode<T> x = y.getLeft();
         y.setLeft( x.getRight() );
@@ -125,48 +114,46 @@ rightRotationModifyNum(y);
         x.setRight( y );
         y.setRoot( x );
 
-}// finrightRotation(RBNode y)
+    }// finrightRotation(RBNode y)
 
-  /**
-     * Modifica el valor de numgetLeft() y numgetRight()
-    * @param: y, El node que va a rotar hacia la getRight()echa
-    * 
-   */
-private void rightRotationModifyNum(RBNode<T> y){
+    /**
+     * Modifica el valor de numgetLeft() y numgetRight().
+     * 
+     * @param: y, El node que va a rotar hacia la getRight()echa
+     */
+    private void rightRotationModifyNum(RBNode<T> y){
 
-if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
-    y.setNumRight( 0 );
-    y.setNumLeft ( 0 );
-    y.getLeft().setNumRight( 1 );
-} else if (isEmpty(y.getRight()) && !isEmpty(y.getLeft().getRight())){
-    y.setNumRight( 0 );
-    y.setNumLeft ( 1 + y.getLeft().getRight().getNumRight() +   y.getLeft().getRight().getNumLeft() );
-    y.getLeft().setNumRight( 2 + y.getLeft().getRight().getNumRight()+
-    y.getLeft().getRight().getNumLeft());
-} else if (!isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
-    y.setNumLeft ( 0 );
-    y.getLeft().setNumRight( 2 + y.getRight().getNumRight() +y.getRight().getNumLeft() );
+        if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
+            y.setNumRight( 0 );
+            y.setNumLeft ( 0 );
+            y.getLeft().setNumRight( 1 );
+        } else if (isEmpty(y.getRight()) && !isEmpty(y.getLeft().getRight())){
+            y.setNumRight( 0 );
+            y.setNumLeft ( 1 + y.getLeft().getRight().getNumRight() +   y.getLeft().getRight().getNumLeft() );
+            y.getLeft().setNumRight( 2 + y.getLeft().getRight().getNumRight()+
+            y.getLeft().getRight().getNumLeft());
+        } else if (!isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
+            y.setNumLeft ( 0 );
+            y.getLeft().setNumRight( 2 + y.getRight().getNumRight() +y.getRight().getNumLeft() );
 
-} else {
-    y.setNumLeft ( 1 + y.getLeft().getRight().getNumRight() +  y.getLeft().getRight().getNumLeft() );
-    y.getLeft().setNumRight( 3 + y.getRight().getNumRight() +  y.getRight().getNumLeft() +   y.getLeft().getRight().getNumRight() + y.getLeft().getRight().getNumLeft() );
-}
+        } else {
+            y.setNumLeft ( 1 + y.getLeft().getRight().getNumRight() +  y.getLeft().getRight().getNumLeft() );
+            y.getLeft().setNumRight( 3 + y.getRight().getNumRight() +  y.getRight().getNumLeft() +   y.getLeft().getRight().getNumRight() + y.getLeft().getRight().getNumLeft() );
+        }
 
-}// finrightRotationModificarNum(RBNode y)
+        }// finrightRotationModificarNum(RBNode y)
 
-    
     /**
      * Dado T, se inserta este dato en un RBTree<T> y retorna si se ha hecho de forma correcta.
+     * 
      * @param key, el dato que se desea add
      * @return true si dato ha sido insertado de forma correcta, false en caso contraio
      */
-@Override
+    @Override
     public boolean add(T key) {
     
-    System.out.println(" --- > rb.add " + key);
-        
-      //  findNode(key);
-        if ( findNode(key)== null)    {
+        System.out.println(" --- > rb.add " + key);
+       if ( findNode(key)== null)    {
             add(new RBNode<>(key));
              return true;
         }
@@ -174,43 +161,43 @@ if (isEmpty(y.getRight()) && isEmpty(y.getLeft().getRight())){
             return false;
     }
     
-// @param: z, El node que se va add en el árbol
-// Inserta z en la posición adecuada del RBTree y modifica los valores numgetRight() y numgetLeft()
-    
-private void add(RBNode<T> z) {
+    // @param: z, El node que se va add en el árbol
+    // Inserta z en la posición adecuada del RBTree y modifica los valores numgetRight() y numgetLeft()
 
-    RBNode<T> y = empty;
-    RBNode<T> x = (RBNode<T>) super.getRoot();
+    private void add(RBNode<T> z) {
 
-    while (!isEmpty(x)){
-    y = x;
+        RBNode<T> y = empty;
+        RBNode<T> x = (RBNode<T>) super.getRoot();
 
-    if ( ( z.getKey() ).compareTo( x.getKey() ) < 0){
-        x.setNumLeft( x.getNumLeft() + 1 );
-        x = x.getLeft();
-    } else {
-           x.setNumRight( x.getNumRight() + 1 );
-        x = x.getRight();
-    }
-    }
-    z.setRoot(y);
+        while (!isEmpty(x)){
+            y = x;
+
+            if ( ( z.getKey() ).compareTo( x.getKey() ) < 0){
+                x.setNumLeft( x.getNumLeft() + 1 );
+                x = x.getLeft();
+            } else {
+                x.setNumRight( x.getNumRight() + 1 );
+                x = x.getRight();
+            }
+        }
+        z.setRoot(y);
 
 
-    if (isEmpty(y)){
-        super.setRoot(z);
-    } else if ((z.getKey()).compareTo(y.getKey()) < 0){
-        y.setLeft( z );
-    }else{
-        y.setRight( z );
-    }
+        if (isEmpty(y)){
+            super.setRoot(z);
+        } else if ((z.getKey()).compareTo(y.getKey()) < 0){
+            y.setLeft( z );
+        }else{
+            y.setRight( z );
+        }
 
-    z.setLeft( empty );
-    z.setRight( empty );
-    z.setColor( RBNode.RED );
+        z.setLeft( empty );
+        z.setRight( empty );
+        z.setColor( RBNode.RED );
 
-    addModifyNum(z);
+        addModifyNum(z);
 
-}// fin add(RBNode z)
+    }// fin add(RBNode z)
 
 
 // @param: z, el node insertado en el árbol y igual ha causado el incumplimiento de alguna 
@@ -529,10 +516,12 @@ private void deleteModificarNum(RBNode<T> x){
 
     }
 
-
-
-    // @param: node, el RBNode que queremos comprobar si es empty
-    // @return: true si el node es igual a empty o false en caso contrario
+    /**
+     * Determina si el árbol es vacío.
+     * 
+     * @return <CODE>true</CODE> si el árbol es vacío,
+     * <CODE>false</CODE> en caso contrario
+     */
     private boolean isEmpty(RBNode node){
 
     return node.getKey()==null;
@@ -583,8 +572,8 @@ private void deleteModificarNum(RBNode<T> x){
 @Override
     public void cutLeaves() {
          Iterator<T> it= this.getLeaves();
-          while(it.hasNext())
-          { delete(it.next());
+          while(it.hasNext()) { 
+              delete(it.next());
           }
     }
     
@@ -654,9 +643,10 @@ private void deleteModificarNum(RBNode<T> x){
     
 
     /**
-     *
-     * @param key
-     * @return
+     * Crea un nodo con la clave.
+     * 
+     * @param key la clave
+     * @return el nodo
      */
     public RBNode<T> createNode(T key){
         return new RBNode<>(key);

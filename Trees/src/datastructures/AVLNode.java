@@ -14,8 +14,9 @@ package datastructures;
     private int height;
 
     /**
-     *
-     * @param k
+     * Construye un AVLNode con la clave del nodo.
+     * 
+     * @param k la clave del nodo
      */
     public AVLNode( T k ) {
         super (k);
@@ -25,7 +26,7 @@ package datastructures;
     }
     
     /**
-     *
+     * Construye un AVLNode vacío.
      */
     public AVLNode( ) {
         super ();
@@ -34,7 +35,12 @@ package datastructures;
         this.root = null;
     }
 
-   AVLNode( AVLNode<T> aux) {        
+    /**
+     * Construye un AVLNode con el nodo.
+     * 
+     * @param aux el nodo
+     */
+    public AVLNode( AVLNode<T> aux) {        
         super.setKey(aux.getKey());
         super.setRight( aux.getRight());
         super.setLeft( aux.getLeft());   
@@ -45,48 +51,54 @@ package datastructures;
     }
 
     /**
-     *
-     * @return
+     * Retorna la raíz del nodo.
+     * 
+     * @return la raíz del nodo
      */
     public AVLNode < T >  getRoot() {        
         return root;
     }
 
     /**
-     *
-     * @return
+     * Retorna el balanceo del nodo.
+     * 
+     * @return el balanceo del nodo
      */
     public int getBalance() {
         return balance;
     }
 
     /**
-     *
-     * @return
+     * Retorna la altura del nodo.
+     * 
+     * @return la altura del nodo
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     *
-     * @param root
+     * Establece la raíz del nodo.
+     * 
+     * @param root la raíz del nodo
      */
     public void setRoot( AVLNode < T >  root ) {
         this.root = root;
     }
 
     /**
-     *
-     * @param balance
+     * Establece el balanceo del nodo.
+     * 
+     * @param balance el balanceo del nodo
      */
     public void setBalance( int balance ) {
         this.balance = balance;
     }
 
     /**
-     *
-     * @param height
+     * Establece la altura del nodo.
+     * 
+     * @param height la altura del nodo
      */
     public void setHeight( int height ) {
         this.height = height;

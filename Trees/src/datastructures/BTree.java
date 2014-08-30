@@ -11,17 +11,18 @@ import java.util.Iterator;
 public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
 
     /**
-     *
+     * Construye un BTree vacío.
      */
     public BTree()    {
         super();
     }
 
     /**
-    *  Inserta un new_key en el árbol binario de búsqueda según factor de ordenamiento
+     * Inserta un new_key en el árbol binario de búsqueda según factor de ordenamiento
+     * 
      * @param key
-    * @return  true si el elemento fue insertado o false en caso contrario
-    */
+     * @return  true si el elemento fue insertado o false en caso contrario
+     */
     @Override
     public boolean add( T key )    {
         BNode< T > new_node;
@@ -51,13 +52,13 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     }
 
     /**
-    * Bonew_nodea un elmento del árbol binario de búsqueda, 
-    * manteniendo su propieda de orden, para esto se busca el menor de los Rightechos y lo intercambia por el new_key
-    *que desea delete. 
-    * @param x new_key que se desea delete
-    * @return  el new_key bonew_nodeado o null si no lo encontro
-    */
-
+     * Bonew_nodea un elmento del árbol binario de búsqueda, 
+     * manteniendo su propieda de orden, para esto se busca el menor de los Rightechos 
+     * y lo intercambia por el new_key que desea delete. 
+     * 
+     * @param x new_key que se desea delete
+     * @return el new_key bonew_nodeado o null si no lo encontro
+     */
     @Override
         public T delete( T x )    {
         if(!this.find(x))   {
@@ -95,23 +96,25 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         return r;
     }
 
-    /*
-    *	Busca el menor new_key del árbol. El menor new_key
-    *	del árbol se encuentra en el nodo mas Leftuierdo.
-    **/
+    /**
+     * Busca el menor new_key del árbol. El menor new_key
+     * del árbol se encuentra en el nodo mas Leftuierdo.
+     * 
+     * @param r
+     * @return
+     */
     private BNode<T> findMin(BNode<T> r)
     {
         for(; r.getLeft()!=null; r=r.getLeft());
         return(r);
     }
 
-
     /**
-    *  Retorna true si existe un new_key en el árbol binario de búsqueda, o false en caso contrario.
+     * Retorna true si existe un new_key en el árbol binario de búsqueda, o false en caso contrario.
+     * 
      * @param x
-    * @return un boolean , true si el new_key está o false en caso contrario.
+     * @return un boolean, true si el new_key está o false en caso contrario.
     */
-
     @Override
         public boolean find(T x)
     {
@@ -138,8 +141,8 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
 
 
     /**
-    * Elimina las hojas(nodos terminales) del árbol binario.
-    */
+     * Elimina las hojas(nodos terminales) del árbol binario.
+     */
     @Override
     public void cutLeaves() {
     Iterator<T> it = this.getLeaves();
@@ -148,9 +151,10 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         }
     }
     
-        /**
-     *
-     * @return
+    /**
+     * Retorna un interador de todas las hojas del árbol.
+     * 
+     * @return el interador de todas las hojas del árbol
      */
     @Override
     public Iterator<T> getLeaves() {
@@ -160,8 +164,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         getLeaves(super.getRoot(), keylist);
         return (keylist.iterator());
     }
-    
- 
+     
     @Override
     public void getLeaves(BNode<T> r, ArrayList<T> keylist) {
         if (r != null) {
@@ -175,9 +178,10 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * Crea un nodo con la clave.
+     * 
+     * @param key la clave
+     * @return el nodo
      */
     public BNode<T> createNode(T key){
         return new BNode<>(key);

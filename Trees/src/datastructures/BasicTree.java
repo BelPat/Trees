@@ -21,48 +21,70 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
     public T value;
 
     /**
-     *
+     * Construye un BasicTree vacío.
      */
     public BasicTree() {
         this.root = null;
     }
 
     /**
-     *
-     * @param root
+     * Construye un BasicTree con el nodo raíz del árbol.
+     * 
+     * @param root el nodo raíz del árbol
      */
     public BasicTree(Node root) {
         this.root = root;
     }
-    void setRoot(Node r) {
+    
+    /**
+     * Establece el nodo raíz del árbol.
+     * 
+     * @param r el nodo raíz del árbol
+     */
+    public void setRoot(Node r) {
         this.root = r;
     }
 
     /**
-     *
-     * @return
+     * Retorna el nodo raíz del árbol.
+     * 
+     * @return el nodo raíz del árbol
      */
     public Node getRoot() {
         return this.root;
     }
-    void setLeft(Node l){
+    
+    /**
+     * Establece el nodo izquierdo del árbol.
+     * 
+     * @param l el nodo izquierdo del árbol
+     */
+    public void setLeft(Node l){
         this.left=l;
     }
 
     /**
-     *
-     * @return
+     * Retorna el nodo izquierdo del árbol
+     * 
+     * @return el nodo izquierdo del árbol
      */
     public Node getLeft() {
         return this.left;
     }
-    void setRight(Node r){
+    
+    /**
+     * Establece el nodo derecho del árbol.
+     * 
+     * @param r el nodo derecho del árbol
+     */
+    public void setRight(Node r){
         this.right=r;
     }
 
     /**
-     *
-     * @return
+     * Retorna el nodo derecho del árbol.
+     * 
+     * @return el nodo derecho del árbol
      */
     public Node getRight() {
         return this.right;
@@ -88,14 +110,21 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
         }
     }
 
+    /**
+     * Determina si el nodo es una hoja.
+     * 
+     * @return <CODE>true</CODE> si el nodo es una hoja,
+     * <CODE>false</CODE> en caso contrario
+     */
     boolean isLeaf(Node x) {
       return (x != null && x.getLeft() == null && x.getRight() == null);
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * Retorna el padre del árbol con la clave.
+     * 
+     * @param key la clave
+     * @return el padre del àrbol
      */
     public T getFather(T key) {
         if (key == null || this.root == null) {
@@ -108,6 +137,12 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
         return (x.getKey());
     }
 
+     /**
+     * Retorna .
+     * 
+     * @param key
+     * @return 
+     */
     private Node getFather(Node x, T key) {
         if (x == null) {
             return null;
@@ -124,76 +159,16 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
     }
 
     /**
-     *
-     * @return
+     * Determina si el árbol es vacío.
+     * 
+     * @return <CODE>true</CODE> si el árbol es vacío,
+     * <CODE>false</CODE> en caso contrario
      */
     public boolean isEmpty() {
         return (this.root == null);
     }
 
-     abstract void cutLeaves();
-     
-    
- //   abstract boolean find(T key);
-    
-  //  abstract Comparable delete(T key);
-    
- //   abstract boolean add( T key );
-    
-  //  abstract public Node createNode(T key);
  
-    /**
-     *
-     * @param key
-     * @return
-     */
-     
-    public boolean find(T key){
-        return true;
-    }
-    
-    /**
-     *
-     * @param key
-     * @return
-     */
-    public boolean add(T key){
-        return true;
-    }
-    
-    /**
-     *
-     * @param key
-     * @return
-     */
-    public T delete(T key){
-        return key;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public BTree getBTree(){
-        return new BTree<>();
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public RBTree getRBTree(){
-        return new RBTree<>();
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public AVLTree getAVLTree(){
-        return new AVLTree<>();
-    }
-
     /**
      *
      * @return
@@ -203,13 +178,19 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
     }
     
     /**
-     *
-     * @return
+     * Retorna todas las posiciones de los nodos.
+     * 
+     * @return las posiciones de los nodos
      */
     public HashMap getPositionNodes()  {     
        Graphic ae =new Graphic <>(this);
        return ae.getPositionNodes();
    }
+    
+    abstract void cutLeaves();
+    abstract boolean find(T key);
+    abstract Comparable delete(T key);
+    abstract boolean add( T key );
     abstract public Iterator<T> getLeaves() ;
     abstract public void getLeaves(Node r, ArrayList<T> keylist);
    

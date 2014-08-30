@@ -4,6 +4,7 @@
  */
 package datastructures;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,11 +50,11 @@ public class RBTreeTest {
         instance.add( 84 );
         instance.add( 25 );        
                 
-        SimpleList<Integer> l = new SimpleList<>();
-        l.addEnd( 10 );
-        l.addEnd( 25 );
-        l.addEnd( 40 );
-        l.addEnd( 84 );        
+         ArrayList l = new ArrayList ();
+        l.add( 10 );
+        l.add( 25 );
+        l.add( 40 );
+        l.add( 84 );        
         
         Iterator expResult = l.iterator();
         Iterator result = instance.getLeaves();
@@ -133,16 +134,16 @@ public class RBTreeTest {
         instance.add( 7 );
         instance.add( 9 );
 
-        SimpleList<Integer> l = new SimpleList<>();
-        l.addEnd( 4 );
-        l.addEnd( 2 );
-        l.addEnd( 1 );
-        l.addEnd( 3 );
-        l.addEnd( 6 );
-        l.addEnd( 5 );
-        l.addEnd( 8 );
-        l.addEnd( 7);
-        l.addEnd( 9);
+        ArrayList l = new ArrayList ();
+        l.add( 4 );
+        l.add( 2 );
+        l.add( 1 );
+        l.add( 3 );
+        l.add( 6 );
+        l.add( 5 );
+        l.add( 8 );
+        l.add( 7);
+        l.add( 9);
         
         Iterator expResult = l.iterator();
         Iterator result = instance.preOrder();

@@ -14,10 +14,8 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
 // private AVLNode < T > root; 
  
     /**
-     *
+     * Construye un árbol AVLTree vacío.
      */
-     
- 
     public AVLTree() {
        super();
     }                              
@@ -28,7 +26,7 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
      * @return
      */
     @Override
-     public boolean add(T k) {
+    public boolean add(T k) {
 
       AVLNode < T >  n = new AVLNode < > (k);
              
@@ -212,8 +210,9 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
    
     /**
-     *
-     * @return
+     * Retorna un interador de todas las hojas del árbol.
+     * 
+     * @return el interador de todas las hojas del árbol
      */
     @Override
      public Iterator<T> getLeaves() {
@@ -374,6 +373,13 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
+    /**
+     * Retorna el valor maximo entre el primer valor y el segundo valor.
+     * 
+     * @param a primer valor
+     * @param b segundo valor
+     * @return el valor maximo
+     */
     private int maximum(int a, int b) {
       if(a>=b) {
            return a;
@@ -439,9 +445,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * Crea un nodo con la clave.
+     * 
+     * @param key la clave
+     * @return el nodo
      */
     public AVLNode<T> createNode(T key){
         return new AVLNode<>(key);

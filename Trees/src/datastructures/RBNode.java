@@ -24,7 +24,7 @@ import static datastructures.RBNode.BLACK;
     private int color;
     
     /**
-     *
+     * Construye un RBNode vacío.
      */
     public RBNode(){
         this.color = BLACK;
@@ -36,8 +36,9 @@ import static datastructures.RBNode.BLACK;
     }
 
     /**
-     *
-     * @param key
+     * Construye un RBNode con la clave del nodo.
+     * 
+     * @param key la clave del nodo
      */
     public RBNode( T key ){
         super(key); 
@@ -49,8 +50,9 @@ import static datastructures.RBNode.BLACK;
     }
     
     /**
-     *
-     * @param aux
+     * Construye un RBNode con el nodo.
+     * 
+     * @param aux el nodo
      */
     public RBNode( RBNode<T> aux) {        
         super.setKey(aux.getKey());
@@ -64,64 +66,72 @@ import static datastructures.RBNode.BLACK;
     }
 
     /**
-     *
-     * @param numLeft
+     * Establece el número de elementos a la izquierda de cada nodo.
+     * 
+     * @param numLeft el número de elementos a la izquierda de cada nodo
      */
     public void setNumLeft(int numLeft) {
         this.numLeft = numLeft;
     }
 
     /**
-     *
-     * @param numRight
+     * Establece el número de elementos a la derecha de cada nodo.
+     * 
+     * @param numRight el número de elementos a la derecha de cada nodo
      */
     public void setNumRight(int numRight) {
         this.numRight = numRight;
     }
 
     /**
-     *
-     * @return
+     * Retorna el número de elementos a la izquierda de cada nodo.
+     * 
+     * @return el número de elementos a la izquierda de cada nodo
      */
     public int getNumLeft() {
         return numLeft;
     }
 
     /**
-     *
-     * @return
+     * Retorna el número de elementos a la derecha de cada nodo.
+     * 
+     * @return el número de elementos a la derecha de cada nodo
      */
     public int getNumRight() {
         return numRight;
     }
 
     /**
-     *
-     * @return
+     * Retorna el color del nodo.
+     * 
+     * @return el color del nodo
      */
     public int getColor() {
         return color;
     }
 
     /**
-     *
-     * @param d
+     * Establece el color del nodo.
+     * 
+     * @param d el color del nodo
      */
     public void setColor( int d ) {
         this.color = d;
     }
     
     /**
-     *
-     * @return
+     * Retorna la raíz del nodo.
+     * 
+     * @return la raíz del nodo
      */
     public RBNode < T >  getRoot() {
         return root;
     }
     
     /**
-     *
-     * @param root
+     * Establece la raíz del nodo.
+     * 
+     * @param root la raíz del nodo
      */
     public void setRoot( RBNode < T >  root ) {
         this.root = root;
