@@ -1,5 +1,6 @@
 package datastructures;
  
+import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JPanel;
 
@@ -12,13 +13,20 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
  
 // private AVLNode < T > root; 
  
- 
+    /**
+     * Construye un árbol AVLTree vacío.
+     */
     public AVLTree() {
        super();
     }                              
              
- @Override
-     public boolean add(T k) {
+    /**
+     *
+     * @param k
+     * @return
+     */
+    @Override
+    public boolean add(T k) {
 
       AVLNode < T >  n = new AVLNode < > (k);
              
@@ -28,6 +36,12 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       return false;
     }
  
+    /**
+     *
+     * @param p
+     * @param q
+     * @return
+     */
     public boolean add(AVLNode < T > p, AVLNode < T > q) {
       // If  node to compare is null, the node is inserted. If the root is null, it is the root of the tree.
       if(p==null) {
@@ -62,6 +76,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
        return true;
     }
 
+    /**
+     *
+     * @param cur
+     */
     public void recursiveBalance(AVLNode < T > cur) {
       setBalance(cur);
       int balance = cur.getBalance();
@@ -86,12 +104,23 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
- @Override
+    /**
+     *
+     * @param k
+     * @return
+     */
+    @Override
      public T delete(T k) {
         T aux_key = deleteAVL((AVLNode<T>)super.getRoot(), (T)k);
       return(aux_key);
     }
 
+    /**
+     *
+     * @param p
+     * @param q
+     * @return
+     */
     public T deleteAVL(AVLNode < T > p,T q) {
       if( p == null ) {
            return null;
@@ -111,6 +140,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
+    /**
+     *
+     * @param q
+     */
     public void deleteNode(AVLNode < T > q) {
       AVLNode < T > r;
       if( q.getLeft()==null || q.getRight()==null ) {
@@ -146,7 +179,12 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       r = null;
     }
 
- @Override
+    /**
+     *
+     * @param key
+     * @return
+     */
+    @Override
     public boolean find(T key) {
      
      System.out.println("********************** avltree.find ************* " + key);
@@ -171,23 +209,28 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         return ( isright || isleft );
     }
    
-
-    
+    /**
+     * Retorna un interador de todas las hojas del árbol.
+     * 
+     * @return el interador de todas las hojas del árbol
+     */
     @Override
-    public Iterator<T> getLeaves() {
-        SimpleList<AVLNode<T>,T> l = new SimpleList<>();
-        getLeaves(super.getRoot(), l);
-        return (l.iterator());
+     public Iterator<T> getLeaves() {
+        AVLNode<T> new_node = new AVLNode<>();
+        ArrayList<T> keylist = new ArrayList<>();
+        getLeaves(super.getRoot(), keylist);
+        return (keylist.iterator());
     }
 
-    private void getLeaves(AVLNode<T> r, SimpleList<AVLNode<T>,T> l) {
+    @Override
+    public void getLeaves(AVLNode<T> r, ArrayList<T> keylist) {
         if (r != null) {
             if (super.isLeaf(r)) {
-                l.addEnd(r.getKey());
+                keylist.add(r.getKey());
             } else {
             }
-            getLeaves(r.getLeft(), l);
-            getLeaves(r.getRight(), l);
+            getLeaves(r.getLeft(), keylist);
+            getLeaves(r.getRight(), keylist);
         }
 
     }
@@ -207,6 +250,9 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         }
     }
 
+    /**
+     *
+     */
     @Override
      public void cutLeaves() {
 
@@ -217,6 +263,11 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         }
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public AVLNode<T> rotateLeft(AVLNode < T > n) {
       AVLNode < T > v = n.getRight();
       v.setRoot( n.getRoot() ) ;
@@ -238,6 +289,11 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       return v;
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public AVLNode<T> rotateRight( AVLNode < T > n ) {  
       AVLNode < T > v = n.getLeft();
       v.setRoot( n.getRoot());  
@@ -260,16 +316,31 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       return v;
     }
  
+    /**
+     *
+     * @param u
+     * @return
+     */
     public AVLNode<T> doubleRotateLeftRight(AVLNode < T > u) {
         u.setLeft( rotateLeft( u.getLeft()) );
         return rotateRight( u );
     }
 
+    /**
+     *
+     * @param u
+     * @return
+     */
     public AVLNode<T> doubleRotateRightLeft( AVLNode < T > u ) {
         u.setRight( rotateRight( u.getRight()) );
         return rotateLeft( u );
     }
 
+    /**
+     *
+     * @param q
+     * @return
+     */
     public AVLNode<T> successor(AVLNode < T > q) {
       if( q.getRight() != null ) {
            AVLNode < T > r = q.getRight();
@@ -302,6 +373,13 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
+    /**
+     * Retorna el valor maximo entre el primer valor y el segundo valor.
+     * 
+     * @param a primer valor
+     * @param b segundo valor
+     * @return el valor maximo
+     */
     private int maximum(int a, int b) {
       if(a>=b) {
            return a;
@@ -310,13 +388,19 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
       }
     }
 
-
-
+    /**
+     *
+     * @return
+     */
     @Override
     public JPanel getPaint() {
         return new Graphic<>( this );
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return ( this.getRoot() == null );
@@ -340,21 +424,32 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         cur.setBalance( heightright - heightleft);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<T> preOrder() {
-        SimpleList<AVLNode<T>,T> l = new SimpleList<>();
-        preOrder(super.getRoot(), l);
-        return (l.iterator());
+    //    SimpleList<AVLNode<T>,T> l = new SimpleList<>();
+        ArrayList<T> keylist = new ArrayList<T>();
+        preOrder(super.getRoot(), keylist);
+        return (keylist.iterator());
     }
 
-    private void preOrder(AVLNode<T> r, SimpleList<AVLNode<T>,T> l) {
+    private void preOrder(AVLNode<T> r, ArrayList<T> keylist) {
         if (r != null) {
-            l.addEnd(r.getKey());
-            preOrder(r.getLeft(), l);
-            preOrder(r.getRight(), l);
+            keylist.add(r.getKey());
+            preOrder(r.getLeft(), keylist);
+            preOrder(r.getRight(), keylist);
         }
     }
 
+    /**
+     * Crea un nodo con la clave.
+     * 
+     * @param key la clave
+     * @return el nodo
+     */
     public AVLNode<T> createNode(T key){
         return new AVLNode<>(key);
     }
@@ -367,5 +462,6 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     public void setRoot(AVLNode < T > root) {
         this.setRoot(root);
     }*/
+
  
 }

@@ -2,7 +2,6 @@ package graphics;
 
 import datastructures.AVLTree;
 import datastructures.BTree;
-import datastructures.BasicNode;
 import datastructures.RBTree;
 import datastructures.Simulator;
 import java.awt.BorderLayout;
@@ -766,7 +765,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
-        btmhelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669794_Folder-Info.png"))); // NOI18N
+        btmhelp.setBackground(new java.awt.Color(237, 236, 235));
+        btmhelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/info.png"))); // NOI18N
+        btmhelp.setBorderPainted(false);
         btmhelp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btmhelpMouseClicked(evt);
@@ -778,7 +779,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
-        btmreload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669670_order.png"))); // NOI18N
+        btmreload.setBackground(new java.awt.Color(237, 236, 235));
+        btmreload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/view_refresh.png"))); // NOI18N
+        btmreload.setBorderPainted(false);
         btmreload.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btmreloadMouseClicked(evt);
@@ -790,7 +793,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
-        btmplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669712_start.png"))); // NOI18N
+        btmplay.setBackground(new java.awt.Color(237, 236, 235));
+        btmplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/play.png"))); // NOI18N
+        btmplay.setBorderPainted(false);
         btmplay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btmplayMouseClicked(evt);
@@ -802,7 +807,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
-        btmnext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669652_hide-right.png"))); // NOI18N
+        btmnext.setBackground(new java.awt.Color(237, 236, 235));
+        btmnext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/forward.png"))); // NOI18N
+        btmnext.setBorderPainted(false);
         btmnext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btmnextMouseClicked(evt);
@@ -817,7 +824,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
-        btmstop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/1373669729_stop-red.png"))); // NOI18N
+        btmstop.setBackground(new java.awt.Color(237, 236, 235));
+        btmstop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/stop.png"))); // NOI18N
+        btmstop.setBorderPainted(false);
         btmstop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btmstopActionPerformed(evt);
@@ -896,42 +905,45 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
                             .addComponent(optdelete)
                             .addComponent(optsearch)
                             .addComponent(optcut)
-                            .addComponent(optsearchfather))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(optsearchfather)
+                            .addComponent(optleaves))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtkey, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(optinsert)
-                            .addComponent(optleaves))
+                        .addComponent(optinsert)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(optinsert)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optsearch)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(optinsert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(optsearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(optdelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(optcut)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(optsearchfather, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(9, 9, 9)
-                                .addComponent(txtkey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)))))
-                .addComponent(optleaves)
-                .addContainerGap())
+                                .addComponent(optcut)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(optsearchfather)))
+                        .addComponent(optleaves)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(9, 9, 9)
+                        .addComponent(txtkey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))))
         );
 
         GTrees.add(optrn);
@@ -953,23 +965,23 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btmhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btmplay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btmnext, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btmstop, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btmreload, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(69, 69, 69)
-                        .addComponent(cmbexamples, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(88, 88, 88))
+                        .addComponent(cmbexamples, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btmhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btmplay, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btmnext, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btmstop, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btmreload))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(111, 111, 111))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -996,16 +1008,15 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
                     .addComponent(cmbexamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btmnext, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(btmplay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(btmhelp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btmstop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btmreload, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btmhelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btmnext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btmplay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btmreload, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btmstop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(3, 3, 3))
         );
 
@@ -1084,8 +1095,8 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             .addGap(0, 278, Short.MAX_VALUE)
         );
 
+        jDesktopPane1.add(jInternalFrame1);
         jInternalFrame1.setBounds(0, 0, 790, 310);
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1098,7 +1109,7 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane8))
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                             .addComponent(btnexit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1126,68 +1137,20 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
                         .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnexit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void optavlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optavlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optavlActionPerformed
-
-    private void btmreloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmreloadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btmreloadActionPerformed
-
-    private void btmplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmplayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btmplayActionPerformed
-
-    private void btmplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmplayMouseClicked
-        jInternalFrame1.setVisible(true);
-        if (minimParameters() == true) {
-            try {
-                if (comboSelectionExamples() == false) {
-                    if ((optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected()) && (txtkey.getText().trim().length() == 0)) {
-                        //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
-                        switch (language) {
-                            case "castellano":
-                                JOptionPane.showMessageDialog(null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE);
-                                break;
-                            case "ingles":
-                                JOptionPane.showMessageDialog(null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE);
-                                break;
-                            case "catalan":
-                                JOptionPane.showMessageDialog(null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE);
-                                break;
-                        }
-                    } else {
-                        startAlgorithm();
-                    }
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        activeOptions();
-    }//GEN-LAST:event_btmplayMouseClicked
-    private void btmhelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmhelpMouseClicked
-        // TODO add your handling code here:
-        frmhelp.setLocationRelativeTo(null);
-        frmhelp.setVisible(true);
-
-    }//GEN-LAST:event_btmhelpMouseClicked
 
     private void btmexithelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmexithelpMouseClicked
         // TODO add your handling code here:
@@ -1201,10 +1164,6 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
     private void frmhelpComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_frmhelpComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_frmhelpComponentShown
-
-    private void btmhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmhelpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btmhelpActionPerformed
 
     private void btnexitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexitMouseClicked
         // TODO add your handling code here:
@@ -1228,27 +1187,6 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
     private void btmexitconfig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmexitconfig2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btmexitconfig2ActionPerformed
-
-    private void btmreloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmreloadMouseClicked
-        // REINICIAMOS TODOS LOS VALORES
-        optabc.setEnabled(true);
-        optavl.setEnabled(true);
-        optrn.setEnabled(true);
-        cmbexamples.setEnabled(true);
-        optabc.setSelected(false);
-        optavl.setSelected(false);
-        optrn.setSelected(false);
-        cmbexamples.setSelectedIndex(0);
-        txtalgorithm.setText("");
-        uncheked();
-        seleccionarbol = false;
-        jInternalFrame1.getContentPane().setVisible(false);
-        this.simulator.deleteTree();
-        this.simulator = new Simulator<>();
-        printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
-        reloadScreen();
-
-    }//GEN-LAST:event_btmreloadMouseClicked
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
         // TODO add your handling code here:
@@ -1375,6 +1313,162 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         jLabel2.setEnabled(false);
     }
 
+    private void jInternalFrame1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame1MouseClicked
+        // TODO add your handling code here:        
+        //  
+    }//GEN-LAST:event_jInternalFrame1MouseClicked
+
+    private void btnspainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnspainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnspainActionPerformed
+
+    private void optrnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optrnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optrnActionPerformed
+
+    private void optrnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optrnMouseClicked
+        printConsole("Seleccionamos un árbol Rojo-Negro \n", "Select an Red-Black tree \n", "Triem un arbre Roig-Negre \n");
+    }//GEN-LAST:event_optrnMouseClicked
+
+    private void optcutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optcutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optcutActionPerformed
+
+    private void optleavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optleavesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optleavesActionPerformed
+
+    private void optsearchfatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optsearchfatherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optsearchfatherActionPerformed
+
+    private void optdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optdeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optdeleteActionPerformed
+
+    private void optsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optsearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optsearchActionPerformed
+
+    private void optinsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optinsertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optinsertActionPerformed
+
+    private void optinsertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optinsertMouseClicked
+
+    }//GEN-LAST:event_optinsertMouseClicked
+
+    private void btmstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmstopActionPerformed
+        // TODO add your handling code here:
+        ep.reinitCount();
+        ep.example1 = new int[9];
+        ep.example2 = new int[9];
+        ep = new runStep();
+        btmnext.addActionListener(ep);
+        // REINICIAMOS TODOS LOS VALORES
+        optabc.setEnabled(true);
+        optavl.setEnabled(true);
+        optrn.setEnabled(true);
+        cmbexamples.setEnabled(true);
+        optabc.setSelected(false);
+        optavl.setSelected(false);
+        cmbexamples.setSelectedIndex(0);
+        uncheked();
+        jInternalFrame1.getContentPane().setVisible(false);
+        //Escribimos en la consola:
+        this.simulator.deleteTree();
+        printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
+        reloadScreen();
+
+        Rectangle size = this.jInternalFrame1.getBounds();
+        this.jInternalFrame1 = null;
+        this.jInternalFrame1 = new JInternalFrame("Representación gráfica", true);
+        this.jDesktopPane1.add(this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER);
+        this.jInternalFrame1.setVisible(true);
+        this.jInternalFrame1.setBounds(size);
+        this.jInternalFrame1.setEnabled(false);
+        jInternalFrame1.getContentPane().setVisible(true);
+    }//GEN-LAST:event_btmstopActionPerformed
+
+    private void btmnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmnextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btmnextActionPerformed
+
+    private void btmnextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btmnextMouseEntered
+
+    private void btmnextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseClicked
+
+    }//GEN-LAST:event_btmnextMouseClicked
+
+    private void btmplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmplayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btmplayActionPerformed
+
+    private void btmplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmplayMouseClicked
+        jInternalFrame1.setVisible(true);
+        if (minimParameters() == true) {
+            try {
+                if (comboSelectionExamples() == false) {
+                    if ((optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected()) && (txtkey.getText().trim().length() == 0)) {
+                        //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
+                        switch (language) {
+                            case "castellano":
+                            JOptionPane.showMessageDialog(null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE);
+                            break;
+                            case "ingles":
+                            JOptionPane.showMessageDialog(null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE);
+                            break;
+                            case "catalan":
+                            JOptionPane.showMessageDialog(null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE);
+                            break;
+                        }
+                    } else {
+                        startAlgorithm();
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Trees.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        activeOptions();
+    }//GEN-LAST:event_btmplayMouseClicked
+
+    private void btmreloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmreloadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btmreloadActionPerformed
+
+    private void btmreloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmreloadMouseClicked
+        // REINICIAMOS TODOS LOS VALORES
+        optabc.setEnabled(true);
+        optavl.setEnabled(true);
+        optrn.setEnabled(true);
+        cmbexamples.setEnabled(true);
+        optabc.setSelected(false);
+        optavl.setSelected(false);
+        optrn.setSelected(false);
+        cmbexamples.setSelectedIndex(0);
+        txtalgorithm.setText("");
+        uncheked();
+        seleccionarbol = false;
+        jInternalFrame1.getContentPane().setVisible(false);
+        this.simulator.deleteTree();
+        this.simulator = new Simulator<>();
+        printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
+        reloadScreen();
+    }//GEN-LAST:event_btmreloadMouseClicked
+
+    private void btmhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmhelpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btmhelpActionPerformed
+
+    private void btmhelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmhelpMouseClicked
+        // TODO add your handling code here:
+        frmhelp.setLocationRelativeTo(null);
+        frmhelp.setVisible(true);
+    }//GEN-LAST:event_btmhelpMouseClicked
+
     private void cmbexamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbexamplesActionPerformed
         Integer index = cmbexamples.getSelectedIndex();
         if (index > 0 && index <= 4) {
@@ -1394,105 +1488,22 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbexamplesActionPerformed
 
-    private void btmnextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseClicked
-    }//GEN-LAST:event_btmnextMouseClicked
-
-    private void optabcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optabcMouseClicked
-        //Imprimimos por la consola la acción seleccionada
-        printConsole("Seleccionamos un árbol ABC \n", "Select an ABC tree \n", "Triem un arbre ABC \n");
-    }//GEN-LAST:event_optabcMouseClicked
+    private void optavlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optavlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optavlActionPerformed
 
     private void optavlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optavlMouseClicked
         printConsole("Seleccionamos un árbol AVL \n", "Select an AVL tree \n", "Triem un arbre AVL \n");
     }//GEN-LAST:event_optavlMouseClicked
 
-    private void optrnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optrnMouseClicked
-        printConsole("Seleccionamos un árbol Rojo-Negro \n", "Select an Red-Black tree \n", "Triem un arbre Roig-Negre \n");
-    }//GEN-LAST:event_optrnMouseClicked
-
-    private void optinsertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optinsertMouseClicked
-    }//GEN-LAST:event_optinsertMouseClicked
-
-    private void optsearchfatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optsearchfatherActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optsearchfatherActionPerformed
-
-    private void optleavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optleavesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optleavesActionPerformed
-
-    private void optcutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optcutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optcutActionPerformed
-
     private void optabcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optabcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_optabcActionPerformed
 
-    private void optinsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optinsertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optinsertActionPerformed
-
-    private void optdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optdeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optdeleteActionPerformed
-
-    private void optrnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optrnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optrnActionPerformed
-
-    private void btmnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmnextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btmnextActionPerformed
-
-    private void jInternalFrame1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame1MouseClicked
-        // TODO add your handling code here:        
-        //  
-    }//GEN-LAST:event_jInternalFrame1MouseClicked
-
-    private void btmnextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmnextMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btmnextMouseEntered
-
-    private void btmstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmstopActionPerformed
-        // TODO add your handling code here:        
-        ep.reinitCount();
-        ep.example1 = new int[9];
-        ep.example2 = new int[9];
-        ep = new runStep();
-        btmnext.addActionListener(ep);
-        // REINICIAMOS TODOS LOS VALORES
-        optabc.setEnabled(true);
-        optavl.setEnabled(true);
-        optrn.setEnabled(true);
-        cmbexamples.setEnabled(true);
-        optabc.setSelected(false);
-        optavl.setSelected(false);
-        cmbexamples.setSelectedIndex(0);
-        uncheked();
-        jInternalFrame1.getContentPane().setVisible(false);
-        //Escribimos en la consola:    
-        this.simulator.deleteTree();
-        printConsole("Reiniciamos el programa..... \n", "Restart the program..... \n", "Reiniciem el programa..... \n");
-        reloadScreen();
-
-        Rectangle size = this.jInternalFrame1.getBounds();
-        this.jInternalFrame1 = null;
-        this.jInternalFrame1 = new JInternalFrame("Representación gráfica", true);
-        this.jDesktopPane1.add(this.jInternalFrame1, JLayeredPane.DEFAULT_LAYER);
-        this.jInternalFrame1.setVisible(true);
-        this.jInternalFrame1.setBounds(size);
-        this.jInternalFrame1.setEnabled(false);
-        jInternalFrame1.getContentPane().setVisible(true);
-    }//GEN-LAST:event_btmstopActionPerformed
-
-    private void optsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optsearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optsearchActionPerformed
-
-    private void btnspainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnspainActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnspainActionPerformed
+    private void optabcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optabcMouseClicked
+        //Imprimimos por la consola la acción seleccionada
+        printConsole("Seleccionamos un árbol ABC \n", "Select an ABC tree \n", "Triem un arbre ABC \n");
+    }//GEN-LAST:event_optabcMouseClicked
 
     /**
      * @param args the command line arguments

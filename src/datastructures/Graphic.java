@@ -5,7 +5,12 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-
+/**
+ *
+ * @author nusatres
+ * @param <Node>
+ * @param <T>
+ */
 public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> extends JPanel {
     private BasicTree<Node,T> myTree;
     private HashMap<BasicNode<Node,T>, Rectangle> positionNodes = null;
@@ -57,7 +62,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * @return Dimension con el tamaño de cada subárbol.
      */
     private Dimension foundSizeSubTree(BasicNode<Node,T> n)    {
-          if (n==null || n.getNode()) {
+          if (n==null || n.isNull()) {
               return new Dimension(0,0);
           }
           Dimension ld = foundSizeSubTree( n.getLeft());
@@ -80,7 +85,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      * @param top: int con el tope.
      */
         private void foundPosition(BasicNode<Node,T> n, int left, int right, int top)     {
-          if (n==null || n.getNode()) {
+          if (n==null || n.isNull()) {
               return;
           }
 
@@ -119,12 +124,13 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
      */
     private void getPaint(Graphics2D g, BasicNode<Node,T> n, int position_x, int position_y, int yoffs)    {
         System.out.println("!!!!!!!!!!!1  get paint ********************"); 
-        if (n==null || n.getNode()) {
+        if (n==null || n.isNull()) {
              return;
          }     
          Rectangle r = (Rectangle) positionNodes.get(n);
          g.setStroke(new BasicStroke(2));
          
+         g.setColor(this.getColorNode(n));
          g.draw(r);
          g.drawString(n.getKey().toString(), r.x + 3, r.y + yoffs);   
 
@@ -134,42 +140,17 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
 
          getPaint(g, n.getLeft(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
          getPaint(g, n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
-     }   
+     }  
     
-      /**
-     * Dibuja el árbol teniendo en cuenta las ubicaciones de los nodos y los 
-     * subárboles calculadas anteriormente.
-     * @param g: Objeto de la clase Graphics2D que permite realizar el dibujo de las líneas, rectangulos y del String de la keyrmación que contiene el NodoB<T>.
-     * @param n: Objeto de la clase NodoB <T> que se utiliza como referencia para dibujar el árbol.
-     * @param position_x: int con la posición en x desde donde se va a dibujar la línea hasta el siguiente hijo.
-     * @param position_y: int con la posición en y desde donde se va a dibujar la línea hasta el siguiente hijo.
-     * @param yoffs: int con la altura del FontMetrics.
-     
-    private void getPaintB(Graphics2D g, BasicNode<Node,T> n, int position_x, int position_y, int yoffs)     {
-        System.out.println("&&&&&&&&&&&  RB get paint ********************"); 
-        if (n.getKey() == null) {
-             return;
-         }
-
-          Rectangle r = (Rectangle) positionNodes.get(n);
-          g.setStroke(new BasicStroke(2));          
-          if ( n.getColor()==0){
-             g.setColor(Color.black);
-          }else{
-                g.setColor(Color.red);
-          }
-         g.draw(r);
-         g.drawString(n.getKey().toString(), r.x + 3, r.y + yoffs);
-
-         if (position_x != Integer.MAX_VALUE){
-             g.drawLine(position_x, position_y, (int)(r.x + r.width/2), r.y);
-         }
-
-         getPaint(g, n.getLeft(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
-         getPaint(g, n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
-     
-   }
-    */
+    private Color getColorNode(BasicNode<Node,T> n) {
+        if(n instanceof RBNode){
+            RBNode<T> rbnode = (RBNode<T>) n;
+            if (rbnode.getColor()==1)
+                return Color.RED;
+        }
+        return Color.BLACK;
+    }
+    
        /**
      * Sobreescribe el metodo paint y se encarga de pintar todo el árbol.
      * @param g: Objeto de la clase Graphics.
@@ -190,6 +171,10 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
          fm = null;
    }
     
+    /**
+     *
+     * @return
+     */
     public HashMap getPositionNodes()
     {
         return positionNodes;
