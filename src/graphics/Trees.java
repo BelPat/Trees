@@ -200,55 +200,16 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
                     break;
             }
             return true;
-        } else if ((cmbexamples.getSelectedIndex() == 1) && cmbexamples.isEnabled()) {
+        }  else if (cmbexamples.getSelectedIndex() > 0 && cmbexamples.getSelectedIndex() < 5 && cmbexamples.isEnabled()) {
             cmbexamples.setEnabled(false);
-            //Carga el example 1
             String key; 
-            InputStream istr = this.getClass().getResourceAsStream("/resources/files/example1.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(istr));
-            while ((key = br.readLine()) != null) {
-                addKey(new Integer(key)); 
-            }
-
-         /*   addKey(33);
-            addKey(44);
-            addKey(23);
-            addKey(11);
-            addKey(15);
-            addKey(60);
-            addKey(38);
-            addKey(72);*/
-            return true;
-        } else if (cmbexamples.getSelectedIndex() == 2 && cmbexamples.isEnabled()) {
-            cmbexamples.setEnabled(false);
-            //Carga el example 2
-            String key; 
-            InputStream istr = this.getClass().getResourceAsStream("/resources/files/example2.txt");
+            InputStream istr = this.getClass().getResourceAsStream("/resources/files/example"+cmbexamples.getSelectedIndex() +".txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(istr));
             while ((key = br.readLine()) != null) {
                 addKey(new Integer(key)); 
             }
             return true;
-        } else if (cmbexamples.getSelectedIndex() == 3 && cmbexamples.isEnabled()) {
-            cmbexamples.setEnabled(false);
-            //Carga el example 3
-            String key; 
-            InputStream istr = this.getClass().getResourceAsStream("/resources/files/example3.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(istr));
-            while ((key = br.readLine()) != null) {
-                addKey(new Integer(key)); 
-            }
-            return true;
-        } else if (cmbexamples.getSelectedIndex() == 4 && cmbexamples.isEnabled()) {
-            cmbexamples.setEnabled(false);
-            String key; 
-            InputStream istr = this.getClass().getResourceAsStream("/resources/files/example4.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(istr));
-            while ((key = br.readLine()) != null) {
-                addKey(new Integer(key)); 
-            }
-            return true;
-        } else if (cmbexamples.getSelectedIndex() == 5 || !cmbexamples.isEnabled()) {
+        }  else if (cmbexamples.getSelectedIndex() == 5 || !cmbexamples.isEnabled()) {
             cmbexamples.setEnabled(false);
             return false;
         }
