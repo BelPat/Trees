@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  * @param <Node>
  * @param <T>
  */

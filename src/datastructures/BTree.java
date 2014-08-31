@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author patricia
+ * @author BelPat
  * @param <T>
  */
 public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
@@ -116,8 +116,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
      * @return un boolean, true si el new_key está o false en caso contrario.
     */
     @Override
-        public boolean find(T x)
-    {
+        public boolean find(T x)    {
         return(find(this.getRoot(),x));
     }
 
@@ -139,18 +138,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         }
     }
 
-
-    /**
-     * Elimina las hojas(nodos terminales) del árbol binario.
-     */
-    @Override
-    public void cutLeaves() {
-    Iterator<T> it = this.getLeaves();
-        while(it.hasNext())    {
-            delete(it.next());
-        }
-    }
-    
+   
     /**
      * Retorna un interador de todas las hojas del árbol.
      * 

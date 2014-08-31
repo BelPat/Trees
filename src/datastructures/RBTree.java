@@ -151,8 +151,6 @@ private RBNode<T> empty = new RBNode<>();
      */
     @Override
     public boolean add(T key) {
-    
-        System.out.println(" --- > rb.add " + key);
        if ( findNode(key)== null)    {
             add(new RBNode<>(key));
              return true;
@@ -163,7 +161,6 @@ private RBNode<T> empty = new RBNode<>();
     
     // @param: z, El node que se va add en el árbol
     // Inserta z en la posición adecuada del RBTree y modifica los valores numgetRight() y numgetLeft()
-
     private void add(RBNode<T> z) {
 
         RBNode<T> y = empty;
@@ -565,17 +562,6 @@ private void deleteModificarNum(RBNode<T> x){
     }
 
        
-         /**
-     * Elimina las hojas(nodes terminales) del árbol .
-     */
-
-@Override
-    public void cutLeaves() {
-         Iterator<T> it= this.getLeaves();
-          while(it.hasNext()) { 
-              delete(it.next());
-          }
-    }
     
     /**
      * @return retorna un nuevo GraphicRBTree
@@ -617,8 +603,6 @@ private void deleteModificarNum(RBNode<T> x){
 
 @Override
     public Iterator<T> getLeaves() {
-      //  RBNode<T> new_node = new RBNode<>();
-       // SimpleList<RBNode<T>,T> l = new SimpleList<>(new_node);
         ArrayList<T> keylist = new ArrayList<>();
         getLeaves(super.getRoot(), keylist);
         return (keylist.iterator());
@@ -631,7 +615,6 @@ private void deleteModificarNum(RBNode<T> x){
      */
 @Override
     public void getLeaves(RBNode<T> r, ArrayList<T> keylist) {
-       // if (r != null) {
          if (!isEmpty(r)) {
             if (isLeaf(r)) {
                 keylist.add(r.getKey());

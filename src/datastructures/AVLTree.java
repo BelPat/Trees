@@ -6,13 +6,11 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author patricia
+ * @author BelPat
  * @param <T>
  */
 public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
- 
-// private AVLNode < T > root; 
- 
+  
     /**
      * Construye un árbol AVLTree vacío.
      */
@@ -21,9 +19,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }                              
              
     /**
-     *
-     * @param k
-     * @return
+     * Inserta la clave k en el árbol
+     * 
+     * @param k la clave del nodo
+     * @return true si se ha insertado correctamente
      */
     @Override
     public boolean add(T k) {
@@ -37,39 +36,35 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
  
     /**
-     *
-     * @param p
-     * @param q
-     * @return
+     * Inserta un nodo q en un árbol
+     * 
+     * @param p nodo actual que se esta consultando 
+     * @param q nodo a insertar
+     * @return true si se ha insertado correctamente
      */
     public boolean add(AVLNode < T > p, AVLNode < T > q) {
       // If  node to compare is null, the node is inserted. If the root is null, it is the root of the tree.
       if(p==null) {
-           System.out.println("  if avltree.add(AVLNode, AVLNode) q.getKey()" + q.getKey());
            super.setRoot(q);
-        //   System.out.println("  if avltree.add(AVLNode, AVLNode) this.root.getKey()" + this.root.getKey());
-      } else {   
-          
-     System.out.println(" avlnode.add -> q.getKey " + q.getKey()+ " p.getkey " + p.getKey());
-     
-       if( q.getKey().compareTo(p.getKey()) < 0 ) {    
-            if(p.getLeft()==null) {
-                 p.setLeft(q);
-                 q.setRoot(p);
-                 recursiveBalance(p);
-            } else {
-                 add(p.getLeft(),q);
-            }
+      } else {    
+        if( q.getKey().compareTo(p.getKey()) < 0 ) {    
+             if(p.getLeft()==null) {
+                  p.setLeft(q);
+                  q.setRoot(p);
+                  recursiveBalance(p);
+             } else {
+                  add(p.getLeft(),q);
+             }
 
-         } else if(q.getKey().compareTo(p.getKey())>0) {
-            if(p.getRight()==null) {
-                 p.setRight(q);
-                 q.setRoot(p);     
-                 recursiveBalance(p);
-            } else {
-             add(p.getRight(),q);
-            }
-       } else {
+          } else if(q.getKey().compareTo(p.getKey())>0) {
+             if(p.getRight()==null) {
+                  p.setRight(q);
+                  q.setRoot(p);     
+                  recursiveBalance(p);
+             } else {
+              add(p.getRight(),q);
+             }
+        } else {
             return false;
        }
       }
@@ -100,7 +95,6 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
            recursiveBalance(cur.getRoot());
       } else {
            super.setRoot(cur);
-           System.out.println("------------ Balancing finished ----------------");
       }
     }
 
@@ -233,34 +227,6 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
             getLeaves(r.getRight(), keylist);
         }
 
-    }
-
-    private AVLNode<T> getFather(AVLNode<T> x, T key) {
-        if (x == null) {
-            return null;
-        }
-        if ((x.getLeft() != null && x.getLeft().getKey().equals(key)) || (x.getRight() != null && x.getRight().getKey().equals(key))) {
-            return (x);
-        }
-        AVLNode<T> y = getFather(x.getLeft(), key);
-        if (y == null) {
-            return (getFather(x.getRight(), key));
-        } else {
-            return (y);
-        }
-    }
-
-    /**
-     *
-     */
-    @Override
-     public void cutLeaves() {
-
-        Iterator<T> it= this.getLeaves();        
-        while(it.hasNext())
-        {
-            delete(it.next());
-        }
     }
 
     /**

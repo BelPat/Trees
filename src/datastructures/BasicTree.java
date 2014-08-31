@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  * @param <Node>
  * @param <T>
  */
@@ -187,7 +187,16 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
        return ae.getPositionNodes();
    }
     
-    abstract void cutLeaves();
+        /**
+     * Elimina las hojas(nodos terminales) del árbol binario.
+     */
+    public void cutLeaves() {
+    Iterator<T> it = this.getLeaves();
+        while(it.hasNext())    {
+            delete(it.next());
+        }
+    }
+    
     abstract boolean find(T key);
     abstract Comparable delete(T key);
     abstract boolean add( T key );

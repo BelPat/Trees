@@ -8,7 +8,7 @@ import static datastructures.RBNode.BLACK;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  * @param <T>
  */
   public class RBNode<T> extends BasicNode<RBNode<T>, T>{

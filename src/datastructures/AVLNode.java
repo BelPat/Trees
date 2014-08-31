@@ -2,7 +2,7 @@ package datastructures;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  * @param <T>
  */
 
@@ -104,22 +104,13 @@ package datastructures;
         this.height = height;
     }
     
+   
     @Override
-public boolean equals(Object o){
-    if(o==null) return false;
-    if(o==this) return true;
-    if(!(o instanceof BasicNode)) return false;
-    AVLNode p=(AVLNode) o;
-    return !((super.getKey()==null)?(p.getKey()!=null): !super.getKey().equals(p.getKey()));
-}
-    
-    @Override
-public int hashCode(){
-    final int prim=31;
-    int result=17;
-    result = prim * result + AVLNode.this.getKey().hashCode();
-    return result;
-    
-}
+    public int hashCode(){
+        final int prim=31;
+        int result=17;
+        result = prim * result + AVLNode.this.getKey().hashCode();
+        return result;    
+    }
 
 }

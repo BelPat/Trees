@@ -2,7 +2,7 @@ package datastructures;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  * @param <T>
  */
 public class BNode <T> extends BasicNode<BNode<T>, T>{

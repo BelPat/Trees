@@ -3,7 +3,7 @@ package datastructures;
 
 /**
  *
- * @author nusatres
+ * @author BelPat
  */
 public class ExceptionUFPS extends Exception{
 
