@@ -2,7 +2,6 @@ package datastructures;
  
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.JPanel;
 
 /**
  *
@@ -36,7 +35,9 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
  
     /**
-     * Inserta un nodo q en un árbol
+     * Busca el nodo padre al que insertarle el nodo 
+     * y llama al método para que lo añada y a las operaciones necesarias
+     * para mantener el balanceo
      * 
      * @param p nodo actual que se esta consultando 
      * @param q nodo a insertar
@@ -72,8 +73,11 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param cur
+     * Comprueba el balanceo para cada nodo de forma recursiva y
+     * llama a los métodos necesarios para hacer el balanceo del árbol 
+     * hasta llegar a la raiz
+     * 
+     * @param cur nodo actual
      */
     public void recursiveBalance(AVLNode < T > cur) {
       setBalance(cur);
@@ -99,9 +103,10 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param k
-     * @return
+     * Borra un nodo del árbol
+     * 
+     * @param k es la clave del nodo a borrar
+     * @return la clave del nodo borrado
      */
     @Override
      public T delete(T k) {
@@ -110,24 +115,25 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param p
-     * @param q
-     * @return
+     * Busca el nodo a borrar y llama al método para que lo elimine
+     * 
+     * @param p nodo actual que se esta consultando 
+     * @param q es la clave del nodo a borrar
+     * @return la clave del nodo borrado
      */
-    public T deleteAVL(AVLNode < T > p,T q) {
+    public T deleteAVL(AVLNode <T> p,T q) {
       if( p == null ) {
            return null;
       } else {
-          System.out.println("Delete_avl p" + p.getKey() + "q " + q);
+          System.out.println("Comparar clave a borrar" + p.getKey() + " y nodo actual" + q);
           if( p.getKey().compareTo( q ) > 0 )  {
-                System.out.println("Delete_avl p>q" + p.getKey() + "q " + q);
+                System.out.println("La clave es mayor");
                 deleteAVL(p.getLeft(),q);
            } else if( p.getKey().compareTo( q ) < 0 ) {
-                 System.out.println("Delete_avl p<q" + p.getKey() + "q " + q);
+                 System.out.println("La clave es menor");
                 deleteAVL(p.getRight(),q);
            } else if( p.getKey().compareTo( q ) ==0 ) {
-                System.out.println("Delete_avl p=q" + p.getKey() + "q " + q);
+                System.out.println("El nodo actual es el que queremos borra");
                 deleteNode(p);
            }
        return q;
@@ -135,7 +141,9 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
+     * Borra el nodo del árbol y llama las operaciones necesarias
+     * para mantener el balanceo
+     * 
      * @param q
      */
     public void deleteNode(AVLNode < T > q) {
@@ -174,17 +182,22 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param key
-     * @return
+     * Busca el nodo en el árbol
+     * 
+     * @param key clave del nodo
+     * @return true si la clave está en el árbol, false en caso contrario
      */
     @Override
     public boolean find(T key) {
-     
-     System.out.println("********************** avltree.find ************* " + key);
         return ( find((AVLNode<T>) super.getRoot(),key ) );
     }
-
+    
+     /**
+     * Busca el nodo en el árbol de forma recursiva
+     * 
+     * @param key clave del nodo
+     * @return true si la clave está en el árbol, false en caso contrario
+     */
     private boolean find(AVLNode<T> r, T key) {
         boolean isleft= false;
         boolean isright = false;
@@ -216,6 +229,12 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         return (keylist.iterator());
     }
 
+    /**
+     * Busca todas la hojas del árbol de forma recursiva.
+     * 
+     * @param r nodo dado
+     * @param keylist lista de hojas
+     */     
     @Override
     public void getLeaves(AVLNode<T> r, ArrayList<T> keylist) {
         if (r != null) {
@@ -230,11 +249,13 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param n
-     * @return
+     * Realiza la rotación a la izquierda del nodo dado y llama a las operaciones
+     * necesarias para mantener el balance del árbol
+     * 
+     * @param n nodo a aplicar la rotación
+     * @return nodo resultante de la rotación
      */
-    public AVLNode<T> rotateLeft(AVLNode < T > n) {
+    public AVLNode<T> rotateLeft(AVLNode <T> n) {
       AVLNode < T > v = n.getRight();
       v.setRoot( n.getRoot() ) ;
       n.setRight( v.getLeft() );
@@ -256,9 +277,11 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @param n
-     * @return
+     * Realiza la rotación a la derecha del nodo dado y llama a las operaciones
+     * necesarias para mantener el balance del árbol
+     * 
+     * @param n nodo a aplicar la rotación
+     * @return nodo resultante de la rotación
      */
     public AVLNode<T> rotateRight( AVLNode < T > n ) {  
       AVLNode < T > v = n.getLeft();
@@ -283,30 +306,33 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
  
     /**
-     *
-     * @param u
-     * @return
+     * Realiza la rotación a la izquierda y a la derecha del nodo dado 
+     * 
+     * @param n nodo dado 
+     * @return nodo resultante de la rotación
      */
-    public AVLNode<T> doubleRotateLeftRight(AVLNode < T > u) {
-        u.setLeft( rotateLeft( u.getLeft()) );
-        return rotateRight( u );
+    public AVLNode<T> doubleRotateLeftRight(AVLNode < T > n) {
+        n.setLeft( rotateLeft( n.getLeft()) );
+        return rotateRight( n );
     }
 
     /**
-     *
-     * @param u
-     * @return
+     * Realiza la rotación a la derecha y a la izquierda del nodo dado 
+     * 
+     * @param n nodo dado 
+     * @return nodo resultante de la rotación
      */
-    public AVLNode<T> doubleRotateRightLeft( AVLNode < T > u ) {
-        u.setRight( rotateRight( u.getRight()) );
-        return rotateLeft( u );
+    public AVLNode<T> doubleRotateRightLeft( AVLNode < T >  n) {
+        n.setRight( rotateRight( n.getRight()) );
+        return rotateLeft( n );
     }
 
     /**
-     *
-     * @param q
-     * @return
-     */
+     * Devuelve el sucesor de un nodo dado en el árbol de forma recursiva. 
+     * 
+     * @param q nodo predecesor 
+     * @return el sucesor del nodo q
+     */    
     public AVLNode<T> successor(AVLNode < T > q) {
       if( q.getRight() != null ) {
            AVLNode < T > r = q.getRight();
@@ -323,7 +349,13 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
            return p;
       }
     }
-
+    
+    /**
+     * Devuelve la altura de un nodo dado. 
+     * 
+     * @param q nodo dado 
+     * @return la altura del nodo, retorna nulo si no existe el nodo
+     */
     private int height(AVLNode < T > cur) {
       if(cur==null) {
            return -1;
@@ -355,49 +387,29 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
     }
 
     /**
-     *
-     * @return
+     * Calcula el balanceo del nodo dado.
+     * 
+     * @param cur nodo dado
      */
-    @Override
-    public JPanel getPaint() {
-        return new Graphic<>( this );
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public boolean isEmpty() {
-        return ( this.getRoot() == null );
-    }
-
-
     private void setBalance(AVLNode < T > cur) {
        int heightleft = 0;
        int heightright = 0;
        
-       if(cur.getLeft()!= null)
-           heightleft = height(cur.getLeft());
-       
-
+       if(cur.getLeft()!= null){
+        System.out.println("Calculando balanceo del nodo izquierdo" + cur.getLeft().getKey());
+        heightleft = height(cur.getLeft()); 
+       }
         if(cur.getRight()!= null)        {
-                   System.out.println("setBalance " + cur.getRight().getKey());
+           System.out.println("Calculando balanceo del nodo derecho" + cur.getRight().getKey());
            heightright = height(cur.getRight());
            
-        }
-       
+        }       
         cur.setBalance( heightright - heightleft);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Iterator<T> preOrder() {
-    //    SimpleList<AVLNode<T>,T> l = new SimpleList<>();
-        ArrayList<T> keylist = new ArrayList<T>();
+        ArrayList<T> keylist = new ArrayList<>();
         preOrder(super.getRoot(), keylist);
         return (keylist.iterator());
     }
@@ -410,24 +422,4 @@ public class AVLTree<T extends Comparable<T>> extends BasicTree<AVLNode<T>, T>{
         }
     }
 
-    /**
-     * Crea un nodo con la clave.
-     * 
-     * @param key la clave
-     * @return el nodo
-     */
-    public AVLNode<T> createNode(T key){
-        return new AVLNode<>(key);
-    }
-/*
- @Override
-     public AVLNode < T > getRoot() {
-        return (AVLNode<T>) super.getRoot();
-    }
-
-    public void setRoot(AVLNode < T > root) {
-        this.setRoot(root);
-    }*/
-
- 
 }

@@ -30,39 +30,39 @@ private RBNode<T> empty = new RBNode<>();
     }
  
     /**
-     * Realiza una rotación a la getLeft()uierda de x
-     * @param: x, El node que va a rotar hacia la getLeft()uierda
+     * Realiza una rotación a la izquierda de x
      * 
+     * @param: x, El node que va a rotar hacia la izquierda    
      */
     private void leftRotacion(RBNode<T> x){
 
-    leftRotationModifyNum(x);
+        leftRotationModifyNum(x);
 
-    RBNode<T> y;
-    y = x.getRight();
-    x.setRight( y.getLeft() );
+        RBNode<T> y;
+        y = x.getRight();
+        x.setRight( y.getLeft() );
 
-    if (!isEmpty(y.getLeft()))
-        y.getLeft().setRoot(x);
+        if (!isEmpty(y.getLeft()))
+            y.getLeft().setRoot(x);
 
-    y.setRoot(x.getRoot());
+        y.setRoot(x.getRoot());
 
-    if (isEmpty(x.getRoot())){
-        super.setRoot(y);    
-    } else if (x.getRoot().getLeft() == x){
-        x.getRoot().setLeft(y);
-    } else {
-        x.getRoot().setRight(y);
+        if (isEmpty(x.getRoot())){
+            super.setRoot(y);    
+        } else if (x.getRoot().getLeft() == x){
+            x.getRoot().setLeft(y);
+        } else {
+            x.getRoot().setRight(y);
+        }
+
+        y.setLeft(x);
+        x.setRoot(y);
     }
 
-    y.setLeft(x);
-    x.setRoot(y);
-    }// fin leftRotacion(RBNode x)
-
     /**
-     * Modifica el valor de numgetLeft() y numgetRight()
+     * Modifica los números de los hijos de nodo dado
      * 
-     * @param x El node que va a rotar hacia la getLeft()uierda
+     * @param x nodo dado
      */
     private void leftRotationModifyNum(RBNode<T> x){
 
@@ -86,12 +86,12 @@ private RBNode<T> empty = new RBNode<>();
         x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight() );
     }
 
-    }// fin leftRotationModifyNum(RBNode x)
+    }
  
     /**
      * Realiza una rotación a la dereecha de y.
      * 
-     * @param y El node que va a rotar hacia la getRight()echa
+     * @param y El node que va a rotar hacia la derecha
      * 
      */
     private void rightRotation(RBNode<T> y){
@@ -114,12 +114,12 @@ private RBNode<T> empty = new RBNode<>();
         x.setRight( y );
         y.setRoot( x );
 
-    }// finrightRotation(RBNode y)
+    }
 
-    /**
-     * Modifica el valor de numgetLeft() y numgetRight().
+     /**
+     * Modifica los números de los hijos de nodo dado
      * 
-     * @param: y, El node que va a rotar hacia la getRight()echa
+     * @param y nodo dado
      */
     private void rightRotationModifyNum(RBNode<T> y){
 
@@ -144,7 +144,7 @@ private RBNode<T> empty = new RBNode<>();
         }// finrightRotationModificarNum(RBNode y)
 
     /**
-     * Dado T, se inserta este dato en un RBTree<T> y retorna si se ha hecho de forma correcta.
+     * Dado T, se inserta este dato en un árbol
      * 
      * @param key, el dato que se desea add
      * @return true si dato ha sido insertado de forma correcta, false en caso contraio
@@ -159,8 +159,12 @@ private RBNode<T> empty = new RBNode<>();
             return false;
     }
     
-    // @param: z, El node que se va add en el árbol
-    // Inserta z en la posición adecuada del RBTree y modifica los valores numgetRight() y numgetLeft()
+    /**
+     * Busca el nodo padre al que insertarle el nodo y modifica 
+     * los valores numgetRight() y numgetLeft()
+     * 
+     * @param: z, El node que se va add en el árbol
+    */    
     private void add(RBNode<T> z) {
 
         RBNode<T> y = empty;
@@ -194,13 +198,14 @@ private RBNode<T> empty = new RBNode<>();
 
         addModifyNum(z);
 
-    }// fin add(RBNode z)
+    }
 
 
-// @param: z, el node insertado en el árbol y igual ha causado el incumplimiento de alguna 
-//de las propiedades del RBTree
-// Corrige el posible incumlimiento de las propiedades tras la inserción
-
+    /**
+     * Corrige el posible incumpimiento de las propiedades de inserción 
+     * 
+     * @param: z, El node que se va ha añadir en el árbol
+    */ 
 private void addModifyNum( RBNode<T> z ){
 
 RBNode<T> y = empty;
@@ -253,52 +258,43 @@ else{
 // @return: node, el node de menor valor
 
     /**
-     *
-     * @param node
-     * @return
+     * Retorna del nodo de menor valor de árbol
+     * @param node nodo dado
+     * @return nodo de menor valor
      */
     
 public RBNode<T> minValue(RBNode<T> node){
 
-while (!isEmpty(node.getLeft()))
-    node = node.getLeft();
-return node;
-}// fin minValue(RBNode node)
-
-
-
-// @param: x, a RBNode whose successor we must find
-// @return: return's the node the with the next largest key
-// from x.key
-
-    /**
-     *
-     * @param x
-     * @return
-     */
-    public RBNode<T> treeSuccessor(RBNode<T> x){
-
-if (!isEmpty(x.getLeft()) )
-return minValue(x.getRight());
-
-RBNode<T> y = x.getRoot();
-
-while (!isEmpty(y) && x == y.getRight()){
-    x = y;
-    y = y.getRoot( );
+    while (!isEmpty(node.getLeft()))
+        node = node.getLeft();
+    return node;
 }
 
-return y;
-}// fin minValue(RBNode x)
+    /**
+     * Devuelve el sucesor de un nodo dado en el árbol 
+     * 
+     * @param x nodo predecesor 
+     * @return el sucesor del nodo x
+     */ 
+    public RBNode<T> treeSuccessor(RBNode<T> x){
 
+    if (!isEmpty(x.getLeft()) )
+    return minValue(x.getRight());
 
-// @param: v, T el valor que queremos delete del RBTree
-// Borramos v del RBTree
+    RBNode<T> y = x.getRoot();
+
+    while (!isEmpty(y) && x == y.getRight()){
+        x = y;
+        y = y.getRoot( );
+    }
+
+    return y;
+}
 
     /**
-     *
-     * @param v
-     * @return
+     * Borra un nodo del árbol
+     * @param v valor que queremos borrar
+     * @return el valor borrado
      */
     @Override
 public T delete(T v){
@@ -339,10 +335,13 @@ public T delete(T v){
         deleteModificarNum(x);
     }
     return v;
-}// fin delete(RBNode z)
+}
 
-
-
+    /**
+     * Actualiza los valores después de eliminar un nodo del árbol
+     * @param x
+     * @param y 
+     */
 private void fixNodeData(RBNode<T> x, RBNode<T> y){
 
     RBNode<T> current = empty;
@@ -385,11 +384,14 @@ private void fixNodeData(RBNode<T> x, RBNode<T> y){
 
     }
 
-}//fin fixNodeData()
+}
 
 
-// @param: x, BasicNode afectado tras delete el valor v
-// Restaura las propiedades incompatibles tras delete un node
+  /**
+     * Corrige el posible incumpimiento de las propiedades de borrar 
+     * 
+     * @param: z, nodo afectado después de eliminar
+    */ 
 
 private void deleteModificarNum(RBNode<T> x){
 
@@ -453,20 +455,15 @@ private void deleteModificarNum(RBNode<T> x){
         }
     }// fin while
 
-
     x.setColor( RBNode.BLACK );
-}// fin deleteModificarNum(RBNode x)
-
-
-
-
+}
       /**
      * Retorna true si existe un dato en el árbol binario, o false en caso
      * contrario.
-     * @param key
+     *      
+     * @param key valor a buscar
      * @return un boolean , true si el dato está o false en caso contrario.
      */
-
 @Override
     public boolean find(T key){
 
@@ -488,10 +485,10 @@ private void deleteModificarNum(RBNode<T> x){
     }// fin find( key)
 
      /**
-     * Retorna el BasicNode si existe un dato en el árbol binario, o null en caso
- contrario.     
-     * @param key
-     * @return un RBNode ,si el dato está o null en caso contrario.
+     * Retorna el Nodo si existe el dato en el árbol o null en caso contrario.    
+     * 
+     * @param key valor a buscar
+     * @return un Nodo ,si el dato está o null en caso contrario.
      */
     public RBNode<T> findNode(T key){
         RBNode<T> current = new RBNode<>(  super.getRoot());
@@ -516,14 +513,12 @@ private void deleteModificarNum(RBNode<T> x){
     /**
      * Determina si el árbol es vacío.
      * 
-     * @return <CODE>true</CODE> si el árbol es vacío,
-     * <CODE>false</CODE> en caso contrario
+     * @node node nodo dado
+     * @return true si el árbol es vacío, false en caso contrario
      */
     private boolean isEmpty(RBNode node){
-
-    return node.getKey()==null;
-
-    }// fin isEmpty(RBNode node)
+     return node.getKey()==null;
+    }
 
 
      /**
@@ -550,35 +545,25 @@ private void deleteModificarNum(RBNode<T> x){
     }
     
     /**
-     * Dado un RBNode<T>, retorna si este es hoja o no.
-     * @param x RBNode<T> del que se desea saber si es hoja
-     * @return true si el node es una hoja, false en caso no existir
-     * el dato
+     * Dado nodo retorna si este es hoja o no.
+     * @param x nodo del que se desea saber si es hoja
+     * @return true si el node es una hoja, false en caso no existir el dato
      */
 
+@Override
     public boolean isLeaf(RBNode<T> x) {
        // return (x.getLeft().getKey() == null && x.getRight().getKey() == null);
         return (isEmpty(x.getRight()) && isEmpty(x.getLeft()));
     }
 
-       
-    
-    /**
-     * @return retorna un nuevo GraphicRBTree
-     */
-    
-      public JPanel getPaint() {
-        return new Graphic<>(this);
-    }
-      
+            
 /**
      * Retorna el padre del dato pasado como parametro ese dato.
      *
      * @param key dato que se desea find
      * @return el padre del dato almacenado en el árbol, null en caso no existir
      * el dato
-     */
-    
+     */    
     
      private RBNode<T> getFather(RBNode<T> x, T key) {
         if (isEmpty(x)) {
@@ -595,7 +580,7 @@ private void deleteModificarNum(RBNode<T> x){
         }
     }
      
-             /**
+     /**
      * Retorna un iterador con las hojas del árbol binario
      *
      * @return un iterador de la clase Iterator de la java.util
@@ -609,8 +594,9 @@ private void deleteModificarNum(RBNode<T> x){
     }
         
     /**
+     * Busca todas la hojas del árbol de forma recursiva.
      * 
-     *  @param r RBNode<T>, node a recorrer hasta llegar a las hojas
+     *  @param r  nodo a recorrer hasta llegar a las hojas
      * @param keylist
      */
 @Override
@@ -624,18 +610,6 @@ private void deleteModificarNum(RBNode<T> x){
         }
     }
     
-
-    /**
-     * Crea un nodo con la clave.
-     * 
-     * @param key la clave
-     * @return el nodo
-     */
-    public RBNode<T> createNode(T key){
-        return new RBNode<>(key);
-    }  
-
-
-  
+ 
     
 }// fin class RBTree

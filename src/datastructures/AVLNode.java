@@ -10,6 +10,9 @@ package datastructures;
 
     private AVLNode <T>  root;
 
+    /*  parámetro utilizado para controlar que la altura de 
+    la rama izquierda no difiere en más de una unidad 
+    de la altura de la rama derecha o viceversa*/
     private int balance;
     private int height;
 

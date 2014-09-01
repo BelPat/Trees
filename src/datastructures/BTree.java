@@ -18,7 +18,7 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
     }
 
     /**
-     * Inserta un new_key en el árbol binario de búsqueda según factor de ordenamiento
+     * Inserta un nuevo nodo en el árbol binario de búsqueda 
      * 
      * @param key
      * @return  true si el elemento fue insertado o false en caso contrario
@@ -32,32 +32,36 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         }
         return ( new_node != null );
     }
-
+    
+     /**
+     * Busca el nodo padre al que insertarle el nodo 
+     * y llama al método para que lo añada 
+     * 
+     * @param new_node nodo actual que se esta consultando 
+     * @param new_key nodo a insertar
+     * @return el nodo añadido
+     */
     private BNode< T > add( BNode< T >  new_node, T new_key)   {
         if( new_node == null ){
             return( new BNode< > ( new_key , null , null ) );
         }
         int compara = ( new_node.getKey() ).compareTo( new_key );
-        if( compara > 0 ) { // new_keydelarbol es menor que new_key
+        if( compara > 0 ) { 
             new_node.setLeft(add(new_node.getLeft(), new_key));
         }  else{
-            if( compara < 0 ) {// key del arbol es mayor que new_key
+            if( compara < 0 ) {
                 new_node.setRight( add( new_node.getRight() , new_key ) );
-            }   else{// new_keydelarbol es igual que new_key
-                System.err.println( "Enew_nodeor new_key duplicado:"+new_key.toString() );
-            //return null;
+            }   else{
             }
         }
         return new_node;
     }
 
     /**
-     * Bonew_nodea un elmento del árbol binario de búsqueda, 
-     * manteniendo su propieda de orden, para esto se busca el menor de los Rightechos 
-     * y lo intercambia por el new_key que desea delete. 
+     * Borra un elmento del árbol 
      * 
      * @param x new_key que se desea delete
-     * @return el new_key bonew_nodeado o null si no lo encontro
+     * @return el new_key borrado o null si no lo encontro
      */
     @Override
         public T delete( T x )    {
@@ -68,10 +72,16 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         this.setRoot( z );
         return x;
     }
-    
+        
+     /* Busca el nodo a borrar del árbol
+     * 
+     * @param p nodo actual que se esta consultando 
+     * @param q es la clave del nodo a borrar
+     * @return la clave del nodo borrado
+     */    
     private BNode< T > delete( BNode< T > r, T x )    {
         if ( r == null ){
-            return null;//<--new_key no encontrado		
+            return null;		
         }
         int compara = ( r.getKey() ).compareTo( x );
         if( compara > 0 ){
@@ -87,10 +97,9 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
                          cambiar.setKey(r.getKey());
                          r.setKey(aux);
                          r.setRight(delete(r.getRight(),x));
-                        System.out.println("2 ramas") 		;
+;
                     }    else    {
                         r=(r.getLeft()!=null)? r.getLeft():r.getRight();
-                        System.out.println("Entro cuando le faltan ramas ");
                   }
         }
         return r;
@@ -119,7 +128,13 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         public boolean find(T x)    {
         return(find(this.getRoot(),x));
     }
-
+    
+    /**
+     * Busca el nodo en el árbol de forma recursiva
+     * 
+     * @param key clave del nodo
+     * @return true si la clave está en el árbol, false en caso contrario
+     */
     private boolean find(BNode<T> r, T x)
     {
         if (r==null){
@@ -153,26 +168,22 @@ public class BTree<T extends Comparable<T>> extends BasicTree<BNode<T>, T>{
         return (keylist.iterator());
     }
      
+    /**
+     * Busca todas la hojas del árbol de forma recursiva.
+     * 
+     * @param r nodo dado
+     * @param keylist lista de hojas
+     */    
     @Override
     public void getLeaves(BNode<T> r, ArrayList<T> keylist) {
         if (r != null) {
             if (this.isLeaf(r)) {
                 keylist.add(r.getKey());
             }
-           if(r.getLeft()!=null) getLeaves(r.getLeft(), keylist);
-           if(r.getRight()!=null)getLeaves(r.getRight(), keylist);
+            getLeaves(r.getLeft(), keylist);
+            getLeaves(r.getRight(), keylist);
         }
 
-    }
-
-    /**
-     * Crea un nodo con la clave.
-     * 
-     * @param key la clave
-     * @return el nodo
-     */
-    public BNode<T> createNode(T key){
-        return new BNode<>(key);
     }
 
 } //Fin de clase

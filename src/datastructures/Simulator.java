@@ -32,23 +32,7 @@ public class Simulator <T extends Comparable<T>> {
             pTree=t;    
      }
 
-  /*  public Simulator(String tree) {
-        
-     switch (tree) {
-            case "abc":
-                pTree.getBTree();
-                break;
-            case "avl":
-                    pTree.getAVLTree();
-                break;
-            case "rn":
-              //  pTree = new  RBTree<> ();
-                     pTree.getRBTree();
-                break;
-        }
-     
-    }*/
-    
+   
     /**
      *
      */
@@ -160,23 +144,5 @@ public class Simulator <T extends Comparable<T>> {
       return ( this.pTree.add( key ) );
 
     }
-  /*  public void loadExamples(int i){
-        if(i==1){
-            this.add(22);
-            this.add(33);
-            this.add(44);
-            this.add(23);
-            this.add(11);
-            this.add(15);
-            this.add(60);
-            this.add(38);
-            this.add(72);
-        }else if(i==2){
-            
-        }else if (i==3){
-            
-        }else if(i==4){
-            
-        }
-    }*/
+
 }

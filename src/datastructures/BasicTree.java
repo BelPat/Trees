@@ -15,9 +15,6 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
 
     private Node root, left,right;
 
-    /**
-     *
-     */
     public T value;
 
     /**
@@ -170,11 +167,10 @@ public abstract class BasicTree<Node extends BasicNode<Node, T>, T extends Compa
 
  
     /**
-     *
-     * @return
+     * @return retorna un nuevo Graphic
      */
-    public JPanel getPaint() {
-        return new Graphic<>( this );
+      public JPanel getPaint() {
+        return new Graphic<>(this);
     }
     
     /**

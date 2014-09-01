@@ -83,7 +83,11 @@ public class BasicNode<Node extends BasicNode<Node, T>, T> {
         this.right = right;        
     }
     
-   
+    /**
+     *
+     * @param key
+     * @param right
+     */
     public void setNode(T key, Node right) {     
         this.key = key;
         this.right = right;    
