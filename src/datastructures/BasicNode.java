@@ -6,7 +6,7 @@ package datastructures;
  * @param <Node>
  * @param <T>
  */
-public class BasicNode<Node, T > {
+public class BasicNode<Node extends BasicNode<Node, T>, T> {
     private T key;
     private Node right, left;
 

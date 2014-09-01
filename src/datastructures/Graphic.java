@@ -130,7 +130,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
          Rectangle r = (Rectangle) positionNodes.get(n);
          g.setStroke(new BasicStroke(2));
          
-         g.setColor(this.getColorNode(n));
+         g.setColor(this.getNodeColor(n));
          g.draw(r);
          g.drawString(n.getKey().toString(), r.x + 3, r.y + yoffs);   
 
@@ -142,8 +142,9 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
          getPaint(g, n.getRight(), (int)(r.x + r.width/2), r.y + r.height, yoffs);
      }  
     
-    private Color getColorNode(BasicNode<Node,T> n) {
+    private Color getNodeColor(BasicNode<Node,T> n) {
         if(n instanceof RBNode){
+            @SuppressWarnings("unchecked")
             RBNode<T> rbnode = (RBNode<T>) n;
             if (rbnode.getColor()==1)
                 return Color.RED;

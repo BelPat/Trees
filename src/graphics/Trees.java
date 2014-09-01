@@ -97,7 +97,6 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
 
     public void deleteKey(int key) {
         operation = "Eliminar";
-        printConsole("Eliminar (" + key + "," + key + ") \n", "Add (" + txtkey.getText() + ") \n", "Inserir (" + txtkey.getText() + ",) \n");
         String msgexit = "";
         String delete;
         delete = this.simulator.delete(key);
@@ -1075,7 +1074,7 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGap(0, 789, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1083,7 +1082,7 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         );
 
         jDesktopPane1.add(jInternalFrame1);
-        jInternalFrame1.setBounds(0, 0, 790, 340);
+        jInternalFrame1.setBounds(0, 0, 800, 340);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
