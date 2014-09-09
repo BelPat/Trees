@@ -159,6 +159,13 @@ public int hashCode(){
     return result;
     
 }
+
+    @Override
+    public boolean isNull(){
+        if (this.getKey()==null){
+           return true;
+        }else return false;
+    }
  
 }// end class RedBlackNode
 

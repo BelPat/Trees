@@ -146,7 +146,7 @@ public class Graphic<Node extends BasicNode<Node, T>, T extends Comparable<T>> e
         if(n instanceof RBNode){
             @SuppressWarnings("unchecked")
             RBNode<T> rbnode = (RBNode<T>) n;
-            if (rbnode.getColor()==1)
+            if (rbnode.getColor()== RBNode.RED)
                 return Color.RED;
         }
         return Color.BLACK;

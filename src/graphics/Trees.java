@@ -220,8 +220,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         loadPseudo();
                 
         if (optinsert.isSelected()) {
-            Integer i = new Integer(txtkey.getText());
-            addKey(i.intValue());
+                Integer i = new Integer(txtkey.getText());
+                addKey(i.intValue());
+            
         } else if (optdelete.isSelected()) {
             Integer i = new Integer(txtkey.getText());
             operation = "Eliminar";
@@ -848,6 +849,12 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             }
         });
 
+        txtkey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtkeyActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Clave:");
 
         GOperations.add(optsearchfather);
@@ -1191,6 +1198,10 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         loadLenguageBottom(file);
         loadPseudo();
         //FALTA AGREGAR EL RESTO DE PSEUDOCÓDIGOS
+        boolean activar = false;
+        if (optinsert.isEnabled()) {activar = true;}
+        
+        int val = cmbexamples.getSelectedIndex();
         cmbexamples.removeAllItems();
         cmbexamples.addItem("<SELECT ONE>");
         cmbexamples.addItem("1");
@@ -1198,6 +1209,11 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         cmbexamples.addItem("3");
         cmbexamples.addItem("4");
         cmbexamples.addItem("New");
+        cmbexamples.setSelectedIndex(val);
+
+        if (activar) {activeOptions();}
+
+        
         //Ahora vamos a actualizar los messages de otros pantallas.
         tabhelp.setTitleAt(2, "Red-Black");
         tabhelpoperations.setTitleAt(0, "Insert");
@@ -1224,7 +1240,10 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         btnenglish.setEnabled(true);
         loadLenguageBottom(file);
         loadPseudo();
+        boolean activar = false;
+        if (optinsert.isEnabled()) {activar = true;}
         
+        int val = cmbexamples.getSelectedIndex();
         cmbexamples.removeAllItems();
         cmbexamples.addItem("<SELECCIONA UNO>");
         cmbexamples.addItem("1");
@@ -1232,6 +1251,9 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         cmbexamples.addItem("3");
         cmbexamples.addItem("4");
         cmbexamples.addItem("Nuevo");
+        cmbexamples.setSelectedIndex(val);
+        
+         if (activar) {activeOptions();}
         //Ahora vamos a actualizar los messages de otros pantallas.
         tabhelp.setTitleAt(2, "Rojo-Negro");
         tabhelpoperations.setTitleAt(0, "Insertar");
@@ -1258,6 +1280,11 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         btnenglish.setEnabled(true);
         loadLenguageBottom(file);
         loadPseudo();
+        
+              boolean activar = false;
+        if (optinsert.isEnabled()) {activar = true;}
+        
+        int val = cmbexamples.getSelectedIndex();
         cmbexamples.removeAllItems();
         cmbexamples.addItem("<TRIA UN>");
         cmbexamples.addItem("1");
@@ -1265,6 +1292,10 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
         cmbexamples.addItem("3");
         cmbexamples.addItem("4");
         cmbexamples.addItem("Nou");
+        cmbexamples.setSelectedIndex(val);
+        
+            if (activar) {activeOptions();}
+        
         //Ahora vamos a actualizar los messages de otros pantallas.
         //PAyudaRN.getAccessibleContext().setAccessibleName("Roig-Negre");
         tabhelp.setTitleAt(2, "Roig-Negre");
@@ -1398,16 +1429,16 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
             try {
                 try {
                     if (comboSelectionExamples() == false) {
-                        if ((optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected()) && (txtkey.getText().trim().length() == 0)) {
-                            //CLAVE O VALOR NO TIENEN NADA O INCLUSO LOS DOS ESTÁN VACÍOS
+                        if ((optinsert.isSelected() || optdelete.isSelected() || optsearch.isSelected()) && (txtkey.getText().isEmpty())) {
+                            //CLAVE NO TIENE NADA
                             switch (language) {
-                                case "castellano":
+                                case "es_ES":
                                     JOptionPane.showMessageDialog(null, "INTRODUZCA UN VALOR CORRECTOS.", "Opciones de Configuración", WARNING_MESSAGE);
                                     break;
-                                case "ingles":
+                                case "en_US":
                                     JOptionPane.showMessageDialog(null, "INSERT CORRECT VALUE.", "Configuration Options", WARNING_MESSAGE);
                                     break;
-                                case "catalan":
+                                case "ca_ES":
                                     JOptionPane.showMessageDialog(null, "INTRODUEIX UN VALOR CORRECTE.", "Opcions de Configuració", WARNING_MESSAGE);
                                     break;
                             }
@@ -1498,6 +1529,10 @@ public class Trees<T extends Comparable> extends javax.swing.JFrame {
     private void btncatalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncatalanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btncatalanActionPerformed
+
+    private void txtkeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkeyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtkeyActionPerformed
 
     /**
      * @param args the command line arguments
